@@ -122,8 +122,9 @@ public class UserTest {
      */
     @Test
     public void testAddTweet() {
+        System.out.println("Adding a tweet");
         user1.addTweet(tweet1, null);
-        assertEquals(tweet1, user1.getTweets().get(0));
+        assertEquals("Tweet should not be null", tweet1, user1.getTweets().get(0));
     }
 
     /**
@@ -132,13 +133,14 @@ public class UserTest {
      */
     @Test
     public void testRemoveTweet() {
+        System.out.println("Removing a tweet");
         // Adding a tweet
         user2.addTweet(tweet2, null);
-        assertEquals(tweet2, user2.getTweets().get(0));
+        assertEquals("Tweet content should not be null", tweet2, user2.getTweets().get(0));
         
         // Removing a tweet
         user2.removeTweet(tweet2);
-        assertEquals(0, user2.getTweets().size());
+        assertEquals("Amount of tweets should be 0", 0, user2.getTweets().size());
     }
 
     /**
@@ -148,12 +150,13 @@ public class UserTest {
      */
     @Test
     public void testFollowUser() {
+        System.out.println("Follow a user");
         // Should be 0 followers.
-        assertEquals(0, user9.getFollowers().size());
+        assertEquals("Amounnt of followers should be 0", 0, user9.getFollowers().size());
         
         // Adding a follower to user 10.
         user10.followUser(user9);
-        assertEquals(1, user9.getFollowers().size());
+        assertEquals("Amount of followers should be 1", 1, user9.getFollowers().size());
         
     }
 
@@ -163,7 +166,8 @@ public class UserTest {
      */
     @Test
     public void testGetFollowers() {
-        assertEquals(3, user1.getFollowers().size());
+        System.out.println("Get amount of followers");
+        assertEquals("Amount of followers should be 3", 3, user1.getFollowers().size());
     }
 
     /**
@@ -172,12 +176,13 @@ public class UserTest {
      */
     @Test
     public void testLikeTweet() {
+        System.out.println("Get amount of likes per tweet");
         // No tweet liked.
-        assertEquals(0, tweet2.getLikes().size());
+        assertEquals("Amount of likes should be 0", 0, tweet2.getLikes().size());
         
         // User liking a tweet
         user1.likeTweet(tweet2);
-        assertEquals(1, tweet2.getLikes().size());
+        assertEquals("Amount of likes should be 1", 1, tweet2.getLikes().size());
     }
 
     /**
@@ -186,7 +191,8 @@ public class UserTest {
      */
     @Test
     public void testGetPicture() {
-        assertEquals("picturePath", user1.getPicture());
+        System.out.println("Get picture path");
+        assertEquals("Picture path should not be null", "picturePath", user1.getPicture());
     }
 
     /**
@@ -195,9 +201,10 @@ public class UserTest {
      */
     @Test
     public void testSetPicture() {
+        System.out.println("Setting picture path");
         String expResult = "New picture path";
         user1.setPicture("New picture path");
-        assertEquals(expResult, user1.getPicture());
+        assertEquals("Picture path should not be null", expResult, user1.getPicture());
     }
 
     /**
@@ -206,7 +213,8 @@ public class UserTest {
      */
     @Test
     public void testGetWebsite() {
-        assertEquals(null, user1.getWebsite());
+        System.out.println("Getting website url");
+        assertEquals("Website should be null", null, user1.getWebsite());
     }
 
     /**
@@ -214,9 +222,10 @@ public class UserTest {
      */
     @Test
     public void testSetWebsite() {
+        System.out.println("Setting website url");
         String expResult = "Websaid";
         user2.setWebsite(expResult);
-        assertEquals(expResult, user2.getWebsite());
+        assertEquals("Website should not be null", expResult, user2.getWebsite());
     }
 
     /**
@@ -225,7 +234,8 @@ public class UserTest {
      */
     @Test
     public void testGetName() {
-        assertEquals(null, user3.getName());
+        System.out.println("Getting username");
+        assertEquals("Username should be null", null, user3.getName());
     }
 
     /**
@@ -234,9 +244,10 @@ public class UserTest {
      */
     @Test
     public void testSetName() {
+        System.out.println("Setting username");
         String name = "Maxime";
         user3.setName(name);
-        assertEquals(name, user3.getName());
+        assertEquals("Username should not be null", name, user3.getName());
     }
 
     /**
@@ -245,7 +256,8 @@ public class UserTest {
      */
     @Test
     public void testGetBio() {
-        assertEquals(null, user4.getBio());
+        System.out.println("Getting biography");
+        assertEquals("ZBiography should be null", null, user4.getBio());
     }
 
     /**
@@ -254,9 +266,10 @@ public class UserTest {
      */
     @Test
     public void testSetBio() {
+        System.out.println("Setting biography");
         String bio = "Women";
         user4.setBio(bio);
-        assertEquals(bio, user4.getBio());
+        assertEquals("Biography should not be null", bio, user4.getBio());
     }
 
     /**
@@ -265,7 +278,8 @@ public class UserTest {
      */
     @Test
     public void testGetLocation() {
-        assertEquals(null, user5.getLocation());
+        System.out.println("Getting location from user");
+        assertEquals("Location should be null", null, user5.getLocation());
     }
 
     /**
@@ -274,9 +288,10 @@ public class UserTest {
      */
     @Test
     public void testSetLocation() {
+        System.out.println("Setting users location");
         String location = "Geldrop";
         user5.setLocation(location);
-        assertEquals(location, user5.getLocation());
+        assertEquals("Location should not be null", location, user5.getLocation());
     }
 
     /**
@@ -285,7 +300,8 @@ public class UserTest {
      */
     @Test
     public void testGetEmail() {
-        assertEquals(null, user6.getEmail());
+        System.out.println("Get email from user");
+        assertEquals("Email should be null", null, user6.getEmail());
     }
 
     /**
@@ -294,9 +310,10 @@ public class UserTest {
      */
     @Test
     public void testSetEmail() {
+        System.out.println("Set email from user");
         String email = "new email.nl";
         user6.setEmail(email);
-        assertEquals(email, user6.getEmail());
+        assertEquals("Email should be not null", email, user6.getEmail());
     }
 
     /**
@@ -305,7 +322,8 @@ public class UserTest {
      */
     @Test
     public void testGetPassword() {
-        assertEquals(null, user1.getPassword());
+        System.out.println("Get password from user");
+        assertEquals("Result should be null", null, user1.getPassword());
     }
 
     /**
@@ -314,9 +332,10 @@ public class UserTest {
      */
     @Test
     public void testSetPassword() {
+        System.out.println("Set password from user");
         String newPassword = "pass1234";
         user1.setPassword(newPassword);
-        assertEquals(newPassword, user1.getPassword());
+        assertEquals("This test should pass", newPassword, user1.getPassword());
     }
 
 }
