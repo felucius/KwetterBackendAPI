@@ -15,7 +15,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
+ * UserTest class tests the users, the followers and their tweets.
+ * 
  * @author M
  */
 public class UserTest {
@@ -117,6 +118,7 @@ public class UserTest {
 
     /**
      * Test of addTweet method, of class User.
+     * Adding a tweet from a single user.
      */
     @Test
     public void testAddTweet() {
@@ -126,6 +128,7 @@ public class UserTest {
 
     /**
      * Test of removeTweet method, of class User.
+     * Removing a tweet from a user.
      */
     @Test
     public void testRemoveTweet() {
@@ -140,6 +143,8 @@ public class UserTest {
 
     /**
      * Test of followUser method, of class User.
+     * Users follow other users. Retrieving the amount of users
+     * a certain user follows.
      */
     @Test
     public void testFollowUser() {
@@ -154,6 +159,7 @@ public class UserTest {
 
     /**
      * Test of getFollowers method, of class User.
+     * Retrieving the amount of followers per follower.
      */
     @Test
     public void testGetFollowers() {
@@ -162,6 +168,7 @@ public class UserTest {
 
     /**
      * Test of likeTweet method, of class User.
+     * Retrieving the amount of likes per tweet.
      */
     @Test
     public void testLikeTweet() {
@@ -175,6 +182,7 @@ public class UserTest {
 
     /**
      * Test of getPicture method, of class User.
+     * Retrieving the picture or avatar per user.
      */
     @Test
     public void testGetPicture() {
@@ -183,6 +191,7 @@ public class UserTest {
 
     /**
      * Test of setPicture method, of class User.
+     * Setting the avatar or picture per user.
      */
     @Test
     public void testSetPicture() {
@@ -193,6 +202,7 @@ public class UserTest {
 
     /**
      * Test of getWebsite method, of class User.
+     * Retrieving the website per user.
      */
     @Test
     public void testGetWebsite() {
@@ -211,6 +221,7 @@ public class UserTest {
 
     /**
      * Test of getName method, of class User.
+     * Retrieving the username per user.
      */
     @Test
     public void testGetName() {
@@ -219,6 +230,7 @@ public class UserTest {
 
     /**
      * Test of setName method, of class User.
+     * Setting the username per user.
      */
     @Test
     public void testSetName() {
@@ -229,6 +241,7 @@ public class UserTest {
 
     /**
      * Test of getBio method, of class User.
+     * Retrieving the biography per user.
      */
     @Test
     public void testGetBio() {
@@ -237,6 +250,7 @@ public class UserTest {
 
     /**
      * Test of setBio method, of class User.
+     * Setting the biography per user.
      */
     @Test
     public void testSetBio() {
@@ -247,6 +261,7 @@ public class UserTest {
 
     /**
      * Test of getLocation method, of class User.
+     * Retrieving the location from a user.
      */
     @Test
     public void testGetLocation() {
@@ -255,6 +270,7 @@ public class UserTest {
 
     /**
      * Test of setLocation method, of class User.
+     * Setting the location of a single user.
      */
     @Test
     public void testSetLocation() {
@@ -265,6 +281,7 @@ public class UserTest {
 
     /**
      * Test of getEmail method, of class User.
+     * Retrieving the email address of a single user.
      */
     @Test
     public void testGetEmail() {
@@ -273,6 +290,7 @@ public class UserTest {
 
     /**
      * Test of setEmail method, of class User.
+     * Setting the email address of a single user.
      */
     @Test
     public void testSetEmail() {
@@ -283,6 +301,7 @@ public class UserTest {
 
     /**
      * Test of getPassword method, of class User.
+     * Retrieving the password of a single user.
      */
     @Test
     public void testGetPassword() {
@@ -291,6 +310,7 @@ public class UserTest {
 
     /**
      * Test of setPassword method, of class User.
+     * Setting a new password for the user.
      */
     @Test
     public void testSetPassword() {
