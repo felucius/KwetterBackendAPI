@@ -81,6 +81,16 @@ public class Tweet implements Serializable {
         }
         return false;
     }
+    
+    /**
+     * Retrieving all the likes from users.
+     * 
+     * @return the amount of users that liked the tweet. This can be converted
+     * to the specifc user or to a number.
+     */
+    public List<User> getLikes(){
+        return this.likes;
+    }
 
     /**
      * This method allows a user to be added to the mentions of a tweet.

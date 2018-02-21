@@ -71,6 +71,7 @@ public class User implements Serializable {
      * -following users
      */
     public User() {
+        this.picture = "picturePath";
         this.tweets = new ArrayList();
         this.following = new ArrayList();
         this.followers = new ArrayList();

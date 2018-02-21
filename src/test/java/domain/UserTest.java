@@ -165,7 +165,12 @@ public class UserTest {
      */
     @Test
     public void testLikeTweet() {
-
+        // No tweet liked.
+        assertEquals(0, tweet2.getLikes().size());
+        
+        // User liking a tweet
+        user1.likeTweet(tweet2);
+        assertEquals(1, tweet2.getLikes().size());
     }
 
     /**
@@ -173,7 +178,7 @@ public class UserTest {
      */
     @Test
     public void testGetPicture() {
-
+        assertEquals("picturePath", user1.getPicture());
     }
 
     /**
@@ -181,7 +186,9 @@ public class UserTest {
      */
     @Test
     public void testSetPicture() {
-
+        String expResult = "New picture path";
+        user1.setPicture("New picture path");
+        assertEquals(expResult, user1.getPicture());
     }
 
     /**
@@ -189,7 +196,7 @@ public class UserTest {
      */
     @Test
     public void testGetWebsite() {
-
+        assertEquals(null, user1.getWebsite());
     }
 
     /**
@@ -197,7 +204,9 @@ public class UserTest {
      */
     @Test
     public void testSetWebsite() {
-
+        String expResult = "Websaid";
+        user2.setWebsite(expResult);
+        assertEquals(expResult, user2.getWebsite());
     }
 
     /**
@@ -205,7 +214,7 @@ public class UserTest {
      */
     @Test
     public void testGetName() {
-
+        assertEquals(null, user3.getName());
     }
 
     /**
@@ -213,7 +222,9 @@ public class UserTest {
      */
     @Test
     public void testSetName() {
-
+        String name = "Maxime";
+        user3.setName(name);
+        assertEquals(name, user3.getName());
     }
 
     /**
@@ -221,7 +232,7 @@ public class UserTest {
      */
     @Test
     public void testGetBio() {
-
+        assertEquals(null, user4.getBio());
     }
 
     /**
@@ -229,7 +240,9 @@ public class UserTest {
      */
     @Test
     public void testSetBio() {
-
+        String bio = "Women";
+        user4.setBio(bio);
+        assertEquals(bio, user4.getBio());
     }
 
     /**
@@ -237,7 +250,7 @@ public class UserTest {
      */
     @Test
     public void testGetLocation() {
-
+        assertEquals(null, user5.getLocation());
     }
 
     /**
@@ -245,7 +258,9 @@ public class UserTest {
      */
     @Test
     public void testSetLocation() {
-
+        String location = "Geldrop";
+        user5.setLocation(location);
+        assertEquals(location, user5.getLocation());
     }
 
     /**
@@ -253,7 +268,7 @@ public class UserTest {
      */
     @Test
     public void testGetEmail() {
-
+        assertEquals(null, user6.getEmail());
     }
 
     /**
@@ -261,7 +276,9 @@ public class UserTest {
      */
     @Test
     public void testSetEmail() {
-
+        String email = "new email.nl";
+        user6.setEmail(email);
+        assertEquals(email, user6.getEmail());
     }
 
     /**
@@ -269,7 +286,7 @@ public class UserTest {
      */
     @Test
     public void testGetPassword() {
-
+        assertEquals(null, user1.getPassword());
     }
 
     /**
@@ -277,7 +294,9 @@ public class UserTest {
      */
     @Test
     public void testSetPassword() {
-
+        String newPassword = "pass1234";
+        user1.setPassword(newPassword);
+        assertEquals(newPassword, user1.getPassword());
     }
 
 }
