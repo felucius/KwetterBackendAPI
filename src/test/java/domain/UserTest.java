@@ -19,43 +19,98 @@ import static org.junit.Assert.*;
  * @author M
  */
 public class UserTest {
-    
-    private List<User> users = null;
-    private List<Tweet> tweets = null;
     private List<String> tags = null;
     
+    private User user1 = null;
+    private User user2 = null;
+    private User user3 = null;
+    private User user4 = null;
+    private User user5 = null;
+    private User user6 = null;
+    private User user7 = null;
+    private User user8 = null;
+    private User user9 = null;
+    private User user10 = null;
+
+    private Tweet tweet1 = null;
+    private Tweet tweet2 = null;
+    private Tweet tweet3 = null;
+    private Tweet tweet4 = null;
+    private Tweet tweet5 = null;
+    private Tweet tweet6 = null;
+    private Tweet tweet7 = null;
+    private Tweet tweet8 = null;
+    private Tweet tweet9 = null;
+    private Tweet tweet10 = null;
+
     public UserTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
+    /**
+     * Setting up the basic information regarding
+     * - users
+     * - tweets
+     * and users that are following other users.
+     */
     @Before
     public void setUp() {
-        users = new ArrayList();
-        tweets = new ArrayList();
         tags = new ArrayList();
+        tags.add("#Like");
+        tags.add("#Super");
         
-        for(int i = 0; i < 10; i++){
-            User user = new User();
-            users.add(user);
-        }
+        user1 = new User();
+        tweet1 = new Tweet("Message1", tags, user1);
         
-        for (int i = 0; i< users.size(); i ++) {
-            tags.add("Like");
-            Tweet tweet = new Tweet("Message " + i, tags, users.get(i));
-            tweets.add(tweet);
-        }
+        user2 = new User();
+        tweet2 = new Tweet("Message1", tags, user2);
         
-        System.out.println("Users: " + users.toString());
-        System.out.println("Tweets: " + tweets.toString());
+        user3 = new User();
+        tweet3 = new Tweet("Message1", tags, user3);
+        
+        user4 = new User();
+        tweet4 = new Tweet("Message1", tags, user4);
+        
+        user5 = new User();
+        tweet5 = new Tweet("Message1", tags, user5);
+        
+        user6 = new User();
+        tweet6 = new Tweet("Message1", tags, user6);
+       
+        user7 = new User();
+        tweet7 = new Tweet("Message1", tags, user7);
+        
+        user8 = new User();
+        tweet8 = new Tweet("Message1", tags, user8);
+        
+        user9 = new User();
+        tweet9 = new Tweet("Message1", tags, user9);
+        
+        user10 = new User();
+        tweet10 = new Tweet("Message1", tags, user10);
+        
+        user1.followUser(user2);
+        user1.followUser(user3);
+        
+        user2.followUser(user1);
+        user2.followUser(user3);
+        user2.followUser(user4);
+        
+        user5.followUser(user1);
+        user5.followUser(user6);
+        
+        user7.followUser(user2);
+        
+        user8.followUser(user1);
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -65,7 +120,8 @@ public class UserTest {
      */
     @Test
     public void testAddTweet() {
-        
+        user1.addTweet(tweet1, null);
+        assertEquals(tweet1, user1.getTweets().get(0));
     }
 
     /**
@@ -73,7 +129,13 @@ public class UserTest {
      */
     @Test
     public void testRemoveTweet() {
-
+        // Adding a tweet
+        user2.addTweet(tweet2, null);
+        assertEquals(tweet2, user2.getTweets().get(0));
+        
+        // Removing a tweet
+        user2.removeTweet(tweet2);
+        assertEquals(0, user2.getTweets().size());
     }
 
     /**
@@ -81,7 +143,13 @@ public class UserTest {
      */
     @Test
     public void testFollowUser() {
-
+        // Should be 0 followers.
+        assertEquals(0, user9.getFollowers().size());
+        
+        // Adding a follower to user 10.
+        user10.followUser(user9);
+        assertEquals(1, user9.getFollowers().size());
+        
     }
 
     /**
@@ -89,7 +157,7 @@ public class UserTest {
      */
     @Test
     public void testGetFollowers() {
-
+        assertEquals(3, user1.getFollowers().size());
     }
 
     /**
@@ -211,5 +279,5 @@ public class UserTest {
     public void testSetPassword() {
 
     }
-    
+
 }

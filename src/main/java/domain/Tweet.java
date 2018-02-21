@@ -175,4 +175,11 @@ public class Tweet implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+    
+    @Override
+    public String toString(){
+        return "Message: " + this.message + " Mentions: " + this.mentions +
+                " Likes: " + this.likes + " Published: " +
+                this.published + " Tags: " + this.tags + " Tweeted by: " + this.tweetedBy;
+    }
 }

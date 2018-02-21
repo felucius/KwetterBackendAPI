@@ -289,6 +289,29 @@ public class User implements Serializable {
         this.password = password;
     }
     
+    /**
+     * Setting new tweets to the list.
+     * 
+     * @param tweets to be added.
+     */
+    public void setTweets(List<Tweet> tweets){
+        this.tweets = tweets;
+    }
+    
+    /**
+     * Retrieving all tweets that the user made.
+     * 
+     * @return all tweets from the user.
+     */
+    public List<Tweet> getTweets(){
+        return this.tweets;
+    }
+    
+    /**
+     * Overriding the toString method with an own implementation.
+     * 
+     * @return all the fields with the user's information.
+     */
     @Override
     public String toString(){
         return "Name: " + this.name + " Biography: " + this.bio + 
