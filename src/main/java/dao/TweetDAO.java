@@ -75,16 +75,18 @@ public class TweetDAO {
         return true;
     }
     
-    //TODO: CHECK IF LIST IS NEEDED OR JUST AN ID.
     /**
+     * This method allows all mentions from a single tweet to be retrieved.
      * 
-     * @param mentions
-     * @return 
+     * @param tweet getting mentions from a certain tweet
+     * @return list of users that belong to the mention list of that single tweet.
      */
-    public List<User> getMentions(List<User> mentions){
+    public List<User> getMentions(Tweet tweet){
         List<User> users = null;
+        tweet.getMentions();
         try{
-            users = em.createNamedQuery("Tweet.getMentions").getResultList();
+            //users = em.createNamedQuery("Tweet.getMentions").getResultList();
+            users = tweet.getMentions();
         }catch (Exception ex){
             ex.printStackTrace();
             return null;
@@ -93,13 +95,21 @@ public class TweetDAO {
     }
     
     /**
-     * This method retrieves all the tweets of the user's followe base.
+     * This method retrieves all the tweets of the user's follower base.
      * 
-     * @param tweets to be received from a user's followers base.
-     * @param followers are retrieved from the user
-     * @return 
+     * @param follower object is the user where all the tweets are going to be
+     * retrieved.
+     * @return a list of tweets from the users follower base
      */
-    public List<Tweet> getTweetsOfFollowers(List<Tweet> tweets, List<User> followers){
-        return em.createNamedQuery("Tweet.getTweets").getResultList();
+    public List<Tweet> getTweetsOfFollowers(User follower){
+        List<User> followers = null;
+        List<Tweet> tweets = null;
+        try{
+            tweets = em.find(User.class, follower.getId()).getTweets();
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return null;
+        }
+        return tweets;
     }
 }

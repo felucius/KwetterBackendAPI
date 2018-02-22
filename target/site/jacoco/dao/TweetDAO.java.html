@@ -34,44 +34,83 @@ import javax.persistence.PersistenceContext;
      * @return a list of tweets.
      */
     public List&lt;Tweet&gt; getAllTweets(){
-<span class="nc" id="L37">        return em.createNamedQuery(&quot;Tweet.getAllTweets&quot;).getResultList();</span>
+<span class="nc" id="L37">        List&lt;Tweet&gt; tweets = null;</span>
+        try{
+<span class="nc" id="L39">            tweets = em.createNamedQuery(&quot;Tweet.getAllTweets&quot;).getResultList();</span>
+<span class="nc" id="L40">        }catch (Exception ex){</span>
+<span class="nc" id="L41">            ex.printStackTrace();</span>
+<span class="nc" id="L42">            return null;</span>
+<span class="nc" id="L43">        }</span>
+<span class="nc" id="L44">        return tweets;</span>
     }
     
     /**
+     * Method to post a tweet.
      * 
-     * @param tweet 
+     * @param tweet to be posted.
      */
-    public void postTweet(Tweet tweet){
-<span class="nc" id="L45">        em.persist(tweet);</span>
-<span class="nc" id="L46">    }</span>
-    
-    /**
-     * 
-     * @param tweet
-     * @param user 
-     */
-    public void postTweetMention(Tweet tweet, List&lt;User&gt; user){
-<span class="nc" id="L54">        em.persist(tweet);</span>
-<span class="nc" id="L55">    }</span>
-    
-    //TODO: CHECK IF LIST IS NEEDED OR JUST AN ID.
-    /**
-     * 
-     * @param mentions
-     * @return 
-     */
-    public List&lt;User&gt; getMentions(List&lt;User&gt; mentions){
-<span class="nc" id="L64">        return em.createNamedQuery(&quot;Tweet.getMentions&quot;).getResultList();</span>
+    public boolean postTweet(Tweet tweet){
+        try{
+<span class="nc" id="L54">            em.persist(tweet);</span>
+<span class="nc" id="L55">        }catch (Exception ex){</span>
+<span class="nc" id="L56">            ex.printStackTrace();</span>
+<span class="nc" id="L57">            return false;</span>
+<span class="nc" id="L58">        }</span>
+<span class="nc" id="L59">        return true;</span>
     }
     
     /**
+     * This method allows a tweet to be posted from a single user.
      * 
-     * @param tweets
-     * @param followers
-     * @return 
+     * @param tweet to be posted by a single user.
+     * @param user that is posting a single tweet.
      */
-    public List&lt;Tweet&gt; getTweetsOfFollowers(List&lt;Tweet&gt; tweets, List&lt;User&gt; followers){
-<span class="nc" id="L74">        return em.createNamedQuery(&quot;Tweet.getTweets&quot;).getResultList();</span>
+    public boolean postTweetMention(Tweet tweet, List&lt;User&gt; user){
+        try {
+<span class="nc" id="L70">            em.persist(tweet);</span>
+<span class="nc" id="L71">        }catch (Exception ex){</span>
+<span class="nc" id="L72">            ex.printStackTrace();</span>
+<span class="nc" id="L73">            return false;</span>
+<span class="nc" id="L74">        }</span>
+<span class="nc" id="L75">        return true;</span>
+    }
+    
+    /**
+     * This method allows all mentions from a single tweet to be retrieved.
+     * 
+     * @param tweet getting mentions from a certain tweet
+     * @return list of users that belong to the mention list of that single tweet.
+     */
+    public List&lt;User&gt; getMentions(Tweet tweet){
+<span class="nc" id="L85">        List&lt;User&gt; users = null;</span>
+<span class="nc" id="L86">        tweet.getMentions();</span>
+        try{
+            //users = em.createNamedQuery(&quot;Tweet.getMentions&quot;).getResultList();
+<span class="nc" id="L89">            users = tweet.getMentions();</span>
+<span class="nc" id="L90">        }catch (Exception ex){</span>
+<span class="nc" id="L91">            ex.printStackTrace();</span>
+<span class="nc" id="L92">            return null;</span>
+<span class="nc" id="L93">        }</span>
+<span class="nc" id="L94">        return users;</span>
+    }
+    
+    /**
+     * This method retrieves all the tweets of the user's follower base.
+     * 
+     * @param follower object is the user where all the tweets are going to be
+     * retrieved.
+     * @return a list of tweets from the users follower base
+     */
+    public List&lt;Tweet&gt; getTweetsOfFollowers(User follower){
+<span class="nc" id="L105">        List&lt;User&gt; followers = null;</span>
+<span class="nc" id="L106">        List&lt;Tweet&gt; tweets = null;</span>
+        try{
+<span class="nc" id="L108">            tweets = em.find(User.class, follower.getId()).getTweets();</span>
+<span class="nc" id="L109">        }catch (Exception ex){</span>
+<span class="nc" id="L110">            ex.printStackTrace();</span>
+<span class="nc" id="L111">            return null;</span>
+<span class="nc" id="L112">        }</span>
+<span class="nc" id="L113">        return tweets;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>
