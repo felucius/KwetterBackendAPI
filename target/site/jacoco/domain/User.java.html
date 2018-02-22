@@ -142,7 +142,7 @@ public class User implements Serializable {
      * 
      * @param user that is going to be removed from the followers base.
      */
-    private void removeFollower(User user){
+    public void removeFollower(User user){
 <span class="nc" id="L146">        this.followers.remove(user);</span>
 <span class="nc" id="L147">    }</span>
     
@@ -156,13 +156,22 @@ public class User implements Serializable {
     }
     
     /**
+     * This method returns all the users, that the user object follows.
+     * 
+     * @return all following users from a specific user.
+     */
+    public List&lt;User&gt; getFollowing(){
+<span class="nc" id="L164">        return this.following;</span>
+    }
+    
+    /**
      * This method allows a tweet to be added to the liked tweets.
      * 
      * @param tweet to be added to the likes.
      */
     public void likeTweet(Tweet tweet){
-<span class="fc" id="L164">        tweet.likeTweet(this);</span>
-<span class="fc" id="L165">    }</span>
+<span class="fc" id="L173">        tweet.likeTweet(this);</span>
+<span class="fc" id="L174">    }</span>
     
     /**
      * Retrieving the picture of the user.
@@ -170,7 +179,7 @@ public class User implements Serializable {
      * @return picture of user.
      */
     public String getPicture() {
-<span class="fc" id="L173">        return this.picture;</span>
+<span class="fc" id="L182">        return this.picture;</span>
     }
 
     /**
@@ -179,8 +188,8 @@ public class User implements Serializable {
      * @param picture of the user that is going to be set.
      */
     public void setPicture(String picture) {
-<span class="fc" id="L182">        this.picture = picture;</span>
-<span class="fc" id="L183">    }</span>
+<span class="fc" id="L191">        this.picture = picture;</span>
+<span class="fc" id="L192">    }</span>
 
     /**
      * Retrieving the website of the user.
@@ -188,7 +197,7 @@ public class User implements Serializable {
      * @return the website.
      */
     public String getWebsite() {
-<span class="fc" id="L191">        return this.website;</span>
+<span class="fc" id="L200">        return this.website;</span>
     }
 
     /**
@@ -197,8 +206,8 @@ public class User implements Serializable {
      * @param website of the users that is going to be set.
      */
     public void setWebsite(String website) {
-<span class="fc" id="L200">        this.website = website;</span>
-<span class="fc" id="L201">    }</span>
+<span class="fc" id="L209">        this.website = website;</span>
+<span class="fc" id="L210">    }</span>
 
     /**
      * Retrieving the name of the user.
@@ -206,7 +215,7 @@ public class User implements Serializable {
      * @return the name of the user.
      */
     public String getName() {
-<span class="fc" id="L209">        return this.name;</span>
+<span class="fc" id="L218">        return this.name;</span>
     }
 
     /**
@@ -215,8 +224,8 @@ public class User implements Serializable {
      * @param name of the user that is going to be set.
      */
     public void setName(String name) {
-<span class="fc" id="L218">        this.name = name;</span>
-<span class="fc" id="L219">    }</span>
+<span class="fc" id="L227">        this.name = name;</span>
+<span class="fc" id="L228">    }</span>
 
     /**
      * Retrieving the bio of the user.
@@ -224,7 +233,7 @@ public class User implements Serializable {
      * @return the bio.
      */
     public String getBio() {
-<span class="fc" id="L227">        return this.bio;</span>
+<span class="fc" id="L236">        return this.bio;</span>
     }
 
     /**
@@ -233,8 +242,8 @@ public class User implements Serializable {
      * @param bio that is going to be set.
      */
     public void setBio(String bio) {
-<span class="fc" id="L236">        this.bio = bio;</span>
-<span class="fc" id="L237">    }</span>
+<span class="fc" id="L245">        this.bio = bio;</span>
+<span class="fc" id="L246">    }</span>
 
     /**
      * Retrieving the location of the user.
@@ -242,7 +251,7 @@ public class User implements Serializable {
      * @return the location of the user.
      */
     public String getLocation() {
-<span class="fc" id="L245">        return this.location;</span>
+<span class="fc" id="L254">        return this.location;</span>
     }
 
     /**
@@ -251,8 +260,8 @@ public class User implements Serializable {
      * @param location to be set.
      */
     public void setLocation(String location) {
-<span class="fc" id="L254">        this.location = location;</span>
-<span class="fc" id="L255">    }</span>
+<span class="fc" id="L263">        this.location = location;</span>
+<span class="fc" id="L264">    }</span>
 
     /**
      * Retrieving the email of the user.
@@ -260,7 +269,7 @@ public class User implements Serializable {
      * @return email of the user.
      */
     public String getEmail() {
-<span class="fc" id="L263">        return this.email;</span>
+<span class="fc" id="L272">        return this.email;</span>
     }
 
     /**
@@ -269,8 +278,8 @@ public class User implements Serializable {
      * @param email of the user to be set.
      */
     public void setEmail(String email) {
-<span class="fc" id="L272">        this.email = email;</span>
-<span class="fc" id="L273">    }</span>
+<span class="fc" id="L281">        this.email = email;</span>
+<span class="fc" id="L282">    }</span>
 
     /**
      * Retrieving the password of the user.
@@ -278,7 +287,7 @@ public class User implements Serializable {
      * @return password of user.
      */
     public String getPassword() {
-<span class="fc" id="L281">        return this.password;</span>
+<span class="fc" id="L290">        return this.password;</span>
     }
 
     /**
@@ -287,8 +296,8 @@ public class User implements Serializable {
      * @param password of the user that is going to be set.
      */
     public void setPassword(String password) {
-<span class="fc" id="L290">        this.password = password;</span>
-<span class="fc" id="L291">    }</span>
+<span class="fc" id="L299">        this.password = password;</span>
+<span class="fc" id="L300">    }</span>
     
     /**
      * Setting new tweets to the list.
@@ -296,8 +305,8 @@ public class User implements Serializable {
      * @param tweets to be added.
      */
     public void setTweets(List&lt;Tweet&gt; tweets){
-<span class="nc" id="L299">        this.tweets = tweets;</span>
-<span class="nc" id="L300">    }</span>
+<span class="nc" id="L308">        this.tweets = tweets;</span>
+<span class="nc" id="L309">    }</span>
     
     /**
      * Retrieving all tweets that the user made.
@@ -305,7 +314,25 @@ public class User implements Serializable {
      * @return all tweets from the user.
      */
     public List&lt;Tweet&gt; getTweets(){
-<span class="fc" id="L308">        return this.tweets;</span>
+<span class="fc" id="L317">        return this.tweets;</span>
+    }
+    
+    /**
+     * Setting the id to a new one.
+     * 
+     * @param id to be set.
+     */
+    public void setId(Long id){
+<span class="nc" id="L326">        this.id = id;</span>
+<span class="nc" id="L327">    }</span>
+    
+    /**
+     * Retrieving the id of a single user.
+     * 
+     * @return the id of a user.
+     */
+    public Long getId(){
+<span class="nc" id="L335">        return this.id;</span>
     }
     
     /**
@@ -315,7 +342,7 @@ public class User implements Serializable {
      */
     @Override
     public String toString(){
-<span class="nc" id="L318">        return &quot;Name: &quot; + this.name + &quot; Biography: &quot; + this.bio + </span>
+<span class="nc" id="L345">        return &quot;Name: &quot; + this.name + &quot; Biography: &quot; + this.bio + </span>
                 &quot; Email: &quot; + this.email + &quot; Location: &quot; + this.location + 
                 &quot; Picture: &quot; + this.picture + &quot;Website: &quot; + this.website;                
     }

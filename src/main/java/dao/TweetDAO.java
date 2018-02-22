@@ -34,24 +34,45 @@ public class TweetDAO {
      * @return a list of tweets.
      */
     public List<Tweet> getAllTweets(){
-        return em.createNamedQuery("Tweet.getAllTweets").getResultList();
+        List<Tweet> tweets = null;
+        try{
+            tweets = em.createNamedQuery("Tweet.getAllTweets").getResultList();
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return null;
+        }
+        return tweets;
     }
     
     /**
+     * Method to post a tweet.
      * 
-     * @param tweet 
+     * @param tweet to be posted.
      */
-    public void postTweet(Tweet tweet){
-        em.persist(tweet);
+    public boolean postTweet(Tweet tweet){
+        try{
+            em.persist(tweet);
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return false;
+        }
+        return true;
     }
     
     /**
+     * This method allows a tweet to be posted from a single user.
      * 
-     * @param tweet
-     * @param user 
+     * @param tweet to be posted by a single user.
+     * @param user that is posting a single tweet.
      */
-    public void postTweetMention(Tweet tweet, List<User> user){
-        em.persist(tweet);
+    public boolean postTweetMention(Tweet tweet, List<User> user){
+        try {
+            em.persist(tweet);
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return false;
+        }
+        return true;
     }
     
     //TODO: CHECK IF LIST IS NEEDED OR JUST AN ID.
@@ -61,13 +82,21 @@ public class TweetDAO {
      * @return 
      */
     public List<User> getMentions(List<User> mentions){
-        return em.createNamedQuery("Tweet.getMentions").getResultList();
+        List<User> users = null;
+        try{
+            users = em.createNamedQuery("Tweet.getMentions").getResultList();
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return null;
+        }
+        return users;
     }
     
     /**
+     * This method retrieves all the tweets of the user's followe base.
      * 
-     * @param tweets
-     * @param followers
+     * @param tweets to be received from a user's followers base.
+     * @param followers are retrieved from the user
      * @return 
      */
     public List<Tweet> getTweetsOfFollowers(List<Tweet> tweets, List<User> followers){
