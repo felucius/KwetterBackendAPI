@@ -49,14 +49,14 @@ public class UserDAO {
      *
      * @param user is the object that is going to be persisted to the database.
      */
-    public boolean createUser(User user) {
+    public User createUser(User user) {
         try {
             em.persist(user);
         } catch (Exception ex) {
             ex.printStackTrace();
-            return false;
+            return null;
         }
-        return true;
+        return user;
     }
 
     /**
@@ -84,21 +84,23 @@ public class UserDAO {
      * @return the value as a User object.
      */
     public User findUser(Long id) {
+        User user = null;
         try {
-            return em.find(User.class, id);
+            user = em.find(User.class, id);
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
         }
+        return user;
     }
 
     /**
      * This method allows a tweet to be added from a specific user with mentions
-     * 
+     *
      * @param tweet to be created by a single user.
      * @param mentions are users that are mentioned in this new tweet.
-     * @return true if the tweet has been successfully added or false when 
-     * the addition has not been successful.
+     * @return true if the tweet has been successfully added or false when the
+     * addition has not been successful.
      */
     public boolean addTweet(Tweet tweet, List<User> mentions) {
         try {
@@ -109,98 +111,128 @@ public class UserDAO {
         }
         return true;
     }
-    
+
     /**
      * This method allows to remove a single tweet from the user.
-     * 
+     *
      * @param tweet to be removed from the user.
      * @return true if the removal has been successful or false when the tweet
      * could not have been removed.
      */
-    public boolean removeTweet(Tweet tweet){
-        try{
+    public boolean removeTweet(Tweet tweet) {
+        try {
             em.remove(tweet);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             return false;
         }
         return true;
     }
-    
+
     /**
      * This method allows a user to follow another user.
-     * 
+     *
      * @param user that is going to follow another user.
-     * @param followingUser is the user the is going to be followed by the 
+     * @param followingUser is the user the is going to be followed by the
      * 'user' object or to say, the first user.
-     * @return true if the user successfully followed another user or false
-     * when the user could not follow another one.
+     * @return true if the user successfully followed another user or false when
+     * the user could not follow another one.
      */
-    public boolean followUser(User user, User followingUser){
+    public boolean followUser(User user, User followingUser) {
         user.followUser(followingUser);
-        try{
+        try {
             em.merge(user);
             em.merge(followingUser);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             return false;
         }
         return true;
     }
-    
+
     /**
-     * This method allows a user to unfollow an existent user from their followers
-     * base
-     * 
+     * This method allows a user to unfollow an existent user from their
+     * followers base
+     *
      * @param user that is going to unfollow another user from his follower list
      * @param unfollowingUser is the user that is going to be unfollowed by the
      * 'user' object or so the say the first user.
      * @return true if the 'user' successfully unfollowed a user or false when
      * the user could not been unfollowed.
      */
-    public boolean unfollowUser(User user, User unfollowingUser){
+    public boolean unfollowUser(User user, User unfollowingUser) {
         user.removeFollower(unfollowingUser);
-        try{
+        try {
             em.merge(user);
             em.merge(unfollowingUser);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             return false;
         }
         return true;
     }
-    
+
     /**
      * Retrieving all following users from a specific user.
-     * 
+     *
      * @param user that follows other users.
      * @return a list of users that the 'user' object follows.
      */
-    public List<User> getFollowingUsers(User user){
+    public List<User> getFollowingUsers(User user) {
         List<User> users = null;
-        try{
+        try {
             users = em.find(User.class, user.getId()).getFollowing();
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             return null;
         }
         return users;
     }
-  
+
     /**
      * Retrieving all followers from a specific user.
-     * 
+     *
      * @param user that is going to retrieve all his following users.
      * @return a list of followers from his following base.
      */
-    public List<User> getFollowers(User user){
+    public List<User> getFollowers(User user) {
         List<User> users = null;
-        try{
+        try {
             users = em.find(User.class, user.getId()).getFollowers();
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             return null;
         }
         return users;
+    }
+
+    public List<Tweet> getTweets() {
+        List<Tweet> tweets = null;
+        try {
+            tweets = em.createNamedQuery("Tweet.getAllTweets").getResultList();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return tweets;
+    }
+    
+    /**
+     * This method allows a single user to like a single tweet.
+     * 
+     * @param user to like a tweet.
+     * @param tweetToLike is the tweet to be liked by a single user
+     * @return true if the user has liked the tweet or false when the user
+     * could not like the specific tweet.
+     */
+    public boolean likeTweet(User user, Tweet tweetToLike){
+        user.likeTweet(tweetToLike);
+        try{
+            em.merge(user);
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return false;
+        }
+        return true;
     }
 }

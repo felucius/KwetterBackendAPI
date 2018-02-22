@@ -45,6 +45,24 @@ public class TweetDAO {
     }
     
     /**
+     * This method allows to retrieve all tweets from the Database, through the
+     * Entity manager.
+     * 
+     * @return a list of likes
+     */
+    public List<Tweet> getLikes(User user){
+        List<Tweet> likes = null;
+        try{
+            likes = em.find(Tweet.class, user.getId()).getLikes();
+            //likes = em.createNamedQuery("Tweet.getLikes").getResultList();
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return null;
+        }
+        return likes;
+    }
+    
+    /**
      * Method to post a tweet.
      * 
      * @param tweet to be posted.
