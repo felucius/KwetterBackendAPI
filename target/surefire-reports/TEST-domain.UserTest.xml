@@ -61,7 +61,7 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="domain.UserTest" name="testSetPassword" time="0.001"/>
+  <testcase classname="domain.UserTest" name="testSetPassword" time="0"/>
   <testcase classname="domain.UserTest" name="testGetPassword" time="0"/>
   <testcase classname="domain.UserTest" name="testGetEmail" time="0"/>
   <testcase classname="domain.UserTest" name="testSetLocation" time="0"/>
@@ -70,10 +70,10 @@
   <testcase classname="domain.UserTest" name="testSetWebsite" time="0"/>
   <testcase classname="domain.UserTest" name="testAddTweet" time="0"/>
   <testcase classname="domain.UserTest" name="testGetName" time="0"/>
-  <testcase classname="domain.UserTest" name="testGetPicture" time="0"/>
+  <testcase classname="domain.UserTest" name="testGetPicture" time="0.003"/>
   <testcase classname="domain.UserTest" name="testLikeTweet" time="0"/>
   <testcase classname="domain.UserTest" name="testGetBio" time="0"/>
-  <testcase classname="domain.UserTest" name="testGetWebsite" time="0.001"/>
+  <testcase classname="domain.UserTest" name="testGetWebsite" time="0"/>
   <testcase classname="domain.UserTest" name="testFollowUser" time="0"/>
   <testcase classname="domain.UserTest" name="testSetName" time="0"/>
   <testcase classname="domain.UserTest" name="testSetPicture" time="0"/>

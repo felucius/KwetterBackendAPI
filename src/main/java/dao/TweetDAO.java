@@ -53,8 +53,8 @@ public class TweetDAO {
     public List<Tweet> getLikes(User user){
         List<Tweet> likes = null;
         try{
-            likes = em.find(Tweet.class, user.getId()).getLikes();
-            //likes = em.createNamedQuery("Tweet.getLikes").getResultList();
+            //likes = em.find(Tweet.class, user.getId()).getLikes();
+            likes = em.createNamedQuery("Tweet.getLikes").getResultList();
         }catch (Exception ex){
             ex.printStackTrace();
             return null;
