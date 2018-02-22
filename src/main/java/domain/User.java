@@ -142,7 +142,7 @@ public class User implements Serializable {
      * 
      * @param user that is going to be removed from the followers base.
      */
-    private void removeFollower(User user){
+    public void removeFollower(User user){
         this.followers.remove(user);
     }
     
@@ -153,6 +153,15 @@ public class User implements Serializable {
      */
     public List<User> getFollowers(){
         return this.followers;
+    }
+    
+    /**
+     * This method returns all the users, that the user object follows.
+     * 
+     * @return all following users from a specific user.
+     */
+    public List<User> getFollowing(){
+        return this.following;
     }
     
     /**
@@ -306,6 +315,24 @@ public class User implements Serializable {
      */
     public List<Tweet> getTweets(){
         return this.tweets;
+    }
+    
+    /**
+     * Setting the id to a new one.
+     * 
+     * @param id to be set.
+     */
+    public void setId(Long id){
+        this.id = id;
+    }
+    
+    /**
+     * Retrieving the id of a single user.
+     * 
+     * @return the id of a user.
+     */
+    public Long getId(){
+        return this.id;
     }
     
     /**
