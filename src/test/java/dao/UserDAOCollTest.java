@@ -9,26 +9,21 @@ import domain.Tweet;
 import domain.User;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
  * @author M
  */
-
 public class UserDAOCollTest {
 
     // userDAO class collection
-    UserDAO userDAO = null;
+    UserDAOCollection userDAO = null;
 
     private List<String> tags = null;
     private List<User> users = null;
@@ -67,19 +62,18 @@ public class UserDAOCollTest {
     }
 
     @Before
-    public void setUp() {        
+    public void setUp() {
         tags = new ArrayList();
         tags.add("#cool");
         tags.add("#like");
         users = new ArrayList();
 
-        /*
-        userDAO = new UserDAO();
-        user1 = userDAO.createUser(new User("pic", "web", "hanzel", "men", "veldhoven", "rick@rick.nl", "pass"), emf);
+        userDAO = new UserDAOCollection();
+        user1 = userDAO.createUser(new User());
+        //user1 = userDAO.createUser(new User("pic", "web", "hanzel", "men", "veldhoven", "rick@rick.nl", "pass"));
         users.add(user1);
         tweet1 = new Tweet("message hello", tags, user1);
-        */
-        /*
+
         user2 = userDAO.createUser(new User());
         users.add(user2);
         tweet2 = new Tweet("message hello", tags, user2);
@@ -114,54 +108,64 @@ public class UserDAOCollTest {
 
         user10 = userDAO.createUser(new User());
         users.add(user10);
-        tweet10 = new Tweet("message hello", tags, user10);*/
+        tweet10 = new Tweet("message hello", tags, user10);
+
+        user1.followUser(user2);
+        user1.followUser(user3);
+
+        user2.followUser(user1);
+        user2.followUser(user3);
+        user2.followUser(user4);
+
+        user5.followUser(user1);
+        user5.followUser(user6);
+
+        user7.followUser(user2);
+
+        user8.followUser(user1);
+
     }
 
     @After
     public void tearDown() {
     }
-    
+
     @Test
     public void createUser() {
         System.out.println("Creating user on - DAO collection");
-        //assertEquals(null, userDAO.createUser(user1));
+        assertEquals(null, userDAO.createUser(user1));
     }
 
     /**
      * Test of addTweet method, of class User. Adding a tweet from a single
      * user.
      */
-    /*
     @Test
     public void testAddTweet() {
         System.out.println("Adding a tweet on - DAO collection");
-        userDAO.addTweet(tweet1, users);
-        assertEquals("Tweet should not be null", tweet1, userDAO.getTweets().get(0));
+        userDAO.addTweet(user1, tweet1, users);
+        assertEquals("Tweet should not be null", tweet1, userDAO.getTweets(user1).get(0));
     }
-    */
-    
+
     /**
      * Test of removeTweet method, of class User. Removing a tweet from a user.
      */
-    /*
     @Test
     public void testRemoveTweet() {
         System.out.println("Removing a tweet on - DAO collection");
         // Adding a tweet
-        userDAO.addTweet(tweet1, null);
-        assertEquals("Tweet content should not be null", tweet2, userDAO.getTweets().get(0));
+        userDAO.addTweet(user2, tweet2, null);
+        assertEquals("Tweet content should be 1", 1, userDAO.getTweets(user2).size());
 
         // Removing a tweet
         userDAO.removeTweet(tweet2);
-        assertEquals("Amount of tweets should be 0", 0, userDAO.getTweets().size());
+        assertEquals("Amount of tweets should be 0", 0, userDAO.getTweets(user1).size());
     }
-    */
-    
+
     /**
      * Test of followUser method, of class User. Users follow other users.
      * Retrieving the amount of users a certain user follows.
      */
-    /*
     @Test
     public void testFollowUser() {
         System.out.println("Follow a user on - DAO collection");
@@ -173,19 +177,16 @@ public class UserDAOCollTest {
         assertEquals("Amount of followers should be 1", 1, userDAO.getFollowers(user9).size());
 
     }
-    */
 
     /**
      * Test of getFollowers method, of class User. Retrieving the amount of
      * followers per follower.
      */
-    /*
     @Test
     public void testGetFollowers() {
         System.out.println("Get amount of followers on - DAO collection");
         assertEquals("Amount of followers should be 3", 3, userDAO.getFollowers(user1).size());
     }
-    */
 
     /**
      * Test of likeTweet method, of class User. Retrieving the amount of likes
@@ -208,15 +209,11 @@ public class UserDAOCollTest {
     /**
      * This method retrieves a user by it's ID throughout the entity manager
      */
-    /*
     @Test
     public void testGetUserByID() {
         System.out.println("Get user by name on - DAO collection");
         user1.setId(1L);
-        user2.setId(2L);
-
-        assertEquals(user1, userDAO.findUser(user1.getId()));
-        assertEquals(user2, userDAO.findUser(user2.getId()));
+        
+        assertEquals(user1.getId(), userDAO.findUser(user1.getId()).getId());
     }
-*/
 }

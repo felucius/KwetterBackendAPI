@@ -64,7 +64,7 @@ public class UserDAOCollection implements UserDAO {
     @Override
     public boolean addTweet(User user, Tweet tweet, List<User> mentions) {
         if (tweet != null) {
-            users.get(user.getId().intValue()).addTweet(tweet, mentions);
+            user.addTweet(tweet, mentions);
             return true;
         } else {
             return false;

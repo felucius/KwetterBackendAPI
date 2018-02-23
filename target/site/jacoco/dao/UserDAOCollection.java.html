@@ -18,11 +18,11 @@ import javax.ejb.Stateless;
 @Stateless
 public class UserDAOCollection implements UserDAO {
 
-<span class="nc" id="L21">    private List&lt;User&gt; users = null;</span>
+<span class="fc" id="L21">    private List&lt;User&gt; users = null;</span>
 
-<span class="nc" id="L23">    public UserDAOCollection() {</span>
-<span class="nc" id="L24">        users = new ArrayList();</span>
-<span class="nc" id="L25">    }</span>
+<span class="fc" id="L23">    public UserDAOCollection() {</span>
+<span class="fc" id="L24">        users = new ArrayList();</span>
+<span class="fc" id="L25">    }</span>
 
     @Override
     public List&lt;User&gt; getAllUsers() {
@@ -31,11 +31,11 @@ public class UserDAOCollection implements UserDAO {
 
     @Override
     public User createUser(User user) {
-<span class="nc bnc" id="L34" title="All 2 branches missed.">        if (!users.contains(user)) {</span>
-<span class="nc" id="L35">            this.users.add(user);</span>
-<span class="nc" id="L36">            return user;</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">        if (!users.contains(user)) {</span>
+<span class="fc" id="L35">            this.users.add(user);</span>
+<span class="fc" id="L36">            return user;</span>
         } else {
-<span class="nc" id="L38">            return null;</span>
+<span class="fc" id="L38">            return null;</span>
         }
     }
 
@@ -51,9 +51,9 @@ public class UserDAOCollection implements UserDAO {
 
     @Override
     public User findUser(Long id) {
-<span class="nc bnc" id="L54" title="All 2 branches missed.">        for (User user : users) {</span>
-<span class="nc bnc" id="L55" title="All 2 branches missed.">            if (user.getId().equals(id)) {</span>
-<span class="nc" id="L56">                return user;</span>
+<span class="pc bpc" id="L54" title="1 of 2 branches missed.">        for (User user : users) {</span>
+<span class="pc bpc" id="L55" title="1 of 2 branches missed.">            if (user.getId().equals(id)) {</span>
+<span class="fc" id="L56">                return user;</span>
             } else {
 <span class="nc" id="L58">                return null;</span>
             }
@@ -63,9 +63,9 @@ public class UserDAOCollection implements UserDAO {
 
     @Override
     public boolean addTweet(User user, Tweet tweet, List&lt;User&gt; mentions) {
-<span class="nc bnc" id="L66" title="All 2 branches missed.">        if (tweet != null) {</span>
-<span class="nc" id="L67">            users.get(user.getId().intValue()).addTweet(tweet, mentions);</span>
-<span class="nc" id="L68">            return true;</span>
+<span class="pc bpc" id="L66" title="1 of 2 branches missed.">        if (tweet != null) {</span>
+<span class="fc" id="L67">            user.addTweet(tweet, mentions);</span>
+<span class="fc" id="L68">            return true;</span>
         } else {
 <span class="nc" id="L70">            return false;</span>
         }
@@ -73,9 +73,9 @@ public class UserDAOCollection implements UserDAO {
 
     @Override
     public boolean removeTweet(Tweet tweet) {
-<span class="nc bnc" id="L76" title="All 2 branches missed.">        if (tweet != null) {</span>
-<span class="nc" id="L77">            users.get(0).removeTweet(tweet);</span>
-<span class="nc" id="L78">            return true;</span>
+<span class="pc bpc" id="L76" title="1 of 2 branches missed.">        if (tweet != null) {</span>
+<span class="fc" id="L77">            users.get(0).removeTweet(tweet);</span>
+<span class="fc" id="L78">            return true;</span>
         } else {
 <span class="nc" id="L80">            return false;</span>
         }
@@ -111,8 +111,8 @@ public class UserDAOCollection implements UserDAO {
 
     @Override
     public List&lt;User&gt; getFollowers(User user) {
-<span class="nc bnc" id="L114" title="All 2 branches missed.">        if (user != null) {</span>
-<span class="nc" id="L115">            return user.getFollowers();</span>
+<span class="pc bpc" id="L114" title="1 of 2 branches missed.">        if (user != null) {</span>
+<span class="fc" id="L115">            return user.getFollowers();</span>
         } else {
 <span class="nc" id="L117">            return null;</span>
         }
@@ -120,8 +120,8 @@ public class UserDAOCollection implements UserDAO {
 
     @Override
     public List&lt;Tweet&gt; getTweets(User user) {
-<span class="nc bnc" id="L123" title="All 2 branches missed.">        if (user != null) {</span>
-<span class="nc" id="L124">            return user.getTweets();</span>
+<span class="pc bpc" id="L123" title="1 of 2 branches missed.">        if (user != null) {</span>
+<span class="fc" id="L124">            return user.getTweets();</span>
         } else {
 <span class="nc" id="L126">            return null;</span>
         }
