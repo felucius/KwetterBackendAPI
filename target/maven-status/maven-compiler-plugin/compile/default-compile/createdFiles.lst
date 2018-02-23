@@ -1,5 +1,6 @@
 boundary\rest\UserResource.class
 domain\User_.class
+dao\UserDAOCollection.class
 domain\Tweet_.class
 domain\UserRole.class
 service\UserService.class
@@ -10,3 +11,4 @@ dao\UserDAO.class
 domain\Tweet.class
 domain\User.class
 boundary\rest\JAXRSconfig.class
+dao\UserDAOImplementation.class

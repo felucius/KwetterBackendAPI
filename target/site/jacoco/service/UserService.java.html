@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">KwetterBackend_Maxime</a> &gt; <a href="index.source.html" class="el_package">service</a> &gt; <span class="el_source">UserService.java</span></div><h1>UserService.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package service;
+
+import dao.UserDAO;
+import domain.User;
+import java.util.List;
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+
+/**
+ * The class 'UserService' provides data of users, collected by the userDAO.
+ * 
+ * @author M
+ */
+@Stateless
+<span class="nc" id="L20">public class UserService {</span>
+    /**
+     * Inject the userDAO. By doing this the constructor does not have to be
+     * initialized with the 'new' keyword. This provides a loosely coupled architecture.
+     */
+    @Inject
+    UserDAO userDAO;
+    
+    /**
+     * Get all users from the userDAO. UserDao makes a call to the database and
+     * sends the data to this method.
+     * 
+     * @return a list of all available users.
+     */
+    public List&lt;User&gt; getAllUsers(){
+<span class="nc" id="L35">        return userDAO.getAllUsers();</span>
+    }
+    
+    /**
+     * This method creates a new user and persists the object to the database
+     * 
+     * @param user is the object that is going to be created and persisted to the
+     * database.
+     */
+    public void CreateUser(User user){
+        //userDAO.createUser(user);
+<span class="nc" id="L46">    }</span>
+    
+    
+    /**
+     * This method finds the user by it's user id. This id is passed on from the
+     * UserResource to the UserService.
+     * 
+     * @param id of the user to be searched.
+     * @return the user object.
+     */
+    public User findUser(Long id){
+<span class="nc" id="L57">        return userDAO.findUser(id);</span>
+    }
+    
+    /**
+     * This method find the user by it's given id. From there on this information
+     * is passed on to the DAO and to the entity manager to be removed from the 
+     * database
+     * 
+     * @param id of the user object that is going to be removed.
+     */
+    public void removeUser(User user){
+<span class="nc" id="L68">        userDAO.removeUser(user);</span>
+<span class="nc" id="L69">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

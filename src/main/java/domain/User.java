@@ -41,21 +41,21 @@ public class User implements Serializable {
     private String password = null;
 
     private List<Tweet> tweets = null;
-    @OneToMany(fetch = FetchType.EAGER) @JoinTable(name = "USER_FOLLOWING_HOI")
+    @OneToMany(fetch = FetchType.EAGER) @JoinTable(name = "User")
     private List<User> following = null;
-    @OneToMany(fetch = FetchType.EAGER) @JoinTable(name = "USER_FOLLOWERS_HOI")
+    @OneToMany(fetch = FetchType.EAGER) @JoinTable(name = "User")
     private List<User> followers = null;
     
     @ManyToMany
     @JoinTable(
         name="FOLLOWING_FOLLOWERS",
-        joinColumns=@JoinColumn(name="USER_FOLLOWING_HOI", referencedColumnName="ID"),
-        inverseJoinColumns=@JoinColumn(name="USER_FOLLOWERS_HOI", referencedColumnName="ID"))
+        joinColumns=@JoinColumn(name="USER_FOLLOWING", referencedColumnName="ID"),
+        inverseJoinColumns=@JoinColumn(name="USER_FOLLOWERS", referencedColumnName="ID"))
     private List<User> followingEachother;
     
     
     /**
-     * ID is automatically generated per persist on the database
+     * ID is automatically generated per persist on the database.
      *
      * GeneratedValue provides primary keys to the database table.
      */

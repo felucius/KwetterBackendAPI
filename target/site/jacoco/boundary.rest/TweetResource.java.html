@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TweetResource.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">KwetterBackend_Maxime</a> &gt; <a href="index.source.html" class="el_package">boundary.rest</a> &gt; <span class="el_source">TweetResource.java</span></div><h1>TweetResource.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package boundary.rest;
+
+import domain.Tweet;
+import java.util.List;
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import service.TweetService;
+
+/**
+ * Api call where the user makes a request to the backend to receive data by going 
+ * to the path 'tweet', through the 'api' path, configured at JAXRSconfig.
+ * 
+ * Stateless beans is used here, because the request is simple and does not need
+ * to be memorized by the server.
+ * 
+ * TweetResource handles all the incoming requests. This class can be seen as
+ * the controller class.
+ * 
+ * @author M
+ */
+@Path(&quot;tweet&quot;)
+@Stateless
+<span class="nc" id="L30">public class TweetResource {</span>
+    /**
+     * Injecting the tweetservice ensures the loosely coupled architecture and removes
+     * the use of the 'new' keyword.
+     */
+    @Inject
+    TweetService tweetService;
+    
+    /**
+     * Retrieving all tweets from the tweetservice. The tweetservice get it's data
+     * from the DAO (Data Access Object). In our case the database.
+     * 
+     * @return a list of all tweets.
+     */
+    @GET
+    public List&lt;Tweet&gt; getAllTweets(){
+<span class="nc" id="L46">        return tweetService.getAllTweets();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

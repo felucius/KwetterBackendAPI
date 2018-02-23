@@ -42,7 +42,7 @@ public class UserService {
      * database.
      */
     public void CreateUser(User user){
-        userDAO.createUser(user);
+        //userDAO.createUser(user);
     }
     
     
@@ -64,7 +64,7 @@ public class UserService {
      * 
      * @param id of the user object that is going to be removed.
      */
-    public void removeUser(Long id){
-        userDAO.removeUser(id);
+    public void removeUser(User user){
+        userDAO.removeUser(user);
     }
 }

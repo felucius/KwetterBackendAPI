@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserDAOImplementation.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">KwetterBackend_Maxime</a> &gt; <a href="index.source.html" class="el_package">dao</a> &gt; <span class="el_source">UserDAOImplementation.java</span></div><h1>UserDAOImplementation.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package dao;
+
+import domain.Tweet;
+import domain.User;
+import java.util.List;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
+
+/**
+ *
+ * @author M
+ */
+@Stateless
+<span class="nc" id="L22">public class UserDAOImplementation {</span>
+        /**
+     * Persisting the context of the entity manager. By doing this methods data
+     * can be requested or persisted to the database.
+     */
+    @PersistenceContext(unitName = &quot;KwetterBackendPU&quot;, type = PersistenceContextType.EXTENDED)
+    private EntityManager em;
+
+    /**
+     * Requesting all users through the Entity manager. The entity manager makes
+     * a call to the database with the Persistence Context.
+     *
+     * @return all the users.
+     */
+    public List&lt;User&gt; getAllUsers() {
+<span class="nc" id="L37">        List&lt;User&gt; users = null;</span>
+        try {
+<span class="nc" id="L39">            users = em.createNamedQuery(&quot;User.getAllUsers&quot;).getResultList();</span>
+<span class="nc" id="L40">        } catch (Exception ex) {</span>
+<span class="nc" id="L41">            ex.printStackTrace();</span>
+<span class="nc" id="L42">            return null;</span>
+<span class="nc" id="L43">        }</span>
+<span class="nc" id="L44">        return users;</span>
+    }
+
+    /**
+     * This method allows a new user to be created and be stored into the
+     * database
+     *
+     * @param user is the object that is going to be persisted to the database.
+     */
+    public User createUser(User user) {
+        
+        try {
+<span class="nc" id="L56">            em.persist(user);</span>
+<span class="nc" id="L57">        } catch (Exception ex) {</span>
+<span class="nc" id="L58">            ex.printStackTrace();</span>
+<span class="nc" id="L59">            return null;</span>
+<span class="nc" id="L60">        }</span>
+<span class="nc" id="L61">        return user;</span>
+    }
+
+    /**
+     * This method allows a user that exists in the database, to be removed
+     *
+     * @param id is the id of the user object that is going to be removed from
+     * the database.
+     */
+    public boolean removeUser(User user) {
+        try {
+<span class="nc" id="L72">            em.remove(user);</span>
+<span class="nc" id="L73">        } catch (Exception ex) {</span>
+<span class="nc" id="L74">            ex.printStackTrace();</span>
+<span class="nc" id="L75">            return false;</span>
+<span class="nc" id="L76">        }</span>
+<span class="nc" id="L77">        return true;</span>
+    }
+
+    /**
+     * This method allows a user to be found from the User entity with it's
+     * given id.
+     *
+     * @param id is the parameter that is going to be needed to find a specific
+     * user from the database
+     * @return the value as a User object.
+     */
+    public User findUser(Long id) {
+<span class="nc" id="L89">        User user = null;</span>
+        try {
+<span class="nc" id="L91">            user = em.find(User.class, id);</span>
+<span class="nc" id="L92">        } catch (Exception ex) {</span>
+<span class="nc" id="L93">            ex.printStackTrace();</span>
+<span class="nc" id="L94">            return null;</span>
+<span class="nc" id="L95">        }</span>
+<span class="nc" id="L96">        return user;</span>
+    }
+
+    /**
+     * This method allows a tweet to be added from a specific user with mentions
+     *
+     * @param tweet to be created by a single user.
+     * @param mentions are users that are mentioned in this new tweet.
+     * @return true if the tweet has been successfully added or false when the
+     * addition has not been successful.
+     */
+    public boolean addTweet(Tweet tweet, List&lt;User&gt; mentions) {
+        try {
+<span class="nc" id="L109">            em.persist(tweet);</span>
+<span class="nc" id="L110">        } catch (Exception ex) {</span>
+<span class="nc" id="L111">            ex.printStackTrace();</span>
+<span class="nc" id="L112">            return false;</span>
+<span class="nc" id="L113">        }</span>
+<span class="nc" id="L114">        return true;</span>
+    }
+
+    /**
+     * This method allows to remove a single tweet from the user.
+     *
+     * @param tweet to be removed from the user.
+     * @return true if the removal has been successful or false when the tweet
+     * could not have been removed.
+     */
+    public boolean removeTweet(Tweet tweet) {
+        try {
+<span class="nc" id="L126">            em.remove(tweet);</span>
+<span class="nc" id="L127">        } catch (Exception ex) {</span>
+<span class="nc" id="L128">            ex.printStackTrace();</span>
+<span class="nc" id="L129">            return false;</span>
+<span class="nc" id="L130">        }</span>
+<span class="nc" id="L131">        return true;</span>
+    }
+
+    /**
+     * This method allows a user to follow another user.
+     *
+     * @param user that is going to follow another user.
+     * @param followingUser is the user the is going to be followed by the
+     * 'user' object or to say, the first user.
+     * @return true if the user successfully followed another user or false when
+     * the user could not follow another one.
+     */
+    public boolean followUser(User user, User followingUser) {
+<span class="nc" id="L144">        user.followUser(followingUser);</span>
+        try {
+<span class="nc" id="L146">            em.merge(user);</span>
+<span class="nc" id="L147">            em.merge(followingUser);</span>
+<span class="nc" id="L148">        } catch (Exception ex) {</span>
+<span class="nc" id="L149">            ex.printStackTrace();</span>
+<span class="nc" id="L150">            return false;</span>
+<span class="nc" id="L151">        }</span>
+<span class="nc" id="L152">        return true;</span>
+    }
+
+    /**
+     * This method allows a user to unfollow an existent user from their
+     * followers base
+     *
+     * @param user that is going to unfollow another user from his follower list
+     * @param unfollowingUser is the user that is going to be unfollowed by the
+     * 'user' object or so the say the first user.
+     * @return true if the 'user' successfully unfollowed a user or false when
+     * the user could not been unfollowed.
+     */
+    public boolean unfollowUser(User user, User unfollowingUser) {
+<span class="nc" id="L166">        user.removeFollower(unfollowingUser);</span>
+        try {
+<span class="nc" id="L168">            em.merge(user);</span>
+<span class="nc" id="L169">            em.merge(unfollowingUser);</span>
+<span class="nc" id="L170">        } catch (Exception ex) {</span>
+<span class="nc" id="L171">            ex.printStackTrace();</span>
+<span class="nc" id="L172">            return false;</span>
+<span class="nc" id="L173">        }</span>
+<span class="nc" id="L174">        return true;</span>
+    }
+
+    /**
+     * Retrieving all following users from a specific user.
+     *
+     * @param user that follows other users.
+     * @return a list of users that the 'user' object follows.
+     */
+    public List&lt;User&gt; getFollowingUsers(User user) {
+<span class="nc" id="L184">        List&lt;User&gt; users = null;</span>
+        try {
+<span class="nc" id="L186">            users = em.find(User.class, user.getId()).getFollowing();</span>
+<span class="nc" id="L187">        } catch (Exception ex) {</span>
+<span class="nc" id="L188">            ex.printStackTrace();</span>
+<span class="nc" id="L189">            return null;</span>
+<span class="nc" id="L190">        }</span>
+<span class="nc" id="L191">        return users;</span>
+    }
+
+    /**
+     * Retrieving all followers from a specific user.
+     *
+     * @param user that is going to retrieve all his following users.
+     * @return a list of followers from his following base.
+     */
+    public List&lt;User&gt; getFollowers(User user) {
+<span class="nc" id="L201">        List&lt;User&gt; users = null;</span>
+        try {
+<span class="nc" id="L203">            users = em.find(User.class, user.getId()).getFollowers();</span>
+<span class="nc" id="L204">        } catch (Exception ex) {</span>
+<span class="nc" id="L205">            ex.printStackTrace();</span>
+<span class="nc" id="L206">            return null;</span>
+<span class="nc" id="L207">        }</span>
+<span class="nc" id="L208">        return users;</span>
+    }
+
+    public List&lt;Tweet&gt; getTweets() {
+<span class="nc" id="L212">        List&lt;Tweet&gt; tweets = null;</span>
+        try {
+<span class="nc" id="L214">            tweets = em.createNamedQuery(&quot;Tweet.getAllTweets&quot;).getResultList();</span>
+<span class="nc" id="L215">        } catch (Exception ex) {</span>
+<span class="nc" id="L216">            ex.printStackTrace();</span>
+<span class="nc" id="L217">            return null;</span>
+<span class="nc" id="L218">        }</span>
+<span class="nc" id="L219">        return tweets;</span>
+    }
+
+    /**
+     * This method allows a single user to like a single tweet.
+     *
+     * @param user to like a tweet.
+     * @param tweetToLike is the tweet to be liked by a single user
+     * @return true if the user has liked the tweet or false when the user could
+     * not like the specific tweet.
+     */
+    public boolean likeTweet(User user, Tweet tweetToLike) {
+<span class="nc" id="L231">        user.likeTweet(tweetToLike);</span>
+        try {
+<span class="nc" id="L233">            em.merge(user);</span>
+<span class="nc" id="L234">        } catch (Exception ex) {</span>
+<span class="nc" id="L235">            ex.printStackTrace();</span>
+<span class="nc" id="L236">            return false;</span>
+<span class="nc" id="L237">        }</span>
+<span class="nc" id="L238">        return true;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

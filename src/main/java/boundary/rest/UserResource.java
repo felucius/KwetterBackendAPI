@@ -88,8 +88,8 @@ public class UserResource {
      * @param id of the user object or account, that is going to be removed.
      */
     @DELETE
-    @Path("{id}")
-    public void removeUser(@PathParam("id") Long id){
-        userService.removeUser(id);
+    @Path("{user}")
+    public void removeUser(@PathParam("user") User user){
+        userService.removeUser(user);
     }
 }
