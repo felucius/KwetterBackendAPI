@@ -1,7 +1,7 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
 KwetterBackend_Maxime,dao,TweetDAO,96,0,0,0,43,0,7,0,7,0
-KwetterBackend_Maxime,dao,UserDAOCollection,3,0,0,0,1,0,1,0,1,0
-KwetterBackend_Maxime,dao,UserDAOImplementation,196,0,0,0,83,0,13,0,13,0
+KwetterBackend_Maxime,dao,UserDAOCollection,147,0,30,0,47,0,28,0,13,0
+KwetterBackend_Maxime,dao,UserDAOImplementation,225,0,0,0,97,0,15,0,15,0
 KwetterBackend_Maxime,boundary.rest,TweetResource,7,0,0,0,2,0,2,0,2,0
 KwetterBackend_Maxime,boundary.rest,UserResource,32,0,0,0,10,0,5,0,5,0
 KwetterBackend_Maxime,boundary.rest,JAXRSconfig,3,0,0,0,1,0,1,0,1,0

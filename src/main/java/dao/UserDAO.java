@@ -31,7 +31,7 @@ public interface UserDAO {
     
     User findUser(Long id);
     
-    boolean addTweet(Tweet tweet, List<User> mentions);
+    boolean addTweet(User user, Tweet tweet, List<User> mentions);
     
     boolean removeTweet(Tweet tweet);
     
@@ -43,7 +43,7 @@ public interface UserDAO {
     
     List<User> getFollowers(User user);
     
-    List<Tweet> getTweets();
+    List<Tweet> getTweets(User user);
     
     boolean likeTweet(User user, Tweet tweetToLike);
 }

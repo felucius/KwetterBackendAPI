@@ -10,7 +10,6 @@ import domain.User;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 
@@ -19,7 +18,7 @@ import javax.persistence.PersistenceContextType;
  * @author M
  */
 @Stateless
-public class UserDAOImplementation {
+public class UserDAOImplementation implements UserDAO{
         /**
      * Persisting the context of the entity manager. By doing this methods data
      * can be requested or persisted to the database.
@@ -236,5 +235,29 @@ public class UserDAOImplementation {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public boolean addTweet(User user, Tweet tweet, List<User> mentions) {
+        user.addTweet(tweet, mentions);
+        try{
+            em.persist(user);
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public List<Tweet> getTweets(User user) {
+        List<Tweet> tweets = null;
+        try{
+            tweets = user.getTweets();
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return null;
+        }
+        return tweets;
     }
 }
