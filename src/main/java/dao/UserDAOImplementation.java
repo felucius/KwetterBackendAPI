@@ -11,7 +11,6 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
 
 /**
  *
@@ -32,6 +31,7 @@ public class UserDAOImplementation implements UserDAO{
      *
      * @return all the users.
      */
+    @Override
     public List<User> getAllUsers() {
         List<User> users = null;
         try {
@@ -48,7 +48,9 @@ public class UserDAOImplementation implements UserDAO{
      * database
      *
      * @param user is the object that is going to be persisted to the database.
+     * @return a user if the object has been created successfully.
      */
+    @Override
     public User createUser(User user) {
         
         try {
@@ -63,9 +65,11 @@ public class UserDAOImplementation implements UserDAO{
     /**
      * This method allows a user that exists in the database, to be removed
      *
-     * @param id is the id of the user object that is going to be removed from
-     * the database.
+     * @param user is the object that is going to be removed.
+     * @return a true statement if the user has successfully been removed or 
+     * false when the action could not be performed.
      */
+    @Override
     public boolean removeUser(User user) {
         try {
             em.remove(user);
@@ -84,6 +88,7 @@ public class UserDAOImplementation implements UserDAO{
      * user from the database
      * @return the value as a User object.
      */
+    @Override
     public User findUser(Long id) {
         User user = null;
         try {
@@ -120,6 +125,7 @@ public class UserDAOImplementation implements UserDAO{
      * @return true if the removal has been successful or false when the tweet
      * could not have been removed.
      */
+    @Override
     public boolean removeTweet(Tweet tweet) {
         try {
             em.remove(tweet);
@@ -139,6 +145,7 @@ public class UserDAOImplementation implements UserDAO{
      * @return true if the user successfully followed another user or false when
      * the user could not follow another one.
      */
+    @Override
     public boolean followUser(User user, User followingUser) {
         user.followUser(followingUser);
         try {
@@ -161,6 +168,7 @@ public class UserDAOImplementation implements UserDAO{
      * @return true if the 'user' successfully unfollowed a user or false when
      * the user could not been unfollowed.
      */
+    @Override
     public boolean unfollowUser(User user, User unfollowingUser) {
         user.removeFollower(unfollowingUser);
         try {
@@ -179,6 +187,7 @@ public class UserDAOImplementation implements UserDAO{
      * @param user that follows other users.
      * @return a list of users that the 'user' object follows.
      */
+    @Override
     public List<User> getFollowingUsers(User user) {
         List<User> users = null;
         try {
@@ -196,6 +205,7 @@ public class UserDAOImplementation implements UserDAO{
      * @param user that is going to retrieve all his following users.
      * @return a list of followers from his following base.
      */
+    @Override
     public List<User> getFollowers(User user) {
         List<User> users = null;
         try {
@@ -207,6 +217,11 @@ public class UserDAOImplementation implements UserDAO{
         return users;
     }
 
+    /**
+     * This method allows to get all tweets from no specific user. It collects
+     * all tweet data. This is necessary for an administrator account.
+     * @return all tweets from all users.
+     */
     public List<Tweet> getTweets() {
         List<Tweet> tweets = null;
         try {
@@ -226,6 +241,7 @@ public class UserDAOImplementation implements UserDAO{
      * @return true if the user has liked the tweet or false when the user could
      * not like the specific tweet.
      */
+    @Override
     public boolean likeTweet(User user, Tweet tweetToLike) {
         user.likeTweet(tweetToLike);
         try {
@@ -237,6 +253,15 @@ public class UserDAOImplementation implements UserDAO{
         return true;
     }
 
+    /**
+     * This method allows a tweet to be added to a certain user with possible
+     * mentions.
+     * 
+     * @param user that adds the tweet.
+     * @param tweet is the tweet that is going to be added from one single user.
+     * @param mentions are other users who are mentioned in this post/tweet.
+     * @return 
+     */
     @Override
     public boolean addTweet(User user, Tweet tweet, List<User> mentions) {
         user.addTweet(tweet, mentions);
@@ -249,6 +274,13 @@ public class UserDAOImplementation implements UserDAO{
         return true;
     }
 
+    /**
+     * This method allows all tweets to be returned from a single user.
+     * 
+     * @param user is the object where all the tweets are going to be collected
+     * from.
+     * @return all the tweets from a single user.
+     */
     @Override
     public List<Tweet> getTweets(User user) {
         List<Tweet> tweets = null;

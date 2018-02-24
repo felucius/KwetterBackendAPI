@@ -17,112 +17,123 @@ import javax.persistence.PersistenceContext;
  * @author M
  */
 @Stateless
-public class TweetDAOImplementation implements TweetDAO{
-        /**
+public class TweetDAOImplementation implements TweetDAO {
+
+    /**
      * Persisting the context of the entity manager. By doing this methods data
      * can be requested or persisted to the database.
      */
     @PersistenceContext
     EntityManager em;
-    
+
     /**
-     * Requesting all tweets through the Entity manager. The entity manager makes a
-     * call to the database with the PersistenceContext.
-     * 
+     * Requesting all tweets through the Entity manager. The entity manager
+     * makes a call to the database with the PersistenceContext.
+     *
      * @return a list of tweets.
      */
-    public List<Tweet> getAllTweets(){
+    @Override
+    public List<Tweet> getAllTweets() {
         List<Tweet> tweets = null;
-        try{
+        try {
             tweets = em.createNamedQuery("Tweet.getAllTweets").getResultList();
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             return null;
         }
         return tweets;
     }
-    
+
     /**
      * This method allows to retrieve all tweets from the Database, through the
      * Entity manager.
-     * 
+     *
+     * @param user is the user to retrieve all the likes from.
      * @return a list of likes
      */
-    public List<Tweet> getLikes(User user){
+    @Override
+    public List<Tweet> getLikes(User user) {
         List<Tweet> likes = null;
-        try{
+        try {
             //likes = em.find(Tweet.class, user.getId()).getLikes();
             likes = em.createNamedQuery("Tweet.getLikes").getResultList();
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             return null;
         }
         return likes;
     }
-    
+
     /**
      * Method to post a tweet.
-     * 
+     *
      * @param tweet to be posted.
+     * @return 
      */
-    public boolean postTweet(Tweet tweet){
-        try{
-            em.persist(tweet);
-        }catch (Exception ex){
-            ex.printStackTrace();
-            return false;
-        }
-        return true;
-    }
-    
-    /**
-     * This method allows a tweet to be posted from a single user.
-     * 
-     * @param tweet to be posted by a single user.
-     * @param user that is posting a single tweet.
-     */
-    public boolean postTweetMention(Tweet tweet, List<User> user){
+    @Override
+    public boolean postTweet(Tweet tweet) {
         try {
             em.persist(tweet);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             return false;
         }
         return true;
     }
-    
+
+    /**
+     * This method allows a tweet to be posted from a single user.
+     *
+     * @param tweet to be posted by a single user.
+     * @param user that is posting a single tweet.
+     * @return 
+     */
+    @Override
+    public boolean postTweetMention(Tweet tweet, List<User> user) {
+        try {
+            em.persist(tweet);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
     /**
      * This method allows all mentions from a single tweet to be retrieved.
-     * 
+     *
      * @param tweet getting mentions from a certain tweet
-     * @return list of users that belong to the mention list of that single tweet.
+     * @return list of users that belong to the mention list of that single
+     * tweet.
      */
-    public List<User> getMentions(Tweet tweet){
+    @Override
+    public List<User> getMentions(Tweet tweet) {
         List<User> users = null;
         tweet.getMentions();
-        try{
+        try {
             //users = em.createNamedQuery("Tweet.getMentions").getResultList();
             users = tweet.getMentions();
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             return null;
         }
         return users;
     }
-    
+
     /**
      * This method retrieves all the tweets of the user's follower base.
-     * 
+     *
      * @param follower object is the user where all the tweets are going to be
      * retrieved.
      * @return a list of tweets from the users follower base
      */
-    public List<Tweet> getTweetsOfFollowers(User follower){
+    @Override
+    public List<Tweet> getTweetsOfFollowers(User follower) {
         List<User> followers = null;
         List<Tweet> tweets = null;
-        try{
+        try {
             tweets = em.find(User.class, follower.getId()).getTweets();
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             return null;
         }
