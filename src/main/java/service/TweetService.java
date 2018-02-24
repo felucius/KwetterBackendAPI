@@ -34,6 +34,6 @@ public class TweetService {
      * @return a list of all Tweets.
      */
     public List<Tweet> getAllTweets(){
-        return tweetDAO.getAllTweets();
+        return null;//return tweetDAO.getAllTweets();
     }
 }

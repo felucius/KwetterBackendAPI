@@ -23,7 +23,7 @@ public class UserDAOImplementation implements UserDAO{
      * Persisting the context of the entity manager. By doing this methods data
      * can be requested or persisted to the database.
      */
-    @PersistenceContext(unitName = "KwetterBackendPU", type = PersistenceContextType.EXTENDED)
+    @PersistenceContext
     private EntityManager em;
 
     /**
