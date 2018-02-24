@@ -316,7 +316,7 @@ public class User implements Serializable {
     public List<Tweet> getTweets(){
         return this.tweets;
     }
-    
+        
     /**
      * Setting the id to a new one.
      * 

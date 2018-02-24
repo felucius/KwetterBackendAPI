@@ -52,51 +52,16 @@ public class TweetDAOImplementation implements TweetDAO {
      * @return a list of likes
      */
     @Override
-    public List<Tweet> getLikes(User user) {
-        List<Tweet> likes = null;
+    public List<User> getLikes(User user) {
+        List<User> users = null;
         try {
             //likes = em.find(Tweet.class, user.getId()).getLikes();
-            likes = em.createNamedQuery("Tweet.getLikes").getResultList();
+            users = em.createNamedQuery("Tweet.getLikes").getResultList();
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
         }
-        return likes;
-    }
-
-    /**
-     * Method to post a tweet.
-     *
-     * @param tweet to be posted.
-     * @return 
-     */
-    @Override
-    public boolean postTweet(Tweet tweet) {
-        try {
-            em.persist(tweet);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * This method allows a tweet to be posted from a single user.
-     *
-     * @param tweet to be posted by a single user.
-     * @param user that is posting a single tweet.
-     * @return 
-     */
-    @Override
-    public boolean postTweetMention(Tweet tweet, List<User> user) {
-        try {
-            em.persist(tweet);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return false;
-        }
-        return true;
+        return users;
     }
 
     /**
@@ -128,7 +93,7 @@ public class TweetDAOImplementation implements TweetDAO {
      * @return a list of tweets from the users follower base
      */
     @Override
-    public List<Tweet> getTweetsOfFollowers(User follower) {
+    public List<Tweet> getTweetsOfFollowingUsers(User follower) {
         List<User> followers = null;
         List<Tweet> tweets = null;
         try {

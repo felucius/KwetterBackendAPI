@@ -20,18 +20,12 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public interface TweetDAO {
-
-    List<Tweet> getAllTweets();
     
-    List<Tweet> getLikes(User user);
-    
-    boolean postTweet(Tweet tweet);
-    
-    boolean postTweetMention(Tweet tweet, List<User> user);
-    
+    List<User> getLikes(User user);
+            
     List<User> getMentions(Tweet tweet);
     
-    List<Tweet> getTweetsOfFollowers(User follower);
+    List<Tweet> getTweetsOfFollowingUsers(User follower);
     
-    
+    List<Tweet> getAllTweets();
 }
