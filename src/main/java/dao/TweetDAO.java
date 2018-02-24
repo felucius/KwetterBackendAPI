@@ -21,7 +21,9 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public interface TweetDAO {
     
-    List<User> getLikes(User user);
+    Tweet addMention(Tweet tweet, User user);
+    
+    List<User> getLikes(Tweet tweet);
             
     List<User> getMentions(Tweet tweet);
     

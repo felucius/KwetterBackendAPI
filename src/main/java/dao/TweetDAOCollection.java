@@ -14,18 +14,30 @@ import java.util.List;
  *
  * @author M
  */
-public class TweetDAOCollection implements TweetDAO{
+public class TweetDAOCollection implements TweetDAO {
 
     private List<Tweet> tweets = null;
-    
-    public TweetDAOCollection(){
+    private Tweet tweet = null;
+
+    public TweetDAOCollection() {
         this.tweets = new ArrayList();
+        tweet = new Tweet();
     }
 
     @Override
-    public List<User> getLikes(User user) {
-        if(user != null && tweets != null){
-            return tweets.get(user.getId().intValue()).getLikes();
+    public List<User> getLikes(Tweet tweet) {
+        if (tweet != null) {
+            return tweet.getLikes();
+        } else {
+            return null;
+        }
+    }
+    
+    @Override
+    public Tweet addMention(Tweet tweet, User user){
+        if(tweet != null && user != null){
+            tweet.addMention(user);
+            return tweet;
         }else{
             return null;
         }
@@ -33,29 +45,29 @@ public class TweetDAOCollection implements TweetDAO{
 
     @Override
     public List<User> getMentions(Tweet tweet) {
-        if(tweet != null){
+        if (tweet != null) {
             return tweet.getMentions();
-        }else{
+        } else {
             return null;
         }
     }
-    
+
     @Override
-    public List<Tweet> getAllTweets(){
-        if(tweets != null){
+    public List<Tweet> getAllTweets() {
+        if (tweets != null) {
             return tweets;
-        }else{
+        } else {
             return null;
         }
     }
 
     @Override
     public List<Tweet> getTweetsOfFollowingUsers(User following) {
-        if(following != null){
-           return following.getTweets();
-        }else{
+        if (following != null) {
+            return following.getTweets();
+        } else {
             return null;
         }
     }
-    
+
 }

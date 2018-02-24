@@ -23,7 +23,7 @@ import org.junit.Test;
 public class UserDAOCollTest {
 
     // userDAO class collection
-    UserDAOCollection userDAO = null;
+    private UserDAOCollection userDAO = null;
 
     private List<String> tags = null;
     private List<User> users = null;

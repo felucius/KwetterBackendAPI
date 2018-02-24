@@ -41,19 +41,20 @@ public class User implements Serializable {
     private String password = null;
 
     private List<Tweet> tweets = null;
-    @OneToMany(fetch = FetchType.EAGER) @JoinTable(name = "User")
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "User")
     private List<User> following = null;
-    @OneToMany(fetch = FetchType.EAGER) @JoinTable(name = "User")
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "User")
     private List<User> followers = null;
-    
+
     @ManyToMany
     @JoinTable(
-        name="FOLLOWING_FOLLOWERS",
-        joinColumns=@JoinColumn(name="USER_FOLLOWING", referencedColumnName="ID"),
-        inverseJoinColumns=@JoinColumn(name="USER_FOLLOWERS", referencedColumnName="ID"))
+            name = "FOLLOWING_FOLLOWERS",
+            joinColumns = @JoinColumn(name = "USER_FOLLOWING", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "USER_FOLLOWERS", referencedColumnName = "ID"))
     private List<User> followingEachother;
-    
-    
+
     /**
      * ID is automatically generated per persist on the database.
      *
@@ -65,10 +66,8 @@ public class User implements Serializable {
     private Long id;
 
     /**
-     * Constructor that initiates a new user with an empty list of
-     * -new tweets
-     * -followers
-     * -following users
+     * Constructor that initiates a new user with an empty list of -new tweets
+     * -followers -following users
      */
     public User() {
         this.picture = "picturePath";
@@ -79,7 +78,7 @@ public class User implements Serializable {
 
     /**
      * Constructor that creates a new user
-     * 
+     *
      * @param picture the picture of the profile
      * @param website of choice from the user
      * @param name the name of the user
@@ -90,92 +89,96 @@ public class User implements Serializable {
      */
     public User(String picture, String website, String name, String bio,
             String location, String email, String password) {
-        this.picture = picture;
         this.website = website;
         this.name = name;
         this.bio = bio;
         this.location = location;
         this.email = email;
         this.password = password;
+
+        this.picture = "picturePath";
+        this.tweets = new ArrayList();
+        this.following = new ArrayList();
+        this.followers = new ArrayList();
     }
 
     /**
      * This method allows a tweet to be added with a certain amount of mentions
-     * 
+     *
      * @param tweet to be added and posted.
      * @param mentions are the users that are going to be mentioned in the post.
      */
-    public void addTweet(Tweet tweet, List<User> mentions){
+    public void addTweet(Tweet tweet, List<User> mentions) {
         tweets.add(tweet);
     }
-    
+
     /**
      * This method allows a tweet to be removed.
-     * 
+     *
      * @param tweet that is going to be removed.
      */
-    public void removeTweet(Tweet tweet){
+    public void removeTweet(Tweet tweet) {
         tweets.remove(tweet);
     }
-    
+
     /**
      * This method allows a user to be followed.
-     * 
+     *
      * @param user that is going to be followed.
      */
-    public void followUser(User user){
+    public void followUser(User user) {
         user.addFollower(user);
     }
-    
+
     /**
-     * This method allows a new follower to be added to the user base of 
+     * This method allows a new follower to be added to the user base of
      * followers.
-     * 
+     *
      * @param user that is going to follow the current user.
      */
-    private void addFollower(User user){
+    private void addFollower(User user) {
         this.followers.add(user);
     }
-    
+
     /**
      * This method allows a user to be removed.
-     * 
+     *
      * @param user that is going to be removed from the followers base.
      */
-    public void removeFollower(User user){
+    public void removeFollower(User user) {
         this.followers.remove(user);
     }
-    
+
     /**
      * This method returns all the followers per user
-     * 
+     *
      * @return all followers.
      */
-    public List<User> getFollowers(){
+    public List<User> getFollowers() {
         return this.followers;
     }
-    
+
     /**
      * This method returns all the users, that the user object follows.
-     * 
+     *
      * @return all following users from a specific user.
      */
-    public List<User> getFollowing(){
+    public List<User> getFollowing() {
         return this.following;
     }
-    
+
     /**
      * This method allows a tweet to be added to the liked tweets.
-     * 
+     *
      * @param tweet to be added to the likes.
      */
-    public void likeTweet(Tweet tweet){
+    public void likeTweet(Tweet tweet) {
         tweet.likeTweet(this);
     }
-    
+
     /**
      * Retrieving the picture of the user.
-     * 
+     *
      * @return picture of user.
      */
     public String getPicture() {
@@ -184,7 +187,7 @@ public class User implements Serializable {
 
     /**
      * Setting the new picture of the user.
-     * 
+     *
      * @param picture of the user that is going to be set.
      */
     public void setPicture(String picture) {
@@ -193,7 +196,7 @@ public class User implements Serializable {
 
     /**
      * Retrieving the website of the user.
-     * 
+     *
      * @return the website.
      */
     public String getWebsite() {
@@ -202,7 +205,7 @@ public class User implements Serializable {
 
     /**
      * Setting the website of the user.
-     * 
+     *
      * @param website of the users that is going to be set.
      */
     public void setWebsite(String website) {
@@ -211,7 +214,7 @@ public class User implements Serializable {
 
     /**
      * Retrieving the name of the user.
-     * 
+     *
      * @return the name of the user.
      */
     public String getName() {
@@ -220,7 +223,7 @@ public class User implements Serializable {
 
     /**
      * Set the name of the user.
-     * 
+     *
      * @param name of the user that is going to be set.
      */
     public void setName(String name) {
@@ -229,7 +232,7 @@ public class User implements Serializable {
 
     /**
      * Retrieving the bio of the user.
-     * 
+     *
      * @return the bio.
      */
     public String getBio() {
@@ -238,7 +241,7 @@ public class User implements Serializable {
 
     /**
      * Setting the new bio of the user.
-     * 
+     *
      * @param bio that is going to be set.
      */
     public void setBio(String bio) {
@@ -247,7 +250,7 @@ public class User implements Serializable {
 
     /**
      * Retrieving the location of the user.
-     * 
+     *
      * @return the location of the user.
      */
     public String getLocation() {
@@ -256,7 +259,7 @@ public class User implements Serializable {
 
     /**
      * Setting the location of the user
-     * 
+     *
      * @param location to be set.
      */
     public void setLocation(String location) {
@@ -265,7 +268,7 @@ public class User implements Serializable {
 
     /**
      * Retrieving the email of the user.
-     * 
+     *
      * @return email of the user.
      */
     public String getEmail() {
@@ -274,7 +277,7 @@ public class User implements Serializable {
 
     /**
      * Setting the email of the user.
-     * 
+     *
      * @param email of the user to be set.
      */
     public void setEmail(String email) {
@@ -283,7 +286,7 @@ public class User implements Serializable {
 
     /**
      * Retrieving the password of the user.
-     * 
+     *
      * @return password of user.
      */
     public String getPassword() {
@@ -292,58 +295,58 @@ public class User implements Serializable {
 
     /**
      * Setting the password of the user.
-     * 
+     *
      * @param password of the user that is going to be set.
      */
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
     /**
      * Setting new tweets to the list.
-     * 
+     *
      * @param tweets to be added.
      */
-    public void setTweets(List<Tweet> tweets){
+    public void setTweets(List<Tweet> tweets) {
         this.tweets = tweets;
     }
-    
+
     /**
      * Retrieving all tweets that the user made.
-     * 
+     *
      * @return all tweets from the user.
      */
-    public List<Tweet> getTweets(){
+    public List<Tweet> getTweets() {
         return this.tweets;
     }
-        
+
     /**
      * Setting the id to a new one.
-     * 
+     *
      * @param id to be set.
      */
-    public void setId(Long id){
+    public void setId(Long id) {
         this.id = id;
     }
-    
+
     /**
      * Retrieving the id of a single user.
-     * 
+     *
      * @return the id of a user.
      */
-    public Long getId(){
+    public Long getId() {
         return this.id;
     }
-    
+
     /**
      * Overriding the toString method with an own implementation.
-     * 
+     *
      * @return all the fields with the user's information.
      */
     @Override
-    public String toString(){
-        return "Name: " + this.name + " Biography: " + this.bio + 
-                " Email: " + this.email + " Location: " + this.location + 
-                " Picture: " + this.picture + "Website: " + this.website;                
+    public String toString() {
+        return "Name: " + this.name + " Biography: " + this.bio
+                + " Email: " + this.email + " Location: " + this.location
+                + " Picture: " + this.picture + "Website: " + this.website;
     }
 }

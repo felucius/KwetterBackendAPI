@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="8" failures="0" name="domain.TweetTest" time="0.009" errors="0" skipped="0">
+<testsuite tests="5" failures="0" name="dao.TweetDAOCollTest" time="12.155" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_101\jre\bin"/>
@@ -14,6 +14,7 @@
     <property name="user.country" value="US"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value=""/>
+    <property name="test" value="dao.TweetDAOCollTest"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
     <property name="user.dir" value="C:\Fontys\S6\JEA6\Week 1\Kwetter\KwetterBackend_Maxime"/>
     <property name="java.runtime.version" value="1.8.0_101-b13"/>
@@ -34,6 +35,8 @@
     <property name="java.class.version" value="52.0"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="os.version" value="10.0"/>
+    <property name="jpda.listen" value="true"/>
+    <property name="jpda.address" value="50855"/>
     <property name="user.home" value="C:\Users\M"/>
     <property name="user.timezone" value="Europe/Berlin"/>
     <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
@@ -41,10 +44,11 @@
     <property name="file.encoding" value="UTF-8"/>
     <property name="user.name" value="M"/>
     <property name="java.class.path" value="C:\Program Files\NetBeans 8.2\java\maven\boot\plexus-classworlds-2.4.jar"/>
+    <property name="maven.surefire.debug" value="-Xdebug -Xrunjdwp:transport=dt_socket,server=n,address=50855"/>
     <property name="java.vm.specification.version" value="1.8"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="C:\Program Files\Java\jdk1.8.0_101\jre"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dmaven.ext.class.path=C:\Program Files\NetBeans 8.2\java\maven-nblib\netbeans-eventspy.jar -Dfile.encoding=UTF-8 clean install"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dtest=dao.TweetDAOCollTest -DforkMode=once -Dmaven.surefire.debug=-Xdebug -Xrunjdwp:transport=dt_socket,server=n,address=50855 -Djpda.listen=true -Djpda.address=50855 -Dmaven.ext.class.path=C:\Program Files\NetBeans 8.2\java\maven-nblib\netbeans-eventspy.jar -Dfile.encoding=UTF-8 surefire:test"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="en"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -56,17 +60,15 @@
     <property name="maven.home" value="C:\Program Files\NetBeans 8.2\java\maven"/>
     <property name="file.separator" value="\"/>
     <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
+    <property name="forkMode" value="once"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="domain.TweetTest" name="testGetPublished" time="0"/>
-  <testcase classname="domain.TweetTest" name="testGetId" time="0"/>
-  <testcase classname="domain.TweetTest" name="testSetId" time="0"/>
-  <testcase classname="domain.TweetTest" name="testSetMessage" time="0"/>
-  <testcase classname="domain.TweetTest" name="testGetTags" time="0"/>
-  <testcase classname="domain.TweetTest" name="testSetPublished" time="0"/>
-  <testcase classname="domain.TweetTest" name="testGetMessage" time="0"/>
-  <testcase classname="domain.TweetTest" name="testSetTags" time="0"/>
+  <testcase classname="dao.TweetDAOCollTest" name="testGetLikes" time="0.015"/>
+  <testcase classname="dao.TweetDAOCollTest" name="testGetAllTweets" time="0"/>
+  <testcase classname="dao.TweetDAOCollTest" name="testGetMentions" time="0"/>
+  <testcase classname="dao.TweetDAOCollTest" name="testGetTweetsOfFollowingUsers" time="11.966"/>
+  <testcase classname="dao.TweetDAOCollTest" name="testAddMention" time="0.001"/>
 </testsuite>
