@@ -1,4 +1,6 @@
 domain\TweetTest.class
 domain\UserTest.class
+service\TweetServiceTest.class
 dao\TweetDAOCollTest.class
 dao\UserDAOCollTest.class
+service\UserServiceTest.class

@@ -56,15 +56,14 @@ public class TweetDAOCollTest {
         tags.add("#Cool");
         tweets = new ArrayList();
 
-        user1 = new User("picURL", "webURL", "Maxime", "Men", "Geldrop", "maxime@hotmail.com", "pass");
-
-        user2 = new User("picURL", "webURL", "Karel", "Men", "Veldhoven", "Karel@hotmail.com", "pass");
+        user1 = userDAO.createUser(new User("picURL", "webURL", "Maxime", "Men", "Geldrop", "maxime@hotmail.com", "pass"));
+        
+        user2 = userDAO.createUser(new User("picURL", "webURL", "Karel", "Men", "Veldhoven", "Karel@hotmail.com", "pass"));
         users.add(user2);
-        user3 = new User("picURL", "webURL", "Karel", "Men", "Veldhoven", "Karel@hotmail.com", "pass");
+        user3 = userDAO.createUser(new User("picURL", "webURL", "Karel", "Men", "Veldhoven", "Karel@hotmail.com", "pass"));
         users.add(user3);
         
         tweet1 = new Tweet("Hello message", tags, user1);
-        
     }
 
     @After
@@ -77,8 +76,8 @@ public class TweetDAOCollTest {
     @Test
     public void testGetLikes() {
         System.out.println("Test get likes on - Tweet DAO collection");
-        tweet1.likeTweet(user1);
-        tweet1.likeTweet(user2);
+        tweetDAO.likeTweet(tweet1, user1);
+        tweetDAO.likeTweet(tweet1, user2);
         assertEquals(2, tweetDAO.getLikes(tweet1).size());
     }
 
@@ -88,8 +87,8 @@ public class TweetDAOCollTest {
     @Test
     public void testGetMentions() {
         System.out.println("Test get mentions on - Tweet DAO collection");
-        tweet1.addMention(user1);
-        tweet1.addMention(user2);
+        tweetDAO.addMention(tweet1, user1);
+        tweetDAO.addMention(tweet1, user2);
         assertEquals(2, tweetDAO.getMentions(tweet1).size());
     }
 

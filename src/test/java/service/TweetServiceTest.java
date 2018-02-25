@@ -5,6 +5,10 @@
  */
 package service;
 
+import domain.Tweet;
+import domain.User;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -17,29 +21,93 @@ import static org.junit.Assert.*;
  * @author M
  */
 public class TweetServiceTest {
-    
+
+    private TweetService tweetService = null;
+    private UserService userService = null;
+
+    private List<Tweet> tweets = null;
+    private List<String> tags = null;
+    private List<User> users = null;
+    private Tweet tweet1 = null;
+    private Tweet tweet2 = null;
+    private User user1 = null;
+    private User user2 = null;
+    private User user3 = null;
+
     public TweetServiceTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
+        tweetService = new TweetService();
+        userService = new UserService();
+
+        users = new ArrayList();
+        tags = new ArrayList();
+        tags.add("#JEA");
+        tags.add("#Cool");
+        tweets = new ArrayList();
+
+        user1 = userService.createUser(new User("picURL", "webURL", "Maxime", "Men", "Geldrop", "maxime@hotmail.com", "pass"));
+        
+        user2 = userService.createUser(new User("picURL", "webURL", "Karel", "Men", "Veldhoven", "Karel@hotmail.com", "pass"));
+        users.add(user2);
+        user3 = userService.createUser(new User("picURL", "webURL", "Karel", "Men", "Veldhoven", "Karel@hotmail.com", "pass"));
+        users.add(user3);
+
+        tweet1 = new Tweet("Hello message", tags, user1);
+        tweet2 = new Tweet("Tweeting now!!", tags, user2);
+        tweetService.addMention(tweet1, user1);
+        userService.addTweet(user1, tweet1, users);
     }
-    
+
     @After
     public void tearDown() {
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+    @Test
+    public void testAddMention() {
+        System.out.println("Test add mention on - TweetService layer");
+        tweetService.addMention(tweet1, user1);
+        assertEquals(3, tweetService.addMention(tweet1, user1).getMentions().size());
+    }
+    
+    @Test
+    public void testGetLikes(){
+        System.out.println("Test get likes on - TweetService layer");
+        assertEquals(0, tweetService.getLikes(tweet1).size());
+        userService.likeTweet(user1, tweet1);
+        assertEquals(1, tweetService.getLikes(tweet1).size());
+    }
+    
+    @Test
+    public void testGetMentions(){
+        System.out.println("Test get mentions on - TweetService layer");
+        assertEquals(1, tweetService.getMentions(tweet1).size());
+        tweet1.addMention(user1);
+        assertEquals(2, tweetService.getMentions(tweet1).size());
+    }
+    
+    @Test
+    public void testGetTweetsOfFollowingUsers(){
+        System.out.println("Test get tweets of following users on - TweetService layer");
+        assertEquals(1, tweetService.getTweetsOfFollowingUsers(user1).size());
+    }
+    
+    @Test
+    public void testGetAllTweets(){
+        System.out.println("Test get all tweets of all users on - TweetService layer");
+        userService.addTweet(user1, tweet1, users);
+        userService.addTweet(user2, tweet2, users);
+        assertEquals(2, userService.getTweets(user1).size());
+    }
+
 }

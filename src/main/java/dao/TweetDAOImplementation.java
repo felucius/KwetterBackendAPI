@@ -125,4 +125,24 @@ public class TweetDAOImplementation implements TweetDAO {
         }
         return tweet;
     }
+
+    /**
+     * This method allows a user to like a single tweet.
+     * 
+     * @param tweet is the tweet that is going to be liked by a single user.
+     * @param user is the object that is liking the tweet.
+     * @return true if the tweets has successfully been likes or false when
+     * the action could not have been succeeded.
+     */
+    @Override
+    public boolean likeTweet(Tweet tweet, User user) {
+        try{
+            tweet.likeTweet(user);
+            em.persist(tweet);
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 }

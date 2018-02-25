@@ -55,6 +55,24 @@ public class TweetDAOCollection implements TweetDAO {
             return null;
         }
     }
+    
+    /**
+     * This method allows a single tweet to be liked by a single user.
+     *
+     * @param tweet is the tweet object that is going to be liked by another user
+     * @param user is the user that likes a single tweet.
+     * @return true if the user is able to like a tweet or false when the action
+     * could not have been succeeded.
+     */
+    @Override
+    public boolean likeTweet(Tweet tweet, User user){
+        if(tweet != null && user != null){
+            tweet.likeTweet(user);
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     /**
      * This method retrieves all mentions from a single tweet.
