@@ -27,6 +27,7 @@ public class TweetService {
      */
     private TweetDAOCollection tweetDAO;
     
+    // Injection on constructor level.
     @Inject
     public TweetService(){
         tweetDAO = new TweetDAOCollection();

@@ -27,6 +27,7 @@ public class UserService {
      */
     private UserDAOCollection userDAO;
     
+    // Injection on constructor level.
     @Inject
     public UserService(){
         userDAO = new UserDAOCollection();
