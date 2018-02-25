@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TweetService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">KwetterBackend_Maxime</a> &gt; <a href="index.source.html" class="el_package">service</a> &gt; <span class="el_source">TweetService.java</span></div><h1>TweetService.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package service;
+
+import dao.TweetDAOCollection;
+import domain.Tweet;
+import domain.User;
+import java.util.List;
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+
+/**
+ * The class 'TweetService' provides information about tweets to the user. Data
+ * is collected from the tweetDAO and handed out to the tweetResource.
+ *
+ * @author M
+ */
+@Stateless
+public class TweetService {
+
+    /**
+     * By injecting TweetDAO, a constructor does not have to be defined with the
+     * keyword 'new'. This provides a loosely coupled architecture.
+     */
+    private TweetDAOCollection tweetDAO;
+    
+    @Inject
+<span class="fc" id="L31">    public TweetService(){</span>
+<span class="fc" id="L32">        tweetDAO = new TweetDAOCollection();</span>
+<span class="fc" id="L33">    }</span>
+
+    /**
+     * This method allows tweet to get a mention by a single user.
+     *
+     * @param tweet object that is receiving a mention from the 'user' object.
+     * @param user object that is going to be mentioned in a single tweet.
+     * @return the tweet with the user that is mentioned in it.
+     */
+    public Tweet addMention(Tweet tweet, User user) {
+<span class="fc" id="L43">        return tweetDAO.addMention(tweet, user);</span>
+    }
+
+    /**
+     * This method retrieved all likes from a single tweet.
+     *
+     * @param tweet object that all likes are going to be retrieved from.
+     * @return a list of users that liked the single tweet.
+     */
+    public List&lt;User&gt; getLikes(Tweet tweet) {
+<span class="fc" id="L53">        return tweetDAO.getLikes(tweet);</span>
+    }
+
+    /**
+     * This method retrieves all mentions from a single tweet.
+     *
+     * @param tweet object where all mentions are going to be retrieved from.
+     * @return a list of users that are mentioned on that single tweet.
+     */
+    public List&lt;User&gt; getMentions(Tweet tweet) {
+<span class="fc" id="L63">        return tweetDAO.getMentions(tweet);</span>
+    }
+
+    /**
+     * This method retrieved all tweets from different users that one single
+     * user follows.
+     *
+     * @param follower is the object where all tweets are going to be collected
+     * from
+     * @return a list of tweets that the 'follower' object follows.
+     */
+    public List&lt;Tweet&gt; getTweetsOfFollowingUsers(User follower) {
+<span class="fc" id="L75">        return tweetDAO.getTweetsOfFollowingUsers(follower);</span>
+    }
+
+    /**
+     * This method retrieves all tweets from all users.
+     *
+     * @return a list of all Tweets from different users.
+     */
+    public List&lt;Tweet&gt; getAllTweets() {
+<span class="nc" id="L84">        return tweetDAO.getAllTweets();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

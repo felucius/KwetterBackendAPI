@@ -180,7 +180,7 @@ public class UserServiceTest {
         assertEquals("Amounnt of followers should be 0", 0, userService.getFollowers(user9).size());
 
         // Adding a follower to user 10.
-        user10.followUser(user9);
+        userService.followUser(user10, user9);
         assertEquals("Amount of followers should be 1", 1, userService.getFollowers(user9).size());
     }
 
