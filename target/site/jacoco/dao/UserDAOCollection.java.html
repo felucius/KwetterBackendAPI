@@ -83,9 +83,9 @@ public class UserDAOCollection implements UserDAO {
 
     @Override
     public boolean followUser(User user, User followingUser) {
-<span class="nc bnc" id="L86" title="All 4 branches missed.">        if (user != null &amp;&amp; followingUser != null) {</span>
-<span class="nc" id="L87">            user.followUser(followingUser);</span>
-<span class="nc" id="L88">            return true;</span>
+<span class="pc bpc" id="L86" title="2 of 4 branches missed.">        if (user != null &amp;&amp; followingUser != null) {</span>
+<span class="fc" id="L87">            user.followUser(followingUser);</span>
+<span class="fc" id="L88">            return true;</span>
         } else {
 <span class="nc" id="L90">            return false;</span>
         }
@@ -93,17 +93,17 @@ public class UserDAOCollection implements UserDAO {
 
     @Override
     public boolean unfollowUser(User user, User unfollowingUser) {
-<span class="nc bnc" id="L96" title="All 4 branches missed.">        if (user != null &amp;&amp; unfollowingUser != null) {</span>
-<span class="nc" id="L97">            user.removeFollower(unfollowingUser);</span>
-<span class="nc" id="L98">            return true;</span>
+<span class="pc bpc" id="L96" title="2 of 4 branches missed.">        if (user != null &amp;&amp; unfollowingUser != null) {</span>
+<span class="fc" id="L97">            user.removeFollower(unfollowingUser);</span>
+<span class="fc" id="L98">            return true;</span>
         }
 <span class="nc" id="L100">        return false;</span>
     }
 
     @Override
     public List&lt;User&gt; getFollowingUsers(User user) {
-<span class="nc bnc" id="L105" title="All 2 branches missed.">        if (user != null) {</span>
-<span class="nc" id="L106">            return user.getFollowing();</span>
+<span class="pc bpc" id="L105" title="1 of 2 branches missed.">        if (user != null) {</span>
+<span class="fc" id="L106">            return user.getFollowing();</span>
         } else {
 <span class="nc" id="L108">            return null;</span>
         }

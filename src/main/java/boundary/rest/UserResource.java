@@ -64,7 +64,7 @@ public class UserResource {
         System.out.println("TESTING USER CREATION");
         User user = new User();
         user.setName(name);
-        userService.CreateUser(user);
+        userService.createUser(user);
     }
     
     /**

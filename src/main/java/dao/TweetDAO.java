@@ -20,6 +20,8 @@ import javax.ejb.Stateless;
 public interface TweetDAO {
     
     Tweet addMention(Tweet tweet, User user);
+        
+    boolean likeTweet(Tweet tweet, User user);
     
     List<User> getLikes(Tweet tweet);
             

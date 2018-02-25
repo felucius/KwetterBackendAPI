@@ -125,5 +125,25 @@ import javax.persistence.PersistenceContext;
 <span class="nc" id="L125">        }</span>
 <span class="nc" id="L126">        return tweet;</span>
     }
+
+    /**
+     * This method allows a user to like a single tweet.
+     * 
+     * @param tweet is the tweet that is going to be liked by a single user.
+     * @param user is the object that is liking the tweet.
+     * @return true if the tweets has successfully been likes or false when
+     * the action could not have been succeeded.
+     */
+    @Override
+    public boolean likeTweet(Tweet tweet, User user) {
+        try{
+<span class="nc" id="L140">            tweet.likeTweet(user);</span>
+<span class="nc" id="L141">            em.persist(tweet);</span>
+<span class="nc" id="L142">        }catch (Exception ex){</span>
+<span class="nc" id="L143">            ex.printStackTrace();</span>
+<span class="nc" id="L144">            return false;</span>
+<span class="nc" id="L145">        }</span>
+<span class="nc" id="L146">        return true;</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

@@ -55,6 +55,24 @@ public class TweetDAOCollection implements TweetDAO {
 <span class="nc" id="L55">            return null;</span>
         }
     }
+    
+    /**
+     * This method allows a single tweet to be liked by a single user.
+     *
+     * @param tweet is the tweet object that is going to be liked by another user
+     * @param user is the user that likes a single tweet.
+     * @return true if the user is able to like a tweet or false when the action
+     * could not have been succeeded.
+     */
+    @Override
+    public boolean likeTweet(Tweet tweet, User user){
+<span class="pc bpc" id="L69" title="2 of 4 branches missed.">        if(tweet != null &amp;&amp; user != null){</span>
+<span class="fc" id="L70">            tweet.likeTweet(user);</span>
+<span class="fc" id="L71">            return true;</span>
+        }else{
+<span class="nc" id="L73">            return false;</span>
+        }
+    }
 
     /**
      * This method retrieves all mentions from a single tweet.
@@ -64,10 +82,10 @@ public class TweetDAOCollection implements TweetDAO {
      */
     @Override
     public List&lt;User&gt; getMentions(Tweet tweet) {
-<span class="pc bpc" id="L67" title="1 of 2 branches missed.">        if (tweet != null) {</span>
-<span class="fc" id="L68">            return tweet.getMentions();</span>
+<span class="pc bpc" id="L85" title="1 of 2 branches missed.">        if (tweet != null) {</span>
+<span class="fc" id="L86">            return tweet.getMentions();</span>
         } else {
-<span class="nc" id="L70">            return null;</span>
+<span class="nc" id="L88">            return null;</span>
         }
     }
 
@@ -78,10 +96,10 @@ public class TweetDAOCollection implements TweetDAO {
      */
     @Override
     public List&lt;Tweet&gt; getAllTweets() {
-<span class="pc bpc" id="L81" title="1 of 2 branches missed.">        if (tweets != null) {</span>
-<span class="fc" id="L82">            return tweets;</span>
+<span class="pc bpc" id="L99" title="1 of 2 branches missed.">        if (tweets != null) {</span>
+<span class="fc" id="L100">            return tweets;</span>
         } else {
-<span class="nc" id="L84">            return null;</span>
+<span class="nc" id="L102">            return null;</span>
         }
     }
 
@@ -94,10 +112,10 @@ public class TweetDAOCollection implements TweetDAO {
      */
     @Override
     public List&lt;Tweet&gt; getTweetsOfFollowingUsers(User following) {
-<span class="pc bpc" id="L97" title="1 of 2 branches missed.">        if (following != null) {</span>
-<span class="fc" id="L98">            return following.getTweets();</span>
+<span class="pc bpc" id="L115" title="1 of 2 branches missed.">        if (following != null) {</span>
+<span class="fc" id="L116">            return following.getTweets();</span>
         } else {
-<span class="nc" id="L100">            return null;</span>
+<span class="nc" id="L118">            return null;</span>
         }
     }
 

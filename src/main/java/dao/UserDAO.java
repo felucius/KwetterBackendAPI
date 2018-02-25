@@ -9,10 +9,6 @@ import domain.Tweet;
 import domain.User;
 import java.util.List;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
 
 /**
  * *A stateless DAO does not hold the data for any particular user. The data is
