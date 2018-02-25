@@ -48,11 +48,12 @@ public class TweetDAOImplementation implements TweetDAO {
      * This method allows to retrieve all tweets from the Database, through the
      * Entity manager.
      *
-     * @param user is the user to retrieve all the likes from.
+     * @param tweet is the tweet that all the likes are going to be retrieved 
+     * from.
      * @return a list of likes
      */
     @Override
-    public List<User> getLikes(User user) {
+    public List<User> getLikes(Tweet tweet) {
         List<User> users = null;
         try {
             //likes = em.find(Tweet.class, user.getId()).getLikes();
@@ -103,5 +104,25 @@ public class TweetDAOImplementation implements TweetDAO {
             return null;
         }
         return tweets;
+    }
+
+    /**
+     * This method allows a user to be added as a mention to a single tweet.
+     * 
+     * @param tweet to be posted with a mention of a user.
+     * @param user to be mentioned in that single tweet.
+     * @return the tweet with the user that is being mentioned in that single 
+     * tweet.
+     */
+    @Override
+    public Tweet addMention(Tweet tweet, User user) {
+        try{
+            tweet.addMention(user);
+            em.persist(tweet);
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return null;
+        }
+        return tweet;
     }
 }

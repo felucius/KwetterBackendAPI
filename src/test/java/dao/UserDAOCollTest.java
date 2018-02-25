@@ -192,19 +192,19 @@ public class UserDAOCollTest {
      * Test of likeTweet method, of class User. Retrieving the amount of likes
      * per tweet.
      */
-    /*
+    
     @Test
     public void testLikeTweet() {
-        TweetDAO tweetDAO = new TweetDAO();
+        TweetDAOCollection tweetDAO = new TweetDAOCollection();
         System.out.println("Get amount of likes per tweet on - DAO collection");
         // No tweet liked.
-        assertEquals("Amount of likes should be 0", 0, tweetDAO.getLikes(user1).size());
+        assertEquals("Amount of likes should be 0", 0, tweetDAO.getLikes(tweet1).size());
 
         // User liking a tweet
         userDAO.likeTweet(user1, tweet2);
-        assertEquals("Amount of likes should be 1", 1, tweetDAO.getLikes(user2).size());
+        assertEquals("Amount of likes should be 1", 1, tweetDAO.getLikes(tweet2).size());
     }
-    */
+    
 
     /**
      * This method retrieves a user by it's ID throughout the entity manager

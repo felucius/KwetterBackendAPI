@@ -71,6 +71,9 @@ public class TweetDAOCollTest {
     public void tearDown() {
     }
 
+    /**
+     * This method tests if all the likes are retrieved from a single tweet.
+     */
     @Test
     public void testGetLikes() {
         System.out.println("Test get likes on - Tweet DAO collection");
@@ -79,6 +82,9 @@ public class TweetDAOCollTest {
         assertEquals(2, tweetDAO.getLikes(tweet1).size());
     }
 
+    /**
+     * This method tests if all mentions can be retrieved from a tweet.
+     */
     @Test
     public void testGetMentions() {
         System.out.println("Test get mentions on - Tweet DAO collection");
@@ -87,6 +93,10 @@ public class TweetDAOCollTest {
         assertEquals(2, tweetDAO.getMentions(tweet1).size());
     }
 
+    /**
+     * This method tests a tweet to get a mention. A mention is another user
+     * that is being mentioned in a tweet.
+     */
     @Test
     public void testAddMention() {
         System.out.println("Test add mentions on - Tweet DAO collection");
@@ -95,6 +105,9 @@ public class TweetDAOCollTest {
         assertEquals(1, tweet.getMentions().size());
     }
 
+    /**
+     * This method tests the retrieval of all tweets from a specific user.
+     */
     @Test
     public void testGetTweetsOfFollowingUsers() {
         System.out.println("Test get tweets of following users on - Tweet DAO collection");
@@ -102,6 +115,9 @@ public class TweetDAOCollTest {
         assertEquals(1, tweetDAO.getTweetsOfFollowingUsers(user1).size());
     }
 
+    /**
+     * This method tests the retrieval of all existing tweets from all users.
+     */
     @Test
     public void testGetAllTweets() {
         System.out.println("Test get all tweets on - Tweet DAO collection");

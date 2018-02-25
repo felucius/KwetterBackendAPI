@@ -1,5 +1,4 @@
 domain\TweetTest.class
 domain\UserTest.class
-dao\UserDAOImplTest.class
 dao\TweetDAOCollTest.class
 dao\UserDAOCollTest.class
