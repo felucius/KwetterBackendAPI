@@ -81,7 +81,7 @@ public class UserService {
      * @return return true if the addition of the tweet has been successful or
      * false when this action could not have been completed.
      */
-    boolean addTweet(User user, Tweet tweet, List<User> mentions){
+    public boolean addTweet(User user, Tweet tweet, List<User> mentions){
         return userDAO.addTweet(user, tweet, mentions);
     }
     
@@ -92,7 +92,7 @@ public class UserService {
      * @return true is the tweet has successfully been removed or false when
      * the action could not have been completed.
      */
-    boolean removeTweet(Tweet tweet){
+    public boolean removeTweet(Tweet tweet){
         return userDAO.removeTweet(tweet);
     }
     
@@ -105,7 +105,7 @@ public class UserService {
      * @return true if the 'user' object successfully followed the 'followingUser'
      * object or false when this action did not succeed.
      */
-    boolean followUser(User user, User followingUser){
+    public boolean followUser(User user, User followingUser){
         return userDAO.followUser(user, followingUser);
     }
     
@@ -118,7 +118,7 @@ public class UserService {
      * @return true if the 'user' successfully un followed the 'unfollowingUser'
      * object or false when this action could not succeed.
      */
-    boolean unfollowUser(User user, User unfollowingUser){
+    public boolean unfollowUser(User user, User unfollowingUser){
         return userDAO.unfollowUser(user, unfollowingUser);
     }
     
@@ -128,7 +128,7 @@ public class UserService {
      * @param user object that is going to retrieve all following users.
      * @return a list of users that the 'user' object follows.
      */
-    List<User> getFollowingUsers(User user){
+    public List<User> getFollowingUsers(User user){
         return userDAO.getFollowingUsers(user);
     }
     
@@ -138,7 +138,7 @@ public class UserService {
      * @param user that is going to retrieve all it's followers.
      * @return a list of users that follow the 'user' object.
      */
-    List<User> getFollowers(User user){
+    public List<User> getFollowers(User user){
         return userDAO.getFollowers(user);
     }
     
@@ -148,7 +148,7 @@ public class UserService {
      * @param user object that all tweets are going to be retrieved from.
      * @return a list of tweets from that single user.
      */
-    List<Tweet> getTweets(User user){
+    public List<Tweet> getTweets(User user){
         return userDAO.getTweets(user);
     }
     
@@ -161,7 +161,7 @@ public class UserService {
      * @return true if the user successfully liked the single tweet or false
      * when this action could not have been succeeded.
      */
-    boolean likeTweet(User user, Tweet tweetToLike){
+    public boolean likeTweet(User user, Tweet tweetToLike){
         return userDAO.likeTweet(user, tweetToLike);
     }
 }
