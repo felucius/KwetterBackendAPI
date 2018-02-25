@@ -6,6 +6,7 @@
 package service;
 
 import dao.UserDAO;
+import domain.Tweet;
 import domain.User;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -40,11 +41,24 @@ public class UserService {
      * 
      * @param user is the object that is going to be created and persisted to the
      * database.
+     * @return the user object if a creation of a new user has been successful.
      */
-    public void CreateUser(User user){
-        //userDAO.createUser(user);
+    public User CreateUser(User user){
+        return userDAO.createUser(user);
     }
     
+    /**
+     * This method find the user by it's given id. From there on this information
+     * is passed on to the DAO and to the entity manager to be removed from the 
+     * database
+     * 
+     * @param user is the object that is going to be removed.
+     * @return true if the user has succesfully been removed or false when the
+     * action could not have been completed.
+     */
+    public boolean removeUser(User user){
+        return userDAO.removeUser(user);
+    }
     
     /**
      * This method finds the user by it's user id. This id is passed on from the
@@ -58,13 +72,96 @@ public class UserService {
     }
     
     /**
-     * This method find the user by it's given id. From there on this information
-     * is passed on to the DAO and to the entity manager to be removed from the 
-     * database
+     * This method allows a tweet to be added with a user, the actual tweet
+     * and a list of users that are mentioned in the post.
      * 
-     * @param id of the user object that is going to be removed.
+     * @param user is the user that wrote the tweet.
+     * @param tweet is the content of the tweet, written by the user object.
+     * @param mentions are the users that are mentioned in this tweet/post.
+     * @return return true if the addition of the tweet has been successful or
+     * false when this action could not have been completed.
      */
-    public void removeUser(User user){
-        userDAO.removeUser(user);
+    boolean addTweet(User user, Tweet tweet, List<User> mentions){
+        return userDAO.addTweet(user, tweet, mentions);
+    }
+    
+    /**
+     * This method allows a single tweet to be removed from a single user.
+     * 
+     * @param tweet that is going to be removed.
+     * @return true is the tweet has successfully been removed or false when
+     * the action could not have been completed.
+     */
+    boolean removeTweet(Tweet tweet){
+        return userDAO.removeTweet(tweet);
+    }
+    
+    /**
+     * This method allows a user to follow another user.
+     * 
+     * @param user is the user that is going to follow another user.
+     * @param followingUser is the users that the 'user' object is going to 
+     * follow.
+     * @return true if the 'user' object successfully followed the 'followingUser'
+     * object or false when this action did not succeed.
+     */
+    boolean followUser(User user, User followingUser){
+        return userDAO.followUser(user, followingUser);
+    }
+    
+    /**
+     * This method allows a user to un follow another user.
+     * 
+     * @param user object that is going to un follow another single user.
+     * @param unfollowingUser is the user that is going to be un followed by
+     * the 'user' object.
+     * @return true if the 'user' successfully un followed the 'unfollowingUser'
+     * object or false when this action could not succeed.
+     */
+    boolean unfollowUser(User user, User unfollowingUser){
+        return userDAO.unfollowUser(user, unfollowingUser);
+    }
+    
+    /**
+     * This method retrieves all the users that one user follows.
+     * 
+     * @param user object that is going to retrieve all following users.
+     * @return a list of users that the 'user' object follows.
+     */
+    List<User> getFollowingUsers(User user){
+        return userDAO.getFollowingUsers(user);
+    }
+    
+    /**
+     * This method retrieves all the following users from a single user.
+     * 
+     * @param user that is going to retrieve all it's followers.
+     * @return a list of users that follow the 'user' object.
+     */
+    List<User> getFollowers(User user){
+        return userDAO.getFollowers(user);
+    }
+    
+    /**
+     * This method retrieves all tweets from a single user.
+     * 
+     * @param user object that all tweets are going to be retrieved from.
+     * @return a list of tweets from that single user.
+     */
+    List<Tweet> getTweets(User user){
+        return userDAO.getTweets(user);
+    }
+    
+    /**
+     * This method allows a tweet to be liked by a single user.
+     * 
+     * @param user is the user that likes a single tweet.
+     * @param tweetToLike is the tweet that is going to be liked by the 'user'
+     * object.
+     * @return true if the user successfully liked the single tweet or false
+     * when this action could not have been succeeded.
+     */
+    boolean likeTweet(User user, Tweet tweetToLike){
+        return userDAO.likeTweet(user, tweetToLike);
     }
 }
