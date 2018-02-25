@@ -92,7 +92,7 @@ public class TweetServiceTest {
     public void testGetMentions(){
         System.out.println("Test get mentions on - TweetService layer");
         assertEquals(1, tweetService.getMentions(tweet1).size());
-        tweet1.addMention(user1);
+        tweetService.addMention(tweet1, user1);
         assertEquals(2, tweetService.getMentions(tweet1).size());
     }
     

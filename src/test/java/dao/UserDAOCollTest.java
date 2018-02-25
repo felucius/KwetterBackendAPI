@@ -216,4 +216,17 @@ public class UserDAOCollTest {
         
         assertEquals(user1.getId(), userDAO.findUser(user1.getId()).getId());
     }
+    
+    @Test
+    public void testUnfollowUser(){
+        System.out.println("Test unfollow user on - DAO collection");
+        assertEquals(3, userDAO.getFollowers(user1).size());
+    }
+    
+    @Test
+    public void testGetTweets(){
+        System.out.println("Test get tweets on - DAO collection");
+        userDAO.addTweet(user1, tweet1, users);
+        assertEquals(1, userDAO.getTweets(user1).size());
+    }
 }
