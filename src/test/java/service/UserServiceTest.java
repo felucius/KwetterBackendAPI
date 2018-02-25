@@ -133,6 +133,7 @@ public class UserServiceTest {
     @Test
     public void testGetAllUsers() {
         System.out.println("Test get all users on - UserService layer");
+        assertEquals(10, userService.getAllUsers().size());
     }
 
     @Test
@@ -144,6 +145,8 @@ public class UserServiceTest {
     @Test
     public void testRemoveUser() {
         System.out.println("Test remove user on - UserService layer");
+        userService.removeUser(user1);
+        assertEquals(9, userService.getAllUsers().size());
     }
 
     @Test

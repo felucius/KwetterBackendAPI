@@ -27,10 +27,11 @@ public class UserService {
      */
     private UserDAOCollection userDAO;
     
+    // Injection on constructor level.
     @Inject
-<span class="fc" id="L31">    public UserService(){</span>
-<span class="fc" id="L32">        userDAO = new UserDAOCollection();</span>
-<span class="fc" id="L33">    }</span>
+<span class="fc" id="L32">    public UserService(){</span>
+<span class="fc" id="L33">        userDAO = new UserDAOCollection();</span>
+<span class="fc" id="L34">    }</span>
 
     /**
      * Get all users from the userDAO. UserDao makes a call to the database and
@@ -39,7 +40,7 @@ public class UserService {
      * @return a list of all available users.
      */
     public List&lt;User&gt; getAllUsers() {
-<span class="nc" id="L42">        return userDAO.getAllUsers();</span>
+<span class="nc" id="L43">        return userDAO.getAllUsers();</span>
     }
 
     /**
@@ -50,7 +51,7 @@ public class UserService {
      * @return the user object if a creation of a new user has been successful.
      */
     public User createUser(User user) {
-<span class="fc" id="L53">        return userDAO.createUser(user);</span>
+<span class="fc" id="L54">        return userDAO.createUser(user);</span>
     }
 
     /**
@@ -63,7 +64,7 @@ public class UserService {
      * action could not have been completed.
      */
     public boolean removeUser(User user) {
-<span class="nc" id="L66">        return userDAO.removeUser(user);</span>
+<span class="nc" id="L67">        return userDAO.removeUser(user);</span>
     }
 
     /**
@@ -74,7 +75,7 @@ public class UserService {
      * @return the user object.
      */
     public User findUser(Long id) {
-<span class="fc" id="L77">        return userDAO.findUser(id);</span>
+<span class="fc" id="L78">        return userDAO.findUser(id);</span>
     }
 
     /**
@@ -88,7 +89,7 @@ public class UserService {
      * false when this action could not have been completed.
      */
     public boolean addTweet(User user, Tweet tweet, List&lt;User&gt; mentions) {
-<span class="fc" id="L91">        return userDAO.addTweet(user, tweet, mentions);</span>
+<span class="fc" id="L92">        return userDAO.addTweet(user, tweet, mentions);</span>
     }
 
     /**
@@ -99,7 +100,7 @@ public class UserService {
      * action could not have been completed.
      */
     public boolean removeTweet(Tweet tweet) {
-<span class="fc" id="L102">        return userDAO.removeTweet(tweet);</span>
+<span class="fc" id="L103">        return userDAO.removeTweet(tweet);</span>
     }
 
     /**
@@ -112,7 +113,7 @@ public class UserService {
      * 'followingUser' object or false when this action did not succeed.
      */
     public boolean followUser(User user, User followingUser) {
-<span class="fc" id="L115">        return userDAO.followUser(user, followingUser);</span>
+<span class="fc" id="L116">        return userDAO.followUser(user, followingUser);</span>
     }
 
     /**
@@ -125,7 +126,7 @@ public class UserService {
      * object or false when this action could not succeed.
      */
     public boolean unfollowUser(User user, User unfollowingUser) {
-<span class="fc" id="L128">        return userDAO.unfollowUser(user, unfollowingUser);</span>
+<span class="fc" id="L129">        return userDAO.unfollowUser(user, unfollowingUser);</span>
     }
 
     /**
@@ -135,7 +136,7 @@ public class UserService {
      * @return a list of users that the 'user' object follows.
      */
     public List&lt;User&gt; getFollowingUsers(User user) {
-<span class="fc" id="L138">        return userDAO.getFollowingUsers(user);</span>
+<span class="fc" id="L139">        return userDAO.getFollowingUsers(user);</span>
     }
 
     /**
@@ -145,7 +146,7 @@ public class UserService {
      * @return a list of users that follow the 'user' object.
      */
     public List&lt;User&gt; getFollowers(User user) {
-<span class="fc" id="L148">        return userDAO.getFollowers(user);</span>
+<span class="fc" id="L149">        return userDAO.getFollowers(user);</span>
     }
 
     /**
@@ -155,7 +156,7 @@ public class UserService {
      * @return a list of tweets from that single user.
      */
     public List&lt;Tweet&gt; getTweets(User user) {
-<span class="fc" id="L158">        return userDAO.getTweets(user);</span>
+<span class="fc" id="L159">        return userDAO.getTweets(user);</span>
     }
 
     /**
@@ -168,7 +169,7 @@ public class UserService {
      * when this action could not have been succeeded.
      */
     public boolean likeTweet(User user, Tweet tweetToLike) {
-<span class="fc" id="L171">        return userDAO.likeTweet(user, tweetToLike);</span>
+<span class="fc" id="L172">        return userDAO.likeTweet(user, tweetToLike);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>
