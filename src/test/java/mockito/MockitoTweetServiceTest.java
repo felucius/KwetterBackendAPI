@@ -100,8 +100,6 @@ public class MockitoTweetServiceTest {
     @Test
     public void testAddMention() {
         System.out.println("Test add mention on Mockito - TweetService layer");
-        TweetService tweetServiceA = new TweetService();
-        tweetServiceA.addMention(tweet1, user1);
         
         when(tweetDAO.addMention(tweet1, user1)).thenReturn(tweet1);
         assertEquals(tweet1, tweetDAO.addMention(tweet1, user1));
@@ -131,7 +129,7 @@ public class MockitoTweetServiceTest {
 
     @Test
     public void testGetTweetsOfFollowingUsers() {
-        System.out.println("Test get tweets of following users on - TweetService layer");
+        System.out.println("Test get tweets of following users on Mockito - TweetService layer");
 
         when(tweetDAO.getTweetsOfFollowingUsers(user1)).thenReturn(tweets);
         assertEquals(tweets, tweetDAO.getTweetsOfFollowingUsers(user1));
@@ -141,7 +139,7 @@ public class MockitoTweetServiceTest {
 
     @Test
     public void testGetAllTweets() {
-        System.out.println("Test get all tweets of all users on - TweetService layer");
+        System.out.println("Test get all tweets of all users on Mockito - TweetService layer");
 
         when(tweetDAO.getAllTweets()).thenReturn(tweets);
         assertEquals(tweets, tweetDAO.getAllTweets());
