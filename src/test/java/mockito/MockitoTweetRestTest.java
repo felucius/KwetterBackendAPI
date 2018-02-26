@@ -7,6 +7,10 @@ package mockito;
 
 import boundary.rest.TweetResource;
 import boundary.rest.UserResource;
+import dao.TweetDAO;
+import dao.TweetDAOCollection;
+import dao.UserDAO;
+import dao.UserDAOCollection;
 import domain.Tweet;
 import domain.User;
 import java.util.ArrayList;
@@ -19,6 +23,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.mockito.Mock;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import service.TweetService;
 import service.UserService;
@@ -33,6 +38,10 @@ public class MockitoTweetRestTest {
     private TweetResource tweetResource = null;
     @Mock
     private UserResource userResource = null;
+    @Mock
+    private TweetService tweetService = null;
+    @Mock
+    private UserService userService = null;
     @Mock
     private List<Tweet> tweets = null;
     @Mock
@@ -65,6 +74,8 @@ public class MockitoTweetRestTest {
     public void setUp() {
         tweetResource = mock(TweetResource.class);
         userResource = mock(UserResource.class);
+        tweetService = mock(TweetService.class);
+        userService = mock(UserService.class);
 
         users = mock(ArrayList.class);
         tags = mock(ArrayList.class);
@@ -92,41 +103,52 @@ public class MockitoTweetRestTest {
     @Test
     public void testAddMention() {
         System.out.println("Test add mention on Mockito - TweetService layer");
+        TweetService tweetServiceA = new TweetService();
+        tweetServiceA.addMention(tweet1, user1);
 
-        when(tweetResource.addMention(tweet1, user1)).thenReturn(tweet1);
-        assertEquals(tweet1, tweetResource.addMention(tweet1, user1));
+        when(tweetService.addMention(tweet1, user1)).thenReturn(tweet1);
+        assertEquals(tweet1, tweetService.addMention(tweet1, user1));
+        tweetResource.addMention(tweet1, user1);
+        verify(tweetService).addMention(tweet1, user1);
     }
 
     @Test
     public void testGetLikes() {
         System.out.println("Test get likes on Mockito - TweetService layer");
 
-        when(tweetResource.getLikes(tweet1)).thenReturn(users);
-        assertEquals(users, tweetResource.getLikes(tweet1));
+        when(tweetService.getLikes(tweet1)).thenReturn(users);
+        assertEquals(users, tweetService.getLikes(tweet1));
+        tweetResource.getLikes(tweet1);
+        verify(tweetService).getLikes(tweet1);
     }
 
     @Test
     public void testGetMentions() {
         System.out.println("Test get mentions on Mockito - TweetService layer");
 
-        when(tweetResource.getMentions(tweet1)).thenReturn(users);
-        assertEquals(users, tweetResource.getMentions(tweet1));
+        when(tweetService.getMentions(tweet1)).thenReturn(users);
+        assertEquals(users, tweetService.getMentions(tweet1));
+        tweetResource.getMentions(tweet1);
+        verify(tweetService).getMentions(tweet1);
     }
 
     @Test
     public void testGetTweetsOfFollowingUsers() {
         System.out.println("Test get tweets of following users on - TweetService layer");
 
-        when(tweetResource.getTweetsOfFollowingUsers(user1)).thenReturn(tweets);
-        assertEquals(tweets, tweetResource.getTweetsOfFollowingUsers(user1));
-
+        when(tweetService.getTweetsOfFollowingUsers(user1)).thenReturn(tweets);
+        assertEquals(tweets, tweetService.getTweetsOfFollowingUsers(user1));
+        tweetResource.getTweetsOfFollowingUsers(user1);
+        verify(tweetService).getTweetsOfFollowingUsers(user1);
     }
 
     @Test
     public void testGetAllTweets() {
         System.out.println("Test get all tweets of all users on - TweetService layer");
 
-        when(userResource.getTweets(user1)).thenReturn(tweets);
-        assertEquals(tweets, userResource.getTweets(user1));
+        when(tweetService.getAllTweets()).thenReturn(tweets);
+        assertEquals(tweets, tweetService.getAllTweets());
+        tweetResource.getAllTweets();
+        verify(tweetService).getAllTweets();
     }
 }
