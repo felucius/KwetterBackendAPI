@@ -6,44 +6,117 @@
 package boundary.rest;
 
 import domain.Tweet;
+import domain.User;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import service.TweetService;
 
 /**
- * Api call where the user makes a request to the backend to receive data by going 
- * to the path 'tweet', through the 'api' path, configured at JAXRSconfig.
- * 
+ * Api call where the user makes a request to the backend to receive data by
+ * going to the path 'tweet', through the 'api' path, configured at JAXRSconfig.
+ *
  * Stateless beans is used here, because the request is simple and does not need
  * to be memorized by the server.
- * 
+ *
  * TweetResource handles all the incoming requests. This class can be seen as
  * the controller class.
- * 
+ *
  * @author M
  */
 @Path(&quot;tweet&quot;)
 @Stateless
-<span class="nc" id="L30">public class TweetResource {</span>
+<span class="nc" id="L32">public class TweetResource {</span>
+
     /**
-     * Injecting the tweetservice ensures the loosely coupled architecture and removes
-     * the use of the 'new' keyword.
+     * Injecting the tweetservice ensures the loosely coupled architecture and
+     * removes the use of the 'new' keyword.
      */
     @Inject
     TweetService tweetService;
-    
+
     /**
-     * Retrieving all tweets from the tweetservice. The tweetservice get it's data
-     * from the DAO (Data Access Object). In our case the database.
+     * POST request to send data.
      * 
+     * This method allows a user to be added as a mention.
+     * 
+     * @param tweet is the object that is going to be used for mentions.
+     * @param user is the object that is going to be mentioned on 'tweet' object.
+     * @return the tweet object that has a mentioned user on it.
+     */
+    @POST
+    public Tweet addMention(Tweet tweet, User user){
+<span class="nc" id="L52">        return tweetService.addMention(tweet, user);</span>
+    }
+
+    /**
+     * POST request to send data
+     * 
+     * This method allows a tweet to be liked by a single user.
+     * 
+     * @param tweet is the object that is going to be liked.
+     * @param user is the object that is going to like the tweet.
+     * @return true if the tweeted has successfully been liked or false
+     * when this action could not have been succeeded.
+     */
+    @POST
+    public boolean likeTweet(Tweet tweet, User user){
+<span class="nc" id="L67">        return tweetService.likeTweet(tweet, user);</span>
+    }
+
+    /**
+     * GET request to retrieve data
+     * 
+     * This method retrieves all likes from a single tweet.
+     * 
+     * @param tweet is the object where all the likes are retrieved from.
+     * @return a list of users that likes a certain tweet.
+     */
+    public List&lt;User&gt; getLikes(Tweet tweet){
+<span class="nc" id="L79">        return tweetService.getLikes(tweet);</span>
+    }
+
+    /**
+     * GET request to retrieve data.
+     * 
+     * This method allows to retrieve mentions from a single tweet.
+     * 
+     * @param tweet is the tweet where all mentions are retrieved from.
+     * @return a list of users that are mentioned in the tweet.
+     */
+    @GET
+    public List&lt;User&gt; getMentions(Tweet tweet){
+<span class="nc" id="L92">        return tweetService.getMentions(tweet);</span>
+    }
+
+    /**
+     * GET request to receive information.
+     * 
+     * This method allows all tweets to be retrieved of the following users
+     * from a single user.
+     * 
+     * @param follower
+     * @return 
+     */
+    @GET
+    public List&lt;Tweet&gt; getTweetsOfFollowingUsers(User follower){
+<span class="nc" id="L106">        return tweetService.getTweetsOfFollowingUsers(follower);</span>
+    }
+
+    /**
+     * GET request to retrieve information.
+     * 
+     * Retrieving all tweets from the tweetservice. The tweetservice get it's
+     * data from the DAO (Data Access Object). In our case the database.
+     *
      * @return a list of all tweets.
      */
     @GET
-    public List&lt;Tweet&gt; getAllTweets(){
-<span class="nc" id="L46">        return tweetService.getAllTweets();</span>
+    public List&lt;Tweet&gt; getAllTweets() {
+<span class="nc" id="L119">        return tweetService.getAllTweets();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

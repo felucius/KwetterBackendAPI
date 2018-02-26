@@ -84,5 +84,17 @@ public class TweetService {
     public List&lt;Tweet&gt; getAllTweets() {
 <span class="nc" id="L85">        return tweetDAO.getAllTweets();</span>
     }
+    
+    /**
+     * This method allows a tweet to be liked by a single user.
+     * 
+     * @param tweet object that is going to be liked.
+     * @param user object is the user that is going to like the tweet.
+     * @return true is the user successfully liked the tweet or false
+     * when the action could not have been succeeded.
+     */
+    public boolean likeTweet(Tweet tweet, User user){
+<span class="nc" id="L97">        return tweetDAO.likeTweet(tweet, user);</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>
