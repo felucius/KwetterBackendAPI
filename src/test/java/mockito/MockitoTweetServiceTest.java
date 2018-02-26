@@ -5,6 +5,10 @@
  */
 package mockito;
 
+import dao.TweetDAO;
+import dao.TweetDAOCollection;
+import dao.UserDAO;
+import dao.UserDAOCollection;
 import domain.Tweet;
 import domain.User;
 import java.util.ArrayList;
@@ -31,6 +35,10 @@ public class MockitoTweetServiceTest {
     private TweetService tweetService = null;
     @Mock
     private UserService userService = null;
+    @Mock
+    private TweetDAO tweetDAO = null;
+    @Mock
+    private UserDAO userDAO = null;
     @Mock
     private List<Tweet> tweets = null;
     @Mock
@@ -63,7 +71,9 @@ public class MockitoTweetServiceTest {
     public void setUp() {
         tweetService = mock(TweetService.class);
         userService = mock(UserService.class);
-
+        tweetDAO = mock(TweetDAOCollection.class);
+        userDAO = mock(UserDAOCollection.class);
+        
         users = mock(ArrayList.class);
         tags = mock(ArrayList.class);
         tags.add("#JEA");
@@ -90,41 +100,52 @@ public class MockitoTweetServiceTest {
     @Test
     public void testAddMention() {
         System.out.println("Test add mention on Mockito - TweetService layer");
-
-        when(tweetService.addMention(tweet1, user1)).thenReturn(tweet1);
-        assertEquals(tweet1, tweetService.addMention(tweet1, user1));
+        TweetService tweetServiceA = new TweetService();
+        tweetServiceA.addMention(tweet1, user1);
+        
+        when(tweetDAO.addMention(tweet1, user1)).thenReturn(tweet1);
+        assertEquals(tweet1, tweetDAO.addMention(tweet1, user1));
+        tweetService.addMention(tweet1, user1);
+        verify(tweetDAO).addMention(tweet1, user1);
     }
 
     @Test
     public void testGetLikes() {
         System.out.println("Test get likes on Mockito - TweetService layer");
 
-        when(tweetService.getLikes(tweet1)).thenReturn(users);
-        assertEquals(users, tweetService.getLikes(tweet1));
+        when(tweetDAO.getLikes(tweet1)).thenReturn(users);
+        assertEquals(users, tweetDAO.getLikes(tweet1));
+        tweetService.getLikes(tweet1);
+        verify(tweetDAO).getLikes(tweet1);
     }
 
     @Test
     public void testGetMentions() {
         System.out.println("Test get mentions on Mockito - TweetService layer");
 
-        when(tweetService.getMentions(tweet1)).thenReturn(users);
-        assertEquals(users, tweetService.getMentions(tweet1));
+        when(tweetDAO.getMentions(tweet1)).thenReturn(users);
+        assertEquals(users, tweetDAO.getMentions(tweet1));
+        tweetService.getMentions(tweet1);
+        verify(tweetDAO).getMentions(tweet1);
     }
 
     @Test
     public void testGetTweetsOfFollowingUsers() {
         System.out.println("Test get tweets of following users on - TweetService layer");
 
-        when(tweetService.getTweetsOfFollowingUsers(user1)).thenReturn(tweets);
-        assertEquals(tweets, tweetService.getTweetsOfFollowingUsers(user1));
-
+        when(tweetDAO.getTweetsOfFollowingUsers(user1)).thenReturn(tweets);
+        assertEquals(tweets, tweetDAO.getTweetsOfFollowingUsers(user1));
+        tweetService.getTweetsOfFollowingUsers(user1);
+        verify(tweetDAO).getTweetsOfFollowingUsers(user1);
     }
 
     @Test
     public void testGetAllTweets() {
         System.out.println("Test get all tweets of all users on - TweetService layer");
 
-        when(userService.getTweets(user1)).thenReturn(tweets);
-        assertEquals(tweets, userService.getTweets(user1));
+        when(tweetDAO.getAllTweets()).thenReturn(tweets);
+        assertEquals(tweets, tweetDAO.getAllTweets());
+        tweetService.getAllTweets();
+        verify(tweetDAO).getAllTweets();
     }
 }
