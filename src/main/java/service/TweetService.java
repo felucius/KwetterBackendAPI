@@ -84,4 +84,16 @@ public class TweetService {
     public List<Tweet> getAllTweets() {
         return tweetDAO.getAllTweets();
     }
+    
+    /**
+     * This method allows a tweet to be liked by a single user.
+     * 
+     * @param tweet object that is going to be liked.
+     * @param user object is the user that is going to like the tweet.
+     * @return true is the user successfully liked the tweet or false
+     * when the action could not have been succeeded.
+     */
+    public boolean likeTweet(Tweet tweet, User user){
+        return tweetDAO.likeTweet(tweet, user);
+    }
 }
