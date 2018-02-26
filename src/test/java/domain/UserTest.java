@@ -331,4 +331,25 @@ public class UserTest {
         assertEquals("This test should pass", newPassword, user1.getPassword());
     }
 
+    /**
+     * Test if a new list of tweets can be setted by the user.
+     */
+    @Test
+    public void testSetTweets() {
+        System.out.println("Set tweets from user");
+        List<Tweet> tweets = new ArrayList();
+        tweets.add(tweet1);
+        user1.setTweets(tweets);
+        assertEquals("This test should pass", tweets, user1.getTweets());
+    }
+
+    /**
+     * Testing the to String method if the value is not null of a new created
+     * user object.
+     */
+    @Test
+    public void testToString() {
+        System.out.println("To String method from user");
+        assertNotNull(user1.toString());
+    }
 }

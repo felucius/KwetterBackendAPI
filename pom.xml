@@ -59,6 +59,13 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.0</version>
                 <configuration>
+                    <excludes>
+                        <exclude>**/*TweetDAOImplementation.*</exclude>
+                        <exclude>**/*UserDAOImplementation.*</exclude>
+                        <exclude>**/*Tweet_.*</exclude>
+                        <exclude>**/*User_.*</exclude>
+                        <exclude>**/*JAXRSconfig.*</exclude>
+                    </excludes>
                     <destFile>${basedir}/target/coverage-reports/jacoco-unit.exec</destFile>
                     <dataFile>${basedir}/target/coverage-reports/jacoco-unit.exec</dataFile>
                 </configuration>
