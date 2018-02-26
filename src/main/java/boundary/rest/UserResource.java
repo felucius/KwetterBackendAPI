@@ -39,6 +39,10 @@ public class UserResource {
      */
     @Inject
     UserService userService;
+    
+    public UserResource(){
+        userService = new UserService();
+    }
 
     /**
      * GET request from the userService. Userservice get it's data from the DAO.

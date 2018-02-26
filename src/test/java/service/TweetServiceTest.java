@@ -15,6 +15,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 /**
  *
@@ -49,7 +50,7 @@ public class TweetServiceTest {
     public void setUp() {
         tweetService = new TweetService();
         userService = new UserService();
-
+        
         users = new ArrayList();
         tags = new ArrayList();
         tags.add("#JEA");

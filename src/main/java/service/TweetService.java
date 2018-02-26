@@ -5,6 +5,7 @@
  */
 package service;
 
+import dao.TweetDAO;
 import dao.TweetDAOCollection;
 import domain.Tweet;
 import domain.User;
@@ -25,7 +26,7 @@ public class TweetService {
      * By injecting TweetDAO, a constructor does not have to be defined with the
      * keyword 'new'. This provides a loosely coupled architecture.
      */
-    private TweetDAOCollection tweetDAO;
+    private TweetDAO tweetDAO;
     
     // Injection on constructor level.
     @Inject

@@ -31,7 +31,7 @@ import service.UserService;
  */
 @Path(&quot;user&quot;)
 @Stateless
-<span class="nc" id="L34">public class UserResource {</span>
+public class UserResource {
 
     /**
      * Injecting ensures the creation of the variable or constructor without
@@ -39,6 +39,10 @@ import service.UserService;
      */
     @Inject
     UserService userService;
+    
+<span class="fc" id="L43">    public UserResource(){</span>
+<span class="fc" id="L44">        userService = new UserService();</span>
+<span class="fc" id="L45">    }</span>
 
     /**
      * GET request from the userService. Userservice get it's data from the DAO.
@@ -49,7 +53,7 @@ import service.UserService;
      */
     @GET
     public List&lt;User&gt; getAllUsers() {
-<span class="nc" id="L52">        return userService.getAllUsers();</span>
+<span class="fc" id="L56">        return userService.getAllUsers();</span>
     }
 
     /**
@@ -65,11 +69,11 @@ import service.UserService;
     @Consumes(MediaType.APPLICATION_JSON)
     public boolean createUser(@PathParam(&quot;name&quot;) String name) {
         // Test user
-<span class="nc" id="L68">        System.out.println(&quot;TESTING USER CREATION&quot;);</span>
-<span class="nc" id="L69">        User user = new User();</span>
-<span class="nc" id="L70">        user.setName(name);</span>
-<span class="nc" id="L71">        userService.createUser(user);</span>
-<span class="nc" id="L72">        return true;</span>
+<span class="nc" id="L72">        System.out.println(&quot;TESTING USER CREATION&quot;);</span>
+<span class="nc" id="L73">        User user = new User();</span>
+<span class="nc" id="L74">        user.setName(name);</span>
+<span class="nc" id="L75">        userService.createUser(user);</span>
+<span class="nc" id="L76">        return true;</span>
     }
 
     /**
@@ -83,7 +87,7 @@ import service.UserService;
     @GET
     @Path(&quot;{id}&quot;)
     public User findUser(@PathParam(&quot;id&quot;) Long id) {
-<span class="nc" id="L86">        return userService.findUser(id);</span>
+<span class="fc" id="L90">        return userService.findUser(id);</span>
     }
 
     /**
@@ -95,52 +99,52 @@ import service.UserService;
     @DELETE
     @Path(&quot;{user}&quot;)
     public boolean removeUser(@PathParam(&quot;user&quot;) User user) {
-<span class="nc" id="L98">        return userService.removeUser(user);</span>
+<span class="fc" id="L102">        return userService.removeUser(user);</span>
     }
 
     @GET
     public User createUser(User user){
-<span class="nc" id="L103">        return userService.createUser(user);</span>
+<span class="fc" id="L107">        return userService.createUser(user);</span>
     }
 
     @GET
     public boolean addTweet(User user, Tweet tweet, List&lt;User&gt; mentions){
-<span class="nc" id="L108">        return userService.addTweet(user, tweet, mentions);</span>
+<span class="fc" id="L112">        return userService.addTweet(user, tweet, mentions);</span>
     }
 
     @GET
     public boolean removeTweet(Tweet tweet){
-<span class="nc" id="L113">        return userService.removeTweet(tweet);</span>
+<span class="fc" id="L117">        return userService.removeTweet(tweet);</span>
     }
 
     @GET
     public boolean followUser(User user, User followingUser){
-<span class="nc" id="L118">        return userService.followUser(user, followingUser);</span>
+<span class="fc" id="L122">        return userService.followUser(user, followingUser);</span>
     }
 
     @GET
     public boolean unfollowUser(User user, User unfollowingUser){
-<span class="nc" id="L123">        return userService.unfollowUser(user, unfollowingUser);</span>
+<span class="fc" id="L127">        return userService.unfollowUser(user, unfollowingUser);</span>
     }
 
     @GET
     public List&lt;User&gt; getFollowingUsers(User user){
-<span class="nc" id="L128">        return userService.getFollowingUsers(user);</span>
+<span class="fc" id="L132">        return userService.getFollowingUsers(user);</span>
     }
 
     @GET
     public List&lt;User&gt; getFollowers(User user){
-<span class="nc" id="L133">        return userService.getFollowers(user);</span>
+<span class="fc" id="L137">        return userService.getFollowers(user);</span>
     }
 
     @GET
     public List&lt;Tweet&gt; getTweets(User user){
-<span class="nc" id="L138">        return userService.getTweets(user);</span>
+<span class="fc" id="L142">        return userService.getTweets(user);</span>
     }
 
     @GET
     public boolean likeTweet(User user, Tweet tweetToLike){
-<span class="nc" id="L143">        return userService.likeTweet(user, tweetToLike);</span>
+<span class="fc" id="L147">        return userService.likeTweet(user, tweetToLike);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

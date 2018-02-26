@@ -3,8 +3,8 @@ KwetterBackend_Maxime,dao,TweetDAOCollection,12,59,8,8,6,20,8,7,0,7
 KwetterBackend_Maxime,dao,UserDAOCollection,22,119,14,16,11,36,14,14,0,13
 KwetterBackend_Maxime,dao,TweetDAOImplementation,103,0,0,0,45,0,7,0,7,0
 KwetterBackend_Maxime,dao,UserDAOImplementation,225,0,0,0,97,0,15,0,15,0
-KwetterBackend_Maxime,boundary.rest,TweetResource,34,0,0,0,7,0,7,0,7,0
-KwetterBackend_Maxime,boundary.rest,UserResource,84,0,0,0,18,0,14,0,14,0
+KwetterBackend_Maxime,boundary.rest,TweetResource,10,29,0,0,2,7,2,5,2,5
+KwetterBackend_Maxime,boundary.rest,UserResource,17,72,0,0,5,15,1,13,1,13
 KwetterBackend_Maxime,boundary.rest,JAXRSconfig,3,0,0,0,1,0,1,0,1,0
 KwetterBackend_Maxime,service,UserService,0,72,0,0,0,15,0,13,0,13
 KwetterBackend_Maxime,service,TweetService,10,29,0,0,2,7,2,5,2,5

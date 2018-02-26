@@ -5,6 +5,7 @@
  */
 package service;
 
+import dao.UserDAO;
 import dao.UserDAOCollection;
 import domain.Tweet;
 import domain.User;
@@ -25,7 +26,7 @@ public class UserService {
      * initialized with the 'new' keyword. This provides a loosely coupled
      * architecture.
      */
-    private UserDAOCollection userDAO;
+    private UserDAO userDAO;
     
     // Injection on constructor level.
     @Inject

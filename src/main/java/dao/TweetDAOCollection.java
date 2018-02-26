@@ -9,11 +9,13 @@ import domain.Tweet;
 import domain.User;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.Stateless;
 
 /**
  *
  * @author M
  */
+@Stateless
 public class TweetDAOCollection implements TweetDAO {
 
     private List<Tweet> tweets = null;

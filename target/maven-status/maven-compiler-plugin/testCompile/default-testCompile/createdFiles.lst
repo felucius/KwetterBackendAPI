@@ -1,6 +1,8 @@
-domain\TweetTest.class
-domain\UserTest.class
+rest\UserRestTest.class
 service\TweetServiceTest.class
 dao\TweetDAOCollTest.class
 dao\UserDAOCollTest.class
 service\UserServiceTest.class
+domain\TweetTest.class
+domain\UserTest.class
+rest\TweetRestTest.class

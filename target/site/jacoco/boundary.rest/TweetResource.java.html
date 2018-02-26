@@ -29,7 +29,7 @@ import service.TweetService;
  */
 @Path(&quot;tweet&quot;)
 @Stateless
-<span class="nc" id="L32">public class TweetResource {</span>
+public class TweetResource {
 
     /**
      * Injecting the tweetservice ensures the loosely coupled architecture and
@@ -37,6 +37,10 @@ import service.TweetService;
      */
     @Inject
     TweetService tweetService;
+    
+<span class="fc" id="L41">    public TweetResource(){</span>
+<span class="fc" id="L42">        tweetService = new TweetService();</span>
+<span class="fc" id="L43">    }</span>
 
     /**
      * POST request to send data.
@@ -49,7 +53,7 @@ import service.TweetService;
      */
     @POST
     public Tweet addMention(Tweet tweet, User user){
-<span class="nc" id="L52">        return tweetService.addMention(tweet, user);</span>
+<span class="fc" id="L56">        return tweetService.addMention(tweet, user);</span>
     }
 
     /**
@@ -64,7 +68,7 @@ import service.TweetService;
      */
     @POST
     public boolean likeTweet(Tweet tweet, User user){
-<span class="nc" id="L67">        return tweetService.likeTweet(tweet, user);</span>
+<span class="nc" id="L71">        return tweetService.likeTweet(tweet, user);</span>
     }
 
     /**
@@ -75,8 +79,9 @@ import service.TweetService;
      * @param tweet is the object where all the likes are retrieved from.
      * @return a list of users that likes a certain tweet.
      */
+    @GET
     public List&lt;User&gt; getLikes(Tweet tweet){
-<span class="nc" id="L79">        return tweetService.getLikes(tweet);</span>
+<span class="fc" id="L84">        return tweetService.getLikes(tweet);</span>
     }
 
     /**
@@ -89,7 +94,7 @@ import service.TweetService;
      */
     @GET
     public List&lt;User&gt; getMentions(Tweet tweet){
-<span class="nc" id="L92">        return tweetService.getMentions(tweet);</span>
+<span class="fc" id="L97">        return tweetService.getMentions(tweet);</span>
     }
 
     /**
@@ -103,7 +108,7 @@ import service.TweetService;
      */
     @GET
     public List&lt;Tweet&gt; getTweetsOfFollowingUsers(User follower){
-<span class="nc" id="L106">        return tweetService.getTweetsOfFollowingUsers(follower);</span>
+<span class="fc" id="L111">        return tweetService.getTweetsOfFollowingUsers(follower);</span>
     }
 
     /**
@@ -116,7 +121,7 @@ import service.TweetService;
      */
     @GET
     public List&lt;Tweet&gt; getAllTweets() {
-<span class="nc" id="L119">        return tweetService.getAllTweets();</span>
+<span class="nc" id="L124">        return tweetService.getAllTweets();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

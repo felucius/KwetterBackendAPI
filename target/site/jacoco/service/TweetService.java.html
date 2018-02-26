@@ -5,6 +5,7 @@
  */
 package service;
 
+import dao.TweetDAO;
 import dao.TweetDAOCollection;
 import domain.Tweet;
 import domain.User;
@@ -25,13 +26,13 @@ public class TweetService {
      * By injecting TweetDAO, a constructor does not have to be defined with the
      * keyword 'new'. This provides a loosely coupled architecture.
      */
-    private TweetDAOCollection tweetDAO;
+    private TweetDAO tweetDAO;
     
     // Injection on constructor level.
     @Inject
-<span class="fc" id="L32">    public TweetService(){</span>
-<span class="fc" id="L33">        tweetDAO = new TweetDAOCollection();</span>
-<span class="fc" id="L34">    }</span>
+<span class="fc" id="L33">    public TweetService(){</span>
+<span class="fc" id="L34">        tweetDAO = new TweetDAOCollection();</span>
+<span class="fc" id="L35">    }</span>
 
     /**
      * This method allows tweet to get a mention by a single user.
@@ -41,7 +42,7 @@ public class TweetService {
      * @return the tweet with the user that is mentioned in it.
      */
     public Tweet addMention(Tweet tweet, User user) {
-<span class="fc" id="L44">        return tweetDAO.addMention(tweet, user);</span>
+<span class="fc" id="L45">        return tweetDAO.addMention(tweet, user);</span>
     }
 
     /**
@@ -51,7 +52,7 @@ public class TweetService {
      * @return a list of users that liked the single tweet.
      */
     public List&lt;User&gt; getLikes(Tweet tweet) {
-<span class="fc" id="L54">        return tweetDAO.getLikes(tweet);</span>
+<span class="fc" id="L55">        return tweetDAO.getLikes(tweet);</span>
     }
 
     /**
@@ -61,7 +62,7 @@ public class TweetService {
      * @return a list of users that are mentioned on that single tweet.
      */
     public List&lt;User&gt; getMentions(Tweet tweet) {
-<span class="fc" id="L64">        return tweetDAO.getMentions(tweet);</span>
+<span class="fc" id="L65">        return tweetDAO.getMentions(tweet);</span>
     }
 
     /**
@@ -73,7 +74,7 @@ public class TweetService {
      * @return a list of tweets that the 'follower' object follows.
      */
     public List&lt;Tweet&gt; getTweetsOfFollowingUsers(User follower) {
-<span class="fc" id="L76">        return tweetDAO.getTweetsOfFollowingUsers(follower);</span>
+<span class="fc" id="L77">        return tweetDAO.getTweetsOfFollowingUsers(follower);</span>
     }
 
     /**
@@ -82,7 +83,7 @@ public class TweetService {
      * @return a list of all Tweets from different users.
      */
     public List&lt;Tweet&gt; getAllTweets() {
-<span class="nc" id="L85">        return tweetDAO.getAllTweets();</span>
+<span class="nc" id="L86">        return tweetDAO.getAllTweets();</span>
     }
     
     /**
@@ -94,7 +95,7 @@ public class TweetService {
      * when the action could not have been succeeded.
      */
     public boolean likeTweet(Tweet tweet, User user){
-<span class="nc" id="L97">        return tweetDAO.likeTweet(tweet, user);</span>
+<span class="nc" id="L98">        return tweetDAO.likeTweet(tweet, user);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

@@ -37,6 +37,10 @@ public class TweetResource {
      */
     @Inject
     TweetService tweetService;
+    
+    public TweetResource(){
+        tweetService = new TweetService();
+    }
 
     /**
      * POST request to send data.
@@ -75,6 +79,7 @@ public class TweetResource {
      * @param tweet is the object where all the likes are retrieved from.
      * @return a list of users that likes a certain tweet.
      */
+    @GET
     public List<User> getLikes(Tweet tweet){
         return tweetService.getLikes(tweet);
     }
