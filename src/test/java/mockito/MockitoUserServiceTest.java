@@ -97,72 +97,50 @@ public class MockitoUserServiceTest {
         userService = mock(UserService.class);
         userDAO = mock(UserDAOCollection.class);
 
-        //tags = new ArrayList();
         tags = mock(ArrayList.class);
         tags.add("#cool");
         tags.add("#like");
-        //users = new ArrayList();
         users = mock(ArrayList.class);
         tweets = mock(ArrayList.class);
 
-        //user1 = userResource.createUser(new User("pic", "web", "hanzel", "men", "veldhoven", "rick@rick.nl", "pass"));
         user1 = mock(User.class);
         users.add(user1);
-        //tweet1 = new Tweet("message hello", tags, user1);
         tweet1 = mock(Tweet.class);
 
-        //user2 = userResource.createUser(new User());
         user2 = mock(User.class);
         users.add(user2);
-        //tweet2 = new Tweet("message hello", tags, user2);
         tweet2 = mock(Tweet.class);
 
         user3 = mock(User.class);
-        //user3 = userResource.createUser(new User());
         users.add(user3);
-        //tweet3 = new Tweet("message hello", tags, user3);
         tweet3 = mock(Tweet.class);
 
         user4 = mock(User.class);
-        //user4 = userResource.createUser(new User());
         users.add(user4);
-        //tweet4 = new Tweet("message hello", tags, user4);
         tweet4 = mock(Tweet.class);
 
         user5 = mock(User.class);
-        //user5 = userResource.createUser(new User());
         users.add(user5);
-        //tweet5 = new Tweet("message hello", tags, user5);
         tweet5 = mock(Tweet.class);
 
         user6 = mock(User.class);
-        //user6 = userResource.createUser(new User());
         users.add(user6);
-        //tweet6 = new Tweet("message hello", tags, user6);
         tweet6 = mock(Tweet.class);
 
         user7 = mock(User.class);
-        //user7 = userResource.createUser(new User());
         users.add(user7);
-        //tweet7 = new Tweet("message hello", tags, user7);
         tweet7 = mock(Tweet.class);
 
         user8 = mock(User.class);
-        //user8 = userResource.createUser(new User());
         users.add(user8);
-        //tweet8 = new Tweet("message hello", tags, user8);
         tweet8 = mock(Tweet.class);
 
         user9 = mock(User.class);
-        //user9 = userResource.createUser(new User());
         users.add(user9);
-        //tweet9 = new Tweet("message hello", tags, user9);
         tweet9 = mock(Tweet.class);
 
         user10 = mock(User.class);
-        //user10 = userResource.createUser(new User());
         users.add(user10);
-        //tweet10 = new Tweet("message hello", tags, user10);
         tweet10 = mock(Tweet.class);
 
         userService.followUser(user1, user2);

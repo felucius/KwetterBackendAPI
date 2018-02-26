@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="5" failures="0" name="mockito.MockitoTweetRestTest" time="0.846" errors="0" skipped="0">
+<testsuite tests="12" failures="0" name="mockito.MockitoUserRestTest" time="0.027" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_101\jre\bin"/>
@@ -61,9 +61,16 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="mockito.MockitoTweetRestTest" name="testGetLikes" time="0.674"/>
-  <testcase classname="mockito.MockitoTweetRestTest" name="testGetAllTweets" time="0.006"/>
-  <testcase classname="mockito.MockitoTweetRestTest" name="testGetMentions" time="0.001"/>
-  <testcase classname="mockito.MockitoTweetRestTest" name="testGetTweetsOfFollowingUsers" time="0.009"/>
-  <testcase classname="mockito.MockitoTweetRestTest" name="testAddMention" time="0.004"/>
+  <testcase classname="mockito.MockitoUserRestTest" name="testGetAllUsers" time="0"/>
+  <testcase classname="mockito.MockitoUserRestTest" name="testGetFollowingUsers" time="0"/>
+  <testcase classname="mockito.MockitoUserRestTest" name="testRemoveTweet" time="0"/>
+  <testcase classname="mockito.MockitoUserRestTest" name="testAddTweet" time="0"/>
+  <testcase classname="mockito.MockitoUserRestTest" name="testFindUser" time="0"/>
+  <testcase classname="mockito.MockitoUserRestTest" name="testRemoveUser" time="0"/>
+  <testcase classname="mockito.MockitoUserRestTest" name="testLikeTweet" time="0"/>
+  <testcase classname="mockito.MockitoUserRestTest" name="testCreateUser" time="0"/>
+  <testcase classname="mockito.MockitoUserRestTest" name="testUnfollowUser" time="0.003"/>
+  <testcase classname="mockito.MockitoUserRestTest" name="testGetTweets" time="0.001"/>
+  <testcase classname="mockito.MockitoUserRestTest" name="testFollowUser" time="0"/>
+  <testcase classname="mockito.MockitoUserRestTest" name="testGetFollowers" time="0"/>
 </testsuite>

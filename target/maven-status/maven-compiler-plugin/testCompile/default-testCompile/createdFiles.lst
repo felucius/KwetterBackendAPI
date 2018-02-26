@@ -1,8 +1,12 @@
 rest\UserRestTest.class
+mockito\MockitoUserServiceTest.class
+mockito\MockitoUserRestTest.class
 service\TweetServiceTest.class
 dao\TweetDAOCollTest.class
 dao\UserDAOCollTest.class
 service\UserServiceTest.class
 domain\TweetTest.class
 domain\UserTest.class
+mockito\MockitoTweetRestTest.class
 rest\TweetRestTest.class
+mockito\MockitoTweetServiceTest.class
