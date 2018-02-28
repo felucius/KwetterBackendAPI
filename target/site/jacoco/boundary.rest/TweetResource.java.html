@@ -6,13 +6,18 @@
 package boundary.rest;
 
 import domain.Tweet;
+import domain.TweetDTO;
 import domain.User;
+import domain.UserDTO;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import service.TweetService;
 
 /**
@@ -27,9 +32,10 @@ import service.TweetService;
  *
  * @author M
  */
-@Path(&quot;tweet&quot;)
 @Stateless
-public class TweetResource {
+@Path(&quot;tweets&quot;)
+@Produces(MediaType.APPLICATION_JSON)
+<span class="nc" id="L38">public class TweetResource {</span>
 
     /**
      * Injecting the tweetservice ensures the loosely coupled architecture and
@@ -37,10 +43,6 @@ public class TweetResource {
      */
     @Inject
     TweetService tweetService;
-    
-<span class="fc" id="L41">    public TweetResource(){</span>
-<span class="fc" id="L42">        tweetService = new TweetService();</span>
-<span class="fc" id="L43">    }</span>
 
     /**
      * POST request to send data.
@@ -48,27 +50,15 @@ public class TweetResource {
      * This method allows a user to be added as a mention.
      * 
      * @param tweet is the object that is going to be used for mentions.
-     * @param user is the object that is going to be mentioned on 'tweet' object.
+     * @param username is the object that is going to be mentioned on 'tweet' object
      * @return the tweet object that has a mentioned user on it.
      */
     @POST
-    public Tweet addMention(Tweet tweet, User user){
-<span class="fc" id="L56">        return tweetService.addMention(tweet, user);</span>
-    }
-
-    /**
-     * POST request to send data
-     * 
-     * This method allows a tweet to be liked by a single user.
-     * 
-     * @param tweet is the object that is going to be liked.
-     * @param user is the object that is going to like the tweet.
-     * @return true if the tweeted has successfully been liked or false
-     * when this action could not have been succeeded.
-     */
-    @POST
-    public boolean likeTweet(Tweet tweet, User user){
-<span class="nc" id="L71">        return tweetService.likeTweet(tweet, user);</span>
+    @Path(&quot;tweetmention/username&quot;)
+    public Tweet addMention(@PathParam(&quot;tweetmention&quot;) TweetDTO tweet, @PathParam(&quot;username&quot;) UserDTO username){
+<span class="nc" id="L59">        Tweet getTweet = tweet.getTweet();</span>
+<span class="nc" id="L60">        User getUser = username.getUser();</span>
+<span class="nc" id="L61">        return tweetService.addMention(getTweet, getUser);</span>
     }
 
     /**
@@ -80,8 +70,10 @@ public class TweetResource {
      * @return a list of users that likes a certain tweet.
      */
     @GET
-    public List&lt;User&gt; getLikes(Tweet tweet){
-<span class="fc" id="L84">        return tweetService.getLikes(tweet);</span>
+    @Path(&quot;gettweetlikes&quot;)
+    public List&lt;User&gt; getLikes(@PathParam(&quot;gettweetlikes&quot;) TweetDTO tweet){
+<span class="nc" id="L75">        Tweet getTweet = tweet.getTweet();</span>
+<span class="nc" id="L76">        return tweetService.getLikes(getTweet);</span>
     }
 
     /**
@@ -93,8 +85,10 @@ public class TweetResource {
      * @return a list of users that are mentioned in the tweet.
      */
     @GET
-    public List&lt;User&gt; getMentions(Tweet tweet){
-<span class="fc" id="L97">        return tweetService.getMentions(tweet);</span>
+    @Path(&quot;gettweetmentions&quot;)
+    public List&lt;User&gt; getMentions(@PathParam(&quot;gettweetmentions&quot;) TweetDTO tweet){
+<span class="nc" id="L90">        Tweet getTweet = tweet.getTweet();</span>
+<span class="nc" id="L91">        return tweetService.getMentions(getTweet);</span>
     }
 
     /**
@@ -107,8 +101,10 @@ public class TweetResource {
      * @return 
      */
     @GET
-    public List&lt;Tweet&gt; getTweetsOfFollowingUsers(User follower){
-<span class="fc" id="L111">        return tweetService.getTweetsOfFollowingUsers(follower);</span>
+    @Path(&quot;gettweetsfollowing&quot;)
+    public List&lt;Tweet&gt; getTweetsOfFollowingUsers(@PathParam(&quot;gettweetsfollowing&quot;) UserDTO follower){
+<span class="nc" id="L106">        User getUser = follower.getUser();</span>
+<span class="nc" id="L107">        return tweetService.getTweetsOfFollowingUsers(getUser);</span>
     }
 
     /**
@@ -121,7 +117,7 @@ public class TweetResource {
      */
     @GET
     public List&lt;Tweet&gt; getAllTweets() {
-<span class="nc" id="L124">        return tweetService.getAllTweets();</span>
+<span class="nc" id="L120">        return tweetService.getAllTweets();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

@@ -10,6 +10,5 @@ mockito\MockitoTweetRestTest.class
 dao\TweetDAOImplementationTest.class
 dao\UserDAOCollTest.class
 service\UserServiceTest.class
-extra\UserRoleTest.class
 rest\TweetRestTest.class
 mockito\MockitoTweetServiceTest.class

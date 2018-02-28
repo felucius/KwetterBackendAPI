@@ -34,6 +34,7 @@ import service.UserService;
  */
 public class MockitoTweetRestTest {
 
+    /*
     @Mock
     private TweetResource tweetResource = null;
     @Mock
@@ -103,8 +104,6 @@ public class MockitoTweetRestTest {
     @Test
     public void testAddMention() {
         System.out.println("Test add mention on Mockito - TweetService layer");
-        TweetService tweetServiceA = new TweetService();
-        tweetServiceA.addMention(tweet1, user1);
 
         when(tweetService.addMention(tweet1, user1)).thenReturn(tweet1);
         assertEquals(tweet1, tweetService.addMention(tweet1, user1));
@@ -150,5 +149,5 @@ public class MockitoTweetRestTest {
         assertEquals(tweets, tweetService.getAllTweets());
         tweetResource.getAllTweets();
         verify(tweetService).getAllTweets();
-    }
+    }*/
 }

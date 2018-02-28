@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>init.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">KwetterBackend_Maxime</a> &gt; <a href="index.source.html" class="el_package">util</a> &gt; <span class="el_source">init.java</span></div><h1>init.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package util;
+
+import dao.JPA;
+import dao.TweetDAO;
+import dao.UserDAO;
+import domain.Tweet;
+import domain.User;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.PostConstruct;
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
+import javax.inject.Inject;
+
+/**
+ *
+ * @author M
+ */
+@Startup
+@Singleton
+<span class="nc" id="L26">public class init {</span>
+
+    @Inject @JPA
+    TweetDAO tweetDAO;
+    @Inject @JPA
+    UserDAO userDAO;
+    
+    //TweetDAOImplementation tweetDAOImpl;
+    //UserDAOImplementation userDAOImpl;
+
+    @PostConstruct
+    public void init() {
+        //tweetDAOImpl = new TweetDAOImplementation();
+        //userDAOImpl = new UserDAOImplementation();
+        
+<span class="nc" id="L41">        System.out.println(&quot;Initializing basic database information....&quot;);</span>
+<span class="nc" id="L42">        List&lt;String&gt; tags = new ArrayList();</span>
+<span class="nc" id="L43">        tags.add(&quot;#cool&quot;);</span>
+<span class="nc" id="L44">        tags.add(&quot;#like&quot;);</span>
+        
+<span class="nc" id="L46">        List&lt;User&gt; mentions = new ArrayList();</span>
+        
+<span class="nc" id="L48">        User user1 = new User(&quot;PictureURL&quot;, &quot;Website.com&quot;, &quot;Maxime&quot;, &quot;Men&quot;, &quot;Geldrop&quot;, &quot;maxime@hotmail.com&quot;, &quot;Pass&quot;);</span>
+<span class="nc" id="L49">        User user2 = new User(&quot;PictureURL&quot;, &quot;Website.com&quot;, &quot;Maxime&quot;, &quot;Men&quot;, &quot;Geldrop&quot;, &quot;maxime@hotmail.com&quot;, &quot;Pass&quot;);</span>
+<span class="nc" id="L50">        User user3 = new User(&quot;PictureURL&quot;, &quot;Website.com&quot;, &quot;Maxime&quot;, &quot;Men&quot;, &quot;Geldrop&quot;, &quot;maxime@hotmail.com&quot;, &quot;Pass&quot;);</span>
+        
+<span class="nc" id="L52">        mentions.add(user2);</span>
+<span class="nc" id="L53">        mentions.add(user3);</span>
+        
+<span class="nc" id="L55">        Tweet tweet = new Tweet(&quot;Message Hello&quot;, tags, user1);</span>
+
+<span class="nc" id="L57">        userDAO.createUser(user1);</span>
+        //userDAO.addTweet(user1, tweet, mentions);
+<span class="nc" id="L59">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

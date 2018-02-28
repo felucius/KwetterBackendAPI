@@ -6,7 +6,9 @@
 package boundary.rest;
 
 import domain.Tweet;
+import domain.TweetDTO;
 import domain.User;
+import domain.UserDTO;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -16,8 +18,8 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import service.UserService;
 
 /**
@@ -29,8 +31,9 @@ import service.UserService;
  *
  * @author M
  */
-@Path("user")
 @Stateless
+@Path("users")
+@Produces(MediaType.APPLICATION_JSON)
 public class UserResource {
 
     /**
@@ -39,10 +42,6 @@ public class UserResource {
      */
     @Inject
     UserService userService;
-    
-    public UserResource(){
-        userService = new UserService();
-    }
 
     /**
      * GET request from the userService. Userservice get it's data from the DAO.
@@ -61,19 +60,14 @@ public class UserResource {
      * created Information is send to the userService, to the userDAO and
      * finally to the entity manager.
      *
-     * @param user is the object that is created and being persisted to the
+     * @param username is the object that is created and being persisted to the
      * database.
      */
     @POST
-    @Path("{name}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public boolean createUser(@PathParam("name") String name) {
-        // Test user
-        System.out.println("TESTING USER CREATION");
-        User user = new User();
-        user.setName(name);
-        userService.createUser(user);
-        return true;
+    @Path("name")
+    public User createUser(@PathParam("name") UserDTO username) {
+        User getUser = username.getUser();
+        return userService.createUser(getUser);
     }
 
     /**
@@ -85,7 +79,7 @@ public class UserResource {
      * @return the user object.
      */
     @GET
-    @Path("{id}")
+    @Path("id")
     public User findUser(@PathParam("id") Long id) {
         return userService.findUser(id);
     }
@@ -94,56 +88,75 @@ public class UserResource {
      * DELETE request to the userService. When this method is called, the user
      * id is given so the account with that specific id can be removed.
      *
+     * @param user
      * @param id of the user object or account, that is going to be removed.
      */
     @DELETE
-    @Path("{user}")
-    public boolean removeUser(@PathParam("user") User user) {
-        return userService.removeUser(user);
+    @Path("removeuser")
+    public boolean removeUser(@PathParam("removeuser") UserDTO user) {
+        User getUser = user.getUser();
+        return userService.removeUser(getUser);
+    }
+    /*
+    @GET
+    @Path("user/tweet/mentions")
+    public boolean addTweet(@PathParam("user") UserDTO user, @PathParam("tweet") TweetDTO tweet, 
+            @PathParam("mentions") List<UserDTO> mentions){
+        User getUser = user.getUser();
+        Tweet getTweet = tweet.getTweet();
+        //List<User> getMentions = (User)mentions;
+        return userService.addTweet(getUser, getTweet, mentions);
+    }*/
+
+    @GET
+    @Path("removetweet")
+    public boolean removeTweet(@PathParam("removetweet") TweetDTO tweet){
+        Tweet getTweet = tweet.getTweet();
+        return userService.removeTweet(getTweet);
     }
 
     @GET
-    public User createUser(User user){
-        return userService.createUser(user);
+    @Path("user/followuser")
+    public boolean followUser(@PathParam("user") UserDTO user, @PathParam("followuser") UserDTO followingUser){
+        User getUser = user.getUser();
+        User getFollowingUser = followingUser.getUser();
+        return userService.followUser(getUser, getFollowingUser);
     }
 
     @GET
-    public boolean addTweet(User user, Tweet tweet, List<User> mentions){
-        return userService.addTweet(user, tweet, mentions);
+    @Path("user/unfollowuser")
+    public boolean unfollowUser(@PathParam("user") UserDTO user, @PathParam("unfollowuser") UserDTO unfollowingUser){
+        User getUser = user.getUser();
+        User getUnfollowingUser = unfollowingUser.getUser();
+        return userService.unfollowUser(getUser, getUnfollowingUser);
     }
 
     @GET
-    public boolean removeTweet(Tweet tweet){
-        return userService.removeTweet(tweet);
+    @Path("{getfollowing}")
+    public List<User> getFollowingUsers(@PathParam("getfollowing") UserDTO user){
+        User getUser = user.getUser();
+        return userService.getFollowingUsers(getUser);
     }
 
     @GET
-    public boolean followUser(User user, User followingUser){
-        return userService.followUser(user, followingUser);
+    @Path("getfollowers")
+    public List<User> getFollowers(@PathParam("getfollowing") UserDTO user){
+        User getUser = user.getUser();
+        return userService.getFollowers(getUser);
     }
 
     @GET
-    public boolean unfollowUser(User user, User unfollowingUser){
-        return userService.unfollowUser(user, unfollowingUser);
+    @Path("gettweets")
+    public List<Tweet> getTweets(@PathParam("gettweets") UserDTO user){
+        User getUSer = user.getUser();
+        return userService.getTweets(getUSer);
     }
 
-    @GET
-    public List<User> getFollowingUsers(User user){
-        return userService.getFollowingUsers(user);
-    }
-
-    @GET
-    public List<User> getFollowers(User user){
-        return userService.getFollowers(user);
-    }
-
-    @GET
-    public List<Tweet> getTweets(User user){
-        return userService.getTweets(user);
-    }
-
-    @GET
-    public boolean likeTweet(User user, Tweet tweetToLike){
-        return userService.likeTweet(user, tweetToLike);
+    @POST
+    @Path("user/tweettolike")
+    public boolean likeTweet(@PathParam("user") UserDTO user, @PathParam("tweettolike") TweetDTO tweetToLike){
+        User getUser = user.getUser();
+        Tweet getTweet = tweetToLike.getTweet();
+        return userService.likeTweet(getUser, getTweet);
     }
 }

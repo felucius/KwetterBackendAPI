@@ -9,12 +9,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.enterprise.inject.Model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -25,13 +28,16 @@ import javax.persistence.TemporalType;
  *
  * @author M
  */
-@Entity
+@Model
+@Entity 
 @NamedQuery(name = "Tweet.getAllTweets", query = "SELECT t FROM Tweet t")
 public class Tweet implements Serializable {
 
     private String message = null;
     private List<String> tags = null;
+    @ManyToOne
     private User tweetedBy = null;
+    @OneToMany
     private List<User> likes = null;
     private List<User> mentions = null;
 
@@ -44,7 +50,7 @@ public class Tweet implements Serializable {
 
     @Id
     @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.TABLE) // Assigning primary key values to the Tweet table.
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Assigning primary key values to the Tweet table.
     private Long id;
 
     public Tweet() {

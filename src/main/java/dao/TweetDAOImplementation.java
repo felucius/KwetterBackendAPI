@@ -11,21 +11,26 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import static org.eclipse.persistence.logging.SessionLog.JPA;
 
 /**
  *
  * @author M
  */
-@Stateless
+@Stateless @JPA
 public class TweetDAOImplementation implements TweetDAO {
 
     /**
      * Persisting the context of the entity manager. By doing this methods data
      * can be requested or persisted to the database.
      */
-    @PersistenceContext
+    @PersistenceContext(unitName = "KwetterBackendPU")
     EntityManager em;
 
+    public TweetDAOImplementation(){
+        
+    }
+    
     /**
      * Requesting all tweets through the Entity manager. The entity manager
      * makes a call to the database with the PersistenceContext.
@@ -37,11 +42,11 @@ public class TweetDAOImplementation implements TweetDAO {
         List<Tweet> tweets = null;
         try {
             tweets = em.createNamedQuery("Tweet.getAllTweets").getResultList();
+            return tweets;
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
         }
-        return tweets;
     }
 
     /**
@@ -124,25 +129,5 @@ public class TweetDAOImplementation implements TweetDAO {
             return null;
         }
         return tweet;
-    }
-
-    /**
-     * This method allows a user to like a single tweet.
-     * 
-     * @param tweet is the tweet that is going to be liked by a single user.
-     * @param user is the object that is liking the tweet.
-     * @return true if the tweets has successfully been likes or false when
-     * the action could not have been succeeded.
-     */
-    @Override
-    public boolean likeTweet(Tweet tweet, User user) {
-        try{
-            tweet.likeTweet(user);
-            em.persist(tweet);
-        }catch (Exception ex){
-            ex.printStackTrace();
-            return false;
-        }
-        return true;
     }
 }

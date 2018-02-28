@@ -5,8 +5,8 @@
  */
 package service;
 
+import dao.JPA;
 import dao.UserDAO;
-import dao.UserDAOCollection;
 import domain.Tweet;
 import domain.User;
 import java.util.List;
@@ -26,12 +26,16 @@ public class UserService {
      * initialized with the 'new' keyword. This provides a loosely coupled
      * architecture.
      */
-    private UserDAO userDAO;
+    @Inject @JPA
+    UserDAO userDAO;
     
+    //@Inject
+    //private UserDAO userDAO;
     // Injection on constructor level.
-    @Inject
+    
+    //@Inject
     public UserService(){
-        userDAO = new UserDAOCollection();
+    //    userDAO = new UserDAOCollection();
     }
 
     /**

@@ -16,7 +16,6 @@ import javax.ejb.Stateless;
  *
  * @author M
  */
-@Stateless
 public interface UserDAO {
 
     List<User> getAllUsers();
@@ -26,7 +25,7 @@ public interface UserDAO {
     boolean removeUser(User user);
     
     User findUser(Long id);
-    
+        
     boolean addTweet(User user, Tweet tweet, List<User> mentions);
     
     boolean removeTweet(Tweet tweet);

@@ -25,6 +25,7 @@ import service.UserService;
  */
 public class UserRestTest {
 
+    /*
     private UserResource userResource = null;
 
     private List<String> tags = null;
@@ -227,4 +228,5 @@ public class UserRestTest {
         userResource.likeTweet(user1, tweet2);
         assertEquals("Amount of likes should be 1", 1, tweetDAO.getLikes(tweet2).size());
     }
+*/
 }

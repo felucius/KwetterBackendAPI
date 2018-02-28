@@ -6,13 +6,18 @@
 package boundary.rest;
 
 import domain.Tweet;
+import domain.TweetDTO;
 import domain.User;
+import domain.UserDTO;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import service.TweetService;
 
 /**
@@ -27,8 +32,9 @@ import service.TweetService;
  *
  * @author M
  */
-@Path("tweet")
 @Stateless
+@Path("tweets")
+@Produces(MediaType.APPLICATION_JSON)
 public class TweetResource {
 
     /**
@@ -37,10 +43,6 @@ public class TweetResource {
      */
     @Inject
     TweetService tweetService;
-    
-    public TweetResource(){
-        tweetService = new TweetService();
-    }
 
     /**
      * POST request to send data.
@@ -48,27 +50,15 @@ public class TweetResource {
      * This method allows a user to be added as a mention.
      * 
      * @param tweet is the object that is going to be used for mentions.
-     * @param user is the object that is going to be mentioned on 'tweet' object.
+     * @param username is the object that is going to be mentioned on 'tweet' object
      * @return the tweet object that has a mentioned user on it.
      */
     @POST
-    public Tweet addMention(Tweet tweet, User user){
-        return tweetService.addMention(tweet, user);
-    }
-
-    /**
-     * POST request to send data
-     * 
-     * This method allows a tweet to be liked by a single user.
-     * 
-     * @param tweet is the object that is going to be liked.
-     * @param user is the object that is going to like the tweet.
-     * @return true if the tweeted has successfully been liked or false
-     * when this action could not have been succeeded.
-     */
-    @POST
-    public boolean likeTweet(Tweet tweet, User user){
-        return tweetService.likeTweet(tweet, user);
+    @Path("tweetmention/username")
+    public Tweet addMention(@PathParam("tweetmention") TweetDTO tweet, @PathParam("username") UserDTO username){
+        Tweet getTweet = tweet.getTweet();
+        User getUser = username.getUser();
+        return tweetService.addMention(getTweet, getUser);
     }
 
     /**
@@ -80,8 +70,10 @@ public class TweetResource {
      * @return a list of users that likes a certain tweet.
      */
     @GET
-    public List<User> getLikes(Tweet tweet){
-        return tweetService.getLikes(tweet);
+    @Path("gettweetlikes")
+    public List<User> getLikes(@PathParam("gettweetlikes") TweetDTO tweet){
+        Tweet getTweet = tweet.getTweet();
+        return tweetService.getLikes(getTweet);
     }
 
     /**
@@ -93,8 +85,10 @@ public class TweetResource {
      * @return a list of users that are mentioned in the tweet.
      */
     @GET
-    public List<User> getMentions(Tweet tweet){
-        return tweetService.getMentions(tweet);
+    @Path("gettweetmentions")
+    public List<User> getMentions(@PathParam("gettweetmentions") TweetDTO tweet){
+        Tweet getTweet = tweet.getTweet();
+        return tweetService.getMentions(getTweet);
     }
 
     /**
@@ -107,8 +101,10 @@ public class TweetResource {
      * @return 
      */
     @GET
-    public List<Tweet> getTweetsOfFollowingUsers(User follower){
-        return tweetService.getTweetsOfFollowingUsers(follower);
+    @Path("gettweetsfollowing")
+    public List<Tweet> getTweetsOfFollowingUsers(@PathParam("gettweetsfollowing") UserDTO follower){
+        User getUser = follower.getUser();
+        return tweetService.getTweetsOfFollowingUsers(getUser);
     }
 
     /**

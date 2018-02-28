@@ -16,15 +16,19 @@ import javax.persistence.PersistenceContext;
  *
  * @author M
  */
-@Stateless
+@Stateless @JPA
 public class UserDAOImplementation implements UserDAO{
         /**
      * Persisting the context of the entity manager. By doing this methods data
      * can be requested or persisted to the database.
      */
-    @PersistenceContext
+    @PersistenceContext(unitName = "KwetterBackendPU")
     private EntityManager em;
 
+    public UserDAOImplementation(){
+        
+    }
+    
     /**
      * Requesting all users through the Entity manager. The entity manager makes
      * a call to the database with the Persistence Context.

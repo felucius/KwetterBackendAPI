@@ -136,10 +136,6 @@ public class UserDAOImplementationTest {
         assertEquals(null, userDAO.createUser(user1));
     }
 
-    /**
-     * Test of addTweet method, of class User. Adding a tweet from a single
-     * user.
-     */
     @Test
     public void testAddTweet() {
         System.out.println("Adding a tweet on - DAO collection");
@@ -147,9 +143,6 @@ public class UserDAOImplementationTest {
         assertEquals("Tweet should not be null", tweet1, userDAO.getTweets(user1).get(0));
     }
 
-    /**
-     * Test of removeTweet method, of class User. Removing a tweet from a user.
-     */
     @Test
     public void testRemoveTweet() {
         System.out.println("Removing a tweet on - DAO collection");
@@ -162,10 +155,6 @@ public class UserDAOImplementationTest {
         assertEquals("Amount of tweets should be 0", 0, userDAO.getTweets(user1).size());
     }
 
-    /**
-     * Test of followUser method, of class User. Users follow other users.
-     * Retrieving the amount of users a certain user follows.
-     */
     @Test
     public void testFollowUser() {
         System.out.println("Follow a user on - DAO collection");
@@ -178,20 +167,12 @@ public class UserDAOImplementationTest {
 
     }
 
-    /**
-     * Test of getFollowers method, of class User. Retrieving the amount of
-     * followers per follower.
-     */
     @Test
     public void testGetFollowers() {
         System.out.println("Get amount of followers on - DAO collection");
         assertEquals("Amount of followers should be 3", 3, userDAO.getFollowers(user1).size());
     }
 
-    /**
-     * Test of likeTweet method, of class User. Retrieving the amount of likes
-     * per tweet.
-     */
     @Test
     public void testLikeTweet() {
         TweetDAOCollection tweetDAO = new TweetDAOCollection();
@@ -204,9 +185,6 @@ public class UserDAOImplementationTest {
         assertEquals("Amount of likes should be 1", 1, tweetDAO.getLikes(tweet2).size());
     }
 
-    /**
-     * This method retrieves a user by it's ID throughout the entity manager
-     */
     @Test
     public void testGetUserByID() {
         System.out.println("Get user by name on - DAO collection");

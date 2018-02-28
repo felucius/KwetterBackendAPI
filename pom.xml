@@ -65,6 +65,8 @@
                         <exclude>**/*Tweet_.*</exclude>
                         <exclude>**/*User_.*</exclude>
                         <exclude>**/*JAXRSconfig.*</exclude>
+                        <exclude>**/*TweetServiceTest.*</exclude>
+                        <exclude>**/*UserServiceTest.*</exclude>
                     </excludes>
                     <destFile>${basedir}/target/coverage-reports/jacoco-unit.exec</destFile>
                     <dataFile>${basedir}/target/coverage-reports/jacoco-unit.exec</dataFile>

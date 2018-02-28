@@ -17,8 +17,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import service.TweetService;
-import service.UserService;
+import static org.mockito.Mockito.*;
 
 /**
  *
@@ -26,6 +25,7 @@ import service.UserService;
  */
 public class TweetRestTest {
 
+    /*
     private TweetResource tweetResource = null;
     private UserResource userResource = null;
 
@@ -52,7 +52,9 @@ public class TweetRestTest {
     @Before
     public void setUp() {
         tweetResource = new TweetResource();
+        tweetResource = mock(TweetResource.class);
         userResource = new UserResource();
+        userResource = mock(UserResource.class);
 
         users = new ArrayList();
         tags = new ArrayList();
@@ -113,5 +115,5 @@ public class TweetRestTest {
         userResource.addTweet(user2, tweet2, users);
         assertEquals(2, userResource.getTweets(user1).size());
     }
-
+    */
 }

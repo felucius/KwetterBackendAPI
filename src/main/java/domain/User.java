@@ -8,6 +8,7 @@ package domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.enterprise.inject.Model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -28,6 +29,7 @@ import javax.persistence.OneToMany;
  *
  * @author M
  */
+@Model
 @Entity
 @NamedQuery(name = "User.getAllUsers", query = "SELECT u FROM User u")
 public class User implements Serializable {
@@ -39,13 +41,16 @@ public class User implements Serializable {
     private String location = null;
     private String email = null;
     private String password = null;
-
+    
+    @OneToMany(mappedBy = "tweetedBy")
     private List<Tweet> tweets = null;
+    
     @OneToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "User")
+    @JoinTable(name = "User_following")
     private List<User> following = null;
+    
     @OneToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "User")
+    @JoinTable(name = "User_followers")
     private List<User> followers = null;
 
     @ManyToMany
@@ -62,7 +67,7 @@ public class User implements Serializable {
      */
     @Id
     @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.TABLE) // Assigning primary keys to the table User.
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Assigning primary keys to the table User.
     private Long id;
 
     /**

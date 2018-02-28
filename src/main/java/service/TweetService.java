@@ -5,13 +5,14 @@
  */
 package service;
 
+import dao.JPA;
 import dao.TweetDAO;
-import dao.TweetDAOCollection;
 import domain.Tweet;
 import domain.User;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+
 
 /**
  * The class 'TweetService' provides information about tweets to the user. Data
@@ -26,14 +27,9 @@ public class TweetService {
      * By injecting TweetDAO, a constructor does not have to be defined with the
      * keyword 'new'. This provides a loosely coupled architecture.
      */
-    private TweetDAO tweetDAO;
+    @Inject @JPA
+    TweetDAO tweetDAO;
     
-    // Injection on constructor level.
-    @Inject
-    public TweetService(){
-        tweetDAO = new TweetDAOCollection();
-    }
-
     /**
      * This method allows tweet to get a mention by a single user.
      *
@@ -84,17 +80,5 @@ public class TweetService {
      */
     public List<Tweet> getAllTweets() {
         return tweetDAO.getAllTweets();
-    }
-    
-    /**
-     * This method allows a tweet to be liked by a single user.
-     * 
-     * @param tweet object that is going to be liked.
-     * @param user object is the user that is going to like the tweet.
-     * @return true is the user successfully liked the tweet or false
-     * when the action could not have been succeeded.
-     */
-    public boolean likeTweet(Tweet tweet, User user){
-        return tweetDAO.likeTweet(tweet, user);
     }
 }
