@@ -157,14 +157,21 @@ public class User implements Serializable {
     private void addFollower(User user) {
         this.followers.add(user);
     }
+    
+    private void removeFollower(User user){
+        this.followers.remove(user);
+    }
 
     /**
      * This method allows a user to be removed.
      *
      * @param user that is going to be removed from the followers base.
      */
-    public void removeFollower(User user) {
-        this.followers.remove(user);
+    public void unfollowUser(User user) {
+        if(this.following.contains(user)){
+            user.removeFollower(this);
+            this.following.remove(user);
+        }
     }
 
     /**

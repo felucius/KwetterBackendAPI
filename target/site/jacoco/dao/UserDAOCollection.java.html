@@ -95,7 +95,7 @@ public class UserDAOCollection implements UserDAO {
     @Override
     public boolean unfollowUser(User user, User unfollowingUser) {
 <span class="nc bnc" id="L97" title="All 4 branches missed.">        if (user != null &amp;&amp; unfollowingUser != null) {</span>
-<span class="nc" id="L98">            user.removeFollower(unfollowingUser);</span>
+<span class="nc" id="L98">            user.unfollowUser(unfollowingUser);</span>
 <span class="nc" id="L99">            return true;</span>
         }
 <span class="nc" id="L101">        return false;</span>

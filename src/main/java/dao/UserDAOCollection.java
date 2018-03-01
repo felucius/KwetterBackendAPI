@@ -95,7 +95,7 @@ public class UserDAOCollection implements UserDAO {
     @Override
     public boolean unfollowUser(User user, User unfollowingUser) {
         if (user != null && unfollowingUser != null) {
-            user.removeFollower(unfollowingUser);
+            user.unfollowUser(unfollowingUser);
             return true;
         }
         return false;

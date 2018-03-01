@@ -144,48 +144,45 @@ import service.UserService;
     }
 
     @GET
-    @Path(&quot;user/followuser&quot;)
-    public boolean followUser(@PathParam(&quot;user&quot;) UserDTO user, @PathParam(&quot;followuser&quot;) UserDTO followingUser){
-<span class="nc" id="L149">        User getUser = user.getUser();</span>
-<span class="nc" id="L150">        User getFollowingUser = followingUser.getUser();</span>
-<span class="nc" id="L151">        return userService.followUser(getUser, getFollowingUser);</span>
+    @Path(&quot;followuser/{user}/{followuser}&quot;)
+    public boolean followUser(@PathParam(&quot;user&quot;) String username, @PathParam(&quot;followuser&quot;) String followingUser){
+
+<span class="nc" id="L150">        return userService.followUser(userService.findUserByName(username), userService.findUserByName(followingUser));</span>
     }
 
     @GET
-    @Path(&quot;user/unfollowuser&quot;)
-    public boolean unfollowUser(@PathParam(&quot;user&quot;) UserDTO user, @PathParam(&quot;unfollowuser&quot;) UserDTO unfollowingUser){
-<span class="nc" id="L157">        User getUser = user.getUser();</span>
-<span class="nc" id="L158">        User getUnfollowingUser = unfollowingUser.getUser();</span>
-<span class="nc" id="L159">        return userService.unfollowUser(getUser, getUnfollowingUser);</span>
+    @Path(&quot;unfollowuser/{user}/{unfollowuser}&quot;)
+    public boolean unfollowUser(@PathParam(&quot;user&quot;) String username, @PathParam(&quot;unfollowuser&quot;) String unfollowingUser){
+<span class="nc" id="L156">        return userService.unfollowUser(userService.findUserByName(username), userService.findUserByName(unfollowingUser));</span>
     }
 
     @GET
     @Path(&quot;getfollowing/{getfollowing}&quot;)
     public List&lt;User&gt; getFollowingUsers(@PathParam(&quot;getfollowing&quot;) UserDTO user){
-<span class="nc" id="L165">        User getUser = user.getUser();</span>
-<span class="nc" id="L166">        return userService.getFollowingUsers(getUser);</span>
+<span class="nc" id="L162">        User getUser = user.getUser();</span>
+<span class="nc" id="L163">        return userService.getFollowingUsers(getUser);</span>
     }
 
     @GET
     @Path(&quot;getfollowers/{getfollowers}&quot;)
     public List&lt;User&gt; getFollowers(@PathParam(&quot;getfollowers&quot;) UserDTO user){
-<span class="nc" id="L172">        User getUser = user.getUser();</span>
-<span class="nc" id="L173">        return userService.getFollowers(getUser);</span>
+<span class="nc" id="L169">        User getUser = user.getUser();</span>
+<span class="nc" id="L170">        return userService.getFollowers(getUser);</span>
     }
 
     @GET
     @Path(&quot;gettweets/{gettweets}&quot;)
     public List&lt;Tweet&gt; getTweets(@PathParam(&quot;gettweets&quot;) UserDTO user){
-<span class="nc" id="L179">        User getUSer = user.getUser();</span>
-<span class="nc" id="L180">        return userService.getTweets(getUSer);</span>
+<span class="nc" id="L176">        User getUSer = user.getUser();</span>
+<span class="nc" id="L177">        return userService.getTweets(getUSer);</span>
     }
 
     @POST
     @Path(&quot;user/tweettolike&quot;)
     public boolean likeTweet(@PathParam(&quot;user&quot;) UserDTO user, @PathParam(&quot;tweettolike&quot;) TweetDTO tweetToLike){
-<span class="nc" id="L186">        User getUser = user.getUser();</span>
-<span class="nc" id="L187">        Tweet getTweet = tweetToLike.getTweet();</span>
-<span class="nc" id="L188">        return userService.likeTweet(getUser, getTweet);</span>
+<span class="nc" id="L183">        User getUser = user.getUser();</span>
+<span class="nc" id="L184">        Tweet getTweet = tweetToLike.getTweet();</span>
+<span class="nc" id="L185">        return userService.likeTweet(getUser, getTweet);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

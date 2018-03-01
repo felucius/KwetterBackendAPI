@@ -178,7 +178,7 @@ public class UserDAOImplementation implements UserDAO {
      */
     @Override
     public boolean unfollowUser(User user, User unfollowingUser) {
-        user.removeFollower(unfollowingUser);
+        user.unfollowUser(unfollowingUser);
         try {
             em.merge(user);
             em.merge(unfollowingUser);

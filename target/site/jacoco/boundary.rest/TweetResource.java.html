@@ -84,13 +84,26 @@ import service.UserService;
 
     /**
      * GET request to find a tweet based on it's content
-     * @param id
-     * @return 
+     *
+     * @param content is the content to be searched on
+     * @return a tweet object.
      */
     @GET
     @Path(&quot;findtweetbycontent/{content}&quot;)
     public Tweet findTweet(@PathParam(&quot;content&quot;) String content) {
-<span class="nc" id="L93">        return tweetService.findTweetByContent(content);</span>
+<span class="nc" id="L94">        return tweetService.findTweetByContent(content);</span>
+    }
+
+    /**
+     * GET request to find a tweet based on it's id
+     *
+     * @param id is the id to be searched on
+     * @return a tweet object.
+     */
+    @GET
+    @Path(&quot;findtweet/{id}&quot;)
+    public Tweet findTweet(@PathParam(&quot;id&quot;) Long id) {
+<span class="nc" id="L106">        return tweetService.findTweet(id);</span>
     }
 
     /**
@@ -104,8 +117,8 @@ import service.UserService;
     @GET
     @Path(&quot;gettweetmentions&quot;)
     public List&lt;User&gt; getMentions(@PathParam(&quot;gettweetmentions&quot;) TweetDTO tweet) {
-<span class="nc" id="L107">        Tweet getTweet = tweet.getTweet();</span>
-<span class="nc" id="L108">        return tweetService.getMentions(getTweet);</span>
+<span class="nc" id="L120">        Tweet getTweet = tweet.getTweet();</span>
+<span class="nc" id="L121">        return tweetService.getMentions(getTweet);</span>
     }
 
     /**
@@ -120,8 +133,8 @@ import service.UserService;
     @GET
     @Path(&quot;gettweetsfollowing&quot;)
     public List&lt;Tweet&gt; getTweetsOfFollowingUsers(@PathParam(&quot;gettweetsfollowing&quot;) UserDTO follower) {
-<span class="nc" id="L123">        User getUser = follower.getUser();</span>
-<span class="nc" id="L124">        return tweetService.getTweetsOfFollowingUsers(getUser);</span>
+<span class="nc" id="L136">        User getUser = follower.getUser();</span>
+<span class="nc" id="L137">        return tweetService.getTweetsOfFollowingUsers(getUser);</span>
     }
 
     /**
@@ -134,7 +147,7 @@ import service.UserService;
      */
     @GET
     public List&lt;Tweet&gt; getAllTweets() {
-<span class="nc" id="L137">        return tweetService.getAllTweets();</span>
+<span class="nc" id="L150">        return tweetService.getAllTweets();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>
