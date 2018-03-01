@@ -27,6 +27,12 @@ To remove a specific tweet by it's ID, written by a certain user.
 
 To find a specific user by it's username.
 - api/users/finduserbyusername/<username>
+  
+To follow a specific user by it's username
+- api/users/followuser/<user-data>/<usertofollow-data>
+
+To unfollow a specific user by it's username
+- api/users/unfollowuser/<user-data>/<usertounfollow-data>
 
 # Tweets and tweet information
 To find all tweets
