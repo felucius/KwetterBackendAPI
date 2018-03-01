@@ -5,6 +5,8 @@
  */
 package domain;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 
@@ -14,20 +16,47 @@ import javax.ws.rs.core.Response;
  */
 public class UserDTO {
 
-<span class="nc" id="L17">    private User user = null;</span>
+<span class="nc" id="L19">    private User user = null;</span>
 
-<span class="nc" id="L19">    public UserDTO(String json) {</span>
+    /*
+    public UserDTO(JsonObject input){
+        this.user.setName(input.getString(&quot;username&quot;));
+        this.user.setBio(input.getString(&quot;bio&quot;));
+        this.user.setEmail(input.getString(&quot;email&quot;));
+        this.user.setId(input.getJsonNumber(&quot;id&quot;).longValue());
+        this.user.setLocation(input.getString(&quot;location&quot;));
+        this.user.setPicture(input.getString(&quot;picture&quot;));
+        this.user.setWebsite(input.getString(&quot;website&quot;));
+        this.user.setPassword(input.getString(&quot;password&quot;));
+    }*/
+    
+    
+    public JsonObject toJSON(){
+<span class="nc" id="L35">        return Json.createObjectBuilder().</span>
+<span class="nc" id="L36">                add(&quot;username&quot;, this.user.getName()).</span>
+<span class="nc" id="L37">                add(&quot;bio&quot;, this.user.getBio()).</span>
+<span class="nc" id="L38">                add(&quot;email&quot;, this.user.getEmail()).</span>
+<span class="nc" id="L39">                add(&quot;id&quot;, this.user.getId()).</span>
+<span class="nc" id="L40">                add(&quot;location&quot;, this.user.getLocation()).</span>
+<span class="nc" id="L41">                add(&quot;picture&quot;, this.user.getPicture()).</span>
+<span class="nc" id="L42">                add(&quot;website&quot;, this.user.getWebsite()).</span>
+<span class="nc" id="L43">                add(&quot;password&quot;, this.user.getPassword()).</span>
+<span class="nc" id="L44">                build();</span>
+    }
+    
+    
+<span class="nc" id="L48">    public UserDTO(String json) {</span>
         try {
-<span class="nc" id="L21">            System.out.println(&quot;USER JSON: &quot; + json);</span>
-<span class="nc" id="L22">        } catch (Exception ex) {</span>
-<span class="nc" id="L23">            throw new WebApplicationException(Response.status(Response.Status.BAD_REQUEST)</span>
-<span class="nc" id="L24">                    .entity(&quot;Couldn't parse JSON string: &quot; + ex.getMessage())</span>
-<span class="nc" id="L25">                    .build());</span>
-<span class="nc" id="L26">        }</span>
-<span class="nc" id="L27">    }</span>
+<span class="nc" id="L50">            System.out.println(&quot;USER JSON: &quot; + json);</span>
+<span class="nc" id="L51">        } catch (Exception ex) {</span>
+<span class="nc" id="L52">            throw new WebApplicationException(Response.status(Response.Status.BAD_REQUEST)</span>
+<span class="nc" id="L53">                    .entity(&quot;Couldn't parse JSON string: &quot; + ex.getMessage())</span>
+<span class="nc" id="L54">                    .build());</span>
+<span class="nc" id="L55">        }</span>
+<span class="nc" id="L56">    }</span>
 
     public User getUser() {
-<span class="nc" id="L30">        return user;</span>
+<span class="nc" id="L59">        return user;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

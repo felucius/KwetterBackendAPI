@@ -29,15 +29,6 @@ public class UserService {
     @Inject @JPA
     UserDAO userDAO;
     
-    //@Inject
-    //private UserDAO userDAO;
-    // Injection on constructor level.
-    
-    //@Inject
-    public UserService(){
-    //    userDAO = new UserDAOCollection();
-    }
-
     /**
      * Get all users from the userDAO. UserDao makes a call to the database and
      * sends the data to this method.

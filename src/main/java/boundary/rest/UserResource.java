@@ -79,7 +79,7 @@ public class UserResource {
      * @return the user object.
      */
     @GET
-    @Path("id")
+    @Path("finduser/{id}")
     public User findUser(@PathParam("id") Long id) {
         return userService.findUser(id);
     }
@@ -92,10 +92,12 @@ public class UserResource {
      * @param id of the user object or account, that is going to be removed.
      */
     @DELETE
-    @Path("removeuser")
-    public boolean removeUser(@PathParam("removeuser") UserDTO user) {
-        User getUser = user.getUser();
-        return userService.removeUser(getUser);
+    @Path("removeuser/{id}")
+    public boolean removeUser(@PathParam("id") Long id) {
+        System.out.println("Rest layer value: " + id);
+        //User getUser = removeuser.getUser();
+        //return userService.removeUser(getUser);
+        return userService.removeUser(userService.findUser(id));
     }
     /*
     @GET
@@ -109,7 +111,7 @@ public class UserResource {
     }*/
 
     @GET
-    @Path("removetweet")
+    @Path("removetweet/{removetweet}")
     public boolean removeTweet(@PathParam("removetweet") TweetDTO tweet){
         Tweet getTweet = tweet.getTweet();
         return userService.removeTweet(getTweet);
@@ -132,21 +134,21 @@ public class UserResource {
     }
 
     @GET
-    @Path("{getfollowing}")
+    @Path("getfollowing/{getfollowing}")
     public List<User> getFollowingUsers(@PathParam("getfollowing") UserDTO user){
         User getUser = user.getUser();
         return userService.getFollowingUsers(getUser);
     }
 
     @GET
-    @Path("getfollowers")
-    public List<User> getFollowers(@PathParam("getfollowing") UserDTO user){
+    @Path("getfollowers/{getfollowers}")
+    public List<User> getFollowers(@PathParam("getfollowers") UserDTO user){
         User getUser = user.getUser();
         return userService.getFollowers(getUser);
     }
 
     @GET
-    @Path("gettweets")
+    @Path("gettweets/{gettweets}")
     public List<Tweet> getTweets(@PathParam("gettweets") UserDTO user){
         User getUSer = user.getUser();
         return userService.getTweets(getUSer);

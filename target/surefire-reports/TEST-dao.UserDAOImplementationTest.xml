@@ -61,13 +61,13 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="dao.UserDAOImplementationTest" name="testRemoveTweet" time="0"/>
+  <testcase classname="dao.UserDAOImplementationTest" name="testRemoveTweet" time="0.001"/>
   <testcase classname="dao.UserDAOImplementationTest" name="testAddTweet" time="0.001"/>
   <testcase classname="dao.UserDAOImplementationTest" name="testLikeTweet" time="0"/>
   <testcase classname="dao.UserDAOImplementationTest" name="testUnfollowUser" time="0"/>
   <testcase classname="dao.UserDAOImplementationTest" name="testGetUserByID" time="0"/>
   <testcase classname="dao.UserDAOImplementationTest" name="createUser" time="0"/>
-  <testcase classname="dao.UserDAOImplementationTest" name="testGetTweets" time="0.001"/>
+  <testcase classname="dao.UserDAOImplementationTest" name="testGetTweets" time="0"/>
   <testcase classname="dao.UserDAOImplementationTest" name="testFollowUser" time="0"/>
   <testcase classname="dao.UserDAOImplementationTest" name="testGetFollowers" time="0"/>
 </testsuite>

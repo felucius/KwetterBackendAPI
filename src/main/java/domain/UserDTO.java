@@ -5,6 +5,8 @@
  */
 package domain;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 
@@ -16,6 +18,33 @@ public class UserDTO {
 
     private User user = null;
 
+    /*
+    public UserDTO(JsonObject input){
+        this.user.setName(input.getString("username"));
+        this.user.setBio(input.getString("bio"));
+        this.user.setEmail(input.getString("email"));
+        this.user.setId(input.getJsonNumber("id").longValue());
+        this.user.setLocation(input.getString("location"));
+        this.user.setPicture(input.getString("picture"));
+        this.user.setWebsite(input.getString("website"));
+        this.user.setPassword(input.getString("password"));
+    }*/
+    
+    
+    public JsonObject toJSON(){
+        return Json.createObjectBuilder().
+                add("username", this.user.getName()).
+                add("bio", this.user.getBio()).
+                add("email", this.user.getEmail()).
+                add("id", this.user.getId()).
+                add("location", this.user.getLocation()).
+                add("picture", this.user.getPicture()).
+                add("website", this.user.getWebsite()).
+                add("password", this.user.getPassword()).
+                build();
+    }
+    
+    
     public UserDTO(String json) {
         try {
             System.out.println("USER JSON: " + json);

@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.inject.Model;
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -41,14 +43,14 @@ public class User implements Serializable {
     private String location = null;
     private String email = null;
     private String password = null;
-    
+
     @OneToMany(mappedBy = "tweetedBy")
     private List<Tweet> tweets = null;
-    
+
     @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "User_following")
     private List<User> following = null;
-    
+
     @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "User_followers")
     private List<User> followers = null;
@@ -353,5 +355,29 @@ public class User implements Serializable {
         return "Name: " + this.name + " Biography: " + this.bio
                 + " Email: " + this.email + " Location: " + this.location
                 + " Picture: " + this.picture + "Website: " + this.website;
+    }
+
+    public User(JsonObject input) {
+        setName(input.getString("username"));
+        setBio(input.getString("bio"));
+        setEmail(input.getString("email"));
+        setId(input.getJsonNumber("id").longValue());
+        setLocation(input.getString("location"));
+        setPicture(input.getString("picture"));
+        setWebsite(input.getString("website"));
+        setPassword(input.getString("password"));
+    }
+
+    public JsonObject toJSON() {
+        return Json.createObjectBuilder().
+                add("username", getName()).
+                add("bio", getBio()).
+                add("email", getEmail()).
+                add("id", getId()).
+                add("location", getLocation()).
+                add("picture", getPicture()).
+                add("website", getWebsite()).
+                add("password", getPassword()).
+                build();
     }
 }
