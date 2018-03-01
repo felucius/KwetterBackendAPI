@@ -29,4 +29,6 @@ public interface TweetDAO {
     List<Tweet> getAllTweets();
     
     Tweet findTweet(Long id);
+    
+    Tweet findTweetByContent(String content);
 }

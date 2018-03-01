@@ -103,12 +103,36 @@ public class TweetDAOCollection implements TweetDAO {
         }
     }
 
+    /**
+     * This method allows a tweet to be searched on it's id.
+     * 
+     * @param id is the id that the tweet object is going to be looked for.
+     * @return the tweet object.
+     */
     @Override
     public Tweet findTweet(Long id) {
         for (Tweet tweet : tweets) {
             if (tweet.getId().equals(id)) {
                 return tweet;
             } else {
+                return null;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * This method allows a tweet to be found by it's message content.
+     * 
+     * @param content of the message that the tweet is going to be searched on.
+     * @return a sinlge tweet object.
+     */
+    @Override
+    public Tweet findTweetByContent(String content) {
+        for(Tweet tweet : tweets){
+            if(tweet.getMessage().equals(content)){
+                return tweet;
+            }else{
                 return null;
             }
         }

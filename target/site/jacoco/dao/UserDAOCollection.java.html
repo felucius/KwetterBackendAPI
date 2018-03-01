@@ -137,5 +137,17 @@ public class UserDAOCollection implements UserDAO {
 <span class="nc" id="L137">            return false;</span>
         }
     }
+
+    @Override
+    public User findUserByName(String name) {
+<span class="nc bnc" id="L143" title="All 2 branches missed.">        for (User user : users) {</span>
+<span class="nc bnc" id="L144" title="All 2 branches missed.">            if (user.getName().equals(name)) {</span>
+<span class="nc" id="L145">                return user;</span>
+            } else {
+<span class="nc" id="L147">                return null;</span>
+            }
+        }
+<span class="nc" id="L150">        return null;</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

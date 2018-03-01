@@ -25,6 +25,8 @@ public interface UserDAO {
     boolean removeUser(User user);
     
     User findUser(Long id);
+    
+    User findUserByName(String name);
         
     boolean addTweet(User user, Tweet tweet, List<User> mentions);
     

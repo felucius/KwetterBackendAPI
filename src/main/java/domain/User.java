@@ -142,7 +142,10 @@ public class User implements Serializable {
      * @param user that is going to be followed.
      */
     public void followUser(User user) {
-        user.addFollower(user);
+        if(!this.following.contains(user)){
+            user.addFollower(this);
+            following.add(user);
+        }
     }
 
     /**

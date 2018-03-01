@@ -103,16 +103,40 @@ public class TweetDAOCollection implements TweetDAO {
         }
     }
 
+    /**
+     * This method allows a tweet to be searched on it's id.
+     * 
+     * @param id is the id that the tweet object is going to be looked for.
+     * @return the tweet object.
+     */
     @Override
     public Tweet findTweet(Long id) {
-<span class="nc bnc" id="L108" title="All 2 branches missed.">        for (Tweet tweet : tweets) {</span>
-<span class="nc bnc" id="L109" title="All 2 branches missed.">            if (tweet.getId().equals(id)) {</span>
-<span class="nc" id="L110">                return tweet;</span>
+<span class="nc bnc" id="L114" title="All 2 branches missed.">        for (Tweet tweet : tweets) {</span>
+<span class="nc bnc" id="L115" title="All 2 branches missed.">            if (tweet.getId().equals(id)) {</span>
+<span class="nc" id="L116">                return tweet;</span>
             } else {
-<span class="nc" id="L112">                return null;</span>
+<span class="nc" id="L118">                return null;</span>
             }
         }
-<span class="nc" id="L115">        return null;</span>
+<span class="nc" id="L121">        return null;</span>
+    }
+
+    /**
+     * This method allows a tweet to be found by it's message content.
+     * 
+     * @param content of the message that the tweet is going to be searched on.
+     * @return a sinlge tweet object.
+     */
+    @Override
+    public Tweet findTweetByContent(String content) {
+<span class="nc bnc" id="L132" title="All 2 branches missed.">        for(Tweet tweet : tweets){</span>
+<span class="nc bnc" id="L133" title="All 2 branches missed.">            if(tweet.getMessage().equals(content)){</span>
+<span class="nc" id="L134">                return tweet;</span>
+            }else{
+<span class="nc" id="L136">                return null;</span>
+            }
+        }
+<span class="nc" id="L139">        return null;</span>
     }
 
 }

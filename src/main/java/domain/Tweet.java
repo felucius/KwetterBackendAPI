@@ -32,14 +32,14 @@ import javax.persistence.TemporalType;
 @Entity 
 @NamedQuery(name = "Tweet.getAllTweets", query = "SELECT t FROM Tweet t")
 public class Tweet implements Serializable {
-
+    private List<User> mentions = null;
     private String message = null;
     private List<String> tags = null;
     @ManyToOne
     private User tweetedBy = null;
     @OneToMany
     private List<User> likes = null;
-    private List<User> mentions = null;
+
 
     /**
      * To insert a date into the database, the Temporal injection needs to be

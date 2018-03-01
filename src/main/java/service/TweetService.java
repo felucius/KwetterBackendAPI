@@ -85,4 +85,8 @@ public class TweetService {
     public Tweet findTweet(Long id){
         return tweetDAO.findTweet(id);
     }
+    
+    public Tweet findTweetByContent(String content){
+        return tweetDAO.findTweetByContent(content);
+    }
 }

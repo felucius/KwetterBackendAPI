@@ -11,6 +11,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -295,6 +296,27 @@ public class UserDAOImplementation implements UserDAO {
         try {
             tweets = user.getTweets();
             return tweets;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * This method allows a user to be found by it's name.
+     *
+     * @param name is the name that a single user is going to be looked for
+     * @return the user object.
+     */
+    @Override
+    public User findUserByName(String name) {
+        User user = null;
+        try {
+            user = (User)em.createQuery("SELECT u FROM User u where u.name = :name").
+                    setParameter("name", name).
+                    getSingleResult();
+            
+            return user;
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;

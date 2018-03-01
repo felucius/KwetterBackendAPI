@@ -68,16 +68,16 @@ public class init {
     }
 
     public void createUsers() {
-        user1 = new User("PictureURL", "Website.com", "Maxime de Lange", "Men", "Geldrop", "Maxime@hotmail.com", "Pass");
-        user2 = new User("PictureURL", "Website.com", "Jaap-joris janssen", "Men", "Veldhoven", "JaapJoris@hotmail.com", "Pass");
-        user3 = new User("PictureURL", "Website.com", "Ferdinand dn Droak", "Men", "Eindhoven", "Ferdinand@hotmail.com", "Pass");
-        user4 = new User("PictureURL", "Website.com", "Ricardo de schilder", "Men", "Eindhoven", "Ricardo@hotmail.com", "Pass");
-        user5 = new User("PictureURL", "Website.com", "Rickert batsbak", "Men", "Geldrop", "Rickert@hotmail.com", "Pass");
-        user6 = new User("PictureURL", "Website.com", "Hettie de flettie", "Women", "Geldrop", "Hettie@hotmail.com", "Pass");
-        user7 = new User("PictureURL", "Website.com", "Janetoine van achter", "Women", "Veldhoven", "Janetoine@hotmail.com", "Pass");
-        user8 = new User("PictureURL", "Website.com", "Angelika ruslofski", "Women", "Eindhoven", "Angelika@hotmail.com", "Pass");
-        user9 = new User("PictureURL", "Website.com", "Gerard broekmans", "Men", "Eindhoven", "Gerard@hotmail.com", "Pass");
-        user10 = new User("PictureURL", "Website.com", "Freek de bleek", "Men", "Eindhoven", "Freek@hotmail.com", "Pass");
+        user1 = new User("PictureURL", "Website.com", "Maxime", "Men", "Geldrop", "Maxime@hotmail.com", "Pass");
+        user2 = new User("PictureURL", "Website.com", "Jaap-joris", "Men", "Veldhoven", "JaapJoris@hotmail.com", "Pass");
+        user3 = new User("PictureURL", "Website.com", "Ferdinand", "Men", "Eindhoven", "Ferdinand@hotmail.com", "Pass");
+        user4 = new User("PictureURL", "Website.com", "Ricardo", "Men", "Eindhoven", "Ricardo@hotmail.com", "Pass");
+        user5 = new User("PictureURL", "Website.com", "Rickert", "Men", "Geldrop", "Rickert@hotmail.com", "Pass");
+        user6 = new User("PictureURL", "Website.com", "Hettie", "Women", "Geldrop", "Hettie@hotmail.com", "Pass");
+        user7 = new User("PictureURL", "Website.com", "Janetoine", "Women", "Veldhoven", "Janetoine@hotmail.com", "Pass");
+        user8 = new User("PictureURL", "Website.com", "Angelika", "Women", "Eindhoven", "Angelika@hotmail.com", "Pass");
+        user9 = new User("PictureURL", "Website.com", "Gerard", "Men", "Eindhoven", "Gerard@hotmail.com", "Pass");
+        user10 = new User("PictureURL", "Website.com", "Freek", "Men", "Eindhoven", "Freek@hotmail.com", "Pass");
 
         mentions.add(user2);
         mentions.add(user3);
@@ -130,5 +130,16 @@ public class init {
         userDAO.addTweet(user8, tweet11, mentions);
         userDAO.addTweet(user9, tweet12, mentions);
         userDAO.addTweet(user10, tweet13, mentions);
+        
+        //tweetDAO.addMention(tweet1, user10);
+        //tweetDAO.addMention(tweet1, user9);
+        //tweetDAO.addMention(tweet1, user8);
+        
+        userDAO.followUser(user1, user2);
+        userDAO.followUser(user1, user3);
+        userDAO.followUser(user1, user4);
+        
+        userDAO.followUser(user2, user3);
+        userDAO.followUser(user2, user4);
     }
 }

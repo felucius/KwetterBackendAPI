@@ -17,7 +17,8 @@ import static org.eclipse.persistence.logging.SessionLog.JPA;
  *
  * @author M
  */
-@Stateless @JPA
+@Stateless
+@JPA
 public class TweetDAOImplementation implements TweetDAO {
 
     /**
@@ -27,10 +28,10 @@ public class TweetDAOImplementation implements TweetDAO {
     @PersistenceContext(unitName = "KwetterBackendPU")
     EntityManager em;
 
-    public TweetDAOImplementation(){
-        
+    public TweetDAOImplementation() {
+
     }
-    
+
     /**
      * Requesting all tweets through the Entity manager. The entity manager
      * makes a call to the database with the PersistenceContext.
@@ -53,7 +54,7 @@ public class TweetDAOImplementation implements TweetDAO {
      * This method allows to retrieve all tweets from the Database, through the
      * Entity manager.
      *
-     * @param tweet is the tweet that all the likes are going to be retrieved 
+     * @param tweet is the tweet that all the likes are going to be retrieved
      * from.
      * @return a list of likes
      */
@@ -113,31 +114,58 @@ public class TweetDAOImplementation implements TweetDAO {
 
     /**
      * This method allows a user to be added as a mention to a single tweet.
-     * 
+     *
      * @param tweet to be posted with a mention of a user.
      * @param user to be mentioned in that single tweet.
-     * @return the tweet with the user that is being mentioned in that single 
+     * @return the tweet with the user that is being mentioned in that single
      * tweet.
      */
     @Override
     public Tweet addMention(Tweet tweet, User user) {
-        try{
+        try {
+            tweet.likeTweet(user);
             tweet.addMention(user);
             em.persist(tweet);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             return null;
         }
         return tweet;
     }
 
+    /**
+     * This method allows a tweet to be found by it's id.
+     *
+     * @param id is the id of the tweet that is going to be looked for.
+     * @return a tweet object.
+     */
     @Override
     public Tweet findTweet(Long id) {
         Tweet tweet = null;
-        try{
+        try {
             tweet = em.find(Tweet.class, id);
             return tweet;
-        }catch (Exception ex){
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * This method allows a tweet to be found by the content written in it.
+     *
+     * @param content is the string that is going to be looked for
+     * @return the tweet object.
+     */
+    @Override
+    public Tweet findTweetByContent(String message) {
+        Tweet tweet = null;
+        try {
+            tweet = (Tweet) em.createQuery("SELECT t FROM Tweet t where t.message LIKE :message").
+                    setParameter("message", "%"+message+"%").
+                    getSingleResult();
+            return tweet;
+        } catch (Exception ex) {
             ex.printStackTrace();
             return null;
         }

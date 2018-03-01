@@ -137,4 +137,16 @@ public class UserDAOCollection implements UserDAO {
             return false;
         }
     }
+
+    @Override
+    public User findUserByName(String name) {
+        for (User user : users) {
+            if (user.getName().equals(name)) {
+                return user;
+            } else {
+                return null;
+            }
+        }
+        return null;
+    }
 }

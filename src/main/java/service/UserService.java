@@ -73,6 +73,15 @@ public class UserService {
     public User findUser(Long id) {
         return userDAO.findUser(id);
     }
+    
+    /**
+     * 
+     * @param name
+     * @return 
+     */
+    public User findUserByName(String name){
+        return userDAO.findUserByName(name);
+    }
 
     /**
      * This method allows a tweet to be added with a user, the actual tweet and

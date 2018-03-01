@@ -91,6 +91,18 @@ public class UserResource {
     }
 
     /**
+     * This method allows a user to be found by it's username.
+     * 
+     * @param name is the name to be searched on as an input parameter.
+     * @return the user object.
+     */
+    @GET
+    @Path("finduserbyname/{name}")
+    public User findUserByName(@PathParam("name") String name){
+        return userService.findUserByName(name);
+    }
+    
+    /**
      * DELETE request to the userService. When this method is called, the user
      * id is given so the account with that specific id can be removed.
      *
