@@ -9,6 +9,7 @@ To use this backend
 Api calls are made with the /api annotation from localhost:8080/KwetterBackend_Maxime/api/ if run locally
 When these '<input>' tags are available. Write the input given from the description and the data can be accessed.
 
+#Users and user information
 To find all users and their written tweets
 - api/users
 
@@ -18,12 +19,21 @@ To find a specific user by it's ID
 To remove a specific user by it's ID
 - api/users/removeuser/<id-of-user>
 
-To find all tweets
-- api/tweets
-
 To find a specific tweet by it's ID, written by a certain user.
 - api/users/findtweet/<id-of-tweet>
 
 To remove a specific tweet by it's ID, written by a certain user.
 - api/users/removetweet/<id-of-tweet>
 
+To find a specific user by it's username.
+- api/users/finduserbyusername/<username>
+
+#Tweets and tweet information
+To find all tweets
+- api/tweets
+
+To find a specific tweet by it's ID
+- api/tweets/findtweet/<id>
+  
+To find a specific tweet by it's content (has wildcard pattern in it)
+- api/tweets/findtweetbycontent/<content-key>
