@@ -103,4 +103,16 @@ public class TweetDAOCollection implements TweetDAO {
         }
     }
 
+    @Override
+    public Tweet findTweet(Long id) {
+        for (Tweet tweet : tweets) {
+            if (tweet.getId().equals(id)) {
+                return tweet;
+            } else {
+                return null;
+            }
+        }
+        return null;
+    }
+
 }

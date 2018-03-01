@@ -81,4 +81,8 @@ public class TweetService {
     public List<Tweet> getAllTweets() {
         return tweetDAO.getAllTweets();
     }
+    
+    public Tweet findTweet(Long id){
+        return tweetDAO.findTweet(id);
+    }
 }

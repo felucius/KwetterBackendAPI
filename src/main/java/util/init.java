@@ -45,7 +45,20 @@ public class init {
     private User user8 = null;
     private User user9 = null;
     private User user10 = null;
-    private Tweet tweet = null;
+
+    private Tweet tweet1 = null;
+    private Tweet tweet2 = null;
+    private Tweet tweet3 = null;
+    private Tweet tweet4 = null;
+    private Tweet tweet5 = null;
+    private Tweet tweet6 = null;
+    private Tweet tweet7 = null;
+    private Tweet tweet8 = null;
+    private Tweet tweet9 = null;
+    private Tweet tweet10 = null;
+    private Tweet tweet11 = null;
+    private Tweet tweet12 = null;
+    private Tweet tweet13 = null;
 
     @PostConstruct
     public void init() {
@@ -84,7 +97,38 @@ public class init {
     public void createTweets() {
         tags.add("#cool");
         tags.add("#like");
-        tweet = new Tweet("Message Hello", tags, user1);
-        //userDAO.addTweet(user1, tweet, mentions);
+
+        tweet1 = new Tweet("This is my first Tweet Hello from Maxime", tags, user1);
+        tweet2 = new Tweet("This is my second Tweet AWESOME", tags, user1);
+        tweet3 = new Tweet("This is my third Tweet MUCH C00l", tags, user1);
+
+        tweet4 = new Tweet("Hey everyone Look at me NO HANDS!", tags, user2);
+        tweet5 = new Tweet("WHOA what was that all about!", tags, user2);
+
+        tweet6 = new Tweet("Welcome to my channel piepol", tags, user3);
+        tweet7 = new Tweet("Hellow Hello", tags, user4);
+        tweet8 = new Tweet("Wilkommen damen und herren", tags, user5);
+        tweet9 = new Tweet("Dikke BMW HAHA", tags, user6);
+        tweet10 = new Tweet("Waarom tweet ik? ik verveel me!", tags, user7);
+        tweet11 = new Tweet("This is a message from KOREA", tags, user8);
+        tweet12 = new Tweet("SPAIN everyone!? someone SPANISH?", tags, user9);
+        tweet13 = new Tweet("Yes finally a highscore from a low score..", tags, user10);
+
+        userDAO.addTweet(user1, tweet1, mentions);
+        userDAO.addTweet(user1, tweet2, mentions);
+        userDAO.addTweet(user1, tweet3, mentions);
+        
+        userDAO.addTweet(user2, tweet4, mentions);
+        userDAO.addTweet(user1, tweet5, mentions);
+        
+        
+        userDAO.addTweet(user3, tweet6, mentions);
+        userDAO.addTweet(user4, tweet7, mentions);
+        userDAO.addTweet(user5, tweet8, mentions);
+        userDAO.addTweet(user6, tweet9, mentions);
+        userDAO.addTweet(user7, tweet10, mentions);
+        userDAO.addTweet(user8, tweet11, mentions);
+        userDAO.addTweet(user9, tweet12, mentions);
+        userDAO.addTweet(user10, tweet13, mentions);
     }
 }

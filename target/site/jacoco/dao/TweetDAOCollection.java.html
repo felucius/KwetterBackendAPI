@@ -103,5 +103,17 @@ public class TweetDAOCollection implements TweetDAO {
         }
     }
 
+    @Override
+    public Tweet findTweet(Long id) {
+<span class="nc bnc" id="L108" title="All 2 branches missed.">        for (Tweet tweet : tweets) {</span>
+<span class="nc bnc" id="L109" title="All 2 branches missed.">            if (tweet.getId().equals(id)) {</span>
+<span class="nc" id="L110">                return tweet;</span>
+            } else {
+<span class="nc" id="L112">                return null;</span>
+            }
+        }
+<span class="nc" id="L115">        return null;</span>
+    }
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

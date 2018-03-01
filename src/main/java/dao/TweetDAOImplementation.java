@@ -130,4 +130,16 @@ public class TweetDAOImplementation implements TweetDAO {
         }
         return tweet;
     }
+
+    @Override
+    public Tweet findTweet(Long id) {
+        Tweet tweet = null;
+        try{
+            tweet = em.find(Tweet.class, id);
+            return tweet;
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return null;
+        }
+    }
 }

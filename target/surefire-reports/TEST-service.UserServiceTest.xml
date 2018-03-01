@@ -72,5 +72,5 @@
   <testcase classname="service.UserServiceTest" name="testUnfollowUser" time="0"/>
   <testcase classname="service.UserServiceTest" name="testGetTweets" time="0"/>
   <testcase classname="service.UserServiceTest" name="testFollowUser" time="0"/>
-  <testcase classname="service.UserServiceTest" name="testGetFollowers" time="0"/>
+  <testcase classname="service.UserServiceTest" name="testGetFollowers" time="0.001"/>
 </testsuite>

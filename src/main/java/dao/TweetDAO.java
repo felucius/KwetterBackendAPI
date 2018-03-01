@@ -27,4 +27,6 @@ public interface TweetDAO {
     List<Tweet> getTweetsOfFollowingUsers(User followerId);
     
     List<Tweet> getAllTweets();
+    
+    Tweet findTweet(Long id);
 }

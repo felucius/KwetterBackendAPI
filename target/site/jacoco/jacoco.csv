@@ -1,11 +1,11 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-KwetterBackend_Maxime,dao,TweetDAOCollection,10,49,6,6,5,17,6,6,0,6
+KwetterBackend_Maxime,dao,TweetDAOCollection,32,49,10,6,10,17,9,6,1,6
 KwetterBackend_Maxime,dao,UserDAOCollection,60,81,20,10,23,24,19,9,5,8
-KwetterBackend_Maxime,boundary.rest,UserResource,106,0,0,0,24,0,12,0,12,0
+KwetterBackend_Maxime,boundary.rest,UserResource,111,0,0,0,24,0,13,0,13,0
 KwetterBackend_Maxime,boundary.rest,TweetResource,43,0,0,0,11,0,6,0,6,0
-KwetterBackend_Maxime,util,init,268,0,0,0,45,0,4,0,4,0
+KwetterBackend_Maxime,util,init,554,0,0,0,82,0,4,0,4,0
 KwetterBackend_Maxime,service,UserService,67,0,0,0,13,0,13,0,13,0
-KwetterBackend_Maxime,service,TweetService,28,0,0,0,6,0,6,0,6,0
+KwetterBackend_Maxime,service,TweetService,33,0,0,0,7,0,7,0,7,0
 KwetterBackend_Maxime,domain,UserRole,39,0,0,0,4,0,2,0,2,0
 KwetterBackend_Maxime,domain,Tweet,2,155,1,1,1,38,1,16,0,16
 KwetterBackend_Maxime,domain,User,120,248,0,0,23,67,4,27,4,27

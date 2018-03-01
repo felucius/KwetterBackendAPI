@@ -20,6 +20,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import service.TweetService;
 import service.UserService;
 
 /**
@@ -42,6 +43,9 @@ public class UserResource {
      */
     @Inject
     UserService userService;
+    
+    @Inject
+    TweetService tweetService;
 
     /**
      * GET request from the userService. Userservice get it's data from the DAO.
@@ -109,12 +113,20 @@ public class UserResource {
         //List<User> getMentions = (User)mentions;
         return userService.addTweet(getUser, getTweet, mentions);
     }*/
-
+    
     @GET
-    @Path("removetweet/{removetweet}")
-    public boolean removeTweet(@PathParam("removetweet") TweetDTO tweet){
-        Tweet getTweet = tweet.getTweet();
-        return userService.removeTweet(getTweet);
+    @Path("findtweet/{id}")
+    public Tweet findTweet(@PathParam("id") Long id){
+        return tweetService.findTweet(id);
+    }
+    
+    
+    @DELETE
+    @Path("removetweet/{id}")
+    public boolean removeTweet(@PathParam("id") Long tweetId){
+        //Tweet getTweet = tweet.getTweet();
+        //return userService.removeTweet(getTweet);
+        return userService.removeTweet(tweetService.findTweet(tweetId));
     }
 
     @GET

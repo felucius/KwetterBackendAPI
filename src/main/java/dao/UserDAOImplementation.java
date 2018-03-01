@@ -274,7 +274,7 @@ public class UserDAOImplementation implements UserDAO {
     public boolean addTweet(User user, Tweet tweet, List<User> mentions) {
         user.addTweet(tweet, mentions);
         try {
-            em.persist(user);
+            em.persist(tweet);
             return true;
         } catch (Exception ex) {
             ex.printStackTrace();

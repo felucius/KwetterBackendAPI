@@ -45,47 +45,91 @@ import javax.inject.Inject;
 <span class="nc" id="L45">    private User user8 = null;</span>
 <span class="nc" id="L46">    private User user9 = null;</span>
 <span class="nc" id="L47">    private User user10 = null;</span>
-<span class="nc" id="L48">    private Tweet tweet = null;</span>
+
+<span class="nc" id="L49">    private Tweet tweet1 = null;</span>
+<span class="nc" id="L50">    private Tweet tweet2 = null;</span>
+<span class="nc" id="L51">    private Tweet tweet3 = null;</span>
+<span class="nc" id="L52">    private Tweet tweet4 = null;</span>
+<span class="nc" id="L53">    private Tweet tweet5 = null;</span>
+<span class="nc" id="L54">    private Tweet tweet6 = null;</span>
+<span class="nc" id="L55">    private Tweet tweet7 = null;</span>
+<span class="nc" id="L56">    private Tweet tweet8 = null;</span>
+<span class="nc" id="L57">    private Tweet tweet9 = null;</span>
+<span class="nc" id="L58">    private Tweet tweet10 = null;</span>
+<span class="nc" id="L59">    private Tweet tweet11 = null;</span>
+<span class="nc" id="L60">    private Tweet tweet12 = null;</span>
+<span class="nc" id="L61">    private Tweet tweet13 = null;</span>
 
     @PostConstruct
     public void init() {
-<span class="nc" id="L52">        System.out.println(&quot;Initializing basic database information....&quot;);</span>
-<span class="nc" id="L53">        createUsers();</span>
-<span class="nc" id="L54">        createTweets();</span>
-<span class="nc" id="L55">    }</span>
+<span class="nc" id="L65">        System.out.println(&quot;Initializing basic database information....&quot;);</span>
+<span class="nc" id="L66">        createUsers();</span>
+<span class="nc" id="L67">        createTweets();</span>
+<span class="nc" id="L68">    }</span>
 
     public void createUsers() {
-<span class="nc" id="L58">        user1 = new User(&quot;PictureURL&quot;, &quot;Website.com&quot;, &quot;Maxime de Lange&quot;, &quot;Men&quot;, &quot;Geldrop&quot;, &quot;Maxime@hotmail.com&quot;, &quot;Pass&quot;);</span>
-<span class="nc" id="L59">        user2 = new User(&quot;PictureURL&quot;, &quot;Website.com&quot;, &quot;Jaap-joris janssen&quot;, &quot;Men&quot;, &quot;Veldhoven&quot;, &quot;JaapJoris@hotmail.com&quot;, &quot;Pass&quot;);</span>
-<span class="nc" id="L60">        user3 = new User(&quot;PictureURL&quot;, &quot;Website.com&quot;, &quot;Ferdinand dn Droak&quot;, &quot;Men&quot;, &quot;Eindhoven&quot;, &quot;Ferdinand@hotmail.com&quot;, &quot;Pass&quot;);</span>
-<span class="nc" id="L61">        user4 = new User(&quot;PictureURL&quot;, &quot;Website.com&quot;, &quot;Ricardo de schilder&quot;, &quot;Men&quot;, &quot;Eindhoven&quot;, &quot;Ricardo@hotmail.com&quot;, &quot;Pass&quot;);</span>
-<span class="nc" id="L62">        user5 = new User(&quot;PictureURL&quot;, &quot;Website.com&quot;, &quot;Rickert batsbak&quot;, &quot;Men&quot;, &quot;Geldrop&quot;, &quot;Rickert@hotmail.com&quot;, &quot;Pass&quot;);</span>
-<span class="nc" id="L63">        user6 = new User(&quot;PictureURL&quot;, &quot;Website.com&quot;, &quot;Hettie de flettie&quot;, &quot;Women&quot;, &quot;Geldrop&quot;, &quot;Hettie@hotmail.com&quot;, &quot;Pass&quot;);</span>
-<span class="nc" id="L64">        user7 = new User(&quot;PictureURL&quot;, &quot;Website.com&quot;, &quot;Janetoine van achter&quot;, &quot;Women&quot;, &quot;Veldhoven&quot;, &quot;Janetoine@hotmail.com&quot;, &quot;Pass&quot;);</span>
-<span class="nc" id="L65">        user8 = new User(&quot;PictureURL&quot;, &quot;Website.com&quot;, &quot;Angelika ruslofski&quot;, &quot;Women&quot;, &quot;Eindhoven&quot;, &quot;Angelika@hotmail.com&quot;, &quot;Pass&quot;);</span>
-<span class="nc" id="L66">        user9 = new User(&quot;PictureURL&quot;, &quot;Website.com&quot;, &quot;Gerard broekmans&quot;, &quot;Men&quot;, &quot;Eindhoven&quot;, &quot;Gerard@hotmail.com&quot;, &quot;Pass&quot;);</span>
-<span class="nc" id="L67">        user10 = new User(&quot;PictureURL&quot;, &quot;Website.com&quot;, &quot;Freek de bleek&quot;, &quot;Men&quot;, &quot;Eindhoven&quot;, &quot;Freek@hotmail.com&quot;, &quot;Pass&quot;);</span>
+<span class="nc" id="L71">        user1 = new User(&quot;PictureURL&quot;, &quot;Website.com&quot;, &quot;Maxime de Lange&quot;, &quot;Men&quot;, &quot;Geldrop&quot;, &quot;Maxime@hotmail.com&quot;, &quot;Pass&quot;);</span>
+<span class="nc" id="L72">        user2 = new User(&quot;PictureURL&quot;, &quot;Website.com&quot;, &quot;Jaap-joris janssen&quot;, &quot;Men&quot;, &quot;Veldhoven&quot;, &quot;JaapJoris@hotmail.com&quot;, &quot;Pass&quot;);</span>
+<span class="nc" id="L73">        user3 = new User(&quot;PictureURL&quot;, &quot;Website.com&quot;, &quot;Ferdinand dn Droak&quot;, &quot;Men&quot;, &quot;Eindhoven&quot;, &quot;Ferdinand@hotmail.com&quot;, &quot;Pass&quot;);</span>
+<span class="nc" id="L74">        user4 = new User(&quot;PictureURL&quot;, &quot;Website.com&quot;, &quot;Ricardo de schilder&quot;, &quot;Men&quot;, &quot;Eindhoven&quot;, &quot;Ricardo@hotmail.com&quot;, &quot;Pass&quot;);</span>
+<span class="nc" id="L75">        user5 = new User(&quot;PictureURL&quot;, &quot;Website.com&quot;, &quot;Rickert batsbak&quot;, &quot;Men&quot;, &quot;Geldrop&quot;, &quot;Rickert@hotmail.com&quot;, &quot;Pass&quot;);</span>
+<span class="nc" id="L76">        user6 = new User(&quot;PictureURL&quot;, &quot;Website.com&quot;, &quot;Hettie de flettie&quot;, &quot;Women&quot;, &quot;Geldrop&quot;, &quot;Hettie@hotmail.com&quot;, &quot;Pass&quot;);</span>
+<span class="nc" id="L77">        user7 = new User(&quot;PictureURL&quot;, &quot;Website.com&quot;, &quot;Janetoine van achter&quot;, &quot;Women&quot;, &quot;Veldhoven&quot;, &quot;Janetoine@hotmail.com&quot;, &quot;Pass&quot;);</span>
+<span class="nc" id="L78">        user8 = new User(&quot;PictureURL&quot;, &quot;Website.com&quot;, &quot;Angelika ruslofski&quot;, &quot;Women&quot;, &quot;Eindhoven&quot;, &quot;Angelika@hotmail.com&quot;, &quot;Pass&quot;);</span>
+<span class="nc" id="L79">        user9 = new User(&quot;PictureURL&quot;, &quot;Website.com&quot;, &quot;Gerard broekmans&quot;, &quot;Men&quot;, &quot;Eindhoven&quot;, &quot;Gerard@hotmail.com&quot;, &quot;Pass&quot;);</span>
+<span class="nc" id="L80">        user10 = new User(&quot;PictureURL&quot;, &quot;Website.com&quot;, &quot;Freek de bleek&quot;, &quot;Men&quot;, &quot;Eindhoven&quot;, &quot;Freek@hotmail.com&quot;, &quot;Pass&quot;);</span>
 
-<span class="nc" id="L69">        mentions.add(user2);</span>
-<span class="nc" id="L70">        mentions.add(user3);</span>
+<span class="nc" id="L82">        mentions.add(user2);</span>
+<span class="nc" id="L83">        mentions.add(user3);</span>
 
-<span class="nc" id="L72">        userDAO.createUser(user1);</span>
-<span class="nc" id="L73">        userDAO.createUser(user2);</span>
-<span class="nc" id="L74">        userDAO.createUser(user3);</span>
-<span class="nc" id="L75">        userDAO.createUser(user4);</span>
-<span class="nc" id="L76">        userDAO.createUser(user5);</span>
-<span class="nc" id="L77">        userDAO.createUser(user6);</span>
-<span class="nc" id="L78">        userDAO.createUser(user7);</span>
-<span class="nc" id="L79">        userDAO.createUser(user8);</span>
-<span class="nc" id="L80">        userDAO.createUser(user9);</span>
-<span class="nc" id="L81">        userDAO.createUser(user10);</span>
-<span class="nc" id="L82">    }</span>
+<span class="nc" id="L85">        userDAO.createUser(user1);</span>
+<span class="nc" id="L86">        userDAO.createUser(user2);</span>
+<span class="nc" id="L87">        userDAO.createUser(user3);</span>
+<span class="nc" id="L88">        userDAO.createUser(user4);</span>
+<span class="nc" id="L89">        userDAO.createUser(user5);</span>
+<span class="nc" id="L90">        userDAO.createUser(user6);</span>
+<span class="nc" id="L91">        userDAO.createUser(user7);</span>
+<span class="nc" id="L92">        userDAO.createUser(user8);</span>
+<span class="nc" id="L93">        userDAO.createUser(user9);</span>
+<span class="nc" id="L94">        userDAO.createUser(user10);</span>
+<span class="nc" id="L95">    }</span>
 
     public void createTweets() {
-<span class="nc" id="L85">        tags.add(&quot;#cool&quot;);</span>
-<span class="nc" id="L86">        tags.add(&quot;#like&quot;);</span>
-<span class="nc" id="L87">        tweet = new Tweet(&quot;Message Hello&quot;, tags, user1);</span>
-        //userDAO.addTweet(user1, tweet, mentions);
-<span class="nc" id="L89">    }</span>
+<span class="nc" id="L98">        tags.add(&quot;#cool&quot;);</span>
+<span class="nc" id="L99">        tags.add(&quot;#like&quot;);</span>
+
+<span class="nc" id="L101">        tweet1 = new Tweet(&quot;This is my first Tweet Hello from Maxime&quot;, tags, user1);</span>
+<span class="nc" id="L102">        tweet2 = new Tweet(&quot;This is my second Tweet AWESOME&quot;, tags, user1);</span>
+<span class="nc" id="L103">        tweet3 = new Tweet(&quot;This is my third Tweet MUCH C00l&quot;, tags, user1);</span>
+
+<span class="nc" id="L105">        tweet4 = new Tweet(&quot;Hey everyone Look at me NO HANDS!&quot;, tags, user2);</span>
+<span class="nc" id="L106">        tweet5 = new Tweet(&quot;WHOA what was that all about!&quot;, tags, user2);</span>
+
+<span class="nc" id="L108">        tweet6 = new Tweet(&quot;Welcome to my channel piepol&quot;, tags, user3);</span>
+<span class="nc" id="L109">        tweet7 = new Tweet(&quot;Hellow Hello&quot;, tags, user4);</span>
+<span class="nc" id="L110">        tweet8 = new Tweet(&quot;Wilkommen damen und herren&quot;, tags, user5);</span>
+<span class="nc" id="L111">        tweet9 = new Tweet(&quot;Dikke BMW HAHA&quot;, tags, user6);</span>
+<span class="nc" id="L112">        tweet10 = new Tweet(&quot;Waarom tweet ik? ik verveel me!&quot;, tags, user7);</span>
+<span class="nc" id="L113">        tweet11 = new Tweet(&quot;This is a message from KOREA&quot;, tags, user8);</span>
+<span class="nc" id="L114">        tweet12 = new Tweet(&quot;SPAIN everyone!? someone SPANISH?&quot;, tags, user9);</span>
+<span class="nc" id="L115">        tweet13 = new Tweet(&quot;Yes finally a highscore from a low score..&quot;, tags, user10);</span>
+
+<span class="nc" id="L117">        userDAO.addTweet(user1, tweet1, mentions);</span>
+<span class="nc" id="L118">        userDAO.addTweet(user1, tweet2, mentions);</span>
+<span class="nc" id="L119">        userDAO.addTweet(user1, tweet3, mentions);</span>
+        
+<span class="nc" id="L121">        userDAO.addTweet(user2, tweet4, mentions);</span>
+<span class="nc" id="L122">        userDAO.addTweet(user1, tweet5, mentions);</span>
+        
+        
+<span class="nc" id="L125">        userDAO.addTweet(user3, tweet6, mentions);</span>
+<span class="nc" id="L126">        userDAO.addTweet(user4, tweet7, mentions);</span>
+<span class="nc" id="L127">        userDAO.addTweet(user5, tweet8, mentions);</span>
+<span class="nc" id="L128">        userDAO.addTweet(user6, tweet9, mentions);</span>
+<span class="nc" id="L129">        userDAO.addTweet(user7, tweet10, mentions);</span>
+<span class="nc" id="L130">        userDAO.addTweet(user8, tweet11, mentions);</span>
+<span class="nc" id="L131">        userDAO.addTweet(user9, tweet12, mentions);</span>
+<span class="nc" id="L132">        userDAO.addTweet(user10, tweet13, mentions);</span>
+<span class="nc" id="L133">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>
