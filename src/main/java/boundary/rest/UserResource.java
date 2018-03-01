@@ -144,11 +144,12 @@ public class UserResource {
     }
 
     @GET
-    @Path("user/followuser")
-    public boolean followUser(@PathParam("user") UserDTO user, @PathParam("followuser") UserDTO followingUser){
-        User getUser = user.getUser();
-        User getFollowingUser = followingUser.getUser();
-        return userService.followUser(getUser, getFollowingUser);
+    @Path("followuser/{user}/{followuser}")
+    public boolean followUser(@PathParam("user") String username, @PathParam("followuser") String followingUser){
+        //User getUser = user.getUser();
+        //User getFollowingUser = followingUser.getUser();
+        //return userService.followUser(getUser, getFollowingUser);
+        return userService.followUser(userService.findUserByName(username), userService.findUserByName(followingUser));
     }
 
     @GET
