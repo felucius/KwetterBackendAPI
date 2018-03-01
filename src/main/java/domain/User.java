@@ -109,6 +109,14 @@ public class User implements Serializable {
         this.followers = new ArrayList();
     }
 
+    public User(String name) {
+        this.name = name;
+        this.picture = "picturePath";
+        this.tweets = new ArrayList();
+        this.following = new ArrayList();
+        this.followers = new ArrayList();
+    }
+
     /**
      * This method allows a tweet to be added with a certain amount of mentions
      *

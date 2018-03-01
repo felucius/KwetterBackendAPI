@@ -68,10 +68,12 @@ public class UserResource {
      * database.
      */
     @POST
-    @Path("name")
-    public User createUser(@PathParam("name") UserDTO username) {
-        User getUser = username.getUser();
-        return userService.createUser(getUser);
+    @Path("createuser/{username}")
+    public User createUser(@PathParam("username") String username) {
+        //User getUser = username.getUser();
+        //return userService.createUser(getUser);
+        User user = new User(username);
+        return userService.createUser(user);
     }
 
     /**
