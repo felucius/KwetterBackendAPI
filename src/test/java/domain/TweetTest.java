@@ -172,4 +172,34 @@ public class TweetTest {
         assert expResult == id;
     }
     
+    /**
+     * Test if the tweet mentions can be set.
+     */
+    @Test
+    public void testSetMentions(){
+        System.out.println("Test setMentions on Tweet");
+        
+        List<Tweet> mentions = new ArrayList();
+        List<User> mentionedUsers = new ArrayList();
+        mentionedUsers.add(new User());
+        mentionedUsers.add(new User());
+        Tweet tweet1 = new Tweet();
+        mentions.add(tweet1);
+        tweet1.setMentions(mentionedUsers);
+        assertNotNull(mentionedUsers);
+    }
+    
+    /**
+     * Test if the toString method does not return null value when a new Tweet
+     * has been made.
+     */
+    @Test
+    public void testToString(){
+        System.out.println("Test toString on Tweet");
+        List<String> tags = new ArrayList();
+        tags.add("#Cool");
+        User user1 = new User("avatarURL", "Website", "Maxime", "Men", "Geldrop", "EmailMaxime", "Pass");
+        Tweet tweet = new Tweet("Hello", tags, user1);
+        assertNotNull(tweet.toString());
+    }
 }

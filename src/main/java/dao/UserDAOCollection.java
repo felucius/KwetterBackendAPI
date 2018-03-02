@@ -10,6 +10,7 @@ import domain.User;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.enterprise.inject.Default;
 
 /**
  *
@@ -94,7 +95,7 @@ public class UserDAOCollection implements UserDAO {
     @Override
     public boolean unfollowUser(User user, User unfollowingUser) {
         if (user != null && unfollowingUser != null) {
-            user.removeFollower(unfollowingUser);
+            user.unfollowUser(unfollowingUser);
             return true;
         }
         return false;
@@ -135,5 +136,17 @@ public class UserDAOCollection implements UserDAO {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public User findUserByName(String name) {
+        for (User user : users) {
+            if (user.getName().equals(name)) {
+                return user;
+            } else {
+                return null;
+            }
+        }
+        return null;
     }
 }

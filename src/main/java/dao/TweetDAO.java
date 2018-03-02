@@ -16,18 +16,19 @@ import javax.ejb.Stateless;
  *
  * @author M
  */
-@Stateless
 public interface TweetDAO {
     
     Tweet addMention(Tweet tweet, User user);
-        
-    boolean likeTweet(Tweet tweet, User user);
     
     List<User> getLikes(Tweet tweet);
             
-    List<User> getMentions(Tweet tweet);
+    List<User> getMentions(Tweet tweetMentions);
     
-    List<Tweet> getTweetsOfFollowingUsers(User follower);
+    List<Tweet> getTweetsOfFollowingUsers(User followerId);
     
     List<Tweet> getAllTweets();
+    
+    Tweet findTweet(Long id);
+    
+    Tweet findTweetByContent(String content);
 }

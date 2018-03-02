@@ -1,13 +1,17 @@
 boundary\rest\UserResource.class
 dao\TweetDAOImplementation.class
 domain\User_.class
+domain\UserDTO.class
 dao\UserDAOCollection.class
+domain\TweetDTO.class
 domain\Tweet_.class
 domain\UserRole.class
 service\UserService.class
 boundary\rest\TweetResource.class
 service\TweetService.class
+util\init.class
 dao\TweetDAO.class
+dao\JPA.class
 dao\TweetDAOCollection.class
 dao\UserDAO.class
 domain\Tweet.class

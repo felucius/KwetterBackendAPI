@@ -5,7 +5,8 @@
  */
 package service;
 
-import dao.UserDAOCollection;
+import dao.JPA;
+import dao.UserDAO;
 import domain.Tweet;
 import domain.User;
 import java.util.List;
@@ -25,14 +26,9 @@ public class UserService {
      * initialized with the 'new' keyword. This provides a loosely coupled
      * architecture.
      */
-    private UserDAOCollection userDAO;
+    @Inject @JPA
+    UserDAO userDAO;
     
-    // Injection on constructor level.
-    @Inject
-    public UserService(){
-        userDAO = new UserDAOCollection();
-    }
-
     /**
      * Get all users from the userDAO. UserDao makes a call to the database and
      * sends the data to this method.
@@ -76,6 +72,15 @@ public class UserService {
      */
     public User findUser(Long id) {
         return userDAO.findUser(id);
+    }
+    
+    /**
+     * 
+     * @param name
+     * @return 
+     */
+    public User findUserByName(String name){
+        return userDAO.findUserByName(name);
     }
 
     /**

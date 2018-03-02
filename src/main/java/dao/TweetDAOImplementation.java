@@ -11,20 +11,26 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import static org.eclipse.persistence.logging.SessionLog.JPA;
 
 /**
  *
  * @author M
  */
 @Stateless
+@JPA
 public class TweetDAOImplementation implements TweetDAO {
 
     /**
      * Persisting the context of the entity manager. By doing this methods data
      * can be requested or persisted to the database.
      */
-    @PersistenceContext
+    @PersistenceContext(unitName = "KwetterBackendPU")
     EntityManager em;
+
+    public TweetDAOImplementation() {
+
+    }
 
     /**
      * Requesting all tweets through the Entity manager. The entity manager
@@ -37,18 +43,18 @@ public class TweetDAOImplementation implements TweetDAO {
         List<Tweet> tweets = null;
         try {
             tweets = em.createNamedQuery("Tweet.getAllTweets").getResultList();
+            return tweets;
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
         }
-        return tweets;
     }
 
     /**
      * This method allows to retrieve all tweets from the Database, through the
      * Entity manager.
      *
-     * @param tweet is the tweet that all the likes are going to be retrieved 
+     * @param tweet is the tweet that all the likes are going to be retrieved
      * from.
      * @return a list of likes
      */
@@ -108,18 +114,19 @@ public class TweetDAOImplementation implements TweetDAO {
 
     /**
      * This method allows a user to be added as a mention to a single tweet.
-     * 
+     *
      * @param tweet to be posted with a mention of a user.
      * @param user to be mentioned in that single tweet.
-     * @return the tweet with the user that is being mentioned in that single 
+     * @return the tweet with the user that is being mentioned in that single
      * tweet.
      */
     @Override
     public Tweet addMention(Tweet tweet, User user) {
-        try{
+        try {
+            tweet.likeTweet(user);
             tweet.addMention(user);
             em.persist(tweet);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             return null;
         }
@@ -127,22 +134,40 @@ public class TweetDAOImplementation implements TweetDAO {
     }
 
     /**
-     * This method allows a user to like a single tweet.
-     * 
-     * @param tweet is the tweet that is going to be liked by a single user.
-     * @param user is the object that is liking the tweet.
-     * @return true if the tweets has successfully been likes or false when
-     * the action could not have been succeeded.
+     * This method allows a tweet to be found by it's id.
+     *
+     * @param id is the id of the tweet that is going to be looked for.
+     * @return a tweet object.
      */
     @Override
-    public boolean likeTweet(Tweet tweet, User user) {
-        try{
-            tweet.likeTweet(user);
-            em.persist(tweet);
-        }catch (Exception ex){
+    public Tweet findTweet(Long id) {
+        Tweet tweet = null;
+        try {
+            tweet = em.find(Tweet.class, id);
+            return tweet;
+        } catch (Exception ex) {
             ex.printStackTrace();
-            return false;
+            return null;
         }
-        return true;
+    }
+
+    /**
+     * This method allows a tweet to be found by the content written in it.
+     *
+     * @param content is the string that is going to be looked for
+     * @return the tweet object.
+     */
+    @Override
+    public Tweet findTweetByContent(String message) {
+        Tweet tweet = null;
+        try {
+            tweet = (Tweet) em.createQuery("SELECT t FROM Tweet t where t.message LIKE :message").
+                    setParameter("message", "%"+message+"%").
+                    getSingleResult();
+            return tweet;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
     }
 }
