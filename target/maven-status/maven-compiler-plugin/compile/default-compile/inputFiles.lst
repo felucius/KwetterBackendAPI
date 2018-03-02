@@ -2,6 +2,10 @@ C:\Fontys\S6\JEA6\Week 1\Kwetter\KwetterBackend_Maxime\src\main\java\boundary\re
 C:\Fontys\S6\JEA6\Week 1\Kwetter\KwetterBackend_Maxime\src\main\java\dao\TweetDAOCollection.java
 C:\Fontys\S6\JEA6\Week 1\Kwetter\KwetterBackend_Maxime\src\main\java\dao\UserDAOImplementation.java
 C:\Fontys\S6\JEA6\Week 1\Kwetter\KwetterBackend_Maxime\src\main\java\dao\UserDAOCollection.java
+C:\Fontys\S6\JEA6\Week 1\Kwetter\KwetterBackend_Maxime\src\main\java\util\init.java
+C:\Fontys\S6\JEA6\Week 1\Kwetter\KwetterBackend_Maxime\src\main\java\dao\JPA.java
+C:\Fontys\S6\JEA6\Week 1\Kwetter\KwetterBackend_Maxime\src\main\java\domain\UserDTO.java
+C:\Fontys\S6\JEA6\Week 1\Kwetter\KwetterBackend_Maxime\src\main\java\domain\TweetDTO.java
 C:\Fontys\S6\JEA6\Week 1\Kwetter\KwetterBackend_Maxime\src\main\java\dao\TweetDAO.java
 C:\Fontys\S6\JEA6\Week 1\Kwetter\KwetterBackend_Maxime\src\main\java\boundary\rest\UserResource.java
 C:\Fontys\S6\JEA6\Week 1\Kwetter\KwetterBackend_Maxime\src\main\java\service\UserService.java

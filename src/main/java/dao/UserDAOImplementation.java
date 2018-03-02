@@ -11,19 +11,26 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
  * @author M
  */
 @Stateless
-public class UserDAOImplementation implements UserDAO{
-        /**
+@JPA
+public class UserDAOImplementation implements UserDAO {
+
+    /**
      * Persisting the context of the entity manager. By doing this methods data
      * can be requested or persisted to the database.
      */
-    @PersistenceContext
+    @PersistenceContext(unitName = "KwetterBackendPU")
     private EntityManager em;
+
+    public UserDAOImplementation() {
+
+    }
 
     /**
      * Requesting all users through the Entity manager. The entity manager makes
@@ -36,11 +43,11 @@ public class UserDAOImplementation implements UserDAO{
         List<User> users = null;
         try {
             users = em.createNamedQuery("User.getAllUsers").getResultList();
+            return users;
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
         }
-        return users;
     }
 
     /**
@@ -52,32 +59,33 @@ public class UserDAOImplementation implements UserDAO{
      */
     @Override
     public User createUser(User user) {
-        
         try {
             em.persist(user);
+            return user;
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
         }
-        return user;
     }
 
     /**
      * This method allows a user that exists in the database, to be removed
      *
      * @param user is the object that is going to be removed.
-     * @return a true statement if the user has successfully been removed or 
+     * @return a true statement if the user has successfully been removed or
      * false when the action could not be performed.
      */
     @Override
     public boolean removeUser(User user) {
         try {
+            System.out.println("UserDAOImpl: " + user.getId());
+            user = em.find(User.class, user.getId());
             em.remove(user);
+            return true;
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
         }
-        return true;
     }
 
     /**
@@ -93,11 +101,11 @@ public class UserDAOImplementation implements UserDAO{
         User user = null;
         try {
             user = em.find(User.class, id);
+            return user;
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
         }
-        return user;
     }
 
     /**
@@ -111,11 +119,11 @@ public class UserDAOImplementation implements UserDAO{
     public boolean addTweet(Tweet tweet, List<User> mentions) {
         try {
             em.persist(tweet);
+            return true;
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
         }
-        return true;
     }
 
     /**
@@ -129,11 +137,11 @@ public class UserDAOImplementation implements UserDAO{
     public boolean removeTweet(Tweet tweet) {
         try {
             em.remove(tweet);
+            return true;
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
         }
-        return true;
     }
 
     /**
@@ -151,11 +159,11 @@ public class UserDAOImplementation implements UserDAO{
         try {
             em.merge(user);
             em.merge(followingUser);
+            return true;
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
         }
-        return true;
     }
 
     /**
@@ -170,15 +178,15 @@ public class UserDAOImplementation implements UserDAO{
      */
     @Override
     public boolean unfollowUser(User user, User unfollowingUser) {
-        user.removeFollower(unfollowingUser);
+        user.unfollowUser(unfollowingUser);
         try {
             em.merge(user);
             em.merge(unfollowingUser);
+            return true;
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
         }
-        return true;
     }
 
     /**
@@ -192,11 +200,11 @@ public class UserDAOImplementation implements UserDAO{
         List<User> users = null;
         try {
             users = em.find(User.class, user.getId()).getFollowing();
+            return users;
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
         }
-        return users;
     }
 
     /**
@@ -210,27 +218,28 @@ public class UserDAOImplementation implements UserDAO{
         List<User> users = null;
         try {
             users = em.find(User.class, user.getId()).getFollowers();
+            return users;
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
         }
-        return users;
     }
 
     /**
      * This method allows to get all tweets from no specific user. It collects
      * all tweet data. This is necessary for an administrator account.
+     *
      * @return all tweets from all users.
      */
     public List<Tweet> getTweets() {
         List<Tweet> tweets = null;
         try {
             tweets = em.createNamedQuery("Tweet.getAllTweets").getResultList();
+            return tweets;
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
         }
-        return tweets;
     }
 
     /**
@@ -246,37 +255,37 @@ public class UserDAOImplementation implements UserDAO{
         user.likeTweet(tweetToLike);
         try {
             em.merge(user);
+            return true;
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
         }
-        return true;
     }
 
     /**
      * This method allows a tweet to be added to a certain user with possible
      * mentions.
-     * 
+     *
      * @param user that adds the tweet.
      * @param tweet is the tweet that is going to be added from one single user.
      * @param mentions are other users who are mentioned in this post/tweet.
-     * @return 
+     * @return
      */
     @Override
     public boolean addTweet(User user, Tweet tweet, List<User> mentions) {
         user.addTweet(tweet, mentions);
-        try{
-            em.persist(user);
-        }catch (Exception ex){
+        try {
+            em.persist(tweet);
+            return true;
+        } catch (Exception ex) {
             ex.printStackTrace();
             return false;
         }
-        return true;
     }
 
     /**
      * This method allows all tweets to be returned from a single user.
-     * 
+     *
      * @param user is the object where all the tweets are going to be collected
      * from.
      * @return all the tweets from a single user.
@@ -284,12 +293,33 @@ public class UserDAOImplementation implements UserDAO{
     @Override
     public List<Tweet> getTweets(User user) {
         List<Tweet> tweets = null;
-        try{
+        try {
             tweets = user.getTweets();
-        }catch (Exception ex){
+            return tweets;
+        } catch (Exception ex) {
             ex.printStackTrace();
             return null;
         }
-        return tweets;
+    }
+
+    /**
+     * This method allows a user to be found by it's name.
+     *
+     * @param name is the name that a single user is going to be looked for
+     * @return the user object.
+     */
+    @Override
+    public User findUserByName(String name) {
+        User user = null;
+        try {
+            user = (User)em.createQuery("SELECT u FROM User u where u.name = :name").
+                    setParameter("name", name).
+                    getSingleResult();
+            
+            return user;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
     }
 }

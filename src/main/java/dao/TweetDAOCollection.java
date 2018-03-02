@@ -9,11 +9,13 @@ import domain.Tweet;
 import domain.User;
 import java.util.ArrayList;
 import java.util.List;
-
+import javax.ejb.Stateless;
+import javax.enterprise.inject.Default;
 /**
  *
  * @author M
  */
+@Stateless
 public class TweetDAOCollection implements TweetDAO {
 
     private List<Tweet> tweets = null;
@@ -53,24 +55,6 @@ public class TweetDAOCollection implements TweetDAO {
             return tweet;
         }else{
             return null;
-        }
-    }
-    
-    /**
-     * This method allows a single tweet to be liked by a single user.
-     *
-     * @param tweet is the tweet object that is going to be liked by another user
-     * @param user is the user that likes a single tweet.
-     * @return true if the user is able to like a tweet or false when the action
-     * could not have been succeeded.
-     */
-    @Override
-    public boolean likeTweet(Tweet tweet, User user){
-        if(tweet != null && user != null){
-            tweet.likeTweet(user);
-            return true;
-        }else{
-            return false;
         }
     }
 
@@ -117,6 +101,42 @@ public class TweetDAOCollection implements TweetDAO {
         } else {
             return null;
         }
+    }
+
+    /**
+     * This method allows a tweet to be searched on it's id.
+     * 
+     * @param id is the id that the tweet object is going to be looked for.
+     * @return the tweet object.
+     */
+    @Override
+    public Tweet findTweet(Long id) {
+        for (Tweet tweet : tweets) {
+            if (tweet.getId().equals(id)) {
+                return tweet;
+            } else {
+                return null;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * This method allows a tweet to be found by it's message content.
+     * 
+     * @param content of the message that the tweet is going to be searched on.
+     * @return a sinlge tweet object.
+     */
+    @Override
+    public Tweet findTweetByContent(String content) {
+        for(Tweet tweet : tweets){
+            if(tweet.getMessage().equals(content)){
+                return tweet;
+            }else{
+                return null;
+            }
+        }
+        return null;
     }
 
 }

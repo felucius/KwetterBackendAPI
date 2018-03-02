@@ -8,6 +8,9 @@ package domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.enterprise.inject.Model;
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -28,6 +31,7 @@ import javax.persistence.OneToMany;
  *
  * @author M
  */
+@Model
 @Entity
 @NamedQuery(name = "User.getAllUsers", query = "SELECT u FROM User u")
 public class User implements Serializable {
@@ -40,12 +44,15 @@ public class User implements Serializable {
     private String email = null;
     private String password = null;
 
+    @OneToMany(mappedBy = "tweetedBy")
     private List<Tweet> tweets = null;
+
     @OneToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "User")
+    @JoinTable(name = "User_following")
     private List<User> following = null;
+
     @OneToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "User")
+    @JoinTable(name = "User_followers")
     private List<User> followers = null;
 
     @ManyToMany
@@ -62,7 +69,7 @@ public class User implements Serializable {
      */
     @Id
     @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.TABLE) // Assigning primary keys to the table User.
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Assigning primary keys to the table User.
     private Long id;
 
     /**
@@ -102,6 +109,14 @@ public class User implements Serializable {
         this.followers = new ArrayList();
     }
 
+    public User(String name) {
+        this.name = name;
+        this.picture = "picturePath";
+        this.tweets = new ArrayList();
+        this.following = new ArrayList();
+        this.followers = new ArrayList();
+    }
+
     /**
      * This method allows a tweet to be added with a certain amount of mentions
      *
@@ -127,7 +142,10 @@ public class User implements Serializable {
      * @param user that is going to be followed.
      */
     public void followUser(User user) {
-        user.addFollower(user);
+        if(!this.following.contains(user)){
+            user.addFollower(this);
+            following.add(user);
+        }
     }
 
     /**
@@ -139,14 +157,21 @@ public class User implements Serializable {
     private void addFollower(User user) {
         this.followers.add(user);
     }
+    
+    private void removeFollower(User user){
+        this.followers.remove(user);
+    }
 
     /**
      * This method allows a user to be removed.
      *
      * @param user that is going to be removed from the followers base.
      */
-    public void removeFollower(User user) {
-        this.followers.remove(user);
+    public void unfollowUser(User user) {
+        if(this.following.contains(user)){
+            user.removeFollower(this);
+            this.following.remove(user);
+        }
     }
 
     /**
