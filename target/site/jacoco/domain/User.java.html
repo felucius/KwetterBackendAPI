@@ -374,29 +374,5 @@ public class User implements Serializable {
                 + &quot; Email: &quot; + this.email + &quot; Location: &quot; + this.location
                 + &quot; Picture: &quot; + this.picture + &quot;Website: &quot; + this.website;
     }
-
-<span class="nc" id="L378">    public User(JsonObject input) {</span>
-<span class="nc" id="L379">        setName(input.getString(&quot;username&quot;));</span>
-<span class="nc" id="L380">        setBio(input.getString(&quot;bio&quot;));</span>
-<span class="nc" id="L381">        setEmail(input.getString(&quot;email&quot;));</span>
-<span class="nc" id="L382">        setId(input.getJsonNumber(&quot;id&quot;).longValue());</span>
-<span class="nc" id="L383">        setLocation(input.getString(&quot;location&quot;));</span>
-<span class="nc" id="L384">        setPicture(input.getString(&quot;picture&quot;));</span>
-<span class="nc" id="L385">        setWebsite(input.getString(&quot;website&quot;));</span>
-<span class="nc" id="L386">        setPassword(input.getString(&quot;password&quot;));</span>
-<span class="nc" id="L387">    }</span>
-
-    public JsonObject toJSON() {
-<span class="nc" id="L390">        return Json.createObjectBuilder().</span>
-<span class="nc" id="L391">                add(&quot;username&quot;, getName()).</span>
-<span class="nc" id="L392">                add(&quot;bio&quot;, getBio()).</span>
-<span class="nc" id="L393">                add(&quot;email&quot;, getEmail()).</span>
-<span class="nc" id="L394">                add(&quot;id&quot;, getId()).</span>
-<span class="nc" id="L395">                add(&quot;location&quot;, getLocation()).</span>
-<span class="nc" id="L396">                add(&quot;picture&quot;, getPicture()).</span>
-<span class="nc" id="L397">                add(&quot;website&quot;, getWebsite()).</span>
-<span class="nc" id="L398">                add(&quot;password&quot;, getPassword()).</span>
-<span class="nc" id="L399">                build();</span>
-    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

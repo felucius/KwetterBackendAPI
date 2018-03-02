@@ -8,6 +8,6 @@ KwetterBackend_Maxime,service,UserService,72,0,0,0,14,0,14,0,14,0
 KwetterBackend_Maxime,service,TweetService,38,0,0,0,8,0,8,0,8,0
 KwetterBackend_Maxime,domain,UserRole,39,0,0,0,4,0,2,0,2,0
 KwetterBackend_Maxime,domain,Tweet,2,155,1,1,1,38,1,16,0,16
-KwetterBackend_Maxime,domain,User,188,258,3,1,34,69,8,27,6,27
+KwetterBackend_Maxime,domain,User,77,258,3,1,14,69,6,27,4,27
 KwetterBackend_Maxime,domain,TweetDTO,38,0,0,0,10,0,2,0,2,0
 KwetterBackend_Maxime,domain,UserDTO,82,0,0,0,20,0,3,0,3,0
