@@ -374,28 +374,4 @@ public class User implements Serializable {
                 + " Email: " + this.email + " Location: " + this.location
                 + " Picture: " + this.picture + "Website: " + this.website;
     }
-
-    public User(JsonObject input) {
-        setName(input.getString("username"));
-        setBio(input.getString("bio"));
-        setEmail(input.getString("email"));
-        setId(input.getJsonNumber("id").longValue());
-        setLocation(input.getString("location"));
-        setPicture(input.getString("picture"));
-        setWebsite(input.getString("website"));
-        setPassword(input.getString("password"));
-    }
-
-    public JsonObject toJSON() {
-        return Json.createObjectBuilder().
-                add("username", getName()).
-                add("bio", getBio()).
-                add("email", getEmail()).
-                add("id", getId()).
-                add("location", getLocation()).
-                add("picture", getPicture()).
-                add("website", getWebsite()).
-                add("password", getPassword()).
-                build();
-    }
 }
