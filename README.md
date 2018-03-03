@@ -49,3 +49,6 @@ To find a specific tweet by it's ID
   
 To find a specific tweet by it's content (has wildcard pattern in it)
 - api/tweets/findtweetbycontent/'content-key'
+
+To find all written tweets from a specific user by it's username
+- api/users/gettweetsfromuser/<username-data>
