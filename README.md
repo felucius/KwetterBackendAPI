@@ -52,3 +52,6 @@ To find a specific tweet by it's content (has wildcard pattern in it)
 
 To find all written tweets from a specific user by it's username
 - api/users/gettweetsfromuser/'username-data'
+
+To like a tweet on it's id by a single user
+- api/users/liketweet/'username-data'/'tweet-id-data'
