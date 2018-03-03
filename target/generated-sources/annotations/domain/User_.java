@@ -7,7 +7,7 @@ import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2018-03-02T18:07:55")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2018-03-03T16:25:23")
 @StaticMetamodel(User.class)
 public class User_ { 
 
@@ -15,7 +15,6 @@ public class User_ {
     public static volatile SingularAttribute<User, String> password;
     public static volatile ListAttribute<User, User> followers;
     public static volatile ListAttribute<User, User> following;
-    public static volatile ListAttribute<User, User> followingEachother;
     public static volatile SingularAttribute<User, String> name;
     public static volatile SingularAttribute<User, String> bio;
     public static volatile SingularAttribute<User, String> location;

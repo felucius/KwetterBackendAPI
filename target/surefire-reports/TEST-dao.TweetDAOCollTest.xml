@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="4" failures="0" name="dao.TweetDAOCollTest" time="0.807" errors="0" skipped="0">
+<testsuite tests="4" failures="0" name="dao.TweetDAOCollTest" time="0.293" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_101\jre\bin"/>
@@ -61,8 +61,8 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="dao.TweetDAOCollTest" name="testGetAllTweets" time="0.048"/>
-  <testcase classname="dao.TweetDAOCollTest" name="testGetMentions" time="0.001"/>
-  <testcase classname="dao.TweetDAOCollTest" name="testGetTweetsOfFollowingUsers" time="0.001"/>
-  <testcase classname="dao.TweetDAOCollTest" name="testAddMention" time="0.001"/>
+  <testcase classname="dao.TweetDAOCollTest" name="testGetAllTweets" time="0.024"/>
+  <testcase classname="dao.TweetDAOCollTest" name="testGetMentions" time="0"/>
+  <testcase classname="dao.TweetDAOCollTest" name="testGetTweetsOfFollowingUsers" time="0"/>
+  <testcase classname="dao.TweetDAOCollTest" name="testAddMention" time="0"/>
 </testsuite>

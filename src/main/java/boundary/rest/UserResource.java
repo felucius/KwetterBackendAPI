@@ -157,17 +157,15 @@ public class UserResource {
     }
 
     @GET
-    @Path("getfollowing/{getfollowing}")
-    public List<User> getFollowingUsers(@PathParam("getfollowing") UserDTO user){
-        User getUser = user.getUser();
-        return userService.getFollowingUsers(getUser);
+    @Path("getfollowers/{getfollowers}")
+    public List<User> getFollowingUsers(@PathParam("getfollowers") String userName){
+        return userService.getFollowingUsers(userService.findUserByName(userName));
     }
 
     @GET
-    @Path("getfollowers/{getfollowers}")
-    public List<User> getFollowers(@PathParam("getfollowers") UserDTO user){
-        User getUser = user.getUser();
-        return userService.getFollowers(getUser);
+    @Path("getfollowing/{getfollowing}")
+    public List<User> getFollowers(@PathParam("getfollowing") String userName){
+        return userService.getFollowers(userService.findUserByName(userName));
     }
 
     @GET

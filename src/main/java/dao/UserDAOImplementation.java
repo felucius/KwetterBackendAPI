@@ -199,7 +199,14 @@ public class UserDAOImplementation implements UserDAO {
     public List<User> getFollowingUsers(User user) {
         List<User> users = null;
         try {
-            users = em.find(User.class, user.getId()).getFollowing();
+            users = em.createQuery("SELECT u.name, u.id, u2.name, u2.id\n"
+                    + "FROM User u\n"
+                    + "INNER JOIN u.followers uf \n"// on (uf.User_ID = u.id)\n"
+                    + "INNER JOIN User u2 \n"
+                    + "WHERE u2.id = uf.id \n"
+                    + "AND u.name = :username").
+                    setParameter("username", user.getName()).
+                    getResultList();
             return users;
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -217,7 +224,15 @@ public class UserDAOImplementation implements UserDAO {
     public List<User> getFollowers(User user) {
         List<User> users = null;
         try {
-            users = em.find(User.class, user.getId()).getFollowers();
+            users = em.createQuery("SELECT u.name, u.id, u2.name, u2.id\n"
+                    + "FROM User u\n"
+                    + "INNER JOIN u.following uf \n"
+                    + "INNER JOIN User u2 \n"
+                    + "WHERE u2.id = uf.id \n"
+                    + "AND u.name = :username").
+                    setParameter("username", user.getName()).
+                    getResultList();
+            //users = em.find(User.class, user.getId()).getFollowers();
             return users;
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -312,10 +327,10 @@ public class UserDAOImplementation implements UserDAO {
     public User findUserByName(String name) {
         User user = null;
         try {
-            user = (User)em.createQuery("SELECT u FROM User u where u.name = :name").
+            user = (User) em.createQuery("SELECT u FROM User u where u.name = :name").
                     setParameter("name", name).
                     getSingleResult();
-            
+
             return user;
         } catch (Exception ex) {
             ex.printStackTrace();

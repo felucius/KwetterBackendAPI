@@ -55,12 +55,13 @@ public class User implements Serializable {
     @JoinTable(name = "User_followers")
     private List<User> followers = null;
 
+    /*
     @ManyToMany
     @JoinTable(
             name = "FOLLOWING_FOLLOWERS",
             joinColumns = @JoinColumn(name = "USER_FOLLOWING", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "USER_FOLLOWERS", referencedColumnName = "ID"))
-    private List<User> followingEachother;
+    private List<User> followingEachother;*/
 
     /**
      * ID is automatically generated per persist on the database.
@@ -180,7 +181,7 @@ public class User implements Serializable {
      * @return all followers.
      */
     public List<User> getFollowers() {
-        return this.followers;
+        return followers;
     }
 
     /**
@@ -189,7 +190,7 @@ public class User implements Serializable {
      * @return all following users from a specific user.
      */
     public List<User> getFollowing() {
-        return this.following;
+        return following;
     }
 
     /**
