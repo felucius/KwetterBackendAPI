@@ -222,7 +222,6 @@ public class UserDAOImplementation implements UserDAO {
             users = em.createNamedQuery("User.getFollowingUsers").
                     setParameter("username", user.getName()).
                     getResultList();
-            //users = em.find(User.class, user.getId()).getFollowers();
             return users;
         } catch (Exception ex) {
             ex.printStackTrace();

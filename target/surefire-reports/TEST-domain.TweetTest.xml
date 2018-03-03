@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="10" failures="0" name="domain.TweetTest" time="0.005" errors="0" skipped="0">
+<testsuite tests="10" failures="0" name="domain.TweetTest" time="0.028" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_101\jre\bin"/>
@@ -63,11 +63,11 @@
   </properties>
   <testcase classname="domain.TweetTest" name="testGetPublished" time="0"/>
   <testcase classname="domain.TweetTest" name="testGetId" time="0"/>
-  <testcase classname="domain.TweetTest" name="testSetId" time="0"/>
+  <testcase classname="domain.TweetTest" name="testSetId" time="0.001"/>
   <testcase classname="domain.TweetTest" name="testSetMessage" time="0"/>
   <testcase classname="domain.TweetTest" name="testToString" time="0"/>
   <testcase classname="domain.TweetTest" name="testGetTags" time="0"/>
-  <testcase classname="domain.TweetTest" name="testSetPublished" time="0.001"/>
+  <testcase classname="domain.TweetTest" name="testSetPublished" time="0"/>
   <testcase classname="domain.TweetTest" name="testSetMentions" time="0"/>
   <testcase classname="domain.TweetTest" name="testGetMessage" time="0"/>
   <testcase classname="domain.TweetTest" name="testSetTags" time="0"/>

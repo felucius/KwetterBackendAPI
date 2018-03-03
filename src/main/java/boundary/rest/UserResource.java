@@ -170,10 +170,11 @@ public class UserResource {
     }
 
     @POST
-    @Path("user/tweettolike")
-    public boolean likeTweet(@PathParam("user") UserDTO user, @PathParam("tweettolike") TweetDTO tweetToLike){
-        User getUser = user.getUser();
-        Tweet getTweet = tweetToLike.getTweet();
-        return userService.likeTweet(getUser, getTweet);
+    @Path("liketweet/{user}/{tweettolike}")
+    public boolean likeTweet(@PathParam("user") String userName, @PathParam("tweettolike") Long tweetId){
+        //User getUser = user.getUser();
+        //Tweet getTweet = tweetToLike.getTweet();
+        //return userService.likeTweet(getUser, getTweet);
+        return userService.likeTweet(userService.findUserByName(userName), tweetService.findTweet(tweetId));
     }
 }

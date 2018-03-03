@@ -170,11 +170,12 @@ import service.UserService;
     }
 
     @POST
-    @Path(&quot;user/tweettolike&quot;)
-    public boolean likeTweet(@PathParam(&quot;user&quot;) UserDTO user, @PathParam(&quot;tweettolike&quot;) TweetDTO tweetToLike){
-<span class="nc" id="L175">        User getUser = user.getUser();</span>
-<span class="nc" id="L176">        Tweet getTweet = tweetToLike.getTweet();</span>
-<span class="nc" id="L177">        return userService.likeTweet(getUser, getTweet);</span>
+    @Path(&quot;liketweet/{user}/{tweettolike}&quot;)
+    public boolean likeTweet(@PathParam(&quot;user&quot;) String userName, @PathParam(&quot;tweettolike&quot;) Long tweetId){
+        //User getUser = user.getUser();
+        //Tweet getTweet = tweetToLike.getTweet();
+        //return userService.likeTweet(getUser, getTweet);
+<span class="nc" id="L178">        return userService.likeTweet(userService.findUserByName(userName), tweetService.findTweet(tweetId));</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>
