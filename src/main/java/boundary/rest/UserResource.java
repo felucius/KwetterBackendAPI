@@ -70,8 +70,6 @@ public class UserResource {
     @POST
     @Path("createuser/{username}")
     public User createUser(@PathParam("username") String username) {
-        //User getUser = username.getUser();
-        //return userService.createUser(getUser);
         User user = new User(username);
         return userService.createUser(user);
     }
@@ -113,8 +111,6 @@ public class UserResource {
     @Path("removeuser/{id}")
     public boolean removeUser(@PathParam("id") Long id) {
         System.out.println("Rest layer value: " + id);
-        //User getUser = removeuser.getUser();
-        //return userService.removeUser(getUser);
         return userService.removeUser(userService.findUser(id));
     }
     /*
@@ -138,15 +134,12 @@ public class UserResource {
     @DELETE
     @Path("removetweet/{id}")
     public boolean removeTweet(@PathParam("id") Long tweetId){
-        //Tweet getTweet = tweet.getTweet();
-        //return userService.removeTweet(getTweet);
         return userService.removeTweet(tweetService.findTweet(tweetId));
     }
 
     @GET
     @Path("followuser/{user}/{followuser}")
     public boolean followUser(@PathParam("user") String username, @PathParam("followuser") String followingUser){
-
         return userService.followUser(userService.findUserByName(username), userService.findUserByName(followingUser));
     }
 
@@ -169,10 +162,11 @@ public class UserResource {
     }
 
     @GET
-    @Path("gettweets/{gettweets}")
-    public List<Tweet> getTweets(@PathParam("gettweets") UserDTO user){
-        User getUSer = user.getUser();
-        return userService.getTweets(getUSer);
+    @Path("gettweetsfromuser/{username}")
+    public List<Tweet> getTweets(@PathParam("username") String username){
+        //User getUSer = user.getUser();
+        //return userService.getTweets(getUSer);
+        return userService.getTweetsByUser(userService.findUserByName(username));
     }
 
     @POST

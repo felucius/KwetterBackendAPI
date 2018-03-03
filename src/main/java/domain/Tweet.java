@@ -16,6 +16,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -29,8 +30,18 @@ import javax.persistence.TemporalType;
  * @author M
  */
 @Model
-@Entity 
-@NamedQuery(name = "Tweet.getAllTweets", query = "SELECT t FROM Tweet t")
+@Entity
+@NamedQueries({
+    @NamedQuery(name = "Tweet.getAllTweets", 
+            query = "SELECT t FROM Tweet t"),
+    @NamedQuery(name = "Tweet.getAllTweetsfromuser", 
+            query = "SELECT u.name, t.message\n"
+                    + "FROM Tweet t\n"
+                    + "INNER JOIN t.tweetedBy tb\n"
+                    + "INNER JOIN User u\n"
+                    + "WHERE u.id = tb.id\n"
+                    + "AND u.name = :userName")
+})
 public class Tweet implements Serializable {
     private List<User> mentions = null;
     private String message = null;

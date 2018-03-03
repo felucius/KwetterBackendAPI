@@ -199,12 +199,7 @@ public class UserDAOImplementation implements UserDAO {
     public List<User> getFollowingUsers(User user) {
         List<User> users = null;
         try {
-            users = em.createQuery("SELECT u.name, u.id, u2.name, u2.id\n"
-                    + "FROM User u\n"
-                    + "INNER JOIN u.followers uf \n"// on (uf.User_ID = u.id)\n"
-                    + "INNER JOIN User u2 \n"
-                    + "WHERE u2.id = uf.id \n"
-                    + "AND u.name = :username").
+            users = em.createNamedQuery("User.getFollowers").
                     setParameter("username", user.getName()).
                     getResultList();
             return users;
@@ -224,12 +219,7 @@ public class UserDAOImplementation implements UserDAO {
     public List<User> getFollowers(User user) {
         List<User> users = null;
         try {
-            users = em.createQuery("SELECT u.name, u.id, u2.name, u2.id\n"
-                    + "FROM User u\n"
-                    + "INNER JOIN u.following uf \n"
-                    + "INNER JOIN User u2 \n"
-                    + "WHERE u2.id = uf.id \n"
-                    + "AND u.name = :username").
+            users = em.createNamedQuery("User.getFollowingUsers").
                     setParameter("username", user.getName()).
                     getResultList();
             //users = em.find(User.class, user.getId()).getFollowers();
@@ -306,10 +296,12 @@ public class UserDAOImplementation implements UserDAO {
      * @return all the tweets from a single user.
      */
     @Override
-    public List<Tweet> getTweets(User user) {
+    public List<Tweet> getTweetsByUser(User user) {
         List<Tweet> tweets = null;
         try {
-            tweets = user.getTweets();
+            tweets = em.createNamedQuery("Tweet.getAllTweetsfromuser").
+                    setParameter("userName", user.getName()).
+                    getResultList();
             return tweets;
         } catch (Exception ex) {
             ex.printStackTrace();

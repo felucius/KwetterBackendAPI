@@ -52,7 +52,7 @@ public class User implements Serializable {
     private List&lt;User&gt; following = null;
 
 <span class="pc" id="L54">    @OneToMany(fetch = FetchType.EAGER)</span>
-    @JoinTable//(name = &quot;User_followers&quot;)
+    @JoinTable(name = &quot;User_followers&quot;)
     private List&lt;User&gt; followers = null;
 
     /*

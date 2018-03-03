@@ -160,8 +160,8 @@ public class UserService {
      * @param user object that all tweets are going to be retrieved from.
      * @return a list of tweets from that single user.
      */
-    public List<Tweet> getTweets(User user) {
-        return userDAO.getTweets(user);
+    public List<Tweet> getTweetsByUser(User user) {
+        return userDAO.getTweetsByUser(user);
     }
 
     /**

@@ -120,7 +120,7 @@ public class UserDAOCollection implements UserDAO {
     }
 
     @Override
-    public List<Tweet> getTweets(User user) {
+    public List<Tweet> getTweetsByUser(User user) {
         if (user != null) {
             return user.getTweets();
         } else {

@@ -160,8 +160,8 @@ import javax.inject.Inject;
      * @param user object that all tweets are going to be retrieved from.
      * @return a list of tweets from that single user.
      */
-    public List&lt;Tweet&gt; getTweets(User user) {
-<span class="nc" id="L164">        return userDAO.getTweets(user);</span>
+    public List&lt;Tweet&gt; getTweetsByUser(User user) {
+<span class="nc" id="L164">        return userDAO.getTweetsByUser(user);</span>
     }
 
     /**

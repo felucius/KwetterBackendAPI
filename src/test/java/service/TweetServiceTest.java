@@ -111,7 +111,7 @@ public class TweetServiceTest {
         System.out.println("Test get all tweets of all users on - TweetService layer");
         userService.addTweet(user1, tweet1, users);
         userService.addTweet(user2, tweet2, users);
-        assertEquals(0, userService.getTweets(user1).size());
+        assertEquals(0, userService.getTweetsByUser(user1).size());
     }
 
 }

@@ -140,7 +140,7 @@ public class UserDAOCollTest {
     public void testAddTweet() {
         System.out.println("Adding a tweet on - DAO collection");
         userDAO.addTweet(user1, tweet1, users);
-        assertEquals("Tweet should not be null", tweet1, userDAO.getTweets(user1).get(0));
+        assertEquals("Tweet should not be null", tweet1, userDAO.getTweetsByUser(user1).get(0));
     }
 
     @Test
@@ -148,11 +148,11 @@ public class UserDAOCollTest {
         System.out.println("Removing a tweet on - DAO collection");
         // Adding a tweet
         userDAO.addTweet(user2, tweet2, null);
-        assertEquals("Tweet content should be 1", 1, userDAO.getTweets(user2).size());
+        assertEquals("Tweet content should be 1", 1, userDAO.getTweetsByUser(user2).size());
 
         // Removing a tweet
         userDAO.removeTweet(tweet2);
-        assertEquals("Amount of tweets should be 0", 0, userDAO.getTweets(user1).size());
+        assertEquals("Amount of tweets should be 0", 0, userDAO.getTweetsByUser(user1).size());
     }
 
     @Test
@@ -203,6 +203,6 @@ public class UserDAOCollTest {
     public void testGetTweets(){
         System.out.println("Test get tweets on - DAO collection");
         userDAO.addTweet(user1, tweet1, users);
-        assertEquals(1, userDAO.getTweets(user1).size());
+        assertEquals(1, userDAO.getTweetsByUser(user1).size());
     }
 }

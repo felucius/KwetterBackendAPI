@@ -20,6 +20,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
@@ -33,7 +34,22 @@ import javax.persistence.OneToMany;
  */
 @Model
 @Entity
-@NamedQuery(name = "User.getAllUsers", query = "SELECT u FROM User u")
+@NamedQueries({
+    @NamedQuery(name = "User.getAllUsers", query = "SELECT u FROM User u"),
+    @NamedQuery(name = "User.getFollowingUsers", query = "SELECT u.name, u.id, u2.name, u2.id\n"
+                    + "FROM User u\n"
+                    + "INNER JOIN u.following uf \n"
+                    + "INNER JOIN User u2 \n"
+                    + "WHERE u2.id = uf.id \n"
+                    + "AND u.name = :username"),
+    @NamedQuery(name = "User.getFollowers", query = "SELECT u.name, u.id, u2.name, u2.id\n"
+                    + "FROM User u\n"
+                    + "INNER JOIN u.followers uf \n"// on (uf.User_ID = u.id)\n"
+                    + "INNER JOIN User u2 \n"
+                    + "WHERE u2.id = uf.id \n"
+                    + "AND u.name = :username")
+})
+
 public class User implements Serializable {
 
     private String picture = null;

@@ -40,7 +40,7 @@ public interface UserDAO {
     
     List<User> getFollowers(User user);
     
-    List<Tweet> getTweets(User user);
+    List<Tweet> getTweetsByUser(User user);
     
     boolean likeTweet(User user, Tweet tweetToLike);
 }

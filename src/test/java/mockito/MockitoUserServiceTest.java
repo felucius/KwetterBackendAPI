@@ -266,10 +266,10 @@ public class MockitoUserServiceTest {
     public void testGetTweets() {
         System.out.println("Test get tweets on Mockito - UserService layer");
         
-        when(userDAO.getTweets(user1)).thenReturn(tweets);
-        assertEquals(tweets, userDAO.getTweets(user1));
-        userService.getTweets(user1);
-        verify(userDAO).getTweets(user1);
+        when(userDAO.getTweetsByUser(user1)).thenReturn(tweets);
+        assertEquals(tweets, userDAO.getTweetsByUser(user1));
+        userService.getTweetsByUser(user1);
+        verify(userDAO).getTweetsByUser(user1);
     }
 
     @Test

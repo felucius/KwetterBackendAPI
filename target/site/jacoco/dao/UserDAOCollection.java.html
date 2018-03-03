@@ -120,7 +120,7 @@ public class UserDAOCollection implements UserDAO {
     }
 
     @Override
-    public List&lt;Tweet&gt; getTweets(User user) {
+    public List&lt;Tweet&gt; getTweetsByUser(User user) {
 <span class="pc bpc" id="L124" title="1 of 2 branches missed.">        if (user != null) {</span>
 <span class="fc" id="L125">            return user.getTweets();</span>
         } else {
