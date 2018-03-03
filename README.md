@@ -34,6 +34,12 @@ To follow a specific user by it's username
 To unfollow a specific user by it's username
 - api/users/unfollowuser/'user-data'/'usertounfollow-data'
 
+To get following users from a single user
+- api/users/getfollowing/'username-data'
+
+To get followers from a single user
+- api/users/getfollowers/'username-data'
+
 # Tweets and tweet information
 To find all tweets
 - api/tweets
