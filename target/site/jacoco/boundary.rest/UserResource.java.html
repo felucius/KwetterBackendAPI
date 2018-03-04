@@ -9,6 +9,7 @@ import domain.Tweet;
 import domain.TweetDTO;
 import domain.User;
 import domain.UserDTO;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -35,7 +36,7 @@ import service.UserService;
 @Stateless
 @Path(&quot;users&quot;)
 @Produces(MediaType.APPLICATION_JSON)
-<span class="nc" id="L38">public class UserResource {</span>
+<span class="nc" id="L39">public class UserResource {</span>
 
     /**
      * Injecting ensures the creation of the variable or constructor without
@@ -56,7 +57,7 @@ import service.UserService;
      */
     @GET
     public List&lt;User&gt; getAllUsers() {
-<span class="nc" id="L59">        return userService.getAllUsers();</span>
+<span class="nc" id="L60">        return userService.getAllUsers();</span>
     }
 
     /**
@@ -70,8 +71,8 @@ import service.UserService;
     @POST
     @Path(&quot;createuser/{username}&quot;)
     public User createUser(@PathParam(&quot;username&quot;) String username) {
-<span class="nc" id="L73">        User user = new User(username);</span>
-<span class="nc" id="L74">        return userService.createUser(user);</span>
+<span class="nc" id="L74">        User user = new User(username);</span>
+<span class="nc" id="L75">        return userService.createUser(user);</span>
     }
 
     /**
@@ -85,7 +86,7 @@ import service.UserService;
     @GET
     @Path(&quot;finduser/{id}&quot;)
     public User findUser(@PathParam(&quot;id&quot;) Long id) {
-<span class="nc" id="L88">        return userService.findUser(id);</span>
+<span class="nc" id="L89">        return userService.findUser(id);</span>
     }
 
     /**
@@ -97,7 +98,7 @@ import service.UserService;
     @GET
     @Path(&quot;finduserbyname/{name}&quot;)
     public User findUserByName(@PathParam(&quot;name&quot;) String name){
-<span class="nc" id="L100">        return userService.findUserByName(name);</span>
+<span class="nc" id="L101">        return userService.findUserByName(name);</span>
     }
     
     /**
@@ -110,72 +111,73 @@ import service.UserService;
     @DELETE
     @Path(&quot;removeuser/{id}&quot;)
     public boolean removeUser(@PathParam(&quot;id&quot;) Long id) {
-<span class="nc" id="L113">        System.out.println(&quot;Rest layer value: &quot; + id);</span>
-<span class="nc" id="L114">        return userService.removeUser(userService.findUser(id));</span>
+<span class="nc" id="L114">        System.out.println(&quot;Rest layer value: &quot; + id);</span>
+<span class="nc" id="L115">        return userService.removeUser(userService.findUser(id));</span>
     }
-    /*
-    @GET
-    @Path(&quot;user/tweet/mentions&quot;)
-    public boolean addTweet(@PathParam(&quot;user&quot;) UserDTO user, @PathParam(&quot;tweet&quot;) TweetDTO tweet, 
-            @PathParam(&quot;mentions&quot;) List&lt;UserDTO&gt; mentions){
-        User getUser = user.getUser();
-        Tweet getTweet = tweet.getTweet();
+    
+    @POST
+    @Path(&quot;addtweet/{username}/{tweetcontent}&quot;)
+    public boolean addTweet(@PathParam(&quot;username&quot;) String userName, @PathParam(&quot;tweetcontent&quot;) String tweetContent){
+        //User getUser = user.getUser();
+        //Tweet getTweet = tweet.getTweet();
         //List&lt;User&gt; getMentions = (User)mentions;
-        return userService.addTweet(getUser, getTweet, mentions);
-    }*/
+        //return userService.addTweet(getUser, getTweet, mentions);
+        
+<span class="nc" id="L126">        List&lt;User&gt; mentions = new ArrayList();</span>
+<span class="nc" id="L127">        List&lt;String&gt; tags = new ArrayList();</span>
+<span class="nc" id="L128">        tags.add(&quot;Test&quot;);</span>
+<span class="nc" id="L129">        mentions.add(userService.findUserByName(&quot;Ricardo&quot;));</span>
+<span class="nc" id="L130">        Tweet tweet = new Tweet(tweetContent, tags, userService.findUserByName(userName));</span>
+<span class="nc" id="L131">        return userService.addTweet(userService.findUserByName(userName), tweet, mentions);</span>
+    }
     
     @GET
     @Path(&quot;findtweet/{id}&quot;)
     public Tweet findTweet(@PathParam(&quot;id&quot;) Long id){
-<span class="nc" id="L130">        return tweetService.findTweet(id);</span>
+<span class="nc" id="L137">        return tweetService.findTweet(id);</span>
     }
     
     
     @DELETE
     @Path(&quot;removetweet/{id}&quot;)
     public boolean removeTweet(@PathParam(&quot;id&quot;) Long tweetId){
-<span class="nc" id="L137">        return userService.removeTweet(tweetService.findTweet(tweetId));</span>
+<span class="nc" id="L144">        return userService.removeTweet(tweetService.findTweet(tweetId));</span>
     }
 
     @GET
     @Path(&quot;followuser/{user}/{followuser}&quot;)
     public boolean followUser(@PathParam(&quot;user&quot;) String username, @PathParam(&quot;followuser&quot;) String followingUser){
-<span class="nc" id="L143">        return userService.followUser(userService.findUserByName(username), userService.findUserByName(followingUser));</span>
+<span class="nc" id="L150">        return userService.followUser(userService.findUserByName(username), userService.findUserByName(followingUser));</span>
     }
 
     @GET
     @Path(&quot;unfollowuser/{user}/{unfollowuser}&quot;)
     public boolean unfollowUser(@PathParam(&quot;user&quot;) String username, @PathParam(&quot;unfollowuser&quot;) String unfollowingUser){
-<span class="nc" id="L149">        return userService.unfollowUser(userService.findUserByName(username), userService.findUserByName(unfollowingUser));</span>
+<span class="nc" id="L156">        return userService.unfollowUser(userService.findUserByName(username), userService.findUserByName(unfollowingUser));</span>
     }
 
     @GET
     @Path(&quot;getfollowers/{getfollowers}&quot;)
     public List&lt;User&gt; getFollowingUsers(@PathParam(&quot;getfollowers&quot;) String userName){
-<span class="nc" id="L155">        return userService.getFollowingUsers(userService.findUserByName(userName));</span>
+<span class="nc" id="L162">        return userService.getFollowingUsers(userService.findUserByName(userName));</span>
     }
 
     @GET
     @Path(&quot;getfollowing/{getfollowing}&quot;)
     public List&lt;User&gt; getFollowers(@PathParam(&quot;getfollowing&quot;) String userName){
-<span class="nc" id="L161">        return userService.getFollowers(userService.findUserByName(userName));</span>
+<span class="nc" id="L168">        return userService.getFollowers(userService.findUserByName(userName));</span>
     }
 
     @GET
     @Path(&quot;gettweetsfromuser/{username}&quot;)
     public List&lt;Tweet&gt; getTweets(@PathParam(&quot;username&quot;) String username){
-        //User getUSer = user.getUser();
-        //return userService.getTweets(getUSer);
-<span class="nc" id="L169">        return userService.getTweetsByUser(userService.findUserByName(username));</span>
+<span class="nc" id="L174">        return userService.getTweetsByUser(userService.findUserByName(username));</span>
     }
 
     @POST
     @Path(&quot;liketweet/{user}/{tweettolike}&quot;)
     public boolean likeTweet(@PathParam(&quot;user&quot;) String userName, @PathParam(&quot;tweettolike&quot;) Long tweetId){
-        //User getUser = user.getUser();
-        //Tweet getTweet = tweetToLike.getTweet();
-        //return userService.likeTweet(getUser, getTweet);
-<span class="nc" id="L178">        return userService.likeTweet(userService.findUserByName(userName), tweetService.findTweet(tweetId));</span>
+<span class="nc" id="L180">        return userService.likeTweet(userService.findUserByName(userName), tweetService.findTweet(tweetId));</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

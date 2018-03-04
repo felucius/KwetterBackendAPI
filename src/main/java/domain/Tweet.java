@@ -43,6 +43,7 @@ import javax.persistence.TemporalType;
                     + "AND u.name = :userName")
 })
 public class Tweet implements Serializable {
+    
     @OneToMany(mappedBy = "tweet")
     private List<User> mentions = null;
     private String message = null;
@@ -83,6 +84,13 @@ public class Tweet implements Serializable {
         this.published = new Date(System.currentTimeMillis());
         this.likes = new ArrayList();
         this.mentions = new ArrayList();
+    }
+    
+    public Tweet(String message){
+        this.message = message;
+        this.tags = new ArrayList();
+        tags.add("TestingTag");
+        this.published = new Date(System.currentTimeMillis());
     }
 
     /**

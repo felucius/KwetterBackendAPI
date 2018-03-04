@@ -89,4 +89,8 @@ public class TweetService {
     public Tweet findTweetByContent(String content){
         return tweetDAO.findTweetByContent(content);
     }
+    
+    public Tweet createTweet(Tweet tweet){
+        return tweetDAO.createTweet(tweet);
+    }
 }

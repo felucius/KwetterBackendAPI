@@ -170,4 +170,16 @@ public class TweetDAOImplementation implements TweetDAO {
             return null;
         }
     }
+    
+    @Override
+    public Tweet createTweet(Tweet tweet){
+        Tweet createdTweet = null;
+        try{
+            em.persist(tweet);
+            return createdTweet;
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return null;
+        }
+    }
 }

@@ -31,4 +31,6 @@ public interface TweetDAO {
     Tweet findTweet(Long id);
     
     Tweet findTweetByContent(String content);
+    
+    Tweet createTweet(Tweet tweet);
 }

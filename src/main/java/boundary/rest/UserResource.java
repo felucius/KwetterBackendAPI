@@ -9,6 +9,7 @@ import domain.Tweet;
 import domain.TweetDTO;
 import domain.User;
 import domain.UserDTO;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -113,16 +114,18 @@ public class UserResource {
         System.out.println("Rest layer value: " + id);
         return userService.removeUser(userService.findUser(id));
     }
-    /*
-    @GET
-    @Path("user/tweet/mentions")
-    public boolean addTweet(@PathParam("user") UserDTO user, @PathParam("tweet") TweetDTO tweet, 
-            @PathParam("mentions") List<UserDTO> mentions){
-        User getUser = user.getUser();
-        Tweet getTweet = tweet.getTweet();
-        //List<User> getMentions = (User)mentions;
-        return userService.addTweet(getUser, getTweet, mentions);
-    }*/
+    
+    //TODO: Change to dynamic method instead of static testing method
+    @POST
+    @Path("addtweet/{username}/{tweetcontent}")
+    public boolean addTweet(@PathParam("username") String userName, @PathParam("tweetcontent") String tweetContent){
+        List<User> mentions = new ArrayList();
+        List<String> tags = new ArrayList();
+        tags.add("Test");
+        mentions.add(userService.findUserByName("Ricardo"));
+        Tweet tweet = new Tweet(tweetContent, tags, userService.findUserByName(userName));
+        return userService.addTweet(userService.findUserByName(userName), tweet, mentions);
+    }
     
     @GET
     @Path("findtweet/{id}")
@@ -164,17 +167,12 @@ public class UserResource {
     @GET
     @Path("gettweetsfromuser/{username}")
     public List<Tweet> getTweets(@PathParam("username") String username){
-        //User getUSer = user.getUser();
-        //return userService.getTweets(getUSer);
         return userService.getTweetsByUser(userService.findUserByName(username));
     }
 
     @POST
     @Path("liketweet/{user}/{tweettolike}")
     public boolean likeTweet(@PathParam("user") String userName, @PathParam("tweettolike") Long tweetId){
-        //User getUser = user.getUser();
-        //Tweet getTweet = tweetToLike.getTweet();
-        //return userService.likeTweet(getUser, getTweet);
         return userService.likeTweet(userService.findUserByName(userName), tweetService.findTweet(tweetId));
     }
 }
