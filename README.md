@@ -55,3 +55,6 @@ To find all written tweets from a specific user by it's username
 
 To like a tweet on it's id by a single user
 - api/users/liketweet/'username-data'/'tweet-id-data'
+
+To add a new tweet from a single user with their own context, tags and mentions
+- api/users/addtweet/'username-data'/'text-to-write-data'
