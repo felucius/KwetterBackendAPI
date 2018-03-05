@@ -64,3 +64,6 @@ To find a tweet with liked users by it's tweet id
 
 To find the mentions (users) on a tweet's id
 - api/tweets/gettweetmentions/'tweet-id-data'
+
+To find the tweets of users that a single users follows. Given the username of the user that follows other users
+- api/tweets/gettweetsfollowing/'username-data'
