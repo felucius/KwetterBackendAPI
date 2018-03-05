@@ -59,5 +59,8 @@ To like a tweet on it's id by a single user
 To add a new tweet from a single user with their own context, tags and mentions
 - api/users/addtweet/'username-data'/'text-to-write-data'
 
-To find a tweet with liked users by it's tweet id.
+To find a tweet with liked users by it's tweet id
 - api/tweets/gettweetlikes/'tweet-id-data'
+
+To find the mentions (users) on a tweet's id
+- api/tweets/gettweetmentions/'tweet-id-data'
