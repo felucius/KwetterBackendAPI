@@ -6,14 +6,11 @@
 package boundary.rest;
 
 import domain.Tweet;
-import domain.TweetDTO;
 import domain.User;
-import domain.UserDTO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -117,12 +114,17 @@ public class UserResource {
     
     //TODO: Change to dynamic method instead of static testing method
     @POST
-    @Path("addtweet/{username}/{tweetcontent}")
-    public boolean addTweet(@PathParam("username") String userName, @PathParam("tweetcontent") String tweetContent){
+    @Path("addtweet/{username}/{tweetcontent}/{tags}/{mention}")
+    public boolean addTweet(@PathParam("username") String userName, 
+            @PathParam("tweetcontent") String tweetContent,
+            @PathParam("tags") String tag, @PathParam("mention") String userMention){
+        
         List<User> mentions = new ArrayList();
         List<String> tags = new ArrayList();
-        tags.add("Test");
-        mentions.add(userService.findUserByName("Ricardo"));
+        
+        tags.add(tag);
+        mentions.add(userService.findUserByName(userMention));
+        
         Tweet tweet = new Tweet(tweetContent, tags, userService.findUserByName(userName));
         return userService.addTweet(userService.findUserByName(userName), tweet, mentions);
     }

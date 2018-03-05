@@ -59,12 +59,9 @@ public class TweetResource {
      * @return the tweet object that has a mentioned user on it.
      */
     @POST
-    @Path("addmention/{tweetmention}/{username}")
-    public Tweet addMention(@PathParam("tweetmention") Long tweetId, @PathParam("username") Long userId) {
-        //Tweet getTweet = tweet.getTweet();
-        //User getUser = username.getUser();
-        //return tweetService.addMention(getTweet, getUser);
-        return tweetService.addMention(tweetService.findTweet(tweetId), userService.findUser(userId));
+    @Path("addmention/{tweetContent}/{username}")
+    public boolean addMention(@PathParam("tweetContent") String tweetContent, @PathParam("username") String userName) {
+        return tweetService.addMention(tweetService.findTweetByContent(tweetContent), userService.findUserByName(userName));
     }
 
     /**
@@ -76,10 +73,10 @@ public class TweetResource {
      * @return a list of users that likes a certain tweet.
      */
     @GET
-    @Path("gettweetlikes")
-    public List<User> getLikes(@PathParam("gettweetlikes") TweetDTO tweet) {
-        Tweet getTweet = tweet.getTweet();
-        return tweetService.getLikes(getTweet);
+    @Path("gettweetlikes/{tweetId}")
+    public List<User> getLikes(@PathParam("tweetId") Long tweetId) {
+        Tweet tweet = tweetService.findTweet(tweetId);
+        return tweet.getLikes();//tweetService.getLikes(tweetService.findTweet(tweetId));
     }
 
     /**
@@ -90,7 +87,7 @@ public class TweetResource {
      */
     @GET
     @Path("findtweetbycontent/{content}")
-    public Tweet findTweet(@PathParam("content") String content) {
+    public Tweet findTweetByContent(@PathParam("content") String content) {
         return tweetService.findTweetByContent(content);
     }
 

@@ -18,9 +18,11 @@ import javax.ejb.Stateless;
  */
 public interface TweetDAO {
     
-    Tweet addMention(Tweet tweet, User user);
+    boolean addMention(Tweet tweet, User user);
     
     List<User> getLikes(Tweet tweet);
+    
+    List<User> getLikesFromTweet(Long tweetId);
             
     List<User> getMentions(Tweet tweetMentions);
     

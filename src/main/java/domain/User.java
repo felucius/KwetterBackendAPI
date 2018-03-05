@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.inject.Model;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -34,15 +35,15 @@ import javax.persistence.OneToMany;
 @Entity
 @NamedQueries({
     @NamedQuery(name = "User.getAllUsers", query = "SELECT u FROM User u"),
-    @NamedQuery(name = "User.getFollowingUsers", query = "SELECT u.name, u.id, u2.name, u2.id\n"
+    @NamedQuery(name = "User.getFollowingUsers", query = "SELECT u2.name, u2.id\n"
                     + "FROM User u\n"
                     + "INNER JOIN u.following uf \n"
                     + "INNER JOIN User u2 \n"
                     + "WHERE u2.id = uf.id \n"
                     + "AND u.name = :username"),
-    @NamedQuery(name = "User.getFollowers", query = "SELECT u.name, u.id, u2.name, u2.id\n"
+    @NamedQuery(name = "User.getFollowers", query = "SELECT u2.name, u2.id\n"
                     + "FROM User u\n"
-                    + "INNER JOIN u.followers uf \n"// on (uf.User_ID = u.id)\n"
+                    + "INNER JOIN u.followers uf \n"
                     + "INNER JOIN User u2 \n"
                     + "WHERE u2.id = uf.id \n"
                     + "AND u.name = :username")
@@ -68,14 +69,6 @@ public class User implements Serializable {
     @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "User_followers")
     private List<User> followers = null;
-
-    /*
-    @ManyToMany
-    @JoinTable(
-            name = "FOLLOWING_FOLLOWERS",
-            joinColumns = @JoinColumn(name = "USER_FOLLOWING", referencedColumnName = "ID"),
-            inverseJoinColumns = @JoinColumn(name = "USER_FOLLOWERS", referencedColumnName = "ID"))
-    private List<User> followingEachother;*/
 
     /**
      * ID is automatically generated per persist on the database.
@@ -196,6 +189,7 @@ public class User implements Serializable {
      *
      * @return all followers.
      */
+    @JsonbTransient
     public List<User> getFollowers() {
         return followers;
     }
@@ -205,6 +199,7 @@ public class User implements Serializable {
      *
      * @return all following users from a specific user.
      */
+    @JsonbTransient
     public List<User> getFollowing() {
         return following;
     }
@@ -358,6 +353,7 @@ public class User implements Serializable {
      *
      * @return all tweets from the user.
      */
+    @JsonbTransient
     public List<Tweet> getTweets() {
         return this.tweets;
     }
@@ -378,17 +374,5 @@ public class User implements Serializable {
      */
     public Long getId() {
         return this.id;
-    }
-
-    /**
-     * Overriding the toString method with an own implementation.
-     *
-     * @return all the fields with the user's information.
-     */
-    @Override
-    public String toString() {
-        return "Name: " + this.name + " Biography: " + this.bio
-                + " Email: " + this.email + " Location: " + this.location
-                + " Picture: " + this.picture + "Website: " + this.website;
     }
 }

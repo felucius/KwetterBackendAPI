@@ -37,7 +37,7 @@ public class TweetService {
      * @param user object that is going to be mentioned in a single tweet.
      * @return the tweet with the user that is mentioned in it.
      */
-    public Tweet addMention(Tweet tweet, User user) {
+    public boolean addMention(Tweet tweet, User user) {
         return tweetDAO.addMention(tweet, user);
     }
 
@@ -49,6 +49,10 @@ public class TweetService {
      */
     public List<User> getLikes(Tweet tweet) {
         return tweetDAO.getLikes(tweet);
+    }
+    
+    public List<User> getLikesFromTweet(Long tweetId){
+        return tweetDAO.getLikesFromTweet(tweetId);
     }
 
     /**

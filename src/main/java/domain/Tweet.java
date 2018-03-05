@@ -15,6 +15,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -44,13 +45,15 @@ import javax.persistence.TemporalType;
 })
 public class Tweet implements Serializable {
     
-    @OneToMany(mappedBy = "tweet")
+    @OneToMany//(mappedBy = "tweet")
+    @JoinTable(name = "Tweet_mentions")
     private List<User> mentions = null;
     private String message = null;
     private List<String> tags = null;
     @ManyToOne
     private User tweetedBy = null;
     @OneToMany
+    @JoinTable(name = "Tweet_likes")
     private List<User> likes = null;
 
 
@@ -85,13 +88,6 @@ public class Tweet implements Serializable {
         this.likes = new ArrayList();
         this.mentions = new ArrayList();
     }
-    
-    public Tweet(String message){
-        this.message = message;
-        this.tags = new ArrayList();
-        tags.add("TestingTag");
-        this.published = new Date(System.currentTimeMillis());
-    }
 
     /**
      * This method allows a user to like a tweet
@@ -123,8 +119,13 @@ public class Tweet implements Serializable {
      *
      * @param mentionedUser is the user to be mentioned in the tweet.
      */
-    public void addMention(User mentionedUser) {
-        this.mentions.add(mentionedUser);
+    public boolean addMention(User mentionedUser) {
+        if(mentionedUser != null){
+            mentions.add(mentionedUser);
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**
@@ -210,12 +211,5 @@ public class Tweet implements Serializable {
      */
     public void setId(Long id) {
         this.id = id;
-    }
-    
-    @Override
-    public String toString(){
-        return "Message: " + this.message + " Mentions: " + this.mentions +
-                " Likes: " + this.likes + " Published: " +
-                this.published + " Tags: " + this.tags + " Tweeted by: " + this.tweetedBy;
     }
 }

@@ -81,9 +81,9 @@ public class TweetDAOCollTest {
     @Test
     public void testAddMention() {
         System.out.println("Test add mentions on - Tweet DAO collection");
-        Tweet tweet = tweetDAO.addMention(tweet1, user1);
+        tweetDAO.addMention(tweet1, user1);
 
-        assertEquals(1, tweet.getMentions().size());
+        assertEquals(1, tweetDAO.getMentions(tweet1).size());
     }
 
     @Test

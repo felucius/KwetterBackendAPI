@@ -81,7 +81,7 @@ public class TweetServiceTest {
         User user1 = mock(User.class);
         Tweet tweet1 = mock(Tweet.class);
         tweetService.addMention(tweet1, user1);
-        assertEquals(null, tweetService.addMention(tweet1, user1));
+        assertEquals(false, tweetService.addMention(tweet1, user1));
     }
 
     @Test

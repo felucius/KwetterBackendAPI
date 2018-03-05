@@ -51,12 +51,12 @@ public class TweetDAOCollection implements TweetDAO {
      * @return the tweet object that is added
      */
     @Override
-    public Tweet addMention(Tweet tweet, User user) {
+    public boolean addMention(Tweet tweet, User user) {
 <span class="pc bpc" id="L55" title="2 of 4 branches missed.">        if (tweet != null &amp;&amp; user != null) {</span>
 <span class="fc" id="L56">            tweet.addMention(user);</span>
-<span class="fc" id="L57">            return tweet;</span>
+<span class="fc" id="L57">            return true;</span>
         } else {
-<span class="nc" id="L59">            return null;</span>
+<span class="nc" id="L59">            return false;</span>
         }
     }
 
@@ -149,6 +149,11 @@ public class TweetDAOCollection implements TweetDAO {
         } else {
 <span class="nc" id="L150">            return null;</span>
         }
+    }
+
+    @Override
+    public List&lt;User&gt; getLikesFromTweet(Long tweetId) {
+<span class="nc" id="L156">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
     }
 
 }

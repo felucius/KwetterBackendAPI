@@ -62,13 +62,29 @@ public class TweetDAOImplementation implements TweetDAO {
     public List<User> getLikes(Tweet tweet) {
         List<User> users = null;
         try {
-            //likes = em.find(Tweet.class, user.getId()).getLikes();
-            users = em.createNamedQuery("Tweet.getLikes").getResultList();
+            //users = em.find(Tweet.class, tweet.getMessage()).getLikes();
+            
+            users = em.createQuery("SELECT t\n"
+                    + "FROM Tweet t\n"
+                    + "INNER JOIN t.likes til\n"
+                    + "INNER JOIN User u\n"
+                    + "WHERE til.id = u.id\n"
+                    + "AND t.id = :tweetId").
+                    setParameter("tweetId", tweet.getId()).
+                    getResultList();
+            // THROWS STACKOVERFLOW EXCEPTION, LOOK AT CONTEXT INSTEAD OF ID
+            //users = em.find(Tweet.class, tweet.getMessage()).getLikes();
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
         }
         return users;
+    }
+    
+    @Override
+    public List<User> getLikesFromTweet(Long tweetId){
+        Tweet tweet = em.find(Tweet.class, tweetId);
+        return tweet.getLikes();
     }
 
     /**
@@ -121,16 +137,17 @@ public class TweetDAOImplementation implements TweetDAO {
      * tweet.
      */
     @Override
-    public Tweet addMention(Tweet tweet, User user) {
+    public boolean addMention(Tweet tweet, User user) {
+        Tweet tweetMention = null;
         try {
-            tweet.likeTweet(user);
+            //tweet.likeTweet(user);
             tweet.addMention(user);
             em.persist(tweet);
+            return true;
         } catch (Exception ex) {
             ex.printStackTrace();
-            return null;
+            return false;
         }
-        return tweet;
     }
 
     /**
@@ -162,7 +179,7 @@ public class TweetDAOImplementation implements TweetDAO {
         Tweet tweet = null;
         try {
             tweet = (Tweet) em.createQuery("SELECT t FROM Tweet t where t.message LIKE :message").
-                    setParameter("message", "%"+message+"%").
+                    setParameter("message", "%" + message + "%").
                     getSingleResult();
             return tweet;
         } catch (Exception ex) {
@@ -170,14 +187,14 @@ public class TweetDAOImplementation implements TweetDAO {
             return null;
         }
     }
-    
+
     @Override
-    public Tweet createTweet(Tweet tweet){
+    public Tweet createTweet(Tweet tweet) {
         Tweet createdTweet = null;
-        try{
+        try {
             em.persist(tweet);
             return createdTweet;
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             return null;
         }

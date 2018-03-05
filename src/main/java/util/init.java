@@ -131,9 +131,10 @@ public class init {
         userDAO.addTweet(user9, tweet12, mentions);
         userDAO.addTweet(user10, tweet13, mentions);
         
-        //tweetDAO.addMention(tweet1, user10);
-        //tweetDAO.addMention(tweet1, user9);
-        //tweetDAO.addMention(tweet1, user8);
+        tweetDAO.addMention(tweet1, user10);
+        tweetDAO.addMention(tweet1, user9);
+        tweetDAO.addMention(tweet1, user8);
+        
         userDAO.likeTweet(user1, tweet1);
         userDAO.likeTweet(user2, tweet1);
         userDAO.likeTweet(user3, tweet2);
