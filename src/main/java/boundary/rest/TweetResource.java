@@ -121,14 +121,14 @@ public class TweetResource {
      * This method allows all tweets to be retrieved of the following users from
      * a single user.
      *
-     * @param follower
-     * @return
+     * @param userName is the user that is going to be searched on to retrieve his
+     * following users and their tweets.
+     * @return a list of tweets that the user is following.
      */
     @GET
-    @Path("gettweetsfollowing")
-    public List<Tweet> getTweetsOfFollowingUsers(@PathParam("gettweetsfollowing") UserDTO follower) {
-        User getUser = follower.getUser();
-        return tweetService.getTweetsOfFollowingUsers(getUser);
+    @Path("gettweetsfollowing/{userName}")
+    public List<Tweet> getTweetsOfFollowingUsers(@PathParam("userName") String userName) {
+        return tweetService.getTweetsOfFollowingUsers(userService.findUserByName(userName));
     }
 
     /**

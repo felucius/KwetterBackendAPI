@@ -106,15 +106,13 @@ import service.UserService;
      *
      * This method allows to retrieve mentions from a single tweet.
      *
-     * @param tweet is the tweet where all mentions are retrieved from.
+     * @param tweetId is the tweet where all mentions are retrieved from.
      * @return a list of users that are mentioned in the tweet.
      */
     @GET
-    @Path(&quot;gettweetmentions&quot;)
-    public List&lt;User&gt; getMentions(@PathParam(&quot;gettweetmentions&quot;) Long tweetId) {
+    @Path(&quot;gettweetmentions/{tweetId}&quot;)
+    public List&lt;User&gt; getMentions(@PathParam(&quot;tweetId&quot;) Long tweetId) {
 <span class="nc" id="L115">        return tweetService.getMentions(tweetService.findTweet(tweetId));</span>
-        //Tweet getTweet = tweet.getTweet();
-        //return tweetService.getMentions(getTweet);
     }
 
     /**
@@ -127,10 +125,9 @@ import service.UserService;
      * @return
      */
     @GET
-    @Path(&quot;gettweetsfollowing&quot;)
-    public List&lt;Tweet&gt; getTweetsOfFollowingUsers(@PathParam(&quot;gettweetsfollowing&quot;) UserDTO follower) {
-<span class="nc" id="L132">        User getUser = follower.getUser();</span>
-<span class="nc" id="L133">        return tweetService.getTweetsOfFollowingUsers(getUser);</span>
+    @Path(&quot;gettweetsfollowing/{userName}&quot;)
+    public List&lt;Tweet&gt; getTweetsOfFollowingUsers(@PathParam(&quot;userName&quot;) String userName) {
+<span class="nc" id="L130">        return tweetService.getTweetsOfFollowingUsers(userService.findUserByName(userName));</span>
     }
 
     /**
@@ -143,7 +140,7 @@ import service.UserService;
      */
     @GET
     public List&lt;Tweet&gt; getAllTweets() {
-<span class="nc" id="L146">        return tweetService.getAllTweets();</span>
+<span class="nc" id="L143">        return tweetService.getAllTweets();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

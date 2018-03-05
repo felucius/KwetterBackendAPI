@@ -53,7 +53,16 @@ import javax.persistence.TemporalType;
             query = "SELECT t.message, t.id "
                     + "FROM Tweet t "
                     + "WHERE t.message "
-                    + "LIKE :message")
+                    + "LIKE :message"),
+    @NamedQuery(name = "Tweet.getTweetsOfFollowers",
+            query = "SELECT t.message, u2.name, u2.id\n"
+                    + "FROM User u, Tweet t\n"
+                    + "INNER JOIN t.tweetedBy tb"
+                    + "INNER JOIN u.following uf \n"
+                    + "INNER JOIN User u2 \n"
+                    + "WHERE t.id = uf.id\n"
+                    + "AND u2.id = uf.id \n"
+                    + "AND u.name = :username")
 })
 public class Tweet implements Serializable {
     

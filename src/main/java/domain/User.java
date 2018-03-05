@@ -34,14 +34,17 @@ import javax.persistence.OneToMany;
 @Model
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "User.getAllUsers", query = "SELECT u FROM User u"),
-    @NamedQuery(name = "User.getFollowingUsers", query = "SELECT u2.name, u2.id\n"
+    @NamedQuery(name = "User.getAllUsers", 
+            query = "SELECT u FROM User u"),
+    @NamedQuery(name = "User.getFollowingUsers", 
+            query = "SELECT u2.name, u2.id\n"
                     + "FROM User u\n"
                     + "INNER JOIN u.following uf \n"
                     + "INNER JOIN User u2 \n"
                     + "WHERE u2.id = uf.id \n"
                     + "AND u.name = :username"),
-    @NamedQuery(name = "User.getFollowers", query = "SELECT u2.name, u2.id\n"
+    @NamedQuery(name = "User.getFollowers", 
+            query = "SELECT u2.name, u2.id\n"
                     + "FROM User u\n"
                     + "INNER JOIN u.followers uf \n"
                     + "INNER JOIN User u2 \n"

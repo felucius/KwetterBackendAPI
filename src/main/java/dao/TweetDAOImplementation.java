@@ -96,16 +96,17 @@ public class TweetDAOImplementation implements TweetDAO {
     /**
      * This method retrieves all the tweets of the user's follower base.
      *
-     * @param follower object is the user where all the tweets are going to be
+     * @param user object is the user where all the tweets are going to be
      * retrieved.
      * @return a list of tweets from the users follower base
      */
     @Override
-    public List<Tweet> getTweetsOfFollowingUsers(User follower) {
-        List<User> followers = null;
+    public List<Tweet> getTweetsOfFollowingUsers(User user) {
         List<Tweet> tweets = null;
         try {
-            tweets = em.find(User.class, follower.getId()).getTweets();
+            tweets = em.createNamedQuery("Tweet.getTweetsOfFollowers").
+                    setParameter("username", user.getName()).
+                    getResultList();
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
@@ -125,7 +126,6 @@ public class TweetDAOImplementation implements TweetDAO {
     public boolean addMention(Tweet tweet, User user) {
         Tweet tweetMention = null;
         try {
-            //tweet.likeTweet(user);
             tweet.addMention(user);
             em.persist(tweet);
             return true;

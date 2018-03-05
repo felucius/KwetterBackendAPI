@@ -34,14 +34,17 @@ import javax.persistence.OneToMany;
 @Model
 @Entity
 @NamedQueries({
-    @NamedQuery(name = &quot;User.getAllUsers&quot;, query = &quot;SELECT u FROM User u&quot;),
-    @NamedQuery(name = &quot;User.getFollowingUsers&quot;, query = &quot;SELECT u2.name, u2.id\n&quot;
+    @NamedQuery(name = &quot;User.getAllUsers&quot;, 
+            query = &quot;SELECT u FROM User u&quot;),
+    @NamedQuery(name = &quot;User.getFollowingUsers&quot;, 
+            query = &quot;SELECT u2.name, u2.id\n&quot;
                     + &quot;FROM User u\n&quot;
                     + &quot;INNER JOIN u.following uf \n&quot;
                     + &quot;INNER JOIN User u2 \n&quot;
                     + &quot;WHERE u2.id = uf.id \n&quot;
                     + &quot;AND u.name = :username&quot;),
-    @NamedQuery(name = &quot;User.getFollowers&quot;, query = &quot;SELECT u2.name, u2.id\n&quot;
+    @NamedQuery(name = &quot;User.getFollowers&quot;, 
+            query = &quot;SELECT u2.name, u2.id\n&quot;
                     + &quot;FROM User u\n&quot;
                     + &quot;INNER JOIN u.followers uf \n&quot;
                     + &quot;INNER JOIN User u2 \n&quot;
@@ -51,22 +54,22 @@ import javax.persistence.OneToMany;
 
 public class User implements Serializable {
 
-<span class="pc" id="L54">    private String picture = null;</span>
-<span class="pc" id="L55">    private String website = null;</span>
-<span class="pc" id="L56">    private String name = null;</span>
-<span class="pc" id="L57">    private String bio = null;</span>
-<span class="pc" id="L58">    private String location = null;</span>
-<span class="pc" id="L59">    private String email = null;</span>
-<span class="pc" id="L60">    private String password = null;</span>
+<span class="pc" id="L57">    private String picture = null;</span>
+<span class="pc" id="L58">    private String website = null;</span>
+<span class="pc" id="L59">    private String name = null;</span>
+<span class="pc" id="L60">    private String bio = null;</span>
+<span class="pc" id="L61">    private String location = null;</span>
+<span class="pc" id="L62">    private String email = null;</span>
+<span class="pc" id="L63">    private String password = null;</span>
 
-<span class="pc" id="L62">    @OneToMany(mappedBy = &quot;tweetedBy&quot;)</span>
+<span class="pc" id="L65">    @OneToMany(mappedBy = &quot;tweetedBy&quot;)</span>
     private List&lt;Tweet&gt; tweets = null;
 
-<span class="pc" id="L65">    @OneToMany(fetch = FetchType.EAGER)</span>
+<span class="pc" id="L68">    @OneToMany(fetch = FetchType.EAGER)</span>
     @JoinTable(name = &quot;User_following&quot;)
     private List&lt;User&gt; following = null;
 
-<span class="pc" id="L69">    @OneToMany(fetch = FetchType.EAGER)</span>
+<span class="pc" id="L72">    @OneToMany(fetch = FetchType.EAGER)</span>
     @JoinTable(name = &quot;User_followers&quot;)
     private List&lt;User&gt; followers = null;
 
@@ -86,12 +89,12 @@ public class User implements Serializable {
      * Constructor that initiates a new user with an empty list of -new tweets
      * -followers -following users
      */
-<span class="fc" id="L89">    public User() {</span>
-<span class="fc" id="L90">        this.picture = &quot;picturePath&quot;;</span>
-<span class="fc" id="L91">        this.tweets = new ArrayList();</span>
-<span class="fc" id="L92">        this.following = new ArrayList();</span>
-<span class="fc" id="L93">        this.followers = new ArrayList();</span>
-<span class="fc" id="L94">    }</span>
+<span class="fc" id="L92">    public User() {</span>
+<span class="fc" id="L93">        this.picture = &quot;picturePath&quot;;</span>
+<span class="fc" id="L94">        this.tweets = new ArrayList();</span>
+<span class="fc" id="L95">        this.following = new ArrayList();</span>
+<span class="fc" id="L96">        this.followers = new ArrayList();</span>
+<span class="fc" id="L97">    }</span>
 
     /**
      * Constructor that creates a new user
@@ -105,27 +108,27 @@ public class User implements Serializable {
      * @param password of account
      */
     public User(String picture, String website, String name, String bio,
-<span class="fc" id="L108">            String location, String email, String password) {</span>
-<span class="fc" id="L109">        this.website = website;</span>
-<span class="fc" id="L110">        this.name = name;</span>
-<span class="fc" id="L111">        this.bio = bio;</span>
-<span class="fc" id="L112">        this.location = location;</span>
-<span class="fc" id="L113">        this.email = email;</span>
-<span class="fc" id="L114">        this.password = password;</span>
+<span class="fc" id="L111">            String location, String email, String password) {</span>
+<span class="fc" id="L112">        this.website = website;</span>
+<span class="fc" id="L113">        this.name = name;</span>
+<span class="fc" id="L114">        this.bio = bio;</span>
+<span class="fc" id="L115">        this.location = location;</span>
+<span class="fc" id="L116">        this.email = email;</span>
+<span class="fc" id="L117">        this.password = password;</span>
 
-<span class="fc" id="L116">        this.picture = &quot;picturePath&quot;;</span>
-<span class="fc" id="L117">        this.tweets = new ArrayList();</span>
-<span class="fc" id="L118">        this.following = new ArrayList();</span>
-<span class="fc" id="L119">        this.followers = new ArrayList();</span>
-<span class="fc" id="L120">    }</span>
+<span class="fc" id="L119">        this.picture = &quot;picturePath&quot;;</span>
+<span class="fc" id="L120">        this.tweets = new ArrayList();</span>
+<span class="fc" id="L121">        this.following = new ArrayList();</span>
+<span class="fc" id="L122">        this.followers = new ArrayList();</span>
+<span class="fc" id="L123">    }</span>
 
-<span class="nc" id="L122">    public User(String name) {</span>
-<span class="nc" id="L123">        this.name = name;</span>
-<span class="nc" id="L124">        this.picture = &quot;picturePath&quot;;</span>
-<span class="nc" id="L125">        this.tweets = new ArrayList();</span>
-<span class="nc" id="L126">        this.following = new ArrayList();</span>
-<span class="nc" id="L127">        this.followers = new ArrayList();</span>
-<span class="nc" id="L128">    }</span>
+<span class="nc" id="L125">    public User(String name) {</span>
+<span class="nc" id="L126">        this.name = name;</span>
+<span class="nc" id="L127">        this.picture = &quot;picturePath&quot;;</span>
+<span class="nc" id="L128">        this.tweets = new ArrayList();</span>
+<span class="nc" id="L129">        this.following = new ArrayList();</span>
+<span class="nc" id="L130">        this.followers = new ArrayList();</span>
+<span class="nc" id="L131">    }</span>
 
     /**
      * This method allows a tweet to be added with a certain amount of mentions
@@ -134,8 +137,8 @@ public class User implements Serializable {
      * @param mentions are the users that are going to be mentioned in the post.
      */
     public void addTweet(Tweet tweet, List&lt;User&gt; mentions) {
-<span class="fc" id="L137">        tweets.add(tweet);</span>
-<span class="fc" id="L138">    }</span>
+<span class="fc" id="L140">        tweets.add(tweet);</span>
+<span class="fc" id="L141">    }</span>
 
     /**
      * This method allows a tweet to be removed.
@@ -143,8 +146,8 @@ public class User implements Serializable {
      * @param tweet that is going to be removed.
      */
     public void removeTweet(Tweet tweet) {
-<span class="fc" id="L146">        tweets.remove(tweet);</span>
-<span class="fc" id="L147">    }</span>
+<span class="fc" id="L149">        tweets.remove(tweet);</span>
+<span class="fc" id="L150">    }</span>
 
     /**
      * This method allows a user to be followed.
@@ -152,11 +155,11 @@ public class User implements Serializable {
      * @param user that is going to be followed.
      */
     public void followUser(User user) {
-<span class="pc bpc" id="L155" title="1 of 2 branches missed.">        if(!this.following.contains(user)){</span>
-<span class="fc" id="L156">            user.addFollower(this);</span>
-<span class="fc" id="L157">            following.add(user);</span>
+<span class="pc bpc" id="L158" title="1 of 2 branches missed.">        if(!this.following.contains(user)){</span>
+<span class="fc" id="L159">            user.addFollower(this);</span>
+<span class="fc" id="L160">            following.add(user);</span>
         }
-<span class="fc" id="L159">    }</span>
+<span class="fc" id="L162">    }</span>
 
     /**
      * This method allows a new follower to be added to the user base of
@@ -165,12 +168,12 @@ public class User implements Serializable {
      * @param user that is going to follow the current user.
      */
     private void addFollower(User user) {
-<span class="fc" id="L168">        this.followers.add(user);</span>
-<span class="fc" id="L169">    }</span>
+<span class="fc" id="L171">        this.followers.add(user);</span>
+<span class="fc" id="L172">    }</span>
     
     private void removeFollower(User user){
-<span class="nc" id="L172">        this.followers.remove(user);</span>
-<span class="nc" id="L173">    }</span>
+<span class="nc" id="L175">        this.followers.remove(user);</span>
+<span class="nc" id="L176">    }</span>
 
     /**
      * This method allows a user to be removed.
@@ -178,11 +181,11 @@ public class User implements Serializable {
      * @param user that is going to be removed from the followers base.
      */
     public void unfollowUser(User user) {
-<span class="nc bnc" id="L181" title="All 2 branches missed.">        if(this.following.contains(user)){</span>
-<span class="nc" id="L182">            user.removeFollower(this);</span>
-<span class="nc" id="L183">            this.following.remove(user);</span>
+<span class="nc bnc" id="L184" title="All 2 branches missed.">        if(this.following.contains(user)){</span>
+<span class="nc" id="L185">            user.removeFollower(this);</span>
+<span class="nc" id="L186">            this.following.remove(user);</span>
         }
-<span class="nc" id="L185">    }</span>
+<span class="nc" id="L188">    }</span>
 
     /**
      * This method returns all the followers per user
@@ -191,7 +194,7 @@ public class User implements Serializable {
      */
     @JsonbTransient
     public List&lt;User&gt; getFollowers() {
-<span class="fc" id="L194">        return followers;</span>
+<span class="fc" id="L197">        return followers;</span>
     }
 
     /**
@@ -201,7 +204,7 @@ public class User implements Serializable {
      */
     @JsonbTransient
     public List&lt;User&gt; getFollowing() {
-<span class="nc" id="L204">        return following;</span>
+<span class="nc" id="L207">        return following;</span>
     }
 
     /**
@@ -210,8 +213,8 @@ public class User implements Serializable {
      * @param tweet to be added to the likes.
      */
     public void likeTweet(Tweet tweet) {
-<span class="fc" id="L213">        tweet.likeTweet(this);</span>
-<span class="fc" id="L214">    }</span>
+<span class="fc" id="L216">        tweet.likeTweet(this);</span>
+<span class="fc" id="L217">    }</span>
 
     /**
      * Retrieving the picture of the user.
@@ -219,7 +222,7 @@ public class User implements Serializable {
      * @return picture of user.
      */
     public String getPicture() {
-<span class="fc" id="L222">        return this.picture;</span>
+<span class="fc" id="L225">        return this.picture;</span>
     }
 
     /**
@@ -228,8 +231,8 @@ public class User implements Serializable {
      * @param picture of the user that is going to be set.
      */
     public void setPicture(String picture) {
-<span class="fc" id="L231">        this.picture = picture;</span>
-<span class="fc" id="L232">    }</span>
+<span class="fc" id="L234">        this.picture = picture;</span>
+<span class="fc" id="L235">    }</span>
 
     /**
      * Retrieving the website of the user.
@@ -237,7 +240,7 @@ public class User implements Serializable {
      * @return the website.
      */
     public String getWebsite() {
-<span class="fc" id="L240">        return this.website;</span>
+<span class="fc" id="L243">        return this.website;</span>
     }
 
     /**
@@ -246,8 +249,8 @@ public class User implements Serializable {
      * @param website of the users that is going to be set.
      */
     public void setWebsite(String website) {
-<span class="fc" id="L249">        this.website = website;</span>
-<span class="fc" id="L250">    }</span>
+<span class="fc" id="L252">        this.website = website;</span>
+<span class="fc" id="L253">    }</span>
 
     /**
      * Retrieving the name of the user.
@@ -255,7 +258,7 @@ public class User implements Serializable {
      * @return the name of the user.
      */
     public String getName() {
-<span class="fc" id="L258">        return this.name;</span>
+<span class="fc" id="L261">        return this.name;</span>
     }
 
     /**
@@ -264,8 +267,8 @@ public class User implements Serializable {
      * @param name of the user that is going to be set.
      */
     public void setName(String name) {
-<span class="fc" id="L267">        this.name = name;</span>
-<span class="fc" id="L268">    }</span>
+<span class="fc" id="L270">        this.name = name;</span>
+<span class="fc" id="L271">    }</span>
 
     /**
      * Retrieving the bio of the user.
@@ -273,7 +276,7 @@ public class User implements Serializable {
      * @return the bio.
      */
     public String getBio() {
-<span class="fc" id="L276">        return this.bio;</span>
+<span class="fc" id="L279">        return this.bio;</span>
     }
 
     /**
@@ -282,8 +285,8 @@ public class User implements Serializable {
      * @param bio that is going to be set.
      */
     public void setBio(String bio) {
-<span class="fc" id="L285">        this.bio = bio;</span>
-<span class="fc" id="L286">    }</span>
+<span class="fc" id="L288">        this.bio = bio;</span>
+<span class="fc" id="L289">    }</span>
 
     /**
      * Retrieving the location of the user.
@@ -291,7 +294,7 @@ public class User implements Serializable {
      * @return the location of the user.
      */
     public String getLocation() {
-<span class="fc" id="L294">        return this.location;</span>
+<span class="fc" id="L297">        return this.location;</span>
     }
 
     /**
@@ -300,8 +303,8 @@ public class User implements Serializable {
      * @param location to be set.
      */
     public void setLocation(String location) {
-<span class="fc" id="L303">        this.location = location;</span>
-<span class="fc" id="L304">    }</span>
+<span class="fc" id="L306">        this.location = location;</span>
+<span class="fc" id="L307">    }</span>
 
     /**
      * Retrieving the email of the user.
@@ -309,7 +312,7 @@ public class User implements Serializable {
      * @return email of the user.
      */
     public String getEmail() {
-<span class="fc" id="L312">        return this.email;</span>
+<span class="fc" id="L315">        return this.email;</span>
     }
 
     /**
@@ -318,8 +321,8 @@ public class User implements Serializable {
      * @param email of the user to be set.
      */
     public void setEmail(String email) {
-<span class="fc" id="L321">        this.email = email;</span>
-<span class="fc" id="L322">    }</span>
+<span class="fc" id="L324">        this.email = email;</span>
+<span class="fc" id="L325">    }</span>
 
     /**
      * Retrieving the password of the user.
@@ -327,7 +330,7 @@ public class User implements Serializable {
      * @return password of user.
      */
     public String getPassword() {
-<span class="fc" id="L330">        return this.password;</span>
+<span class="fc" id="L333">        return this.password;</span>
     }
 
     /**
@@ -336,8 +339,8 @@ public class User implements Serializable {
      * @param password of the user that is going to be set.
      */
     public void setPassword(String password) {
-<span class="fc" id="L339">        this.password = password;</span>
-<span class="fc" id="L340">    }</span>
+<span class="fc" id="L342">        this.password = password;</span>
+<span class="fc" id="L343">    }</span>
 
     /**
      * Setting new tweets to the list.
@@ -345,8 +348,8 @@ public class User implements Serializable {
      * @param tweets to be added.
      */
     public void setTweets(List&lt;Tweet&gt; tweets) {
-<span class="fc" id="L348">        this.tweets = tweets;</span>
-<span class="fc" id="L349">    }</span>
+<span class="fc" id="L351">        this.tweets = tweets;</span>
+<span class="fc" id="L352">    }</span>
 
     /**
      * Retrieving all tweets that the user made.
@@ -355,7 +358,7 @@ public class User implements Serializable {
      */
     @JsonbTransient
     public List&lt;Tweet&gt; getTweets() {
-<span class="fc" id="L358">        return this.tweets;</span>
+<span class="fc" id="L361">        return this.tweets;</span>
     }
 
     /**
@@ -364,8 +367,8 @@ public class User implements Serializable {
      * @param id to be set.
      */
     public void setId(Long id) {
-<span class="fc" id="L367">        this.id = id;</span>
-<span class="fc" id="L368">    }</span>
+<span class="fc" id="L370">        this.id = id;</span>
+<span class="fc" id="L371">    }</span>
 
     /**
      * Retrieving the id of a single user.
@@ -373,7 +376,7 @@ public class User implements Serializable {
      * @return the id of a user.
      */
     public Long getId() {
-<span class="fc" id="L376">        return this.id;</span>
+<span class="fc" id="L379">        return this.id;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

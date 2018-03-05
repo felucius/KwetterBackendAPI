@@ -131,23 +131,20 @@ public class TweetDAOCollection implements TweetDAO {
      */
     @Override
     public List&lt;Tweet&gt; findTweetByContent(String content) {
-        //for (Tweet tweet : tweets) {
-            //if (tweet.getMessage().equals(content)) {
-<span class="nc" id="L136">                return tweets;</span>
-            //} else {
-                //return null;
-            //}
-        //}
-        //return null;
+<span class="nc bnc" id="L134" title="All 2 branches missed.">        if(tweets != null){</span>
+<span class="nc" id="L135">            return tweets;</span>
+        }else{
+<span class="nc" id="L137">            return null;</span>
+        }
     }
 
     @Override
     public Tweet createTweet(Tweet tweet) {
-<span class="nc bnc" id="L146" title="All 2 branches missed.">        if (!tweets.contains(tweet)) {</span>
-<span class="nc" id="L147">            this.tweets.add(tweet);</span>
-<span class="nc" id="L148">            return tweet;</span>
+<span class="nc bnc" id="L143" title="All 2 branches missed.">        if (!tweets.contains(tweet)) {</span>
+<span class="nc" id="L144">            this.tweets.add(tweet);</span>
+<span class="nc" id="L145">            return tweet;</span>
         } else {
-<span class="nc" id="L150">            return null;</span>
+<span class="nc" id="L147">            return null;</span>
         }
     }
 }

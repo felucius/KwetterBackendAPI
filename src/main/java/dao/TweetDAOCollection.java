@@ -131,14 +131,11 @@ public class TweetDAOCollection implements TweetDAO {
      */
     @Override
     public List<Tweet> findTweetByContent(String content) {
-        //for (Tweet tweet : tweets) {
-            //if (tweet.getMessage().equals(content)) {
-                return tweets;
-            //} else {
-                //return null;
-            //}
-        //}
-        //return null;
+        if(tweets != null){
+            return tweets;
+        }else{
+            return null;
+        }
     }
 
     @Override
