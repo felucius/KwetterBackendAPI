@@ -50,10 +50,6 @@ import javax.inject.Inject;
     public List&lt;User&gt; getLikes(Tweet tweet) {
 <span class="nc" id="L51">        return tweetDAO.getLikes(tweet);</span>
     }
-    
-    public List&lt;User&gt; getLikesFromTweet(Long tweetId){
-<span class="nc" id="L55">        return tweetDAO.getLikesFromTweet(tweetId);</span>
-    }
 
     /**
      * This method retrieves all mentions from a single tweet.
@@ -62,7 +58,7 @@ import javax.inject.Inject;
      * @return a list of users that are mentioned on that single tweet.
      */
     public List&lt;User&gt; getMentions(Tweet tweet) {
-<span class="nc" id="L65">        return tweetDAO.getMentions(tweet);</span>
+<span class="nc" id="L61">        return tweetDAO.getMentions(tweet);</span>
     }
 
     /**
@@ -74,7 +70,7 @@ import javax.inject.Inject;
      * @return a list of tweets that the 'follower' object follows.
      */
     public List&lt;Tweet&gt; getTweetsOfFollowingUsers(User follower) {
-<span class="nc" id="L77">        return tweetDAO.getTweetsOfFollowingUsers(follower);</span>
+<span class="nc" id="L73">        return tweetDAO.getTweetsOfFollowingUsers(follower);</span>
     }
 
     /**
@@ -83,19 +79,19 @@ import javax.inject.Inject;
      * @return a list of all Tweets from different users.
      */
     public List&lt;Tweet&gt; getAllTweets() {
-<span class="nc" id="L86">        return tweetDAO.getAllTweets();</span>
+<span class="nc" id="L82">        return tweetDAO.getAllTweets();</span>
     }
     
     public Tweet findTweet(Long id){
-<span class="nc" id="L90">        return tweetDAO.findTweet(id);</span>
+<span class="nc" id="L86">        return tweetDAO.findTweet(id);</span>
     }
     
-    public Tweet findTweetByContent(String content){
-<span class="nc" id="L94">        return tweetDAO.findTweetByContent(content);</span>
+    public List&lt;Tweet&gt; findTweetByContent(String content){
+<span class="nc" id="L90">        return tweetDAO.findTweetByContent(content);</span>
     }
     
     public Tweet createTweet(Tweet tweet){
-<span class="nc" id="L98">        return tweetDAO.createTweet(tweet);</span>
+<span class="nc" id="L94">        return tweetDAO.createTweet(tweet);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

@@ -130,15 +130,15 @@ public class TweetDAOCollection implements TweetDAO {
      * @return a sinlge tweet object.
      */
     @Override
-    public Tweet findTweetByContent(String content) {
-        for (Tweet tweet : tweets) {
-            if (tweet.getMessage().equals(content)) {
-                return tweet;
-            } else {
-                return null;
-            }
-        }
-        return null;
+    public List<Tweet> findTweetByContent(String content) {
+        //for (Tweet tweet : tweets) {
+            //if (tweet.getMessage().equals(content)) {
+                return tweets;
+            //} else {
+                //return null;
+            //}
+        //}
+        //return null;
     }
 
     @Override
@@ -150,10 +150,4 @@ public class TweetDAOCollection implements TweetDAO {
             return null;
         }
     }
-
-    @Override
-    public List<User> getLikesFromTweet(Long tweetId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }

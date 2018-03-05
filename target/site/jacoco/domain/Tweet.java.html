@@ -41,18 +41,30 @@ import javax.persistence.TemporalType;
                     + &quot;INNER JOIN t.tweetedBy tb\n&quot;
                     + &quot;INNER JOIN User u\n&quot;
                     + &quot;WHERE u.id = tb.id\n&quot;
-                    + &quot;AND u.name = :userName&quot;)
+                    + &quot;AND u.name = :userName&quot;),
+    @NamedQuery(name = &quot;Tweet.getLikes&quot;,
+            query = &quot;SELECT t.message, u.name, u.id\n&quot;
+                    + &quot;FROM Tweet t\n&quot;
+                    + &quot;INNER JOIN t.likes til\n&quot;
+                    + &quot;INNER JOIN User u\n&quot;
+                    + &quot;WHERE til.id = u.id\n&quot;
+                    + &quot;AND t.id = :tweetId&quot;),
+    @NamedQuery(name = &quot;Tweet.findTweetByContent&quot;, 
+            query = &quot;SELECT t.message, t.id &quot;
+                    + &quot;FROM Tweet t &quot;
+                    + &quot;WHERE t.message &quot;
+                    + &quot;LIKE :message&quot;)
 })
 public class Tweet implements Serializable {
     
-<span class="fc" id="L48">    @OneToMany//(mappedBy = &quot;tweet&quot;)</span>
+<span class="fc" id="L60">    @OneToMany</span>
     @JoinTable(name = &quot;Tweet_mentions&quot;)
     private List&lt;User&gt; mentions = null;
-<span class="fc" id="L51">    private String message = null;</span>
-<span class="fc" id="L52">    private List&lt;String&gt; tags = null;</span>
-<span class="fc" id="L53">    @ManyToOne</span>
+<span class="fc" id="L63">    private String message = null;</span>
+<span class="fc" id="L64">    private List&lt;String&gt; tags = null;</span>
+<span class="fc" id="L65">    @ManyToOne</span>
     private User tweetedBy = null;
-<span class="fc" id="L55">    @OneToMany</span>
+<span class="fc" id="L67">    @OneToMany</span>
     @JoinTable(name = &quot;Tweet_likes&quot;)
     private List&lt;User&gt; likes = null;
 
@@ -61,7 +73,7 @@ public class Tweet implements Serializable {
      * To insert a date into the database, the Temporal injection needs to be
      * added.
      */
-<span class="fc" id="L64">    @Temporal(TemporalType.TIMESTAMP)</span>
+<span class="fc" id="L76">    @Temporal(TemporalType.TIMESTAMP)</span>
     private Date published = null;
 
     @Id
@@ -69,9 +81,9 @@ public class Tweet implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Assigning primary key values to the Tweet table.
     private Long id;
 
-<span class="fc" id="L72">    public Tweet() {</span>
+<span class="fc" id="L84">    public Tweet() {</span>
 
-<span class="fc" id="L74">    }</span>
+<span class="fc" id="L86">    }</span>
 
     /**
      * Constructor that initiates a new Tweet
@@ -80,14 +92,14 @@ public class Tweet implements Serializable {
      * @param tags are extra features such as likes and kuddos
      * @param tweetedBy is the person who created the tweet.
      */
-<span class="fc" id="L83">    public Tweet(String message, List&lt;String&gt; tags, User tweetedBy) {</span>
-<span class="fc" id="L84">        this.message = message;</span>
-<span class="fc" id="L85">        this.tags = tags;</span>
-<span class="fc" id="L86">        this.tweetedBy = tweetedBy;</span>
-<span class="fc" id="L87">        this.published = new Date(System.currentTimeMillis());</span>
-<span class="fc" id="L88">        this.likes = new ArrayList();</span>
-<span class="fc" id="L89">        this.mentions = new ArrayList();</span>
-<span class="fc" id="L90">    }</span>
+<span class="fc" id="L95">    public Tweet(String message, List&lt;String&gt; tags, User tweetedBy) {</span>
+<span class="fc" id="L96">        this.message = message;</span>
+<span class="fc" id="L97">        this.tags = tags;</span>
+<span class="fc" id="L98">        this.tweetedBy = tweetedBy;</span>
+<span class="fc" id="L99">        this.published = new Date(System.currentTimeMillis());</span>
+<span class="fc" id="L100">        this.likes = new ArrayList();</span>
+<span class="fc" id="L101">        this.mentions = new ArrayList();</span>
+<span class="fc" id="L102">    }</span>
 
     /**
      * This method allows a user to like a tweet
@@ -97,11 +109,11 @@ public class Tweet implements Serializable {
      * tweet.
      */
     public boolean likeTweet(User user) {
-<span class="pc bpc" id="L100" title="1 of 2 branches missed.">        if (user != null) {</span>
-<span class="fc" id="L101">            likes.add(user);</span>
-<span class="fc" id="L102">            return true;</span>
+<span class="pc bpc" id="L112" title="1 of 2 branches missed.">        if (user != null) {</span>
+<span class="fc" id="L113">            likes.add(user);</span>
+<span class="fc" id="L114">            return true;</span>
         }
-<span class="nc" id="L104">        return false;</span>
+<span class="nc" id="L116">        return false;</span>
     }
     
     /**
@@ -111,7 +123,7 @@ public class Tweet implements Serializable {
      * to the specifc user or to a number.
      */
     public List&lt;User&gt; getLikes(){
-<span class="fc" id="L114">        return this.likes;</span>
+<span class="fc" id="L126">        return this.likes;</span>
     }
 
     /**
@@ -120,11 +132,11 @@ public class Tweet implements Serializable {
      * @param mentionedUser is the user to be mentioned in the tweet.
      */
     public boolean addMention(User mentionedUser) {
-<span class="pc bpc" id="L123" title="1 of 2 branches missed.">        if(mentionedUser != null){</span>
-<span class="fc" id="L124">            mentions.add(mentionedUser);</span>
-<span class="fc" id="L125">            return true;</span>
+<span class="pc bpc" id="L135" title="1 of 2 branches missed.">        if(mentionedUser != null){</span>
+<span class="fc" id="L136">            mentions.add(mentionedUser);</span>
+<span class="fc" id="L137">            return true;</span>
         }else{
-<span class="nc" id="L127">            return false;</span>
+<span class="nc" id="L139">            return false;</span>
         }
     }
 
@@ -134,7 +146,7 @@ public class Tweet implements Serializable {
      * @return all mentions.
      */
     public List&lt;User&gt; getMentions() {
-<span class="fc" id="L137">        return this.mentions;</span>
+<span class="fc" id="L149">        return this.mentions;</span>
     }
 
     /**
@@ -143,8 +155,8 @@ public class Tweet implements Serializable {
      * @param mentions to be setted.
      */
     public void setMentions(List&lt;User&gt; mentions) {
-<span class="fc" id="L146">        this.mentions = mentions;</span>
-<span class="fc" id="L147">    }</span>
+<span class="fc" id="L158">        this.mentions = mentions;</span>
+<span class="fc" id="L159">    }</span>
 
     /**
      * Retrieving the tweet message.
@@ -152,12 +164,12 @@ public class Tweet implements Serializable {
      * @return the message of the tweet.
      */
     public String getMessage() {
-<span class="fc" id="L155">        return this.message;</span>
+<span class="fc" id="L167">        return this.message;</span>
     }
 
     public void setMessage(String message) {
-<span class="fc" id="L159">        this.message = message;</span>
-<span class="fc" id="L160">    }</span>
+<span class="fc" id="L171">        this.message = message;</span>
+<span class="fc" id="L172">    }</span>
 
     /**
      * Retrieving the tags that is going to be added to the tweet.
@@ -165,7 +177,7 @@ public class Tweet implements Serializable {
      * @return tags of the tweet.
      */
     public List&lt;String&gt; getTags() {
-<span class="fc" id="L168">        return this.tags;</span>
+<span class="fc" id="L180">        return this.tags;</span>
     }
 
     /**
@@ -174,8 +186,8 @@ public class Tweet implements Serializable {
      * @param tags to be setted per tweet.
      */
     public void setTags(List&lt;String&gt; tags) {
-<span class="fc" id="L177">        this.tags = tags;</span>
-<span class="fc" id="L178">    }</span>
+<span class="fc" id="L189">        this.tags = tags;</span>
+<span class="fc" id="L190">    }</span>
 
     /**
      * Retrieving published date.
@@ -183,7 +195,7 @@ public class Tweet implements Serializable {
      * @return the date of the publishing.
      */
     public Date getPublished() {
-<span class="fc" id="L186">        return this.published;</span>
+<span class="fc" id="L198">        return this.published;</span>
     }
     
     /**
@@ -192,8 +204,8 @@ public class Tweet implements Serializable {
      * @param published to be set. 
      */
     public void setPublished(Date published){
-<span class="fc" id="L195">        this.published = published;</span>
-<span class="fc" id="L196">    }</span>
+<span class="fc" id="L207">        this.published = published;</span>
+<span class="fc" id="L208">    }</span>
     
     /**
      * Retrieving the id of the tweet
@@ -201,7 +213,7 @@ public class Tweet implements Serializable {
      * @return tweet id.
      */
     public Long getId() {
-<span class="fc" id="L204">        return id;</span>
+<span class="fc" id="L216">        return id;</span>
     }
 
     /**
@@ -210,7 +222,7 @@ public class Tweet implements Serializable {
      * @param id to be changed.
      */
     public void setId(Long id) {
-<span class="fc" id="L213">        this.id = id;</span>
-<span class="fc" id="L214">    }</span>
+<span class="fc" id="L225">        this.id = id;</span>
+<span class="fc" id="L226">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

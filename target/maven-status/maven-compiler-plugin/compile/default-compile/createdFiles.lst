@@ -3,7 +3,6 @@ dao\TweetDAOImplementation.class
 domain\User_.class
 domain\UserDTO.class
 dao\UserDAOCollection.class
-domain\TweetDTO.class
 domain\Tweet_.class
 domain\UserRole.class
 service\UserService.class

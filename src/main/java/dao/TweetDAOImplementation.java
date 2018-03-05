@@ -61,30 +61,15 @@ public class TweetDAOImplementation implements TweetDAO {
     @Override
     public List<User> getLikes(Tweet tweet) {
         List<User> users = null;
-        try {
-            //users = em.find(Tweet.class, tweet.getMessage()).getLikes();
-            
-            users = em.createQuery("SELECT t\n"
-                    + "FROM Tweet t\n"
-                    + "INNER JOIN t.likes til\n"
-                    + "INNER JOIN User u\n"
-                    + "WHERE til.id = u.id\n"
-                    + "AND t.id = :tweetId").
+        try {            
+            users = em.createNamedQuery("Tweet.getLikes").
                     setParameter("tweetId", tweet.getId()).
                     getResultList();
-            // THROWS STACKOVERFLOW EXCEPTION, LOOK AT CONTEXT INSTEAD OF ID
-            //users = em.find(Tweet.class, tweet.getMessage()).getLikes();
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
         }
         return users;
-    }
-    
-    @Override
-    public List<User> getLikesFromTweet(Long tweetId){
-        Tweet tweet = em.find(Tweet.class, tweetId);
-        return tweet.getLikes();
     }
 
     /**
@@ -171,16 +156,16 @@ public class TweetDAOImplementation implements TweetDAO {
     /**
      * This method allows a tweet to be found by the content written in it.
      *
-     * @param content is the string that is going to be looked for
+     * @param message is the string that is going to be looked for
      * @return the tweet object.
      */
     @Override
-    public Tweet findTweetByContent(String message) {
-        Tweet tweet = null;
+    public List<Tweet> findTweetByContent(String message) {
+        List<Tweet> tweet = null;
         try {
-            tweet = (Tweet) em.createQuery("SELECT t FROM Tweet t where t.message LIKE :message").
+            tweet = em.createNamedQuery("Tweet.findTweetByContent").
                     setParameter("message", "%" + message + "%").
-                    getSingleResult();
+                    getResultList();
             return tweet;
         } catch (Exception ex) {
             ex.printStackTrace();

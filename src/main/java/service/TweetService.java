@@ -50,10 +50,6 @@ public class TweetService {
     public List<User> getLikes(Tweet tweet) {
         return tweetDAO.getLikes(tweet);
     }
-    
-    public List<User> getLikesFromTweet(Long tweetId){
-        return tweetDAO.getLikesFromTweet(tweetId);
-    }
 
     /**
      * This method retrieves all mentions from a single tweet.
@@ -90,7 +86,7 @@ public class TweetService {
         return tweetDAO.findTweet(id);
     }
     
-    public Tweet findTweetByContent(String content){
+    public List<Tweet> findTweetByContent(String content){
         return tweetDAO.findTweetByContent(content);
     }
     

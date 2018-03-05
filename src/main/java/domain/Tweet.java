@@ -41,11 +41,23 @@ import javax.persistence.TemporalType;
                     + "INNER JOIN t.tweetedBy tb\n"
                     + "INNER JOIN User u\n"
                     + "WHERE u.id = tb.id\n"
-                    + "AND u.name = :userName")
+                    + "AND u.name = :userName"),
+    @NamedQuery(name = "Tweet.getLikes",
+            query = "SELECT t.message, u.name, u.id\n"
+                    + "FROM Tweet t\n"
+                    + "INNER JOIN t.likes til\n"
+                    + "INNER JOIN User u\n"
+                    + "WHERE til.id = u.id\n"
+                    + "AND t.id = :tweetId"),
+    @NamedQuery(name = "Tweet.findTweetByContent", 
+            query = "SELECT t.message, t.id "
+                    + "FROM Tweet t "
+                    + "WHERE t.message "
+                    + "LIKE :message")
 })
 public class Tweet implements Serializable {
     
-    @OneToMany//(mappedBy = "tweet")
+    @OneToMany
     @JoinTable(name = "Tweet_mentions")
     private List<User> mentions = null;
     private String message = null;

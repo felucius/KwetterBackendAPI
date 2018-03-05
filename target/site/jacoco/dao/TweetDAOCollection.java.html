@@ -130,15 +130,15 @@ public class TweetDAOCollection implements TweetDAO {
      * @return a sinlge tweet object.
      */
     @Override
-    public Tweet findTweetByContent(String content) {
-<span class="nc bnc" id="L134" title="All 2 branches missed.">        for (Tweet tweet : tweets) {</span>
-<span class="nc bnc" id="L135" title="All 2 branches missed.">            if (tweet.getMessage().equals(content)) {</span>
-<span class="nc" id="L136">                return tweet;</span>
-            } else {
-<span class="nc" id="L138">                return null;</span>
-            }
-        }
-<span class="nc" id="L141">        return null;</span>
+    public List&lt;Tweet&gt; findTweetByContent(String content) {
+        //for (Tweet tweet : tweets) {
+            //if (tweet.getMessage().equals(content)) {
+<span class="nc" id="L136">                return tweets;</span>
+            //} else {
+                //return null;
+            //}
+        //}
+        //return null;
     }
 
     @Override
@@ -150,11 +150,5 @@ public class TweetDAOCollection implements TweetDAO {
 <span class="nc" id="L150">            return null;</span>
         }
     }
-
-    @Override
-    public List&lt;User&gt; getLikesFromTweet(Long tweetId) {
-<span class="nc" id="L156">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
-    }
-
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>
