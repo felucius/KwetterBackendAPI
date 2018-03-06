@@ -6,14 +6,22 @@
 package httpclientrest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.TypeFactory;
+import domain.Tweet;
+import domain.User;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -61,9 +69,78 @@ public class TweetRestTest {
     public void tearDown() {
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+    @Test
+    public void addmention() {
+        try {
+            HttpUriRequest request = new HttpPost("http://localhost:8080/KwetterBackend_Maxime/api/tweets/addmention/3/maxime");
+            HttpResponse response = HttpClientBuilder.create().build().execute(request);
+
+            Boolean result = om.readValue(response.getEntity().getContent(), Boolean.class);
+
+            assertTrue(result);
+        } catch (Exception ex) {
+            {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    @Test
+    public void getTweetLikes() {
+        try {
+            HttpUriRequest request = new HttpGet("http://localhost:8080/KwetterBackend_Maxime/api/tweets/gettweetlikes/2");
+            HttpResponse response = HttpClientBuilder.create().build().execute(request);
+
+            List<User> users = om.readValue(response.getEntity().getContent(),
+                    TypeFactory.defaultInstance().constructCollectionType(List.class, String.class));
+
+            assertEquals(0, users.size());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @Test
+    public void findTweetByContent() {
+        try {
+            HttpUriRequest request = new HttpGet("http://localhost:8080/KwetterBackend_Maxime/api/tweets/findtweetbycontent/hellow");
+            HttpResponse response = HttpClientBuilder.create().build().execute(request);
+
+            List<Tweet> tweets = om.readValue(response.getEntity().getContent(),
+                    TypeFactory.defaultInstance().constructCollectionType(List.class, String[].class));
+
+            assertEquals(1, tweets.size());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @Test
+    public void findTweetById() {
+        try {
+            HttpUriRequest request = new HttpGet("http://localhost:8080/KwetterBackend_Maxime/api/tweets/findtweet/1");
+            HttpResponse response = HttpClientBuilder.create().build().execute(request);
+
+            Tweet tweet = om.readValue(response.getEntity().getContent(), Tweet.class);
+
+            assertNotNull(tweet.getId());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @Test
+    public void getTweetsOfFollowing() {
+        try {
+            HttpUriRequest request = new HttpGet("http://localhost:8080/KwetterBackend_Maxime/api/tweets/gettweetsfollowing/maxime");
+            HttpResponse response = HttpClientBuilder.create().build().execute(request);
+
+            List<Tweet> tweets = om.readValue(response.getEntity().getContent(),
+                    TypeFactory.defaultInstance().constructCollectionType(List.class, String[].class));
+
+            assertEquals(3, tweets.size());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 }
