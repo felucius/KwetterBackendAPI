@@ -75,6 +75,7 @@ public class UserDAOImplementation implements UserDAO {
      * @return a true statement if the user has successfully been removed or
      * false when the action could not be performed.
      */
+    /*
     @Override
     public boolean removeUser(User user) {
         try {
@@ -86,7 +87,7 @@ public class UserDAOImplementation implements UserDAO {
             ex.printStackTrace();
             return false;
         }
-    }
+    }*/
 
     /**
      * This method allows a user to be found from the User entity with it's

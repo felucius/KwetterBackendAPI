@@ -143,12 +143,13 @@ public class UserServiceTest {
         assertEquals(null, userService.createUser(user1));
     }
 
+    /*
     @Test
     public void testRemoveUser() {
         System.out.println("Test remove user on - UserService layer");
         userService.removeUser(user1);
         assertEquals(0, userService.getAllUsers().size());
-    }
+    }*/
 
     @Test
     public void testFindUser() {

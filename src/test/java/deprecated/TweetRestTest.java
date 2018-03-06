@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rest;
+package deprecated;
 
 import boundary.rest.TweetResource;
 import boundary.rest.UserResource;

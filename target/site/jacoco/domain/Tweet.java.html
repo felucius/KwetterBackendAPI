@@ -66,14 +66,14 @@ import javax.persistence.TemporalType;
 })
 public class Tweet implements Serializable {
     
-<span class="fc" id="L69">    @OneToMany</span>
+<span class="fc" id="L69">    @OneToMany(orphanRemoval = true)</span>
     @JoinTable(name = &quot;Tweet_mentions&quot;)
     private List&lt;User&gt; mentions = null;
 <span class="fc" id="L72">    private String message = null;</span>
 <span class="fc" id="L73">    private List&lt;String&gt; tags = null;</span>
-<span class="fc" id="L74">    @ManyToOne</span>
+<span class="fc" id="L74">    @ManyToOne()</span>
     private User tweetedBy = null;
-<span class="fc" id="L76">    @OneToMany</span>
+<span class="fc" id="L76">    @OneToMany(orphanRemoval = true)</span>
     @JoinTable(name = &quot;Tweet_likes&quot;)
     private List&lt;User&gt; likes = null;
 

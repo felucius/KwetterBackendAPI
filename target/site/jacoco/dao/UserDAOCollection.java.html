@@ -40,114 +40,115 @@ public class UserDAOCollection implements UserDAO {
         }
     }
 
+    /*
     @Override
     public boolean removeUser(User user) {
-<span class="nc bnc" id="L45" title="All 2 branches missed.">        if (users.contains(user)) {</span>
-<span class="nc" id="L46">            users.remove(user);</span>
-<span class="nc" id="L47">            return true;</span>
+        if (users.contains(user)) {
+            users.remove(user);
+            return true;
         } else {
-<span class="nc" id="L49">            return false;</span>
+            return false;
         }
-    }
+    }*/
 
     @Override
     public User findUser(Long id) {
-<span class="pc bpc" id="L55" title="1 of 2 branches missed.">        for (User user : users) {</span>
-<span class="pc bpc" id="L56" title="1 of 2 branches missed.">            if (user.getId().equals(id)) {</span>
-<span class="fc" id="L57">                return user;</span>
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">        for (User user : users) {</span>
+<span class="pc bpc" id="L57" title="1 of 2 branches missed.">            if (user.getId().equals(id)) {</span>
+<span class="fc" id="L58">                return user;</span>
             } else {
-<span class="nc" id="L59">                return null;</span>
+<span class="nc" id="L60">                return null;</span>
             }
         }
-<span class="nc" id="L62">        return null;</span>
+<span class="nc" id="L63">        return null;</span>
     }
 
     @Override
     public boolean addTweet(User user, Tweet tweet, List&lt;User&gt; mentions) {
-<span class="pc bpc" id="L67" title="1 of 2 branches missed.">        if (tweet != null) {</span>
-<span class="fc" id="L68">            user.addTweet(tweet, mentions);</span>
-<span class="fc" id="L69">            return true;</span>
+<span class="pc bpc" id="L68" title="1 of 2 branches missed.">        if (tweet != null) {</span>
+<span class="fc" id="L69">            user.addTweet(tweet, mentions);</span>
+<span class="fc" id="L70">            return true;</span>
         } else {
-<span class="nc" id="L71">            return false;</span>
+<span class="nc" id="L72">            return false;</span>
         }
     }
 
     @Override
     public boolean removeTweet(Tweet tweet) {
-<span class="pc bpc" id="L77" title="1 of 2 branches missed.">        if (tweet != null) {</span>
-<span class="fc" id="L78">            users.get(0).removeTweet(tweet);</span>
-<span class="fc" id="L79">            return true;</span>
+<span class="pc bpc" id="L78" title="1 of 2 branches missed.">        if (tweet != null) {</span>
+<span class="fc" id="L79">            users.get(0).removeTweet(tweet);</span>
+<span class="fc" id="L80">            return true;</span>
         } else {
-<span class="nc" id="L81">            return false;</span>
+<span class="nc" id="L82">            return false;</span>
         }
     }
 
     @Override
     public boolean followUser(User user, User followingUser) {
-<span class="nc bnc" id="L87" title="All 4 branches missed.">        if (user != null &amp;&amp; followingUser != null) {</span>
-<span class="nc" id="L88">            user.followUser(followingUser);</span>
-<span class="nc" id="L89">            return true;</span>
+<span class="nc bnc" id="L88" title="All 4 branches missed.">        if (user != null &amp;&amp; followingUser != null) {</span>
+<span class="nc" id="L89">            user.followUser(followingUser);</span>
+<span class="nc" id="L90">            return true;</span>
         } else {
-<span class="nc" id="L91">            return false;</span>
+<span class="nc" id="L92">            return false;</span>
         }
     }
 
     @Override
     public boolean unfollowUser(User user, User unfollowingUser) {
-<span class="nc bnc" id="L97" title="All 4 branches missed.">        if (user != null &amp;&amp; unfollowingUser != null) {</span>
-<span class="nc" id="L98">            user.unfollowUser(unfollowingUser);</span>
-<span class="nc" id="L99">            return true;</span>
+<span class="nc bnc" id="L98" title="All 4 branches missed.">        if (user != null &amp;&amp; unfollowingUser != null) {</span>
+<span class="nc" id="L99">            user.unfollowUser(unfollowingUser);</span>
+<span class="nc" id="L100">            return true;</span>
         }
-<span class="nc" id="L101">        return false;</span>
+<span class="nc" id="L102">        return false;</span>
     }
 
     @Override
     public List&lt;User&gt; getFollowingUsers(User user) {
-<span class="nc bnc" id="L106" title="All 2 branches missed.">        if (user != null) {</span>
-<span class="nc" id="L107">            return user.getFollowing();</span>
+<span class="nc bnc" id="L107" title="All 2 branches missed.">        if (user != null) {</span>
+<span class="nc" id="L108">            return user.getFollowing();</span>
         } else {
-<span class="nc" id="L109">            return null;</span>
+<span class="nc" id="L110">            return null;</span>
         }
     }
 
     @Override
     public List&lt;User&gt; getFollowers(User user) {
-<span class="pc bpc" id="L115" title="1 of 2 branches missed.">        if (user != null) {</span>
-<span class="fc" id="L116">            return user.getFollowers();</span>
+<span class="pc bpc" id="L116" title="1 of 2 branches missed.">        if (user != null) {</span>
+<span class="fc" id="L117">            return user.getFollowers();</span>
         } else {
-<span class="nc" id="L118">            return null;</span>
+<span class="nc" id="L119">            return null;</span>
         }
     }
 
     @Override
     public List&lt;Tweet&gt; getTweetsByUser(User user) {
-<span class="pc bpc" id="L124" title="1 of 2 branches missed.">        if (user != null) {</span>
-<span class="fc" id="L125">            return user.getTweets();</span>
+<span class="pc bpc" id="L125" title="1 of 2 branches missed.">        if (user != null) {</span>
+<span class="fc" id="L126">            return user.getTweets();</span>
         } else {
-<span class="nc" id="L127">            return null;</span>
+<span class="nc" id="L128">            return null;</span>
         }
     }
 
     @Override
     public boolean likeTweet(User user, Tweet tweetToLike) {
-<span class="pc bpc" id="L133" title="2 of 4 branches missed.">        if (user != null &amp;&amp; tweetToLike != null) {</span>
-<span class="fc" id="L134">            user.likeTweet(tweetToLike);</span>
-<span class="fc" id="L135">            return true;</span>
+<span class="pc bpc" id="L134" title="2 of 4 branches missed.">        if (user != null &amp;&amp; tweetToLike != null) {</span>
+<span class="fc" id="L135">            user.likeTweet(tweetToLike);</span>
+<span class="fc" id="L136">            return true;</span>
         } else {
-<span class="nc" id="L137">            return false;</span>
+<span class="nc" id="L138">            return false;</span>
         }
     }
 
     @Override
     public User findUserByName(String name) {
-<span class="nc bnc" id="L143" title="All 2 branches missed.">        for (User user : users) {</span>
-<span class="nc bnc" id="L144" title="All 2 branches missed.">            if (user.getName().equals(name)) {</span>
-<span class="nc" id="L145">                return user;</span>
+<span class="nc bnc" id="L144" title="All 2 branches missed.">        for (User user : users) {</span>
+<span class="nc bnc" id="L145" title="All 2 branches missed.">            if (user.getName().equals(name)) {</span>
+<span class="nc" id="L146">                return user;</span>
             } else {
-<span class="nc" id="L147">                return null;</span>
+<span class="nc" id="L148">                return null;</span>
             }
         }
-<span class="nc" id="L150">        return null;</span>
+<span class="nc" id="L151">        return null;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

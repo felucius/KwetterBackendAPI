@@ -59,9 +59,10 @@ import javax.inject.Inject;
      * @return true if the user has succesfully been removed or false when the
      * action could not have been completed.
      */
+    /*
     public boolean removeUser(User user) {
-<span class="nc" id="L63">        return userDAO.removeUser(user);</span>
-    }
+        return userDAO.removeUser(user);
+    }*/
 
     /**
      * This method finds the user by it's user id. This id is passed on from the
@@ -71,7 +72,7 @@ import javax.inject.Inject;
      * @return the user object.
      */
     public User findUser(Long id) {
-<span class="nc" id="L74">        return userDAO.findUser(id);</span>
+<span class="nc" id="L75">        return userDAO.findUser(id);</span>
     }
     
     /**
@@ -80,7 +81,7 @@ import javax.inject.Inject;
      * @return 
      */
     public User findUserByName(String name){
-<span class="nc" id="L83">        return userDAO.findUserByName(name);</span>
+<span class="nc" id="L84">        return userDAO.findUserByName(name);</span>
     }
 
     /**
@@ -94,7 +95,7 @@ import javax.inject.Inject;
      * false when this action could not have been completed.
      */
     public boolean addTweet(User user, Tweet tweet, List&lt;User&gt; mentions) {
-<span class="nc" id="L97">        return userDAO.addTweet(user, tweet, mentions);</span>
+<span class="nc" id="L98">        return userDAO.addTweet(user, tweet, mentions);</span>
     }
 
     /**
@@ -105,7 +106,7 @@ import javax.inject.Inject;
      * action could not have been completed.
      */
     public boolean removeTweet(Tweet tweet) {
-<span class="nc" id="L108">        return userDAO.removeTweet(tweet);</span>
+<span class="nc" id="L109">        return userDAO.removeTweet(tweet);</span>
     }
 
     /**
@@ -118,7 +119,7 @@ import javax.inject.Inject;
      * 'followingUser' object or false when this action did not succeed.
      */
     public boolean followUser(User user, User followingUser) {
-<span class="nc" id="L121">        return userDAO.followUser(user, followingUser);</span>
+<span class="nc" id="L122">        return userDAO.followUser(user, followingUser);</span>
     }
 
     /**
@@ -131,7 +132,7 @@ import javax.inject.Inject;
      * object or false when this action could not succeed.
      */
     public boolean unfollowUser(User user, User unfollowingUser) {
-<span class="nc" id="L134">        return userDAO.unfollowUser(user, unfollowingUser);</span>
+<span class="nc" id="L135">        return userDAO.unfollowUser(user, unfollowingUser);</span>
     }
 
     /**
@@ -141,7 +142,7 @@ import javax.inject.Inject;
      * @return a list of users that the 'user' object follows.
      */
     public List&lt;User&gt; getFollowingUsers(User user) {
-<span class="nc" id="L144">        return userDAO.getFollowingUsers(user);</span>
+<span class="nc" id="L145">        return userDAO.getFollowingUsers(user);</span>
     }
 
     /**
@@ -151,7 +152,7 @@ import javax.inject.Inject;
      * @return a list of users that follow the 'user' object.
      */
     public List&lt;User&gt; getFollowers(User user) {
-<span class="nc" id="L154">        return userDAO.getFollowers(user);</span>
+<span class="nc" id="L155">        return userDAO.getFollowers(user);</span>
     }
 
     /**
@@ -161,7 +162,7 @@ import javax.inject.Inject;
      * @return a list of tweets from that single user.
      */
     public List&lt;Tweet&gt; getTweetsByUser(User user) {
-<span class="nc" id="L164">        return userDAO.getTweetsByUser(user);</span>
+<span class="nc" id="L165">        return userDAO.getTweetsByUser(user);</span>
     }
 
     /**
@@ -174,7 +175,7 @@ import javax.inject.Inject;
      * when this action could not have been succeeded.
      */
     public boolean likeTweet(User user, Tweet tweetToLike) {
-<span class="nc" id="L177">        return userDAO.likeTweet(user, tweetToLike);</span>
+<span class="nc" id="L178">        return userDAO.likeTweet(user, tweetToLike);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

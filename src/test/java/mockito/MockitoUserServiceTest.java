@@ -182,6 +182,7 @@ public class MockitoUserServiceTest {
         verify(userDAO).createUser(user1);
     }
 
+    /*
     @Test
     public void testRemoveUser() {
         System.out.println("Test remove user on Mockito - UserService layer");
@@ -190,7 +191,7 @@ public class MockitoUserServiceTest {
         assertEquals(true, userDAO.removeUser(user1));
         userService.removeUser(user1);
         verify(userDAO).removeUser(user1);
-    }
+    }*/
 
     @Test
     public void testFindUser() {

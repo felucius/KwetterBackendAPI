@@ -7,10 +7,12 @@ package boundary.rest;
 
 import domain.Tweet;
 import domain.User;
+import domain.UserDTO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -66,11 +68,27 @@ public class UserResource {
      * database.
      */
     @POST
-    @Path("createuser/{username}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/createuser/{username}")
     public User createUser(@PathParam("username") String username) {
         User user = new User(username);
         return userService.createUser(user);
     }
+    
+    /*
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("createuser")
+    public User createUser(User user) {
+        //User user = new User(username);
+        //return userService.createUser(user);
+        //System.out.println("USER USERNAME: " + user.getName());
+        //System.out.println("USER EMAIL: " + user.getEmail());
+        //System.out.println("USER OBJECT: " + user.toString());
+        return userService.createUser(user);
+        //return user;
+    }
+    */
 
     /**
      * GET request from the userService. When calling this method, the user id
@@ -102,17 +120,16 @@ public class UserResource {
      * DELETE request to the userService. When this method is called, the user
      * id is given so the account with that specific id can be removed.
      *
-     * @param user
      * @param id of the user object or account, that is going to be removed.
      */
+    /*
     @DELETE
-    @Path("removeuser/{id}")
+    @Path("removeuser/{id}") // Not working on old existing users. Does work on new created users.
     public boolean removeUser(@PathParam("id") Long id) {
         System.out.println("Rest layer value: " + id);
         return userService.removeUser(userService.findUser(id));
-    }
+    }*/
     
-    //TODO: Change to dynamic method instead of static testing method
     @POST
     @Path("addtweet/{username}/{tweetcontent}/{tags}/{mention}")
     public boolean addTweet(@PathParam("username") String userName, 

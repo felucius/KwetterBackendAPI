@@ -59,9 +59,10 @@ public class UserService {
      * @return true if the user has succesfully been removed or false when the
      * action could not have been completed.
      */
+    /*
     public boolean removeUser(User user) {
         return userDAO.removeUser(user);
-    }
+    }*/
 
     /**
      * This method finds the user by it's user id. This id is passed on from the

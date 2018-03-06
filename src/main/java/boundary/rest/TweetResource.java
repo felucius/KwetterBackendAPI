@@ -7,7 +7,6 @@ package boundary.rest;
 
 import domain.Tweet;
 import domain.User;
-import domain.UserDTO;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -58,8 +57,8 @@ public class TweetResource {
      * @return the tweet object that has a mentioned user on it.
      */
     @POST
-    @Path("addmention/{tweetContent}/{username}")
-    public boolean addMention(@PathParam("tweetContent") Long tweetId, @PathParam("username") String userName) {
+    @Path("addmention/{tweetId}/{username}")
+    public boolean addMention(@PathParam("tweetId") Long tweetId, @PathParam("username") String userName) {
         return tweetService.addMention(findTweet(tweetId), userService.findUserByName(userName));
     }
 

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mockito;
+package rest;
 
 import boundary.rest.TweetResource;
 import boundary.rest.UserResource;
@@ -34,7 +34,7 @@ import service.UserService;
  */
 public class MockitoTweetRestTest {
 
-    /*
+    
     @Mock
     private TweetResource tweetResource = null;
     @Mock
@@ -93,8 +93,8 @@ public class MockitoTweetRestTest {
 
         tweet1 = mock(Tweet.class);
         tweet2 = mock(Tweet.class);
-        tweetResource.addMention(tweet1, user1);
-        userResource.addTweet(user1, tweet1, users);
+        tweetResource.addMention(tweet1.getId(), user1.getName());
+        //userResource.addTweet(user1.getName(), tweet1.getMessage(), users.get(0).ge);
     }
 
     @After
@@ -105,9 +105,9 @@ public class MockitoTweetRestTest {
     public void testAddMention() {
         System.out.println("Test add mention on Mockito - TweetService layer");
 
-        when(tweetService.addMention(tweet1, user1)).thenReturn(tweet1);
-        assertEquals(tweet1, tweetService.addMention(tweet1, user1));
-        tweetResource.addMention(tweet1, user1);
+        when(tweetService.addMention(tweet1, user1)).thenReturn(true);
+        assertEquals(true, tweetService.addMention(tweet1, user1));
+        tweetResource.addMention(tweet1.getId(), user1.getName());
         verify(tweetService).addMention(tweet1, user1);
     }
 
@@ -117,7 +117,7 @@ public class MockitoTweetRestTest {
 
         when(tweetService.getLikes(tweet1)).thenReturn(users);
         assertEquals(users, tweetService.getLikes(tweet1));
-        tweetResource.getLikes(tweet1);
+        tweetResource.getLikes(tweet1.getId());
         verify(tweetService).getLikes(tweet1);
     }
 
@@ -127,7 +127,7 @@ public class MockitoTweetRestTest {
 
         when(tweetService.getMentions(tweet1)).thenReturn(users);
         assertEquals(users, tweetService.getMentions(tweet1));
-        tweetResource.getMentions(tweet1);
+        tweetResource.getMentions(tweet1.getId());
         verify(tweetService).getMentions(tweet1);
     }
 
@@ -137,7 +137,7 @@ public class MockitoTweetRestTest {
 
         when(tweetService.getTweetsOfFollowingUsers(user1)).thenReturn(tweets);
         assertEquals(tweets, tweetService.getTweetsOfFollowingUsers(user1));
-        tweetResource.getTweetsOfFollowingUsers(user1);
+        tweetResource.getTweetsOfFollowingUsers(user1.getName());
         verify(tweetService).getTweetsOfFollowingUsers(user1);
     }
 
@@ -149,5 +149,5 @@ public class MockitoTweetRestTest {
         assertEquals(tweets, tweetService.getAllTweets());
         tweetResource.getAllTweets();
         verify(tweetService).getAllTweets();
-    }*/
+    }
 }

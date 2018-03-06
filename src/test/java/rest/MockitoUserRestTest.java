@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mockito;
+package rest;
 
 import boundary.rest.UserResource;
 import dao.UserDAO;
@@ -29,7 +29,7 @@ import service.UserService;
  * @author M
  */
 public class MockitoUserRestTest {
-    /*
+    
     @Mock
     private UserResource userResource = null;
     @Mock
@@ -144,19 +144,19 @@ public class MockitoUserRestTest {
         users.add(user10);
         tweet10 = mock(Tweet.class);
 
-        userResource.followUser(user1, user2);
-        userResource.followUser(user1, user3);
+        userResource.followUser(user1.getName(), user2.getName());
+        userResource.followUser(user1.getName(), user3.getName());
 
-        userResource.followUser(user2, user1);
-        userResource.followUser(user2, user3);
-        userResource.followUser(user2, user4);
+        userResource.followUser(user2.getName(), user1.getName());
+        userResource.followUser(user2.getName(), user3.getName());
+        userResource.followUser(user2.getName(), user4.getName());
 
-        userResource.followUser(user5, user1);
-        userResource.followUser(user5, user6);
+        userResource.followUser(user5.getName(), user1.getName());
+        userResource.followUser(user5.getName(), user6.getName());
 
-        userResource.followUser(user7, user2);
+        userResource.followUser(user7.getName(), user2.getName());
 
-        userResource.followUser(user8, user1);
+        userResource.followUser(user8.getName(), user1.getName());
     }
 
     @After
@@ -179,10 +179,11 @@ public class MockitoUserRestTest {
 
         when(userService.createUser(user1)).thenReturn(user1);
         assertEquals(user1, userService.createUser(user1));
-        userResource.createUser(user1);
+        userResource.createUser(user1.getName());
         verify(userService).createUser(user1);
     }
 
+    /*
     @Test
     public void testRemoveUser() {
         System.out.println("Test remove user on Mockito - UserService layer");
@@ -191,7 +192,7 @@ public class MockitoUserRestTest {
         assertEquals(true, userService.removeUser(user1));
         userResource.removeUser(user1);
         verify(userService).removeUser(user1);
-    }
+    }*/
 
     @Test
     public void testFindUser() {
@@ -209,7 +210,8 @@ public class MockitoUserRestTest {
 
         when(userService.addTweet(user1, tweet1, users)).thenReturn(true);
         assertEquals(true, userService.addTweet(user1, tweet1, users));
-        userResource.addTweet(user1, tweet1, users);
+        //userResource.addTweet(user1.getName(), tweet1.getMessage(), tags.get(0), 
+                //users.get(user1.getId().intValue()).getName());
         verify(userService).addTweet(user1, tweet1, users);
     }
 
@@ -219,7 +221,7 @@ public class MockitoUserRestTest {
 
         when(userService.removeTweet(tweet1)).thenReturn(true);
         assertEquals(true, userService.removeTweet(tweet1));
-        userResource.removeTweet(tweet1);
+        userResource.removeTweet(tweet1.getId());
         verify(userService).removeTweet(tweet1);
     }
 
@@ -229,7 +231,7 @@ public class MockitoUserRestTest {
 
         when(userService.followUser(user1, user2)).thenReturn(true);
         assertEquals(true, userService.followUser(user1, user2));
-        userResource.followUser(user1, user2);
+        userResource.followUser(user1.getName(), user2.getName());
         verify(userService).followUser(user1, user2);
     }
 
@@ -239,7 +241,7 @@ public class MockitoUserRestTest {
 
         when(userService.unfollowUser(user1, user2)).thenReturn(true);
         assertEquals(true, userService.unfollowUser(user1, user2));
-        userResource.unfollowUser(user1, user2);
+        userResource.unfollowUser(user1.getName(), user2.getName());
         verify(userService).unfollowUser(user1, user2);
     }
 
@@ -249,7 +251,7 @@ public class MockitoUserRestTest {
 
         when(userService.getFollowingUsers(user1)).thenReturn(users);
         assertEquals(users, userService.getFollowingUsers(user1));
-        userResource.getFollowingUsers(user1);
+        userResource.getFollowingUsers(user1.getName());
         verify(userService).getFollowingUsers(user1);
     }
 
@@ -259,7 +261,7 @@ public class MockitoUserRestTest {
 
         when(userService.getFollowers(user1)).thenReturn(users);
         assertEquals(users, userService.getFollowers(user1));
-        userResource.getFollowers(user1);
+        userResource.getFollowers(user1.getName());
         verify(userService).getFollowers(user1);
     }
 
@@ -267,10 +269,10 @@ public class MockitoUserRestTest {
     public void testGetTweets() {
         System.out.println("Test get tweets on Mockito - UserService layer");
 
-        when(userService.getTweets(user1)).thenReturn(tweets);
-        assertEquals(tweets, userService.getTweets(user1));
-        userResource.getTweets(user1);
-        verify(userService).getTweets(user1);
+        when(userService.getTweetsByUser(user1)).thenReturn(tweets);
+        assertEquals(tweets, userService.getTweetsByUser(user1));
+        userResource.getTweets(user1.getName());
+        verify(userService).getTweetsByUser(user1);
     }
 
     @Test
@@ -279,7 +281,7 @@ public class MockitoUserRestTest {
 
         when(userService.likeTweet(user1, tweet1)).thenReturn(true);
         assertEquals(true, userService.likeTweet(user1, tweet1));
-        userResource.likeTweet(user1, tweet1);
+        userResource.likeTweet(user1.getName(), tweet1.getId());
         verify(userService).likeTweet(user1, tweet1);
-    }*/
+    }
 }

@@ -22,7 +22,7 @@ public interface UserDAO {
     
     User createUser(User user);
     
-    boolean removeUser(User user);
+    //boolean removeUser(User user);
     
     User findUser(Long id);
     

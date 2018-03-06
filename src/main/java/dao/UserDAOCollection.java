@@ -40,6 +40,7 @@ public class UserDAOCollection implements UserDAO {
         }
     }
 
+    /*
     @Override
     public boolean removeUser(User user) {
         if (users.contains(user)) {
@@ -48,7 +49,7 @@ public class UserDAOCollection implements UserDAO {
         } else {
             return false;
         }
-    }
+    }*/
 
     @Override
     public User findUser(Long id) {

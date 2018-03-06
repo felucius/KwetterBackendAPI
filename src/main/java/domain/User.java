@@ -62,6 +62,7 @@ public class User implements Serializable {
     private String email = null;
     private String password = null;
 
+    // When a user is removed it's tweets are removed as well.
     @OneToMany(mappedBy = "tweetedBy")
     private List<Tweet> tweets = null;
 
