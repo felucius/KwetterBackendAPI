@@ -90,6 +90,10 @@ public class TweetService {
         return tweetDAO.findTweetByContent(content);
     }
     
+    public Tweet updateTweet(Tweet tweet){
+        return tweetDAO.updateTweet(tweet);
+    }
+    
     public Tweet createTweet(Tweet tweet){
         return tweetDAO.createTweet(tweet);
     }

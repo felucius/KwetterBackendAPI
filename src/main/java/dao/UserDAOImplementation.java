@@ -88,7 +88,6 @@ public class UserDAOImplementation implements UserDAO {
             return false;
         }
     }*/
-
     /**
      * This method allows a user to be found from the User entity with it's
      * given id.
@@ -327,6 +326,44 @@ public class UserDAOImplementation implements UserDAO {
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
+        }
+    }
+
+    /**
+     * This method allows a user to be promoted.
+     *
+     * @param user is the object that is going to be promoted.
+     * @return true if the user has successfully been promoted or false when the
+     * action could not have been succeeded.
+     */
+    @Override
+    public boolean promoteUser(User user) {
+        try {
+            user.promoteUser(user);
+            em.merge(user);
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * This method allows a user to be demoted.
+     *
+     * @param user is the object that is going to be demoted.
+     * @return true if the user has successfully been demoted or false when the
+     * action could not have been succeeded.
+     */
+    @Override
+    public boolean demoteUser(User user) {
+        try {
+            user.demoteUser(user);
+            em.merge(user);
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
         }
     }
 }

@@ -177,4 +177,12 @@ public class UserService {
     public boolean likeTweet(User user, Tweet tweetToLike) {
         return userDAO.likeTweet(user, tweetToLike);
     }
+    
+    public boolean promoteUser(User user){
+        return userDAO.promoteUser(user);
+    }
+    
+    public boolean demoteUser(User user){
+        return userDAO.demoteUser(user);
+    }
 }

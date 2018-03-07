@@ -147,4 +147,13 @@ public class TweetDAOCollection implements TweetDAO {
             return null;
         }
     }
+
+    @Override
+    public Tweet updateTweet(Tweet tweet) {
+        if(tweet != null){
+            return tweet;
+        }else{
+            return null;
+        }
+    }
 }

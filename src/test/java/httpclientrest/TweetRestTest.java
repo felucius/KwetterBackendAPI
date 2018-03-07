@@ -72,7 +72,7 @@ public class TweetRestTest {
     @Test
     public void addmention() {
         try {
-            HttpUriRequest request = new HttpPost("http://localhost:8080/KwetterBackend_Maxime/api/tweets/addmention/3/maxime");
+            HttpUriRequest request = new HttpPost("http://localhost:8080/KwetterBackend_Maxime/api/tweets/addmention/2/maxime");
             HttpResponse response = HttpClientBuilder.create().build().execute(request);
 
             Boolean result = om.readValue(response.getEntity().getContent(), Boolean.class);
@@ -92,7 +92,7 @@ public class TweetRestTest {
             HttpResponse response = HttpClientBuilder.create().build().execute(request);
 
             List<User> users = om.readValue(response.getEntity().getContent(),
-                    TypeFactory.defaultInstance().constructCollectionType(List.class, String.class));
+                    TypeFactory.defaultInstance().constructCollectionType(List.class, String[].class));
 
             assertEquals(0, users.size());
         } catch (Exception ex) {

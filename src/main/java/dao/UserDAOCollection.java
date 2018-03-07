@@ -50,7 +50,6 @@ public class UserDAOCollection implements UserDAO {
             return false;
         }
     }*/
-
     @Override
     public User findUser(Long id) {
         for (User user : users) {
@@ -149,5 +148,25 @@ public class UserDAOCollection implements UserDAO {
             }
         }
         return null;
+    }
+
+    @Override
+    public boolean promoteUser(User user) {
+        if (user != null) {
+            user.promoteUser(user);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean demoteUser(User user) {
+        if (user != null) {
+            user.demoteUser(user);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

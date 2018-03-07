@@ -33,4 +33,6 @@ public interface TweetDAO {
     List<Tweet> findTweetByContent(String content);
     
     Tweet createTweet(Tweet tweet);
+    
+    Tweet updateTweet(Tweet tweet);
 }

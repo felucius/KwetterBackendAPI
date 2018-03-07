@@ -7,7 +7,6 @@ package boundary.rest;
 
 import domain.Tweet;
 import domain.User;
-import domain.UserDTO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -194,4 +193,19 @@ public class UserResource {
     public boolean likeTweet(@PathParam("user") String userName, @PathParam("tweettolike") Long tweetId){
         return userService.likeTweet(userService.findUserByName(userName), tweetService.findTweet(tweetId));
     }
+    
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("promote")
+    public boolean promoteUser(User user){
+        return userService.promoteUser(user);
+    }
+    
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("demote")
+    public boolean demoteUser(User user){
+        return userService.demoteUser(user);
+    }
+    
 }

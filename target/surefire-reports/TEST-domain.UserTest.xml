@@ -77,7 +77,7 @@
   <testcase classname="domain.UserTest" name="testGetBio" time="0"/>
   <testcase classname="domain.UserTest" name="testGetWebsite" time="0"/>
   <testcase classname="domain.UserTest" name="testFollowUser" time="0"/>
-  <testcase classname="domain.UserTest" name="testSetName" time="0.001"/>
+  <testcase classname="domain.UserTest" name="testSetName" time="0"/>
   <testcase classname="domain.UserTest" name="testSetPicture" time="0"/>
   <testcase classname="domain.UserTest" name="testSetBio" time="0"/>
   <testcase classname="domain.UserTest" name="testGetFollowers" time="0"/>

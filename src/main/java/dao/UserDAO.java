@@ -43,4 +43,8 @@ public interface UserDAO {
     List<Tweet> getTweetsByUser(User user);
     
     boolean likeTweet(User user, Tweet tweetToLike);
+    
+    boolean promoteUser(User user);
+    
+    boolean demoteUser(User user);
 }

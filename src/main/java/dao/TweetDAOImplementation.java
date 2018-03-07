@@ -60,7 +60,7 @@ public class TweetDAOImplementation implements TweetDAO {
     @Override
     public List<User> getLikes(Tweet tweet) {
         List<User> users = null;
-        try {            
+        try {
             users = em.createNamedQuery("Tweet.getLikes").
                     setParameter("tweetId", tweet.getId()).
                     getResultList();
@@ -177,6 +177,16 @@ public class TweetDAOImplementation implements TweetDAO {
         try {
             em.persist(tweet);
             return createdTweet;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public Tweet updateTweet(Tweet tweet) {
+        try {
+            return em.merge(tweet);
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
