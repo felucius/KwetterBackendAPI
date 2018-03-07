@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserResource.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">KwetterBackend_Maxime</a> &gt; <a href="index.source.html" class="el_package">boundary.rest</a> &gt; <span class="el_source">UserResource.java</span></div><h1>UserResource.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package boundary.rest;
+
+import domain.Tweet;
+import domain.User;
+import java.util.ArrayList;
+import java.util.List;
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import service.TweetService;
+import service.UserService;
+
+/**
+ * Api call where the user makes a request to the backend to receive data by
+ * going to the path 'user', through the 'api' path, configured at JAXRSconfig.
+ *
+ * Stateless beans is used here, because the request is simple and does not need
+ * to be memorized by the server.
+ *
+ * @author M
+ */
+@Stateless
+@Path(&quot;users&quot;)
+@Produces(MediaType.APPLICATION_JSON)
+<span class="nc" id="L37">public class UserResource {</span>
+
+    /**
+     * Injecting ensures the creation of the variable or constructor without
+     * using the 'new' keyword.
+     */
+    @Inject
+    UserService userService;
+    
+    @Inject
+    TweetService tweetService;
+
+    /**
+     * GET request from the userService. Userservice get it's data from the DAO.
+     * The DAO (Data Access Object) get it's information from the database,
+     * through it's persistence context.
+     *
+     * @return a list of all users.
+     */
+    @GET
+    public List&lt;User&gt; getAllUsers() {
+<span class="nc" id="L58">        return userService.getAllUsers();</span>
+    }
+
+    /**
+     * POST request to the userService. This method allows a new user to be
+     * created Information is send to the userService, to the userDAO and
+     * finally to the entity manager.
+     *
+     * @param username is the object that is created and being persisted to the
+     * database.
+     */
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path(&quot;/createuser/{username}&quot;)
+    public User createUser(@PathParam(&quot;username&quot;) String username) {
+<span class="nc" id="L73">        User user = new User(username);</span>
+<span class="nc" id="L74">        return userService.createUser(user);</span>
+    }
+    
+    /*
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path(&quot;createuser&quot;)
+    public User createUser(User user) {
+        //User user = new User(username);
+        //return userService.createUser(user);
+        //System.out.println(&quot;USER USERNAME: &quot; + user.getName());
+        //System.out.println(&quot;USER EMAIL: &quot; + user.getEmail());
+        //System.out.println(&quot;USER OBJECT: &quot; + user.toString());
+        return userService.createUser(user);
+        //return user;
+    }
+    */
+
+    /**
+     * GET request from the userService. When calling this method, the user id
+     * is given to the userService. From there to the DAO and from there to the
+     * entity manager to get the data from the database.
+     *
+     * @param id of the user to be found.
+     * @return the user object.
+     */
+    @GET
+    @Path(&quot;finduser/{id}&quot;)
+    public User findUser(@PathParam(&quot;id&quot;) Long id) {
+<span class="nc" id="L103">        return userService.findUser(id);</span>
+    }
+
+    /**
+     * This method allows a user to be found by it's username.
+     * 
+     * @param name is the name to be searched on as an input parameter.
+     * @return the user object.
+     */
+    @GET
+    @Path(&quot;finduserbyname/{name}&quot;)
+    public User findUserByName(@PathParam(&quot;name&quot;) String name){
+<span class="nc" id="L115">        return userService.findUserByName(name);</span>
+    }
+    
+    /**
+     * DELETE request to the userService. When this method is called, the user
+     * id is given so the account with that specific id can be removed.
+     *
+     * @param id of the user object or account, that is going to be removed.
+     */
+    /*
+    @DELETE
+    @Path(&quot;removeuser/{id}&quot;) // Not working on old existing users. Does work on new created users.
+    public boolean removeUser(@PathParam(&quot;id&quot;) Long id) {
+        System.out.println(&quot;Rest layer value: &quot; + id);
+        return userService.removeUser(userService.findUser(id));
+    }*/
+    
+    @POST
+    @Path(&quot;addtweet/{username}/{tweetcontent}/{tags}/{mention}&quot;)
+    public boolean addTweet(@PathParam(&quot;username&quot;) String userName, 
+            @PathParam(&quot;tweetcontent&quot;) String tweetContent,
+            @PathParam(&quot;tags&quot;) String tag, @PathParam(&quot;mention&quot;) String userMention){
+        
+<span class="nc" id="L138">        List&lt;User&gt; mentions = new ArrayList();</span>
+<span class="nc" id="L139">        List&lt;String&gt; tags = new ArrayList();</span>
+        
+<span class="nc" id="L141">        tags.add(tag);</span>
+<span class="nc" id="L142">        mentions.add(userService.findUserByName(userMention));</span>
+        
+<span class="nc" id="L144">        Tweet tweet = new Tweet(tweetContent, tags, userService.findUserByName(userName));</span>
+<span class="nc" id="L145">        return userService.addTweet(userService.findUserByName(userName), tweet, mentions);</span>
+    }
+    
+    @GET
+    @Path(&quot;findtweet/{id}&quot;)
+    public Tweet findTweet(@PathParam(&quot;id&quot;) Long id){
+<span class="nc" id="L151">        return tweetService.findTweet(id);</span>
+    }
+    
+    
+    @DELETE
+    @Path(&quot;removetweet/{id}&quot;)
+    public boolean removeTweet(@PathParam(&quot;id&quot;) Long tweetId){
+<span class="nc" id="L158">        return userService.removeTweet(tweetService.findTweet(tweetId));</span>
+    }
+
+    @GET
+    @Path(&quot;followuser/{user}/{followuser}&quot;)
+    public boolean followUser(@PathParam(&quot;user&quot;) String username, @PathParam(&quot;followuser&quot;) String followingUser){
+<span class="nc" id="L164">        return userService.followUser(userService.findUserByName(username), userService.findUserByName(followingUser));</span>
+    }
+
+    @GET
+    @Path(&quot;unfollowuser/{user}/{unfollowuser}&quot;)
+    public boolean unfollowUser(@PathParam(&quot;user&quot;) String username, @PathParam(&quot;unfollowuser&quot;) String unfollowingUser){
+<span class="nc" id="L170">        return userService.unfollowUser(userService.findUserByName(username), userService.findUserByName(unfollowingUser));</span>
+    }
+
+    @GET
+    @Path(&quot;getfollowers/{getfollowers}&quot;)
+    public List&lt;User&gt; getFollowingUsers(@PathParam(&quot;getfollowers&quot;) String userName){
+<span class="nc" id="L176">        return userService.getFollowingUsers(userService.findUserByName(userName));</span>
+    }
+
+    @GET
+    @Path(&quot;getfollowing/{getfollowing}&quot;)
+    public List&lt;User&gt; getFollowers(@PathParam(&quot;getfollowing&quot;) String userName){
+<span class="nc" id="L182">        return userService.getFollowers(userService.findUserByName(userName));</span>
+    }
+
+    @GET
+    @Path(&quot;gettweetsfromuser/{username}&quot;)
+    public List&lt;Tweet&gt; getTweets(@PathParam(&quot;username&quot;) String username){
+<span class="nc" id="L188">        return userService.getTweetsByUser(userService.findUserByName(username));</span>
+    }
+
+    @POST
+    @Path(&quot;liketweet/{user}/{tweettolike}&quot;)
+    public boolean likeTweet(@PathParam(&quot;user&quot;) String userName, @PathParam(&quot;tweettolike&quot;) Long tweetId){
+<span class="nc" id="L194">        return userService.likeTweet(userService.findUserByName(userName), tweetService.findTweet(tweetId));</span>
+    }
+    
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path(&quot;promote&quot;)
+    public boolean promoteUser(User user){
+<span class="nc" id="L201">        return userService.promoteUser(user);</span>
+    }
+    
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path(&quot;demote&quot;)
+    public boolean demoteUser(User user){
+<span class="nc" id="L208">        return userService.demoteUser(user);</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>
