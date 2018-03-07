@@ -207,11 +207,16 @@ public class User implements Serializable {
     public List&lt;User&gt; getFollowers() {
 <span class="fc" id="L208">        return followers;</span>
     }
-    
+
+    /**
+     * Setting the followers of a single user.
+     *
+     * @param followers
+     */
     @JsonbTransient
-    public void setFollowers(List&lt;User&gt; followers){
-<span class="nc" id="L213">        this.followers = followers;</span>
-<span class="nc" id="L214">    }</span>
+    public void setFollowers(List&lt;User&gt; followers) {
+<span class="nc" id="L218">        this.followers = followers;</span>
+<span class="nc" id="L219">    }</span>
 
     /**
      * This method returns all the users, that the user object follows.
@@ -220,13 +225,18 @@ public class User implements Serializable {
      */
     @JsonbTransient
     public List&lt;User&gt; getFollowing() {
-<span class="nc" id="L223">        return following;</span>
+<span class="nc" id="L228">        return following;</span>
     }
-    
+
+    /**
+     * Setting the following users of a single user.
+     *
+     * @param following
+     */
     @JsonbTransient
-    public void setFollowing(List&lt;User&gt; following){
-<span class="nc" id="L228">        this.following = following;</span>
-<span class="nc" id="L229">    }</span>
+    public void setFollowing(List&lt;User&gt; following) {
+<span class="nc" id="L238">        this.following = following;</span>
+<span class="nc" id="L239">    }</span>
 
     /**
      * This method allows a tweet to be added to the liked tweets.
@@ -234,8 +244,8 @@ public class User implements Serializable {
      * @param tweet to be added to the likes.
      */
     public void likeTweet(Tweet tweet) {
-<span class="fc" id="L237">        tweet.likeTweet(this);</span>
-<span class="fc" id="L238">    }</span>
+<span class="fc" id="L247">        tweet.likeTweet(this);</span>
+<span class="fc" id="L248">    }</span>
 
     /**
      * Retrieving the picture of the user.
@@ -243,7 +253,7 @@ public class User implements Serializable {
      * @return picture of user.
      */
     public String getPicture() {
-<span class="fc" id="L246">        return this.picture;</span>
+<span class="fc" id="L256">        return this.picture;</span>
     }
 
     /**
@@ -252,8 +262,8 @@ public class User implements Serializable {
      * @param picture of the user that is going to be set.
      */
     public void setPicture(String picture) {
-<span class="fc" id="L255">        this.picture = picture;</span>
-<span class="fc" id="L256">    }</span>
+<span class="fc" id="L265">        this.picture = picture;</span>
+<span class="fc" id="L266">    }</span>
 
     /**
      * Retrieving the website of the user.
@@ -261,7 +271,7 @@ public class User implements Serializable {
      * @return the website.
      */
     public String getWebsite() {
-<span class="fc" id="L264">        return this.website;</span>
+<span class="fc" id="L274">        return this.website;</span>
     }
 
     /**
@@ -270,8 +280,8 @@ public class User implements Serializable {
      * @param website of the users that is going to be set.
      */
     public void setWebsite(String website) {
-<span class="fc" id="L273">        this.website = website;</span>
-<span class="fc" id="L274">    }</span>
+<span class="fc" id="L283">        this.website = website;</span>
+<span class="fc" id="L284">    }</span>
 
     /**
      * Retrieving the name of the user.
@@ -279,7 +289,7 @@ public class User implements Serializable {
      * @return the name of the user.
      */
     public String getName() {
-<span class="fc" id="L282">        return this.name;</span>
+<span class="fc" id="L292">        return this.name;</span>
     }
 
     /**
@@ -288,8 +298,8 @@ public class User implements Serializable {
      * @param name of the user that is going to be set.
      */
     public void setName(String name) {
-<span class="fc" id="L291">        this.name = name;</span>
-<span class="fc" id="L292">    }</span>
+<span class="fc" id="L301">        this.name = name;</span>
+<span class="fc" id="L302">    }</span>
 
     /**
      * Retrieving the bio of the user.
@@ -297,7 +307,7 @@ public class User implements Serializable {
      * @return the bio.
      */
     public String getBio() {
-<span class="fc" id="L300">        return this.bio;</span>
+<span class="fc" id="L310">        return this.bio;</span>
     }
 
     /**
@@ -306,8 +316,8 @@ public class User implements Serializable {
      * @param bio that is going to be set.
      */
     public void setBio(String bio) {
-<span class="fc" id="L309">        this.bio = bio;</span>
-<span class="fc" id="L310">    }</span>
+<span class="fc" id="L319">        this.bio = bio;</span>
+<span class="fc" id="L320">    }</span>
 
     /**
      * Retrieving the location of the user.
@@ -315,7 +325,7 @@ public class User implements Serializable {
      * @return the location of the user.
      */
     public String getLocation() {
-<span class="fc" id="L318">        return this.location;</span>
+<span class="fc" id="L328">        return this.location;</span>
     }
 
     /**
@@ -324,8 +334,8 @@ public class User implements Serializable {
      * @param location to be set.
      */
     public void setLocation(String location) {
-<span class="fc" id="L327">        this.location = location;</span>
-<span class="fc" id="L328">    }</span>
+<span class="fc" id="L337">        this.location = location;</span>
+<span class="fc" id="L338">    }</span>
 
     /**
      * Retrieving the email of the user.
@@ -333,7 +343,7 @@ public class User implements Serializable {
      * @return email of the user.
      */
     public String getEmail() {
-<span class="fc" id="L336">        return this.email;</span>
+<span class="fc" id="L346">        return this.email;</span>
     }
 
     /**
@@ -342,8 +352,8 @@ public class User implements Serializable {
      * @param email of the user to be set.
      */
     public void setEmail(String email) {
-<span class="fc" id="L345">        this.email = email;</span>
-<span class="fc" id="L346">    }</span>
+<span class="fc" id="L355">        this.email = email;</span>
+<span class="fc" id="L356">    }</span>
 
     /**
      * Retrieving the password of the user.
@@ -351,7 +361,7 @@ public class User implements Serializable {
      * @return password of user.
      */
     public String getPassword() {
-<span class="fc" id="L354">        return this.password;</span>
+<span class="fc" id="L364">        return this.password;</span>
     }
 
     /**
@@ -360,8 +370,8 @@ public class User implements Serializable {
      * @param password of the user that is going to be set.
      */
     public void setPassword(String password) {
-<span class="fc" id="L363">        this.password = password;</span>
-<span class="fc" id="L364">    }</span>
+<span class="fc" id="L373">        this.password = password;</span>
+<span class="fc" id="L374">    }</span>
 
     /**
      * Setting new tweets to the list.
@@ -369,8 +379,8 @@ public class User implements Serializable {
      * @param tweets to be added.
      */
     public void setTweets(List&lt;Tweet&gt; tweets) {
-<span class="fc" id="L372">        this.tweets = tweets;</span>
-<span class="fc" id="L373">    }</span>
+<span class="fc" id="L382">        this.tweets = tweets;</span>
+<span class="fc" id="L383">    }</span>
 
     /**
      * Retrieving all tweets that the user made.
@@ -379,7 +389,7 @@ public class User implements Serializable {
      */
     @JsonbTransient
     public List&lt;Tweet&gt; getTweets() {
-<span class="fc" id="L382">        return this.tweets;</span>
+<span class="fc" id="L392">        return this.tweets;</span>
     }
 
     /**
@@ -388,8 +398,8 @@ public class User implements Serializable {
      * @param id to be set.
      */
     public void setId(Long id) {
-<span class="fc" id="L391">        this.id = id;</span>
-<span class="fc" id="L392">    }</span>
+<span class="fc" id="L401">        this.id = id;</span>
+<span class="fc" id="L402">    }</span>
 
     /**
      * Retrieving the id of a single user.
@@ -397,38 +407,42 @@ public class User implements Serializable {
      * @return the id of a user.
      */
     public Long getId() {
-<span class="fc" id="L400">        return this.id;</span>
+<span class="fc" id="L410">        return this.id;</span>
     }
 
     /**
      * Setting the user role of a single user object.
-     * 
+     *
      * @param userRole to be added to the user.
      */
     public void setUserRole(UserRole userRole) {
-<span class="nc" id="L409">        this.userRole = userRole;</span>
-<span class="nc" id="L410">    }</span>
+<span class="nc" id="L419">        this.userRole = userRole;</span>
+<span class="nc" id="L420">    }</span>
 
     /**
      * Retrieving the user role of a single user object.
-     * 
+     *
      * @return the user object.
      */
     public UserRole getUserRole() {
-<span class="nc" id="L418">        return this.userRole;</span>
+<span class="nc" id="L428">        return this.userRole;</span>
     }
-    
-    public User updateUser(User user){
-<span class="nc" id="L422">        user.setBio(user.getBio());</span>
-<span class="nc" id="L423">        user.setEmail(user.getEmail());</span>
-        //user.setId(user.getId());
-<span class="nc" id="L425">        user.setLocation(user.getLocation());</span>
-        //user.setName(user.getName());
-<span class="nc" id="L427">        user.setPassword(user.getPassword());</span>
-<span class="nc" id="L428">        user.setPicture(user.getPicture());</span>
-<span class="nc" id="L429">        user.setWebsite(user.getWebsite());</span>
-        
-<span class="nc" id="L431">        return user;</span>
+
+    /**
+     * This method updates a single user object with new account information
+     *
+     * @param user is the object that received new values.
+     * @return a new user object filled with user data.
+     */
+    public User updateUser(User user) {
+<span class="nc" id="L438">        user.setBio(user.getBio());</span>
+<span class="nc" id="L439">        user.setEmail(user.getEmail());</span>
+<span class="nc" id="L440">        user.setLocation(user.getLocation());</span>
+<span class="nc" id="L441">        user.setPassword(user.getPassword());</span>
+<span class="nc" id="L442">        user.setPicture(user.getPicture());</span>
+<span class="nc" id="L443">        user.setWebsite(user.getWebsite());</span>
+
+<span class="nc" id="L445">        return user;</span>
     }
 
     /**
@@ -439,20 +453,20 @@ public class User implements Serializable {
      * action could not have been succeeded.
      */
     public UserRole promoteUser(User user) {
-<span class="nc bnc" id="L442" title="All 4 branches missed.">        switch (user.getUserRole()) {</span>
+<span class="nc bnc" id="L456" title="All 4 branches missed.">        switch (user.getUserRole()) {</span>
             case USER:
-<span class="nc" id="L444">                userRole = UserRole.MODERATOR;</span>
-<span class="nc" id="L445">                break;</span>
+<span class="nc" id="L458">                userRole = UserRole.MODERATOR;</span>
+<span class="nc" id="L459">                break;</span>
             case MODERATOR:
-<span class="nc" id="L447">                userRole = UserRole.ADMIN;</span>
-<span class="nc" id="L448">                break;</span>
+<span class="nc" id="L461">                userRole = UserRole.ADMIN;</span>
+<span class="nc" id="L462">                break;</span>
             case ADMIN:
                 // Do Nothing
-<span class="nc" id="L451">                break;</span>
+<span class="nc" id="L465">                break;</span>
             default:
-<span class="nc" id="L453">                userRole = UserRole.USER;</span>
+<span class="nc" id="L467">                userRole = UserRole.USER;</span>
         }
-<span class="nc" id="L455">        return userRole;</span>
+<span class="nc" id="L469">        return userRole;</span>
     }
 
     /**
@@ -463,20 +477,20 @@ public class User implements Serializable {
      * action could not have been succeeded.
      */
     public UserRole demoteUser(User user) {
-<span class="nc bnc" id="L466" title="All 4 branches missed.">        switch (user.getUserRole()) {</span>
+<span class="nc bnc" id="L480" title="All 4 branches missed.">        switch (user.getUserRole()) {</span>
             case USER:
                 // Do nothing
-<span class="nc" id="L469">                break;</span>
+<span class="nc" id="L483">                break;</span>
             case MODERATOR:
-<span class="nc" id="L471">                userRole = UserRole.USER;</span>
-<span class="nc" id="L472">                break;</span>
+<span class="nc" id="L485">                userRole = UserRole.USER;</span>
+<span class="nc" id="L486">                break;</span>
             case ADMIN:
-<span class="nc" id="L474">                userRole = UserRole.MODERATOR;</span>
-<span class="nc" id="L475">                break;</span>
+<span class="nc" id="L488">                userRole = UserRole.MODERATOR;</span>
+<span class="nc" id="L489">                break;</span>
             default:
-<span class="nc" id="L477">                return userRole;</span>
+<span class="nc" id="L491">                return userRole;</span>
         }
-<span class="nc" id="L479">        return userRole;</span>
+<span class="nc" id="L493">        return userRole;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

@@ -178,16 +178,36 @@ import javax.inject.Inject;
 <span class="nc" id="L178">        return userDAO.likeTweet(user, tweetToLike);</span>
     }
     
+    /**
+     * Promotes a single user object that is going to be promoted.
+     * 
+     * @param user is the user that is going to be promoted.
+     * @return true if the action was successful or false when the action
+     * could not have been succeeded.
+     */
     public boolean promoteUser(User user){
-<span class="nc" id="L182">        return userDAO.promoteUser(user);</span>
+<span class="nc" id="L189">        return userDAO.promoteUser(user);</span>
     }
     
+    /**
+     * Demoting a single user.
+     * 
+     * @param user is the object that is going to be demoted
+     * @return true if the action has successfully been added or false
+     * if the action could not been succeeded.
+     */
     public boolean demoteUser(User user){
-<span class="nc" id="L186">        return userDAO.demoteUser(user);</span>
+<span class="nc" id="L200">        return userDAO.demoteUser(user);</span>
     }
     
+    /**
+     * Update a single user object with new user information.
+     * 
+     * @param user is the object that is going to receive new information.
+     * @return a user with updated account information.
+     */
     public User updateUser(User user){
-<span class="nc" id="L190">        return userDAO.updateUser(user);</span>
+<span class="nc" id="L210">        return userDAO.updateUser(user);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>
