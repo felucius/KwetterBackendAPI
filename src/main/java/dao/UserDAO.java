@@ -47,4 +47,6 @@ public interface UserDAO {
     boolean promoteUser(User user);
     
     boolean demoteUser(User user);
+    
+    User updateUser(User user);
 }

@@ -178,11 +178,35 @@ public class UserService {
         return userDAO.likeTweet(user, tweetToLike);
     }
     
+    /**
+     * Promotes a single user object that is going to be promoted.
+     * 
+     * @param user is the user that is going to be promoted.
+     * @return true if the action was successful or false when the action
+     * could not have been succeeded.
+     */
     public boolean promoteUser(User user){
         return userDAO.promoteUser(user);
     }
     
+    /**
+     * Demoting a single user.
+     * 
+     * @param user is the object that is going to be demoted
+     * @return true if the action has successfully been added or false
+     * if the action could not been succeeded.
+     */
     public boolean demoteUser(User user){
         return userDAO.demoteUser(user);
+    }
+    
+    /**
+     * Update a single user object with new user information.
+     * 
+     * @param user is the object that is going to receive new information.
+     * @return a user with updated account information.
+     */
+    public User updateUser(User user){
+        return userDAO.updateUser(user);
     }
 }

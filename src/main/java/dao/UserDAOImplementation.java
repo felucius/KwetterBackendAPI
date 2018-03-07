@@ -366,4 +366,27 @@ public class UserDAOImplementation implements UserDAO {
             return false;
         }
     }
+
+    /**
+     * This method updates a single user object with new information.
+     *
+     * @param user is the object that is going to be receive new information
+     * @return a new user object with updated account information.
+     */
+    @Override
+    public User updateUser(User user) {
+        try {
+            User existingUser = em.find(User.class, user.getId());
+            existingUser.updateUser(user);
+
+            user.setFollowing(existingUser.getFollowing());
+            user.setFollowers(existingUser.getFollowers());
+
+            em.merge(user);
+            return user;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
 }

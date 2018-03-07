@@ -208,5 +208,12 @@ import service.UserService;
 <span class="nc" id="L208">        return userService.demoteUser(user);</span>
     }
     
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path(&quot;updateuser&quot;)
+    public User updateUserInformation(User user){
+<span class="nc" id="L215">        return userService.updateUser(user);</span>
+    }
+    
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

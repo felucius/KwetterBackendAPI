@@ -209,6 +209,16 @@ public class User implements Serializable {
     }
 
     /**
+     * Setting the followers of a single user.
+     *
+     * @param followers
+     */
+    @JsonbTransient
+    public void setFollowers(List<User> followers) {
+        this.followers = followers;
+    }
+
+    /**
      * This method returns all the users, that the user object follows.
      *
      * @return all following users from a specific user.
@@ -216,6 +226,16 @@ public class User implements Serializable {
     @JsonbTransient
     public List<User> getFollowing() {
         return following;
+    }
+
+    /**
+     * Setting the following users of a single user.
+     *
+     * @param following
+     */
+    @JsonbTransient
+    public void setFollowing(List<User> following) {
+        this.following = following;
     }
 
     /**
@@ -392,7 +412,7 @@ public class User implements Serializable {
 
     /**
      * Setting the user role of a single user object.
-     * 
+     *
      * @param userRole to be added to the user.
      */
     public void setUserRole(UserRole userRole) {
@@ -401,11 +421,28 @@ public class User implements Serializable {
 
     /**
      * Retrieving the user role of a single user object.
-     * 
+     *
      * @return the user object.
      */
     public UserRole getUserRole() {
         return this.userRole;
+    }
+
+    /**
+     * This method updates a single user object with new account information
+     *
+     * @param user is the object that received new values.
+     * @return a new user object filled with user data.
+     */
+    public User updateUser(User user) {
+        user.setBio(user.getBio());
+        user.setEmail(user.getEmail());
+        user.setLocation(user.getLocation());
+        user.setPassword(user.getPassword());
+        user.setPicture(user.getPicture());
+        user.setWebsite(user.getWebsite());
+
+        return user;
     }
 
     /**

@@ -42,7 +42,7 @@ public class UserResource {
      */
     @Inject
     UserService userService;
-    
+
     @Inject
     TweetService tweetService;
 
@@ -73,7 +73,7 @@ public class UserResource {
         User user = new User(username);
         return userService.createUser(user);
     }
-    
+
     /*
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -87,8 +87,7 @@ public class UserResource {
         return userService.createUser(user);
         //return user;
     }
-    */
-
+     */
     /**
      * GET request from the userService. When calling this method, the user id
      * is given to the userService. From there to the DAO and from there to the
@@ -105,16 +104,16 @@ public class UserResource {
 
     /**
      * This method allows a user to be found by it's username.
-     * 
+     *
      * @param name is the name to be searched on as an input parameter.
      * @return the user object.
      */
     @GET
     @Path("finduserbyname/{name}")
-    public User findUserByName(@PathParam("name") String name){
+    public User findUserByName(@PathParam("name") String name) {
         return userService.findUserByName(name);
     }
-    
+
     /**
      * DELETE request to the userService. When this method is called, the user
      * id is given so the account with that specific id can be removed.
@@ -128,84 +127,89 @@ public class UserResource {
         System.out.println("Rest layer value: " + id);
         return userService.removeUser(userService.findUser(id));
     }*/
-    
     @POST
     @Path("addtweet/{username}/{tweetcontent}/{tags}/{mention}")
-    public boolean addTweet(@PathParam("username") String userName, 
+    public boolean addTweet(@PathParam("username") String userName,
             @PathParam("tweetcontent") String tweetContent,
-            @PathParam("tags") String tag, @PathParam("mention") String userMention){
-        
+            @PathParam("tags") String tag, @PathParam("mention") String userMention) {
+
         List<User> mentions = new ArrayList();
         List<String> tags = new ArrayList();
-        
+
         tags.add(tag);
         mentions.add(userService.findUserByName(userMention));
-        
+
         Tweet tweet = new Tweet(tweetContent, tags, userService.findUserByName(userName));
         return userService.addTweet(userService.findUserByName(userName), tweet, mentions);
     }
-    
+
     @GET
     @Path("findtweet/{id}")
-    public Tweet findTweet(@PathParam("id") Long id){
+    public Tweet findTweet(@PathParam("id") Long id) {
         return tweetService.findTweet(id);
     }
-    
-    
+
     @DELETE
     @Path("removetweet/{id}")
-    public boolean removeTweet(@PathParam("id") Long tweetId){
+    public boolean removeTweet(@PathParam("id") Long tweetId) {
         return userService.removeTweet(tweetService.findTweet(tweetId));
     }
 
     @GET
     @Path("followuser/{user}/{followuser}")
-    public boolean followUser(@PathParam("user") String username, @PathParam("followuser") String followingUser){
+    public boolean followUser(@PathParam("user") String username, @PathParam("followuser") String followingUser) {
         return userService.followUser(userService.findUserByName(username), userService.findUserByName(followingUser));
     }
 
     @GET
     @Path("unfollowuser/{user}/{unfollowuser}")
-    public boolean unfollowUser(@PathParam("user") String username, @PathParam("unfollowuser") String unfollowingUser){
+    public boolean unfollowUser(@PathParam("user") String username, @PathParam("unfollowuser") String unfollowingUser) {
         return userService.unfollowUser(userService.findUserByName(username), userService.findUserByName(unfollowingUser));
     }
 
     @GET
     @Path("getfollowers/{getfollowers}")
-    public List<User> getFollowingUsers(@PathParam("getfollowers") String userName){
+    public List<User> getFollowingUsers(@PathParam("getfollowers") String userName) {
         return userService.getFollowingUsers(userService.findUserByName(userName));
     }
 
     @GET
     @Path("getfollowing/{getfollowing}")
-    public List<User> getFollowers(@PathParam("getfollowing") String userName){
+    public List<User> getFollowers(@PathParam("getfollowing") String userName) {
         return userService.getFollowers(userService.findUserByName(userName));
     }
 
     @GET
     @Path("gettweetsfromuser/{username}")
-    public List<Tweet> getTweets(@PathParam("username") String username){
+    public List<Tweet> getTweets(@PathParam("username") String username) {
         return userService.getTweetsByUser(userService.findUserByName(username));
     }
 
     @POST
     @Path("liketweet/{user}/{tweettolike}")
-    public boolean likeTweet(@PathParam("user") String userName, @PathParam("tweettolike") Long tweetId){
+    public boolean likeTweet(@PathParam("user") String userName, @PathParam("tweettolike") Long tweetId) {
         return userService.likeTweet(userService.findUserByName(userName), tweetService.findTweet(tweetId));
     }
-    
+
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Path("promote")
-    public boolean promoteUser(User user){
+    public boolean promoteUser(User user) {
         return userService.promoteUser(user);
     }
-    
+
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Path("demote")
-    public boolean demoteUser(User user){
+    public boolean demoteUser(User user) {
         return userService.demoteUser(user);
     }
-    
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("updateuser")
+    public User updateUserInformation(User user) {
+        return userService.updateUser(user);
+    }
+
 }

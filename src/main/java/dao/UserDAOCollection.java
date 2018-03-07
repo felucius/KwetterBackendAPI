@@ -169,4 +169,14 @@ public class UserDAOCollection implements UserDAO {
             return false;
         }
     }
+
+    @Override
+    public User updateUser(User user) {
+        if(user != null){
+            user.updateUser(user);
+            return user;
+        }else{
+            return null;
+        }
+    }
 }
