@@ -15,7 +15,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -29,15 +31,50 @@ import javax.persistence.TemporalType;
  * @author M
  */
 @Model
-@Entity 
-@NamedQuery(name = "Tweet.getAllTweets", query = "SELECT t FROM Tweet t")
+@Entity
+@NamedQueries({
+    @NamedQuery(name = "Tweet.getAllTweets", 
+            query = "SELECT t FROM Tweet t"),
+    @NamedQuery(name = "Tweet.getAllTweetsfromuser", 
+            query = "SELECT u.name, t.message\n"
+                    + "FROM Tweet t\n"
+                    + "INNER JOIN t.tweetedBy tb\n"
+                    + "INNER JOIN User u\n"
+                    + "WHERE u.id = tb.id\n"
+                    + "AND u.name = :userName"),
+    @NamedQuery(name = "Tweet.getLikes",
+            query = "SELECT t.message, u.name, u.id\n"
+                    + "FROM Tweet t\n"
+                    + "INNER JOIN t.likes til\n"
+                    + "INNER JOIN User u\n"
+                    + "WHERE til.id = u.id\n"
+                    + "AND t.id = :tweetId"),
+    @NamedQuery(name = "Tweet.findTweetByContent", 
+            query = "SELECT t.message, t.id "
+                    + "FROM Tweet t "
+                    + "WHERE t.message "
+                    + "LIKE :message"),
+    @NamedQuery(name = "Tweet.getTweetsOfFollowers",
+            query = "SELECT t.message, u2.name, u2.id\n"
+                    + "FROM User u, Tweet t\n"
+                    + "INNER JOIN t.tweetedBy tb"
+                    + "INNER JOIN u.following uf \n"
+                    + "INNER JOIN User u2 \n"
+                    + "WHERE t.id = uf.id\n"
+                    + "AND u2.id = uf.id \n"
+                    + "AND u.name = :username")
+})
 public class Tweet implements Serializable {
+    
+    @OneToMany(orphanRemoval = true)
+    @JoinTable(name = "Tweet_mentions")
     private List<User> mentions = null;
     private String message = null;
     private List<String> tags = null;
-    @ManyToOne
+    @ManyToOne()
     private User tweetedBy = null;
-    @OneToMany
+    @OneToMany(orphanRemoval = true)
+    @JoinTable(name = "Tweet_likes")
     private List<User> likes = null;
 
 
@@ -103,8 +140,13 @@ public class Tweet implements Serializable {
      *
      * @param mentionedUser is the user to be mentioned in the tweet.
      */
-    public void addMention(User mentionedUser) {
-        this.mentions.add(mentionedUser);
+    public boolean addMention(User mentionedUser) {
+        if(mentionedUser != null){
+            mentions.add(mentionedUser);
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**
@@ -190,12 +232,5 @@ public class Tweet implements Serializable {
      */
     public void setId(Long id) {
         this.id = id;
-    }
-    
-    @Override
-    public String toString(){
-        return "Message: " + this.message + " Mentions: " + this.mentions +
-                " Likes: " + this.likes + " Published: " +
-                this.published + " Tags: " + this.tags + " Tweeted by: " + this.tweetedBy;
     }
 }

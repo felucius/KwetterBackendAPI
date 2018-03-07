@@ -59,9 +59,10 @@ public class UserService {
      * @return true if the user has succesfully been removed or false when the
      * action could not have been completed.
      */
+    /*
     public boolean removeUser(User user) {
         return userDAO.removeUser(user);
-    }
+    }*/
 
     /**
      * This method finds the user by it's user id. This id is passed on from the
@@ -160,8 +161,8 @@ public class UserService {
      * @param user object that all tweets are going to be retrieved from.
      * @return a list of tweets from that single user.
      */
-    public List<Tweet> getTweets(User user) {
-        return userDAO.getTweets(user);
+    public List<Tweet> getTweetsByUser(User user) {
+        return userDAO.getTweetsByUser(user);
     }
 
     /**
@@ -175,5 +176,37 @@ public class UserService {
      */
     public boolean likeTweet(User user, Tweet tweetToLike) {
         return userDAO.likeTweet(user, tweetToLike);
+    }
+    
+    /**
+     * Promotes a single user object that is going to be promoted.
+     * 
+     * @param user is the user that is going to be promoted.
+     * @return true if the action was successful or false when the action
+     * could not have been succeeded.
+     */
+    public boolean promoteUser(User user){
+        return userDAO.promoteUser(user);
+    }
+    
+    /**
+     * Demoting a single user.
+     * 
+     * @param user is the object that is going to be demoted
+     * @return true if the action has successfully been added or false
+     * if the action could not been succeeded.
+     */
+    public boolean demoteUser(User user){
+        return userDAO.demoteUser(user);
+    }
+    
+    /**
+     * Update a single user object with new user information.
+     * 
+     * @param user is the object that is going to receive new information.
+     * @return a user with updated account information.
+     */
+    public User updateUser(User user){
+        return userDAO.updateUser(user);
     }
 }

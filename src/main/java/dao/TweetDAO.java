@@ -18,10 +18,10 @@ import javax.ejb.Stateless;
  */
 public interface TweetDAO {
     
-    Tweet addMention(Tweet tweet, User user);
+    boolean addMention(Tweet tweet, User user);
     
     List<User> getLikes(Tweet tweet);
-            
+                
     List<User> getMentions(Tweet tweetMentions);
     
     List<Tweet> getTweetsOfFollowingUsers(User followerId);
@@ -30,5 +30,9 @@ public interface TweetDAO {
     
     Tweet findTweet(Long id);
     
-    Tweet findTweetByContent(String content);
+    List<Tweet> findTweetByContent(String content);
+    
+    Tweet createTweet(Tweet tweet);
+    
+    Tweet updateTweet(Tweet tweet);
 }

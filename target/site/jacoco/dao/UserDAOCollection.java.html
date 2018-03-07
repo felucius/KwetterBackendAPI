@@ -40,16 +40,16 @@ public class UserDAOCollection implements UserDAO {
         }
     }
 
+    /*
     @Override
     public boolean removeUser(User user) {
-<span class="nc bnc" id="L45" title="All 2 branches missed.">        if (users.contains(user)) {</span>
-<span class="nc" id="L46">            users.remove(user);</span>
-<span class="nc" id="L47">            return true;</span>
+        if (users.contains(user)) {
+            users.remove(user);
+            return true;
         } else {
-<span class="nc" id="L49">            return false;</span>
+            return false;
         }
-    }
-
+    }*/
     @Override
     public User findUser(Long id) {
 <span class="pc bpc" id="L55" title="1 of 2 branches missed.">        for (User user : users) {</span>
@@ -120,7 +120,7 @@ public class UserDAOCollection implements UserDAO {
     }
 
     @Override
-    public List&lt;Tweet&gt; getTweets(User user) {
+    public List&lt;Tweet&gt; getTweetsByUser(User user) {
 <span class="pc bpc" id="L124" title="1 of 2 branches missed.">        if (user != null) {</span>
 <span class="fc" id="L125">            return user.getTweets();</span>
         } else {
@@ -148,6 +148,36 @@ public class UserDAOCollection implements UserDAO {
             }
         }
 <span class="nc" id="L150">        return null;</span>
+    }
+
+    @Override
+    public boolean promoteUser(User user) {
+<span class="nc bnc" id="L155" title="All 2 branches missed.">        if (user != null) {</span>
+<span class="nc" id="L156">            user.promoteUser(user);</span>
+<span class="nc" id="L157">            return true;</span>
+        } else {
+<span class="nc" id="L159">            return false;</span>
+        }
+    }
+
+    @Override
+    public boolean demoteUser(User user) {
+<span class="nc bnc" id="L165" title="All 2 branches missed.">        if (user != null) {</span>
+<span class="nc" id="L166">            user.demoteUser(user);</span>
+<span class="nc" id="L167">            return true;</span>
+        } else {
+<span class="nc" id="L169">            return false;</span>
+        }
+    }
+
+    @Override
+    public User updateUser(User user) {
+<span class="nc bnc" id="L175" title="All 2 branches missed.">        if(user != null){</span>
+<span class="nc" id="L176">            user.updateUser(user);</span>
+<span class="nc" id="L177">            return user;</span>
+        }else{
+<span class="nc" id="L179">            return null;</span>
+        }
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

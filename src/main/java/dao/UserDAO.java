@@ -22,7 +22,7 @@ public interface UserDAO {
     
     User createUser(User user);
     
-    boolean removeUser(User user);
+    //boolean removeUser(User user);
     
     User findUser(Long id);
     
@@ -40,7 +40,13 @@ public interface UserDAO {
     
     List<User> getFollowers(User user);
     
-    List<Tweet> getTweets(User user);
+    List<Tweet> getTweetsByUser(User user);
     
     boolean likeTweet(User user, Tweet tweetToLike);
+    
+    boolean promoteUser(User user);
+    
+    boolean demoteUser(User user);
+    
+    User updateUser(User user);
 }

@@ -9,17 +9,17 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.inject.Model;
-import javax.json.Json;
-import javax.json.JsonObject;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
@@ -33,7 +33,32 @@ import javax.persistence.OneToMany;
  */
 @Model
 @Entity
-@NamedQuery(name = "User.getAllUsers", query = "SELECT u FROM User u")
+@NamedQueries({
+    @NamedQuery(name = "User.getAllUsers",
+            query = "SELECT u FROM User u")
+    ,
+    @NamedQuery(name = "User.getFollowingUsers",
+            query = "SELECT u2.name, u2.id\n"
+            + "FROM User u\n"
+            + "INNER JOIN u.following uf \n"
+            + "INNER JOIN User u2 \n"
+            + "WHERE u2.id = uf.id \n"
+            + "AND u.name = :username")
+    ,
+    @NamedQuery(name = "User.getFollowers",
+            query = "SELECT u2.name, u2.id\n"
+            + "FROM User u\n"
+            + "INNER JOIN u.followers uf \n"
+            + "INNER JOIN User u2 \n"
+            + "WHERE u2.id = uf.id \n"
+            + "AND u.name = :username")
+    ,
+    @NamedQuery(name = "User.findUserByName",
+            query = "SELECT u "
+            + "FROM User u "
+            + "where u.name = :name")
+})
+
 public class User implements Serializable {
 
     private String picture = null;
@@ -43,7 +68,9 @@ public class User implements Serializable {
     private String location = null;
     private String email = null;
     private String password = null;
+    private UserRole userRole = null;
 
+    // When a user is removed it's tweets are removed as well.
     @OneToMany(mappedBy = "tweetedBy")
     private List<Tweet> tweets = null;
 
@@ -55,13 +82,6 @@ public class User implements Serializable {
     @JoinTable(name = "User_followers")
     private List<User> followers = null;
 
-    @ManyToMany
-    @JoinTable(
-            name = "FOLLOWING_FOLLOWERS",
-            joinColumns = @JoinColumn(name = "USER_FOLLOWING", referencedColumnName = "ID"),
-            inverseJoinColumns = @JoinColumn(name = "USER_FOLLOWERS", referencedColumnName = "ID"))
-    private List<User> followingEachother;
-
     /**
      * ID is automatically generated per persist on the database.
      *
@@ -71,6 +91,8 @@ public class User implements Serializable {
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Assigning primary keys to the table User.
     private Long id;
+    @ManyToOne
+    private Tweet tweet;
 
     /**
      * Constructor that initiates a new user with an empty list of -new tweets
@@ -81,6 +103,7 @@ public class User implements Serializable {
         this.tweets = new ArrayList();
         this.following = new ArrayList();
         this.followers = new ArrayList();
+        this.userRole = UserRole.USER;
     }
 
     /**
@@ -102,6 +125,7 @@ public class User implements Serializable {
         this.location = location;
         this.email = email;
         this.password = password;
+        this.userRole = UserRole.USER;
 
         this.picture = "picturePath";
         this.tweets = new ArrayList();
@@ -142,7 +166,7 @@ public class User implements Serializable {
      * @param user that is going to be followed.
      */
     public void followUser(User user) {
-        if(!this.following.contains(user)){
+        if (!this.following.contains(user)) {
             user.addFollower(this);
             following.add(user);
         }
@@ -157,8 +181,8 @@ public class User implements Serializable {
     private void addFollower(User user) {
         this.followers.add(user);
     }
-    
-    private void removeFollower(User user){
+
+    private void removeFollower(User user) {
         this.followers.remove(user);
     }
 
@@ -168,7 +192,7 @@ public class User implements Serializable {
      * @param user that is going to be removed from the followers base.
      */
     public void unfollowUser(User user) {
-        if(this.following.contains(user)){
+        if (this.following.contains(user)) {
             user.removeFollower(this);
             this.following.remove(user);
         }
@@ -179,8 +203,19 @@ public class User implements Serializable {
      *
      * @return all followers.
      */
+    @JsonbTransient
     public List<User> getFollowers() {
-        return this.followers;
+        return followers;
+    }
+
+    /**
+     * Setting the followers of a single user.
+     *
+     * @param followers
+     */
+    @JsonbTransient
+    public void setFollowers(List<User> followers) {
+        this.followers = followers;
     }
 
     /**
@@ -188,8 +223,19 @@ public class User implements Serializable {
      *
      * @return all following users from a specific user.
      */
+    @JsonbTransient
     public List<User> getFollowing() {
-        return this.following;
+        return following;
+    }
+
+    /**
+     * Setting the following users of a single user.
+     *
+     * @param following
+     */
+    @JsonbTransient
+    public void setFollowing(List<User> following) {
+        this.following = following;
     }
 
     /**
@@ -341,6 +387,7 @@ public class User implements Serializable {
      *
      * @return all tweets from the user.
      */
+    @JsonbTransient
     public List<Tweet> getTweets() {
         return this.tweets;
     }
@@ -364,14 +411,85 @@ public class User implements Serializable {
     }
 
     /**
-     * Overriding the toString method with an own implementation.
+     * Setting the user role of a single user object.
      *
-     * @return all the fields with the user's information.
+     * @param userRole to be added to the user.
      */
-    @Override
-    public String toString() {
-        return "Name: " + this.name + " Biography: " + this.bio
-                + " Email: " + this.email + " Location: " + this.location
-                + " Picture: " + this.picture + "Website: " + this.website;
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
+    }
+
+    /**
+     * Retrieving the user role of a single user object.
+     *
+     * @return the user object.
+     */
+    public UserRole getUserRole() {
+        return this.userRole;
+    }
+
+    /**
+     * This method updates a single user object with new account information
+     *
+     * @param user is the object that received new values.
+     * @return a new user object filled with user data.
+     */
+    public User updateUser(User user) {
+        user.setBio(user.getBio());
+        user.setEmail(user.getEmail());
+        user.setLocation(user.getLocation());
+        user.setPassword(user.getPassword());
+        user.setPicture(user.getPicture());
+        user.setWebsite(user.getWebsite());
+
+        return user;
+    }
+
+    /**
+     * This method allows a user to be promoted.
+     *
+     * @param user is the object that is going to be promoted.
+     * @return true if the user has successfully been promoted or false when the
+     * action could not have been succeeded.
+     */
+    public UserRole promoteUser(User user) {
+        switch (user.getUserRole()) {
+            case USER:
+                userRole = UserRole.MODERATOR;
+                break;
+            case MODERATOR:
+                userRole = UserRole.ADMIN;
+                break;
+            case ADMIN:
+                // Do Nothing
+                break;
+            default:
+                userRole = UserRole.USER;
+        }
+        return userRole;
+    }
+
+    /**
+     * This method allows a user to be demoted.
+     *
+     * @param user is the object that is going to be demoted.
+     * @return true if the user has successfully been demoted or false when the
+     * action could not have been succeeded.
+     */
+    public UserRole demoteUser(User user) {
+        switch (user.getUserRole()) {
+            case USER:
+                // Do nothing
+                break;
+            case MODERATOR:
+                userRole = UserRole.USER;
+                break;
+            case ADMIN:
+                userRole = UserRole.MODERATOR;
+                break;
+            default:
+                return userRole;
+        }
+        return userRole;
     }
 }

@@ -131,16 +131,21 @@ import javax.inject.Inject;
 <span class="nc" id="L131">        userDAO.addTweet(user9, tweet12, mentions);</span>
 <span class="nc" id="L132">        userDAO.addTweet(user10, tweet13, mentions);</span>
         
-        //tweetDAO.addMention(tweet1, user10);
-        //tweetDAO.addMention(tweet1, user9);
-        //tweetDAO.addMention(tweet1, user8);
+<span class="nc" id="L134">        tweetDAO.addMention(tweet1, user10);</span>
+<span class="nc" id="L135">        tweetDAO.addMention(tweet1, user9);</span>
+<span class="nc" id="L136">        tweetDAO.addMention(tweet1, user8);</span>
         
-<span class="nc" id="L138">        userDAO.followUser(user1, user2);</span>
-<span class="nc" id="L139">        userDAO.followUser(user1, user3);</span>
-<span class="nc" id="L140">        userDAO.followUser(user1, user4);</span>
+<span class="nc" id="L138">        userDAO.likeTweet(user1, tweet1);</span>
+<span class="nc" id="L139">        userDAO.likeTweet(user2, tweet1);</span>
+<span class="nc" id="L140">        userDAO.likeTweet(user3, tweet2);</span>
+<span class="nc" id="L141">        userDAO.likeTweet(user4, tweet3);</span>
         
-<span class="nc" id="L142">        userDAO.followUser(user2, user3);</span>
-<span class="nc" id="L143">        userDAO.followUser(user2, user4);</span>
-<span class="nc" id="L144">    }</span>
+<span class="nc" id="L143">        userDAO.followUser(user1, user2);</span>
+<span class="nc" id="L144">        userDAO.followUser(user1, user3);</span>
+<span class="nc" id="L145">        userDAO.followUser(user1, user4);</span>
+        
+<span class="nc" id="L147">        userDAO.followUser(user2, user3);</span>
+<span class="nc" id="L148">        userDAO.followUser(user2, user4);</span>
+<span class="nc" id="L149">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

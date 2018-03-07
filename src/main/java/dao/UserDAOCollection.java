@@ -40,6 +40,7 @@ public class UserDAOCollection implements UserDAO {
         }
     }
 
+    /*
     @Override
     public boolean removeUser(User user) {
         if (users.contains(user)) {
@@ -48,8 +49,7 @@ public class UserDAOCollection implements UserDAO {
         } else {
             return false;
         }
-    }
-
+    }*/
     @Override
     public User findUser(Long id) {
         for (User user : users) {
@@ -120,7 +120,7 @@ public class UserDAOCollection implements UserDAO {
     }
 
     @Override
-    public List<Tweet> getTweets(User user) {
+    public List<Tweet> getTweetsByUser(User user) {
         if (user != null) {
             return user.getTweets();
         } else {
@@ -148,5 +148,35 @@ public class UserDAOCollection implements UserDAO {
             }
         }
         return null;
+    }
+
+    @Override
+    public boolean promoteUser(User user) {
+        if (user != null) {
+            user.promoteUser(user);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean demoteUser(User user) {
+        if (user != null) {
+            user.demoteUser(user);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public User updateUser(User user) {
+        if(user != null){
+            user.updateUser(user);
+            return user;
+        }else{
+            return null;
+        }
     }
 }

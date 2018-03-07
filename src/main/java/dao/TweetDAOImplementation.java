@@ -11,7 +11,6 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import static org.eclipse.persistence.logging.SessionLog.JPA;
 
 /**
  *
@@ -62,8 +61,9 @@ public class TweetDAOImplementation implements TweetDAO {
     public List<User> getLikes(Tweet tweet) {
         List<User> users = null;
         try {
-            //likes = em.find(Tweet.class, user.getId()).getLikes();
-            users = em.createNamedQuery("Tweet.getLikes").getResultList();
+            users = em.createNamedQuery("Tweet.getLikes").
+                    setParameter("tweetId", tweet.getId()).
+                    getResultList();
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
@@ -83,8 +83,7 @@ public class TweetDAOImplementation implements TweetDAO {
         List<User> users = null;
         tweet.getMentions();
         try {
-            //users = em.createNamedQuery("Tweet.getMentions").getResultList();
-            users = tweet.getMentions();
+            users = em.find(Tweet.class, tweet.getId()).getMentions();
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
@@ -95,16 +94,17 @@ public class TweetDAOImplementation implements TweetDAO {
     /**
      * This method retrieves all the tweets of the user's follower base.
      *
-     * @param follower object is the user where all the tweets are going to be
+     * @param user object is the user where all the tweets are going to be
      * retrieved.
      * @return a list of tweets from the users follower base
      */
     @Override
-    public List<Tweet> getTweetsOfFollowingUsers(User follower) {
-        List<User> followers = null;
+    public List<Tweet> getTweetsOfFollowingUsers(User user) {
         List<Tweet> tweets = null;
         try {
-            tweets = em.find(User.class, follower.getId()).getTweets();
+            tweets = em.createNamedQuery("Tweet.getTweetsOfFollowers").
+                    setParameter("username", user.getName()).
+                    getResultList();
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
@@ -121,16 +121,16 @@ public class TweetDAOImplementation implements TweetDAO {
      * tweet.
      */
     @Override
-    public Tweet addMention(Tweet tweet, User user) {
+    public boolean addMention(Tweet tweet, User user) {
+        Tweet tweetMention = null;
         try {
-            tweet.likeTweet(user);
             tweet.addMention(user);
             em.persist(tweet);
+            return true;
         } catch (Exception ex) {
             ex.printStackTrace();
-            return null;
+            return false;
         }
-        return tweet;
     }
 
     /**
@@ -154,17 +154,39 @@ public class TweetDAOImplementation implements TweetDAO {
     /**
      * This method allows a tweet to be found by the content written in it.
      *
-     * @param content is the string that is going to be looked for
+     * @param message is the string that is going to be looked for
      * @return the tweet object.
      */
     @Override
-    public Tweet findTweetByContent(String message) {
-        Tweet tweet = null;
+    public List<Tweet> findTweetByContent(String message) {
+        List<Tweet> tweet = null;
         try {
-            tweet = (Tweet) em.createQuery("SELECT t FROM Tweet t where t.message LIKE :message").
-                    setParameter("message", "%"+message+"%").
-                    getSingleResult();
+            tweet = em.createNamedQuery("Tweet.findTweetByContent").
+                    setParameter("message", "%" + message + "%").
+                    getResultList();
             return tweet;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public Tweet createTweet(Tweet tweet) {
+        Tweet createdTweet = null;
+        try {
+            em.persist(tweet);
+            return createdTweet;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public Tweet updateTweet(Tweet tweet) {
+        try {
+            return em.merge(tweet);
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;

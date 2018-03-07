@@ -37,7 +37,7 @@ import javax.inject.Inject;
      * @param user object that is going to be mentioned in a single tweet.
      * @return the tweet with the user that is mentioned in it.
      */
-    public Tweet addMention(Tweet tweet, User user) {
+    public boolean addMention(Tweet tweet, User user) {
 <span class="nc" id="L41">        return tweetDAO.addMention(tweet, user);</span>
     }
 
@@ -86,8 +86,16 @@ import javax.inject.Inject;
 <span class="nc" id="L86">        return tweetDAO.findTweet(id);</span>
     }
     
-    public Tweet findTweetByContent(String content){
+    public List&lt;Tweet&gt; findTweetByContent(String content){
 <span class="nc" id="L90">        return tweetDAO.findTweetByContent(content);</span>
+    }
+    
+    public Tweet updateTweet(Tweet tweet){
+<span class="nc" id="L94">        return tweetDAO.updateTweet(tweet);</span>
+    }
+    
+    public Tweet createTweet(Tweet tweet){
+<span class="nc" id="L98">        return tweetDAO.createTweet(tweet);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

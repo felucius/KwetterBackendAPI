@@ -6,9 +6,7 @@
 package boundary.rest;
 
 import domain.Tweet;
-import domain.TweetDTO;
 import domain.User;
-import domain.UserDTO;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -53,18 +51,15 @@ public class TweetResource {
      *
      * This method allows a user to be added as a mention.
      *
-     * @param tweet is the object that is going to be used for mentions.
-     * @param username is the object that is going to be mentioned on 'tweet'
+     * @param tweetId is the object that is going to be used for mentions.
+     * @param userName is the object that is going to be mentioned on 'tweet'
      * object
      * @return the tweet object that has a mentioned user on it.
      */
     @POST
-    @Path("addmention/{tweetmention}/{username}")
-    public Tweet addMention(@PathParam("tweetmention") Long tweetId, @PathParam("username") Long userId) {
-        //Tweet getTweet = tweet.getTweet();
-        //User getUser = username.getUser();
-        //return tweetService.addMention(getTweet, getUser);
-        return tweetService.addMention(tweetService.findTweet(tweetId), userService.findUser(userId));
+    @Path("addmention/{tweetId}/{username}")
+    public boolean addMention(@PathParam("tweetId") Long tweetId, @PathParam("username") String userName) {
+        return tweetService.addMention(findTweet(tweetId), userService.findUserByName(userName));
     }
 
     /**
@@ -72,14 +67,13 @@ public class TweetResource {
      *
      * This method retrieves all likes from a single tweet.
      *
-     * @param tweet is the object where all the likes are retrieved from.
+     * @param tweetId is the id of the tweet that is going to be searched on
      * @return a list of users that likes a certain tweet.
      */
     @GET
-    @Path("gettweetlikes")
-    public List<User> getLikes(@PathParam("gettweetlikes") TweetDTO tweet) {
-        Tweet getTweet = tweet.getTweet();
-        return tweetService.getLikes(getTweet);
+    @Path("gettweetlikes/{tweetId}")
+    public List<User> getLikes(@PathParam("tweetId") Long tweetId) {
+        return tweetService.getLikes(tweetService.findTweet(tweetId));
     }
 
     /**
@@ -90,7 +84,7 @@ public class TweetResource {
      */
     @GET
     @Path("findtweetbycontent/{content}")
-    public Tweet findTweet(@PathParam("content") String content) {
+    public List<Tweet> findTweetByContent(@PathParam("content") String content) {
         return tweetService.findTweetByContent(content);
     }
 
@@ -111,14 +105,13 @@ public class TweetResource {
      *
      * This method allows to retrieve mentions from a single tweet.
      *
-     * @param tweet is the tweet where all mentions are retrieved from.
+     * @param tweetId is the tweet where all mentions are retrieved from.
      * @return a list of users that are mentioned in the tweet.
      */
     @GET
-    @Path("gettweetmentions")
-    public List<User> getMentions(@PathParam("gettweetmentions") TweetDTO tweet) {
-        Tweet getTweet = tweet.getTweet();
-        return tweetService.getMentions(getTweet);
+    @Path("gettweetmentions/{tweetId}")
+    public List<User> getMentions(@PathParam("tweetId") Long tweetId) {
+        return tweetService.getMentions(tweetService.findTweet(tweetId));
     }
 
     /**
@@ -127,14 +120,21 @@ public class TweetResource {
      * This method allows all tweets to be retrieved of the following users from
      * a single user.
      *
-     * @param follower
-     * @return
+     * @param userName is the user that is going to be searched on to retrieve
+     * his following users and their tweets.
+     * @return a list of tweets that the user is following.
      */
     @GET
-    @Path("gettweetsfollowing")
-    public List<Tweet> getTweetsOfFollowingUsers(@PathParam("gettweetsfollowing") UserDTO follower) {
-        User getUser = follower.getUser();
-        return tweetService.getTweetsOfFollowingUsers(getUser);
+    @Path("gettweetsfollowing/{userName}")
+    public List<Tweet> getTweetsOfFollowingUsers(@PathParam("userName") String userName) {
+        return tweetService.getTweetsOfFollowingUsers(userService.findUserByName(userName));
+    }
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("updatetweet")
+    public Tweet updateTweetContent(Tweet tweet) {
+        return tweetService.updateTweet(tweet);
     }
 
     /**

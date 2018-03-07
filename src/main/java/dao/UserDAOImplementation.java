@@ -75,6 +75,7 @@ public class UserDAOImplementation implements UserDAO {
      * @return a true statement if the user has successfully been removed or
      * false when the action could not be performed.
      */
+    /*
     @Override
     public boolean removeUser(User user) {
         try {
@@ -86,8 +87,7 @@ public class UserDAOImplementation implements UserDAO {
             ex.printStackTrace();
             return false;
         }
-    }
-
+    }*/
     /**
      * This method allows a user to be found from the User entity with it's
      * given id.
@@ -199,7 +199,9 @@ public class UserDAOImplementation implements UserDAO {
     public List<User> getFollowingUsers(User user) {
         List<User> users = null;
         try {
-            users = em.find(User.class, user.getId()).getFollowing();
+            users = em.createNamedQuery("User.getFollowers").
+                    setParameter("username", user.getName()).
+                    getResultList();
             return users;
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -217,7 +219,9 @@ public class UserDAOImplementation implements UserDAO {
     public List<User> getFollowers(User user) {
         List<User> users = null;
         try {
-            users = em.find(User.class, user.getId()).getFollowers();
+            users = em.createNamedQuery("User.getFollowingUsers").
+                    setParameter("username", user.getName()).
+                    getResultList();
             return users;
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -291,10 +295,12 @@ public class UserDAOImplementation implements UserDAO {
      * @return all the tweets from a single user.
      */
     @Override
-    public List<Tweet> getTweets(User user) {
+    public List<Tweet> getTweetsByUser(User user) {
         List<Tweet> tweets = null;
         try {
-            tweets = user.getTweets();
+            tweets = em.createNamedQuery("Tweet.getAllTweetsfromuser").
+                    setParameter("userName", user.getName()).
+                    getResultList();
             return tweets;
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -312,10 +318,71 @@ public class UserDAOImplementation implements UserDAO {
     public User findUserByName(String name) {
         User user = null;
         try {
-            user = (User)em.createQuery("SELECT u FROM User u where u.name = :name").
+            user = (User) em.createNamedQuery("User.findUserByName").
                     setParameter("name", name).
                     getSingleResult();
-            
+
+            return user;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * This method allows a user to be promoted.
+     *
+     * @param user is the object that is going to be promoted.
+     * @return true if the user has successfully been promoted or false when the
+     * action could not have been succeeded.
+     */
+    @Override
+    public boolean promoteUser(User user) {
+        try {
+            user.promoteUser(user);
+            em.merge(user);
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * This method allows a user to be demoted.
+     *
+     * @param user is the object that is going to be demoted.
+     * @return true if the user has successfully been demoted or false when the
+     * action could not have been succeeded.
+     */
+    @Override
+    public boolean demoteUser(User user) {
+        try {
+            user.demoteUser(user);
+            em.merge(user);
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * This method updates a single user object with new information.
+     *
+     * @param user is the object that is going to be receive new information
+     * @return a new user object with updated account information.
+     */
+    @Override
+    public User updateUser(User user) {
+        try {
+            User existingUser = em.find(User.class, user.getId());
+            existingUser.updateUser(user);
+
+            user.setFollowing(existingUser.getFollowing());
+            user.setFollowers(existingUser.getFollowers());
+
+            em.merge(user);
             return user;
         } catch (Exception ex) {
             ex.printStackTrace();

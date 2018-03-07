@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
+
 /**
  *
  * @author M
@@ -18,126 +19,142 @@ import javax.enterprise.inject.Default;
 @Stateless
 public class TweetDAOCollection implements TweetDAO {
 
-<span class="fc" id="L21">    private List&lt;Tweet&gt; tweets = null;</span>
-<span class="fc" id="L22">    private Tweet tweet = null;</span>
+<span class="fc" id="L22">    private List&lt;Tweet&gt; tweets = null;</span>
+<span class="fc" id="L23">    private Tweet tweet = null;</span>
 
-<span class="fc" id="L24">    public TweetDAOCollection() {</span>
-<span class="fc" id="L25">        this.tweets = new ArrayList();</span>
-<span class="fc" id="L26">        tweet = new Tweet();</span>
-<span class="fc" id="L27">    }</span>
+<span class="fc" id="L25">    public TweetDAOCollection() {</span>
+<span class="fc" id="L26">        this.tweets = new ArrayList();</span>
+<span class="fc" id="L27">        tweet = new Tweet();</span>
+<span class="fc" id="L28">    }</span>
 
     /**
      * This method retrieves all likes from a single tweet.
-     * 
+     *
      * @param tweet to retrieve all likes from
      * @return a list of users that liked that single tweet.
      */
     @Override
     public List&lt;User&gt; getLikes(Tweet tweet) {
-<span class="pc bpc" id="L37" title="1 of 2 branches missed.">        if (tweet != null) {</span>
-<span class="fc" id="L38">            return tweet.getLikes();</span>
+<span class="pc bpc" id="L38" title="1 of 2 branches missed.">        if (tweet != null) {</span>
+<span class="fc" id="L39">            return tweet.getLikes();</span>
         } else {
-<span class="nc" id="L40">            return null;</span>
+<span class="nc" id="L41">            return null;</span>
         }
     }
-    
+
     /**
      * This method allows a mention to be added to a tweet, from a single user.
-     * 
+     *
      * @param tweet is the tweet that is going to be added to a certain mention.
-     * @param user is the user that is going to be mentioned in that single tweet.
+     * @param user is the user that is going to be mentioned in that single
+     * tweet.
      * @return the tweet object that is added
      */
     @Override
-    public Tweet addMention(Tweet tweet, User user){
-<span class="pc bpc" id="L53" title="2 of 4 branches missed.">        if(tweet != null &amp;&amp; user != null){</span>
-<span class="fc" id="L54">            tweet.addMention(user);</span>
-<span class="fc" id="L55">            return tweet;</span>
-        }else{
-<span class="nc" id="L57">            return null;</span>
+    public boolean addMention(Tweet tweet, User user) {
+<span class="pc bpc" id="L55" title="2 of 4 branches missed.">        if (tweet != null &amp;&amp; user != null) {</span>
+<span class="fc" id="L56">            tweet.addMention(user);</span>
+<span class="fc" id="L57">            return true;</span>
+        } else {
+<span class="nc" id="L59">            return false;</span>
         }
     }
 
     /**
      * This method retrieves all mentions from a single tweet.
-     * 
+     *
      * @param tweet is the tweet where all mentions are going to be retrieved.
      * @return a list users that are being mentioned in that specific tweet.
      */
     @Override
     public List&lt;User&gt; getMentions(Tweet tweet) {
-<span class="pc bpc" id="L69" title="1 of 2 branches missed.">        if (tweet != null) {</span>
-<span class="fc" id="L70">            return tweet.getMentions();</span>
+<span class="pc bpc" id="L71" title="1 of 2 branches missed.">        if (tweet != null) {</span>
+<span class="fc" id="L72">            return tweet.getMentions();</span>
         } else {
-<span class="nc" id="L72">            return null;</span>
+<span class="nc" id="L74">            return null;</span>
         }
     }
 
     /**
      * This method retrieves all tweets in general.
-     * 
+     *
      * @return all tweets ever created by all users.
      */
     @Override
     public List&lt;Tweet&gt; getAllTweets() {
-<span class="pc bpc" id="L83" title="1 of 2 branches missed.">        if (tweets != null) {</span>
-<span class="fc" id="L84">            return tweets;</span>
+<span class="pc bpc" id="L85" title="1 of 2 branches missed.">        if (tweets != null) {</span>
+<span class="fc" id="L86">            return tweets;</span>
         } else {
-<span class="nc" id="L86">            return null;</span>
+<span class="nc" id="L88">            return null;</span>
         }
     }
 
     /**
      * This method retrieves all tweets of a single user.
-     * 
-     * @param following is the user that the tweets are going to be collected 
+     *
+     * @param following is the user that the tweets are going to be collected
      * from
-     * @return a list of tweets from the specific following user. 
+     * @return a list of tweets from the specific following user.
      */
     @Override
     public List&lt;Tweet&gt; getTweetsOfFollowingUsers(User following) {
-<span class="pc bpc" id="L99" title="1 of 2 branches missed.">        if (following != null) {</span>
-<span class="fc" id="L100">            return following.getTweets();</span>
+<span class="pc bpc" id="L101" title="1 of 2 branches missed.">        if (following != null) {</span>
+<span class="fc" id="L102">            return following.getTweets();</span>
         } else {
-<span class="nc" id="L102">            return null;</span>
+<span class="nc" id="L104">            return null;</span>
         }
     }
 
     /**
      * This method allows a tweet to be searched on it's id.
-     * 
+     *
      * @param id is the id that the tweet object is going to be looked for.
      * @return the tweet object.
      */
     @Override
     public Tweet findTweet(Long id) {
-<span class="nc bnc" id="L114" title="All 2 branches missed.">        for (Tweet tweet : tweets) {</span>
-<span class="nc bnc" id="L115" title="All 2 branches missed.">            if (tweet.getId().equals(id)) {</span>
-<span class="nc" id="L116">                return tweet;</span>
+<span class="nc bnc" id="L116" title="All 2 branches missed.">        for (Tweet tweet : tweets) {</span>
+<span class="nc bnc" id="L117" title="All 2 branches missed.">            if (tweet.getId().equals(id)) {</span>
+<span class="nc" id="L118">                return tweet;</span>
             } else {
-<span class="nc" id="L118">                return null;</span>
+<span class="nc" id="L120">                return null;</span>
             }
         }
-<span class="nc" id="L121">        return null;</span>
+<span class="nc" id="L123">        return null;</span>
     }
 
     /**
      * This method allows a tweet to be found by it's message content.
-     * 
+     *
      * @param content of the message that the tweet is going to be searched on.
      * @return a sinlge tweet object.
      */
     @Override
-    public Tweet findTweetByContent(String content) {
-<span class="nc bnc" id="L132" title="All 2 branches missed.">        for(Tweet tweet : tweets){</span>
-<span class="nc bnc" id="L133" title="All 2 branches missed.">            if(tweet.getMessage().equals(content)){</span>
-<span class="nc" id="L134">                return tweet;</span>
-            }else{
-<span class="nc" id="L136">                return null;</span>
-            }
+    public List&lt;Tweet&gt; findTweetByContent(String content) {
+<span class="nc bnc" id="L134" title="All 2 branches missed.">        if(tweets != null){</span>
+<span class="nc" id="L135">            return tweets;</span>
+        }else{
+<span class="nc" id="L137">            return null;</span>
         }
-<span class="nc" id="L139">        return null;</span>
     }
 
+    @Override
+    public Tweet createTweet(Tweet tweet) {
+<span class="nc bnc" id="L143" title="All 2 branches missed.">        if (!tweets.contains(tweet)) {</span>
+<span class="nc" id="L144">            this.tweets.add(tweet);</span>
+<span class="nc" id="L145">            return tweet;</span>
+        } else {
+<span class="nc" id="L147">            return null;</span>
+        }
+    }
+
+    @Override
+    public Tweet updateTweet(Tweet tweet) {
+<span class="nc bnc" id="L153" title="All 2 branches missed.">        if(tweet != null){</span>
+<span class="nc" id="L154">            return tweet;</span>
+        }else{
+<span class="nc" id="L156">            return null;</span>
+        }
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

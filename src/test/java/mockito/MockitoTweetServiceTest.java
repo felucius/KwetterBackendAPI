@@ -101,8 +101,8 @@ public class MockitoTweetServiceTest {
     public void testAddMention() {
         System.out.println("Test add mention on Mockito - TweetService layer");
         
-        when(tweetDAO.addMention(tweet1, user1)).thenReturn(tweet1);
-        assertEquals(tweet1, tweetDAO.addMention(tweet1, user1));
+        when(tweetDAO.addMention(tweet1, user1)).thenReturn(true);
+        assertEquals(true, tweetDAO.addMention(tweet1, user1));
         tweetService.addMention(tweet1, user1);
         verify(tweetDAO).addMention(tweet1, user1);
     }
