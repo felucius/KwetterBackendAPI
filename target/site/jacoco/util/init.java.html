@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>init.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">KwetterBackend_Maxime</a> &gt; <a href="index.source.html" class="el_package">util</a> &gt; <span class="el_source">init.java</span></div><h1>init.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package util;
+
+import dao.JPA;
+import dao.TweetDAO;
+import dao.UserDAO;
+import domain.Tweet;
+import domain.User;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.PostConstruct;
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
+import javax.inject.Inject;
+
+/**
+ *
+ * @author M
+ */
+@Startup
+@Singleton
+<span class="nc" id="L26">public class init {</span>
+
+    @Inject
+    @JPA
+    TweetDAO tweetDAO;
+    @Inject
+    @JPA
+    UserDAO userDAO;
+
+<span class="nc" id="L35">    private List&lt;String&gt; tags = new ArrayList();</span>
+<span class="nc" id="L36">    private List&lt;User&gt; mentions = new ArrayList();</span>
+
+<span class="nc" id="L38">    private User user1 = null;</span>
+<span class="nc" id="L39">    private User user2 = null;</span>
+<span class="nc" id="L40">    private User user3 = null;</span>
+<span class="nc" id="L41">    private User user4 = null;</span>
+<span class="nc" id="L42">    private User user5 = null;</span>
+<span class="nc" id="L43">    private User user6 = null;</span>
+<span class="nc" id="L44">    private User user7 = null;</span>
+<span class="nc" id="L45">    private User user8 = null;</span>
+<span class="nc" id="L46">    private User user9 = null;</span>
+<span class="nc" id="L47">    private User user10 = null;</span>
+
+<span class="nc" id="L49">    private Tweet tweet1 = null;</span>
+<span class="nc" id="L50">    private Tweet tweet2 = null;</span>
+<span class="nc" id="L51">    private Tweet tweet3 = null;</span>
+<span class="nc" id="L52">    private Tweet tweet4 = null;</span>
+<span class="nc" id="L53">    private Tweet tweet5 = null;</span>
+<span class="nc" id="L54">    private Tweet tweet6 = null;</span>
+<span class="nc" id="L55">    private Tweet tweet7 = null;</span>
+<span class="nc" id="L56">    private Tweet tweet8 = null;</span>
+<span class="nc" id="L57">    private Tweet tweet9 = null;</span>
+<span class="nc" id="L58">    private Tweet tweet10 = null;</span>
+<span class="nc" id="L59">    private Tweet tweet11 = null;</span>
+<span class="nc" id="L60">    private Tweet tweet12 = null;</span>
+<span class="nc" id="L61">    private Tweet tweet13 = null;</span>
+
+    @PostConstruct
+    public void init() {
+<span class="nc" id="L65">        System.out.println(&quot;Initializing basic database information....&quot;);</span>
+<span class="nc" id="L66">        createUsers();</span>
+<span class="nc" id="L67">        createTweets();</span>
+<span class="nc" id="L68">    }</span>
+
+    public void createUsers() {
+<span class="nc" id="L71">        user1 = new User(&quot;PictureURL&quot;, &quot;Website.com&quot;, &quot;Maxime&quot;, &quot;Men&quot;, &quot;Geldrop&quot;, &quot;Maxime@hotmail.com&quot;, &quot;Pass&quot;);</span>
+<span class="nc" id="L72">        user2 = new User(&quot;PictureURL&quot;, &quot;Website.com&quot;, &quot;Jaap-joris&quot;, &quot;Men&quot;, &quot;Veldhoven&quot;, &quot;JaapJoris@hotmail.com&quot;, &quot;Pass&quot;);</span>
+<span class="nc" id="L73">        user3 = new User(&quot;PictureURL&quot;, &quot;Website.com&quot;, &quot;Ferdinand&quot;, &quot;Men&quot;, &quot;Eindhoven&quot;, &quot;Ferdinand@hotmail.com&quot;, &quot;Pass&quot;);</span>
+<span class="nc" id="L74">        user4 = new User(&quot;PictureURL&quot;, &quot;Website.com&quot;, &quot;Ricardo&quot;, &quot;Men&quot;, &quot;Eindhoven&quot;, &quot;Ricardo@hotmail.com&quot;, &quot;Pass&quot;);</span>
+<span class="nc" id="L75">        user5 = new User(&quot;PictureURL&quot;, &quot;Website.com&quot;, &quot;Rickert&quot;, &quot;Men&quot;, &quot;Geldrop&quot;, &quot;Rickert@hotmail.com&quot;, &quot;Pass&quot;);</span>
+<span class="nc" id="L76">        user6 = new User(&quot;PictureURL&quot;, &quot;Website.com&quot;, &quot;Hettie&quot;, &quot;Women&quot;, &quot;Geldrop&quot;, &quot;Hettie@hotmail.com&quot;, &quot;Pass&quot;);</span>
+<span class="nc" id="L77">        user7 = new User(&quot;PictureURL&quot;, &quot;Website.com&quot;, &quot;Janetoine&quot;, &quot;Women&quot;, &quot;Veldhoven&quot;, &quot;Janetoine@hotmail.com&quot;, &quot;Pass&quot;);</span>
+<span class="nc" id="L78">        user8 = new User(&quot;PictureURL&quot;, &quot;Website.com&quot;, &quot;Angelika&quot;, &quot;Women&quot;, &quot;Eindhoven&quot;, &quot;Angelika@hotmail.com&quot;, &quot;Pass&quot;);</span>
+<span class="nc" id="L79">        user9 = new User(&quot;PictureURL&quot;, &quot;Website.com&quot;, &quot;Gerard&quot;, &quot;Men&quot;, &quot;Eindhoven&quot;, &quot;Gerard@hotmail.com&quot;, &quot;Pass&quot;);</span>
+<span class="nc" id="L80">        user10 = new User(&quot;PictureURL&quot;, &quot;Website.com&quot;, &quot;Freek&quot;, &quot;Men&quot;, &quot;Eindhoven&quot;, &quot;Freek@hotmail.com&quot;, &quot;Pass&quot;);</span>
+
+<span class="nc" id="L82">        mentions.add(user2);</span>
+<span class="nc" id="L83">        mentions.add(user3);</span>
+
+<span class="nc" id="L85">        userDAO.createUser(user1);</span>
+<span class="nc" id="L86">        userDAO.createUser(user2);</span>
+<span class="nc" id="L87">        userDAO.createUser(user3);</span>
+<span class="nc" id="L88">        userDAO.createUser(user4);</span>
+<span class="nc" id="L89">        userDAO.createUser(user5);</span>
+<span class="nc" id="L90">        userDAO.createUser(user6);</span>
+<span class="nc" id="L91">        userDAO.createUser(user7);</span>
+<span class="nc" id="L92">        userDAO.createUser(user8);</span>
+<span class="nc" id="L93">        userDAO.createUser(user9);</span>
+<span class="nc" id="L94">        userDAO.createUser(user10);</span>
+<span class="nc" id="L95">    }</span>
+
+    public void createTweets() {
+<span class="nc" id="L98">        tags.add(&quot;#cool&quot;);</span>
+<span class="nc" id="L99">        tags.add(&quot;#like&quot;);</span>
+
+<span class="nc" id="L101">        tweet1 = new Tweet(&quot;This is my first Tweet Hello from Maxime&quot;, tags, user1);</span>
+<span class="nc" id="L102">        tweet2 = new Tweet(&quot;This is my second Tweet AWESOME&quot;, tags, user1);</span>
+<span class="nc" id="L103">        tweet3 = new Tweet(&quot;This is my third Tweet MUCH C00l&quot;, tags, user1);</span>
+
+<span class="nc" id="L105">        tweet4 = new Tweet(&quot;Hey everyone Look at me NO HANDS!&quot;, tags, user2);</span>
+<span class="nc" id="L106">        tweet5 = new Tweet(&quot;WHOA what was that all about!&quot;, tags, user2);</span>
+
+<span class="nc" id="L108">        tweet6 = new Tweet(&quot;Welcome to my channel piepol&quot;, tags, user3);</span>
+<span class="nc" id="L109">        tweet7 = new Tweet(&quot;Hellow Hello&quot;, tags, user4);</span>
+<span class="nc" id="L110">        tweet8 = new Tweet(&quot;Wilkommen damen und herren&quot;, tags, user5);</span>
+<span class="nc" id="L111">        tweet9 = new Tweet(&quot;Dikke BMW HAHA&quot;, tags, user6);</span>
+<span class="nc" id="L112">        tweet10 = new Tweet(&quot;Waarom tweet ik? ik verveel me!&quot;, tags, user7);</span>
+<span class="nc" id="L113">        tweet11 = new Tweet(&quot;This is a message from KOREA&quot;, tags, user8);</span>
+<span class="nc" id="L114">        tweet12 = new Tweet(&quot;SPAIN everyone!? someone SPANISH?&quot;, tags, user9);</span>
+<span class="nc" id="L115">        tweet13 = new Tweet(&quot;Yes finally a highscore from a low score..&quot;, tags, user10);</span>
+
+<span class="nc" id="L117">        userDAO.addTweet(user1, tweet1, mentions);</span>
+<span class="nc" id="L118">        userDAO.addTweet(user1, tweet2, mentions);</span>
+<span class="nc" id="L119">        userDAO.addTweet(user1, tweet3, mentions);</span>
+        
+<span class="nc" id="L121">        userDAO.addTweet(user2, tweet4, mentions);</span>
+<span class="nc" id="L122">        userDAO.addTweet(user1, tweet5, mentions);</span>
+        
+        
+<span class="nc" id="L125">        userDAO.addTweet(user3, tweet6, mentions);</span>
+<span class="nc" id="L126">        userDAO.addTweet(user4, tweet7, mentions);</span>
+<span class="nc" id="L127">        userDAO.addTweet(user5, tweet8, mentions);</span>
+<span class="nc" id="L128">        userDAO.addTweet(user6, tweet9, mentions);</span>
+<span class="nc" id="L129">        userDAO.addTweet(user7, tweet10, mentions);</span>
+<span class="nc" id="L130">        userDAO.addTweet(user8, tweet11, mentions);</span>
+<span class="nc" id="L131">        userDAO.addTweet(user9, tweet12, mentions);</span>
+<span class="nc" id="L132">        userDAO.addTweet(user10, tweet13, mentions);</span>
+        
+<span class="nc" id="L134">        tweetDAO.addMention(tweet1, user10);</span>
+<span class="nc" id="L135">        tweetDAO.addMention(tweet1, user9);</span>
+<span class="nc" id="L136">        tweetDAO.addMention(tweet1, user8);</span>
+        
+<span class="nc" id="L138">        userDAO.likeTweet(user1, tweet1);</span>
+<span class="nc" id="L139">        userDAO.likeTweet(user2, tweet1);</span>
+<span class="nc" id="L140">        userDAO.likeTweet(user3, tweet2);</span>
+<span class="nc" id="L141">        userDAO.likeTweet(user4, tweet3);</span>
+        
+<span class="nc" id="L143">        userDAO.followUser(user1, user2);</span>
+<span class="nc" id="L144">        userDAO.followUser(user1, user3);</span>
+<span class="nc" id="L145">        userDAO.followUser(user1, user4);</span>
+        
+<span class="nc" id="L147">        userDAO.followUser(user2, user3);</span>
+<span class="nc" id="L148">        userDAO.followUser(user2, user4);</span>
+<span class="nc" id="L149">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

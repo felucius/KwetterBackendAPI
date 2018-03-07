@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">KwetterBackend_Maxime</a> &gt; <a href="index.source.html" class="el_package">service</a> &gt; <span class="el_source">UserService.java</span></div><h1>UserService.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package service;
+
+import dao.JPA;
+import dao.UserDAO;
+import domain.Tweet;
+import domain.User;
+import java.util.List;
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+
+/**
+ * The class 'UserService' provides data of users, collected by the userDAO.
+ *
+ * @author M
+ */
+@Stateless
+<span class="nc" id="L22">public class UserService {</span>
+
+    /**
+     * Inject the userDAO. By doing this the constructor does not have to be
+     * initialized with the 'new' keyword. This provides a loosely coupled
+     * architecture.
+     */
+    @Inject @JPA
+    UserDAO userDAO;
+    
+    /**
+     * Get all users from the userDAO. UserDao makes a call to the database and
+     * sends the data to this method.
+     *
+     * @return a list of all available users.
+     */
+    public List&lt;User&gt; getAllUsers() {
+<span class="nc" id="L39">        return userDAO.getAllUsers();</span>
+    }
+
+    /**
+     * This method creates a new user and persists the object to the database
+     *
+     * @param user is the object that is going to be created and persisted to
+     * the database.
+     * @return the user object if a creation of a new user has been successful.
+     */
+    public User createUser(User user) {
+<span class="nc" id="L50">        return userDAO.createUser(user);</span>
+    }
+
+    /**
+     * This method find the user by it's given id. From there on this
+     * information is passed on to the DAO and to the entity manager to be
+     * removed from the database
+     *
+     * @param user is the object that is going to be removed.
+     * @return true if the user has succesfully been removed or false when the
+     * action could not have been completed.
+     */
+    /*
+    public boolean removeUser(User user) {
+        return userDAO.removeUser(user);
+    }*/
+
+    /**
+     * This method finds the user by it's user id. This id is passed on from the
+     * UserResource to the UserService.
+     *
+     * @param id of the user to be searched.
+     * @return the user object.
+     */
+    public User findUser(Long id) {
+<span class="nc" id="L75">        return userDAO.findUser(id);</span>
+    }
+    
+    /**
+     * 
+     * @param name
+     * @return 
+     */
+    public User findUserByName(String name){
+<span class="nc" id="L84">        return userDAO.findUserByName(name);</span>
+    }
+
+    /**
+     * This method allows a tweet to be added with a user, the actual tweet and
+     * a list of users that are mentioned in the post.
+     *
+     * @param user is the user that wrote the tweet.
+     * @param tweet is the content of the tweet, written by the user object.
+     * @param mentions are the users that are mentioned in this tweet/post.
+     * @return return true if the addition of the tweet has been successful or
+     * false when this action could not have been completed.
+     */
+    public boolean addTweet(User user, Tweet tweet, List&lt;User&gt; mentions) {
+<span class="nc" id="L98">        return userDAO.addTweet(user, tweet, mentions);</span>
+    }
+
+    /**
+     * This method allows a single tweet to be removed from a single user.
+     *
+     * @param tweet that is going to be removed.
+     * @return true is the tweet has successfully been removed or false when the
+     * action could not have been completed.
+     */
+    public boolean removeTweet(Tweet tweet) {
+<span class="nc" id="L109">        return userDAO.removeTweet(tweet);</span>
+    }
+
+    /**
+     * This method allows a user to follow another user.
+     *
+     * @param user is the user that is going to follow another user.
+     * @param followingUser is the users that the 'user' object is going to
+     * follow.
+     * @return true if the 'user' object successfully followed the
+     * 'followingUser' object or false when this action did not succeed.
+     */
+    public boolean followUser(User user, User followingUser) {
+<span class="nc" id="L122">        return userDAO.followUser(user, followingUser);</span>
+    }
+
+    /**
+     * This method allows a user to un follow another user.
+     *
+     * @param user object that is going to un follow another single user.
+     * @param unfollowingUser is the user that is going to be un followed by the
+     * 'user' object.
+     * @return true if the 'user' successfully un followed the 'unfollowingUser'
+     * object or false when this action could not succeed.
+     */
+    public boolean unfollowUser(User user, User unfollowingUser) {
+<span class="nc" id="L135">        return userDAO.unfollowUser(user, unfollowingUser);</span>
+    }
+
+    /**
+     * This method retrieves all the users that one user follows.
+     *
+     * @param user object that is going to retrieve all following users.
+     * @return a list of users that the 'user' object follows.
+     */
+    public List&lt;User&gt; getFollowingUsers(User user) {
+<span class="nc" id="L145">        return userDAO.getFollowingUsers(user);</span>
+    }
+
+    /**
+     * This method retrieves all the following users from a single user.
+     *
+     * @param user that is going to retrieve all it's followers.
+     * @return a list of users that follow the 'user' object.
+     */
+    public List&lt;User&gt; getFollowers(User user) {
+<span class="nc" id="L155">        return userDAO.getFollowers(user);</span>
+    }
+
+    /**
+     * This method retrieves all tweets from a single user.
+     *
+     * @param user object that all tweets are going to be retrieved from.
+     * @return a list of tweets from that single user.
+     */
+    public List&lt;Tweet&gt; getTweetsByUser(User user) {
+<span class="nc" id="L165">        return userDAO.getTweetsByUser(user);</span>
+    }
+
+    /**
+     * This method allows a tweet to be liked by a single user.
+     *
+     * @param user is the user that likes a single tweet.
+     * @param tweetToLike is the tweet that is going to be liked by the 'user'
+     * object.
+     * @return true if the user successfully liked the single tweet or false
+     * when this action could not have been succeeded.
+     */
+    public boolean likeTweet(User user, Tweet tweetToLike) {
+<span class="nc" id="L178">        return userDAO.likeTweet(user, tweetToLike);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

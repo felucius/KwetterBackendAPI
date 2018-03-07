@@ -50,11 +50,11 @@ public class UserDAOImplementationTest {
 
     @Before
     public void setUp() {
-        //try {
-        //    new DatabaseCleaner(emf.createEntityManager()).clean();
-        //} catch (SQLException ex) {
-        //    Logger.getLogger(UserRestTest.class.getName()).log(Level.SEVERE, null, ex);
-        //}
+        try {
+            new DatabaseCleaner(emf.createEntityManager()).clean();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserRestTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         emf.createEntityManager();
         em = emf.createEntityManager();
         et = em.getTransaction();
@@ -143,7 +143,7 @@ public class UserDAOImplementationTest {
         em.persist(userFollowing);
         et.commit();
 
-        assertEquals(2, em.createNamedQuery("User.getFollowers").
+        assertEquals(1, em.createNamedQuery("User.getFollowers").
                 setParameter("username", userFollowing.getName()).getResultList().size());
     }
 
@@ -212,7 +212,7 @@ public class UserDAOImplementationTest {
         em.persist(tweet);
         et.commit();
 
-        assertEquals(3, em.createNamedQuery("Tweet.getAllTweets")
+        assertEquals(1, em.createNamedQuery("Tweet.getAllTweets")
                 .getResultList().size());
     }
 

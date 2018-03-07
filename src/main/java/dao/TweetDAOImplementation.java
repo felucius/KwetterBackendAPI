@@ -11,7 +11,6 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import static org.eclipse.persistence.logging.SessionLog.JPA;
 
 /**
  *
@@ -84,8 +83,7 @@ public class TweetDAOImplementation implements TweetDAO {
         List<User> users = null;
         tweet.getMentions();
         try {
-            //users = em.createNamedQuery("Tweet.getMentions").getResultList();
-            users = tweet.getMentions();
+            users = em.find(Tweet.class, tweet.getId()).getMentions();
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;

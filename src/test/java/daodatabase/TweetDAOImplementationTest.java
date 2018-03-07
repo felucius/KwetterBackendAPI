@@ -5,12 +5,11 @@
  */
 package daodatabase;
 
-import dao.TweetDAOCollection;
-import dao.UserDAOCollection;
 import domain.Tweet;
 import domain.User;
 import httpclientrest.UserRestTest;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,10 +19,10 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import util.DatabaseCleaner;
 
 /**
@@ -65,37 +64,53 @@ public class TweetDAOImplementationTest {
     @Test
     public void testGetMentions() {
         System.out.println("Test get mentions on - Tweet DAO Database implementation");
+        List<String> tags = new ArrayList();
+        tags.add("#cool");
         User user = new User("Maxime");
-        Tweet tweet = new Tweet();
+        Tweet tweet = new Tweet("test", tags, user);
         tweet.addMention(user);
-        
+
         et.begin();
+        em.persist(user);
         em.persist(tweet);
         et.commit();
-        
-        //tweetDAO.addMention(tweet1, user1);
-        //tweetDAO.addMention(tweet1, user2);
-        //assertEquals(2, tweetDAO.getMentions(tweet1).size());
+
+        assertEquals(1, em.find(Tweet.class, tweet.getId()).getMentions().size());
     }
 
     @Test
     public void testAddMention() {
-        System.out.println("Test add mentions on - Tweet DAO collection");
-        //tweetDAO.addMention(tweet1, user1);
+        System.out.println("Test add mentions on - Tweet DAO database implementation");
 
-        //assertEquals(1, tweetDAO.getMentions(tweet1).size());
-    }
+        List<String> tags = new ArrayList();
+        tags.add("#cool");
+        User user = new User("Maxime");
+        Tweet tweet = new Tweet("test", tags, user);
+        tweet.addMention(user);
 
-    @Test
-    public void testGetTweetsOfFollowingUsers() {
-        System.out.println("Test get tweets of following users on - Tweet DAO collection");
-        //userDAO.addTweet(user1, tweet1, users);
-        //assertEquals(1, tweetDAO.getTweetsOfFollowingUsers(user1).size());
+        et.begin();
+        em.persist(user);
+        em.persist(tweet);
+        et.commit();
+
+        assertEquals(1, em.find(Tweet.class, tweet.getId()).getMentions().size());
     }
 
     @Test
     public void testGetAllTweets() {
         System.out.println("Test get all tweets on - Tweet DAO collection");
-        //assertEquals(0, tweetDAO.getAllTweets().size());
+
+        List<String> tags = new ArrayList();
+        tags.add("#cool");
+        User user = new User("Maxime");
+        Tweet tweet = new Tweet("test", tags, user);
+        
+        et.begin();
+        em.persist(user);
+        em.persist(tweet);
+        et.commit();
+        
+        
+        assertEquals(1, em.createNamedQuery("Tweet.getAllTweets").getResultList().size());
     }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="11" failures="0" name="rest.MockitoUserRestTest" time="0.026" errors="0" skipped="0">
+<testsuite tests="11" failures="0" name="rest.MockitoUserRestTest" time="0.003" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_101\jre\bin"/>
@@ -64,12 +64,12 @@
   <testcase classname="rest.MockitoUserRestTest" name="testGetAllUsers" time="0"/>
   <testcase classname="rest.MockitoUserRestTest" name="testGetFollowingUsers" time="0"/>
   <testcase classname="rest.MockitoUserRestTest" name="testRemoveTweet" time="0"/>
-  <testcase classname="rest.MockitoUserRestTest" name="testAddTweet" time="0"/>
+  <testcase classname="rest.MockitoUserRestTest" name="testAddTweet" time="0.001"/>
   <testcase classname="rest.MockitoUserRestTest" name="testFindUser" time="0"/>
   <testcase classname="rest.MockitoUserRestTest" name="testLikeTweet" time="0"/>
   <testcase classname="rest.MockitoUserRestTest" name="testCreateUser" time="0"/>
   <testcase classname="rest.MockitoUserRestTest" name="testUnfollowUser" time="0"/>
   <testcase classname="rest.MockitoUserRestTest" name="testGetTweets" time="0"/>
   <testcase classname="rest.MockitoUserRestTest" name="testFollowUser" time="0"/>
-  <testcase classname="rest.MockitoUserRestTest" name="testGetFollowers" time="0.001"/>
+  <testcase classname="rest.MockitoUserRestTest" name="testGetFollowers" time="0"/>
 </testsuite>

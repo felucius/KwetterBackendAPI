@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>User.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">KwetterBackend_Maxime</a> &gt; <a href="index.source.html" class="el_package">domain</a> &gt; <span class="el_source">User.java</span></div><h1>User.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package domain;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.enterprise.inject.Model;
+import javax.json.bind.annotation.JsonbTransient;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+
+/**
+ * This class is the template of a single user.
+ *
+ * The entity is the table that is being persisted into the database. The named
+ * query executes a query to receive information from the database
+ *
+ * @author M
+ */
+@Model
+@Entity
+@NamedQueries({
+    @NamedQuery(name = &quot;User.getAllUsers&quot;, 
+            query = &quot;SELECT u FROM User u&quot;),
+    @NamedQuery(name = &quot;User.getFollowingUsers&quot;, 
+            query = &quot;SELECT u2.name, u2.id\n&quot;
+                    + &quot;FROM User u\n&quot;
+                    + &quot;INNER JOIN u.following uf \n&quot;
+                    + &quot;INNER JOIN User u2 \n&quot;
+                    + &quot;WHERE u2.id = uf.id \n&quot;
+                    + &quot;AND u.name = :username&quot;),
+    @NamedQuery(name = &quot;User.getFollowers&quot;, 
+            query = &quot;SELECT u2.name, u2.id\n&quot;
+                    + &quot;FROM User u\n&quot;
+                    + &quot;INNER JOIN u.followers uf \n&quot;
+                    + &quot;INNER JOIN User u2 \n&quot;
+                    + &quot;WHERE u2.id = uf.id \n&quot;
+                    + &quot;AND u.name = :username&quot;),
+    @NamedQuery(name = &quot;User.findUserByName&quot;,
+            query = &quot;SELECT u &quot;
+                    + &quot;FROM User u &quot;
+                    + &quot;where u.name = :name&quot;)
+})
+
+public class User implements Serializable {
+
+<span class="fc" id="L61">    private String picture = null;</span>
+<span class="fc" id="L62">    private String website = null;</span>
+<span class="fc" id="L63">    private String name = null;</span>
+<span class="fc" id="L64">    private String bio = null;</span>
+<span class="fc" id="L65">    private String location = null;</span>
+<span class="fc" id="L66">    private String email = null;</span>
+<span class="fc" id="L67">    private String password = null;</span>
+
+    // When a user is removed it's tweets are removed as well.
+<span class="fc" id="L70">    @OneToMany(mappedBy = &quot;tweetedBy&quot;)</span>
+    private List&lt;Tweet&gt; tweets = null;
+
+<span class="fc" id="L73">    @OneToMany(fetch = FetchType.EAGER)</span>
+    @JoinTable(name = &quot;User_following&quot;)
+    private List&lt;User&gt; following = null;
+
+<span class="fc" id="L77">    @OneToMany(fetch = FetchType.EAGER)</span>
+    @JoinTable(name = &quot;User_followers&quot;)
+    private List&lt;User&gt; followers = null;
+
+    /**
+     * ID is automatically generated per persist on the database.
+     *
+     * GeneratedValue provides primary keys to the database table.
+     */
+    @Id
+    @Column(name = &quot;ID&quot;)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Assigning primary keys to the table User.
+    private Long id;
+    @ManyToOne
+    private Tweet tweet;
+
+    /**
+     * Constructor that initiates a new user with an empty list of -new tweets
+     * -followers -following users
+     */
+<span class="fc" id="L97">    public User() {</span>
+<span class="fc" id="L98">        this.picture = &quot;picturePath&quot;;</span>
+<span class="fc" id="L99">        this.tweets = new ArrayList();</span>
+<span class="fc" id="L100">        this.following = new ArrayList();</span>
+<span class="fc" id="L101">        this.followers = new ArrayList();</span>
+<span class="fc" id="L102">    }</span>
+
+    /**
+     * Constructor that creates a new user
+     *
+     * @param picture the picture of the profile
+     * @param website of choice from the user
+     * @param name the name of the user
+     * @param bio the biography of the user
+     * @param location of residence
+     * @param email of the user
+     * @param password of account
+     */
+    public User(String picture, String website, String name, String bio,
+<span class="fc" id="L116">            String location, String email, String password) {</span>
+<span class="fc" id="L117">        this.website = website;</span>
+<span class="fc" id="L118">        this.name = name;</span>
+<span class="fc" id="L119">        this.bio = bio;</span>
+<span class="fc" id="L120">        this.location = location;</span>
+<span class="fc" id="L121">        this.email = email;</span>
+<span class="fc" id="L122">        this.password = password;</span>
+
+<span class="fc" id="L124">        this.picture = &quot;picturePath&quot;;</span>
+<span class="fc" id="L125">        this.tweets = new ArrayList();</span>
+<span class="fc" id="L126">        this.following = new ArrayList();</span>
+<span class="fc" id="L127">        this.followers = new ArrayList();</span>
+<span class="fc" id="L128">    }</span>
+
+<span class="fc" id="L130">    public User(String name) {</span>
+<span class="fc" id="L131">        this.name = name;</span>
+<span class="fc" id="L132">        this.picture = &quot;picturePath&quot;;</span>
+<span class="fc" id="L133">        this.tweets = new ArrayList();</span>
+<span class="fc" id="L134">        this.following = new ArrayList();</span>
+<span class="fc" id="L135">        this.followers = new ArrayList();</span>
+<span class="fc" id="L136">    }</span>
+
+    /**
+     * This method allows a tweet to be added with a certain amount of mentions
+     *
+     * @param tweet to be added and posted.
+     * @param mentions are the users that are going to be mentioned in the post.
+     */
+    public void addTweet(Tweet tweet, List&lt;User&gt; mentions) {
+<span class="fc" id="L145">        tweets.add(tweet);</span>
+<span class="fc" id="L146">    }</span>
+
+    /**
+     * This method allows a tweet to be removed.
+     *
+     * @param tweet that is going to be removed.
+     */
+    public void removeTweet(Tweet tweet) {
+<span class="fc" id="L154">        tweets.remove(tweet);</span>
+<span class="fc" id="L155">    }</span>
+
+    /**
+     * This method allows a user to be followed.
+     *
+     * @param user that is going to be followed.
+     */
+    public void followUser(User user) {
+<span class="pc bpc" id="L163" title="1 of 2 branches missed.">        if(!this.following.contains(user)){</span>
+<span class="fc" id="L164">            user.addFollower(this);</span>
+<span class="fc" id="L165">            following.add(user);</span>
+        }
+<span class="fc" id="L167">    }</span>
+
+    /**
+     * This method allows a new follower to be added to the user base of
+     * followers.
+     *
+     * @param user that is going to follow the current user.
+     */
+    private void addFollower(User user) {
+<span class="fc" id="L176">        this.followers.add(user);</span>
+<span class="fc" id="L177">    }</span>
+    
+    private void removeFollower(User user){
+<span class="nc" id="L180">        this.followers.remove(user);</span>
+<span class="nc" id="L181">    }</span>
+
+    /**
+     * This method allows a user to be removed.
+     *
+     * @param user that is going to be removed from the followers base.
+     */
+    public void unfollowUser(User user) {
+<span class="pc bpc" id="L189" title="1 of 2 branches missed.">        if(this.following.contains(user)){</span>
+<span class="nc" id="L190">            user.removeFollower(this);</span>
+<span class="nc" id="L191">            this.following.remove(user);</span>
+        }
+<span class="fc" id="L193">    }</span>
+
+    /**
+     * This method returns all the followers per user
+     *
+     * @return all followers.
+     */
+    @JsonbTransient
+    public List&lt;User&gt; getFollowers() {
+<span class="fc" id="L202">        return followers;</span>
+    }
+
+    /**
+     * This method returns all the users, that the user object follows.
+     *
+     * @return all following users from a specific user.
+     */
+    @JsonbTransient
+    public List&lt;User&gt; getFollowing() {
+<span class="nc" id="L212">        return following;</span>
+    }
+
+    /**
+     * This method allows a tweet to be added to the liked tweets.
+     *
+     * @param tweet to be added to the likes.
+     */
+    public void likeTweet(Tweet tweet) {
+<span class="fc" id="L221">        tweet.likeTweet(this);</span>
+<span class="fc" id="L222">    }</span>
+
+    /**
+     * Retrieving the picture of the user.
+     *
+     * @return picture of user.
+     */
+    public String getPicture() {
+<span class="fc" id="L230">        return this.picture;</span>
+    }
+
+    /**
+     * Setting the new picture of the user.
+     *
+     * @param picture of the user that is going to be set.
+     */
+    public void setPicture(String picture) {
+<span class="fc" id="L239">        this.picture = picture;</span>
+<span class="fc" id="L240">    }</span>
+
+    /**
+     * Retrieving the website of the user.
+     *
+     * @return the website.
+     */
+    public String getWebsite() {
+<span class="fc" id="L248">        return this.website;</span>
+    }
+
+    /**
+     * Setting the website of the user.
+     *
+     * @param website of the users that is going to be set.
+     */
+    public void setWebsite(String website) {
+<span class="fc" id="L257">        this.website = website;</span>
+<span class="fc" id="L258">    }</span>
+
+    /**
+     * Retrieving the name of the user.
+     *
+     * @return the name of the user.
+     */
+    public String getName() {
+<span class="fc" id="L266">        return this.name;</span>
+    }
+
+    /**
+     * Set the name of the user.
+     *
+     * @param name of the user that is going to be set.
+     */
+    public void setName(String name) {
+<span class="fc" id="L275">        this.name = name;</span>
+<span class="fc" id="L276">    }</span>
+
+    /**
+     * Retrieving the bio of the user.
+     *
+     * @return the bio.
+     */
+    public String getBio() {
+<span class="fc" id="L284">        return this.bio;</span>
+    }
+
+    /**
+     * Setting the new bio of the user.
+     *
+     * @param bio that is going to be set.
+     */
+    public void setBio(String bio) {
+<span class="fc" id="L293">        this.bio = bio;</span>
+<span class="fc" id="L294">    }</span>
+
+    /**
+     * Retrieving the location of the user.
+     *
+     * @return the location of the user.
+     */
+    public String getLocation() {
+<span class="fc" id="L302">        return this.location;</span>
+    }
+
+    /**
+     * Setting the location of the user
+     *
+     * @param location to be set.
+     */
+    public void setLocation(String location) {
+<span class="fc" id="L311">        this.location = location;</span>
+<span class="fc" id="L312">    }</span>
+
+    /**
+     * Retrieving the email of the user.
+     *
+     * @return email of the user.
+     */
+    public String getEmail() {
+<span class="fc" id="L320">        return this.email;</span>
+    }
+
+    /**
+     * Setting the email of the user.
+     *
+     * @param email of the user to be set.
+     */
+    public void setEmail(String email) {
+<span class="fc" id="L329">        this.email = email;</span>
+<span class="fc" id="L330">    }</span>
+
+    /**
+     * Retrieving the password of the user.
+     *
+     * @return password of user.
+     */
+    public String getPassword() {
+<span class="fc" id="L338">        return this.password;</span>
+    }
+
+    /**
+     * Setting the password of the user.
+     *
+     * @param password of the user that is going to be set.
+     */
+    public void setPassword(String password) {
+<span class="fc" id="L347">        this.password = password;</span>
+<span class="fc" id="L348">    }</span>
+
+    /**
+     * Setting new tweets to the list.
+     *
+     * @param tweets to be added.
+     */
+    public void setTweets(List&lt;Tweet&gt; tweets) {
+<span class="fc" id="L356">        this.tweets = tweets;</span>
+<span class="fc" id="L357">    }</span>
+
+    /**
+     * Retrieving all tweets that the user made.
+     *
+     * @return all tweets from the user.
+     */
+    @JsonbTransient
+    public List&lt;Tweet&gt; getTweets() {
+<span class="fc" id="L366">        return this.tweets;</span>
+    }
+
+    /**
+     * Setting the id to a new one.
+     *
+     * @param id to be set.
+     */
+    public void setId(Long id) {
+<span class="fc" id="L375">        this.id = id;</span>
+<span class="fc" id="L376">    }</span>
+
+    /**
+     * Retrieving the id of a single user.
+     *
+     * @return the id of a user.
+     */
+    public Long getId() {
+<span class="fc" id="L384">        return this.id;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>
