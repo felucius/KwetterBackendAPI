@@ -49,7 +49,11 @@ import javax.persistence.OneToMany;
                     + "INNER JOIN u.followers uf \n"
                     + "INNER JOIN User u2 \n"
                     + "WHERE u2.id = uf.id \n"
-                    + "AND u.name = :username")
+                    + "AND u.name = :username"),
+    @NamedQuery(name = "User.findUserByName",
+            query = "SELECT u "
+                    + "FROM User u "
+                    + "where u.name = :name")
 })
 
 public class User implements Serializable {

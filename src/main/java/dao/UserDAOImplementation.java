@@ -319,7 +319,7 @@ public class UserDAOImplementation implements UserDAO {
     public User findUserByName(String name) {
         User user = null;
         try {
-            user = (User) em.createQuery("SELECT u FROM User u where u.name = :name").
+            user = (User) em.createNamedQuery("User.findUserByName").
                     setParameter("name", name).
                     getSingleResult();
 

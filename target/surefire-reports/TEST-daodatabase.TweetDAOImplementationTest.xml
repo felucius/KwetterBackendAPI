@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="21" failures="0" name="domain.UserTest" time="0.005" errors="0" skipped="0">
+<testsuite tests="4" failures="0" name="daodatabase.TweetDAOImplementationTest" time="20.265" errors="1" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_101\jre\bin"/>
@@ -61,25 +61,54 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="domain.UserTest" name="testSetPassword" time="0"/>
-  <testcase classname="domain.UserTest" name="testGetPassword" time="0"/>
-  <testcase classname="domain.UserTest" name="testGetEmail" time="0"/>
-  <testcase classname="domain.UserTest" name="testSetLocation" time="0"/>
-  <testcase classname="domain.UserTest" name="testToString" time="0"/>
-  <testcase classname="domain.UserTest" name="testGetLocation" time="0"/>
-  <testcase classname="domain.UserTest" name="testRemoveTweet" time="0"/>
-  <testcase classname="domain.UserTest" name="testSetWebsite" time="0"/>
-  <testcase classname="domain.UserTest" name="testAddTweet" time="0"/>
-  <testcase classname="domain.UserTest" name="testGetName" time="0"/>
-  <testcase classname="domain.UserTest" name="testGetPicture" time="0"/>
-  <testcase classname="domain.UserTest" name="testLikeTweet" time="0"/>
-  <testcase classname="domain.UserTest" name="testSetTweets" time="0"/>
-  <testcase classname="domain.UserTest" name="testGetBio" time="0"/>
-  <testcase classname="domain.UserTest" name="testGetWebsite" time="0"/>
-  <testcase classname="domain.UserTest" name="testFollowUser" time="0"/>
-  <testcase classname="domain.UserTest" name="testSetName" time="0"/>
-  <testcase classname="domain.UserTest" name="testSetPicture" time="0"/>
-  <testcase classname="domain.UserTest" name="testSetBio" time="0"/>
-  <testcase classname="domain.UserTest" name="testGetFollowers" time="0"/>
-  <testcase classname="domain.UserTest" name="testSetEmail" time="0"/>
+  <testcase classname="daodatabase.TweetDAOImplementationTest" name="testGetAllTweets" time="0.448"/>
+  <testcase classname="daodatabase.TweetDAOImplementationTest" name="testGetMentions" time="0.012">
+    <error type="java.lang.NullPointerException">java.lang.NullPointerException
+	at domain.Tweet.addMention(Tweet.java:145)
+	at daodatabase.TweetDAOImplementationTest.testGetMentions(TweetDAOImplementationTest.java:70)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:104)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:164)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:110)
+	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
+	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
+</error>
+    <system-out>[EL Fine]: sql: 2018-03-07 09:29:01.134--ClientSession(210532515)--Connection(148964727)--Thread(Thread[main,5,main])--DELETE FROM Tweet_mentions
+[EL Fine]: sql: 2018-03-07 09:29:01.135--ClientSession(210532515)--Connection(148964727)--Thread(Thread[main,5,main])--DELETE FROM Tweet_likes
+[EL Fine]: sql: 2018-03-07 09:29:01.135--ClientSession(210532515)--Connection(148964727)--Thread(Thread[main,5,main])--DELETE FROM TWEET
+[EL Fine]: sql: 2018-03-07 09:29:01.136--ClientSession(210532515)--Connection(148964727)--Thread(Thread[main,5,main])--DELETE FROM User_following
+[EL Fine]: sql: 2018-03-07 09:29:01.137--ClientSession(210532515)--Connection(148964727)--Thread(Thread[main,5,main])--DELETE FROM User_followers
+[EL Fine]: sql: 2018-03-07 09:29:01.138--ClientSession(210532515)--Connection(148964727)--Thread(Thread[main,5,main])--DELETE FROM USER
+Test get mentions on - Tweet DAO Database implementation
+</system-out>
+  </testcase>
+  <testcase classname="daodatabase.TweetDAOImplementationTest" name="testGetTweetsOfFollowingUsers" time="0.005"/>
+  <testcase classname="daodatabase.TweetDAOImplementationTest" name="testAddMention" time="0.006"/>
 </testsuite>
