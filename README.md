@@ -40,6 +40,15 @@ To get following users from a single user
 To get followers from a single user
 - api/users/getfollowers/'username-data'
 
+To promote a user with a new user role
+- api/users/promote
+
+To demote a user with a new suer role
+- api/users/demote
+
+to update a user with new user information
+- api/users/updateuser
+
 # Tweets and tweet information
 To find all tweets
 - api/tweets
