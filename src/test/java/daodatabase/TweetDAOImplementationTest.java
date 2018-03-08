@@ -22,6 +22,7 @@ import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import util.DatabaseCleaner;
 
@@ -29,6 +30,7 @@ import util.DatabaseCleaner;
  *
  * @author M
  */
+@Ignore
 public class TweetDAOImplementationTest {
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("KwetterBackendTestPU");

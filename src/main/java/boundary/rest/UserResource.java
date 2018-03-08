@@ -74,20 +74,19 @@ public class UserResource {
         return userService.createUser(user);
     }
 
-    /*
+    /**
+     * Creates a new user object
+     *
+     * @param user is the object that is going to be created.
+     * @return the new created user object.
+     */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("createuser")
     public User createUser(User user) {
-        //User user = new User(username);
-        //return userService.createUser(user);
-        //System.out.println("USER USERNAME: " + user.getName());
-        //System.out.println("USER EMAIL: " + user.getEmail());
-        //System.out.println("USER OBJECT: " + user.toString());
         return userService.createUser(user);
-        //return user;
     }
-     */
+
     /**
      * GET request from the userService. When calling this method, the user id
      * is given to the userService. From there to the DAO and from there to the
@@ -143,54 +142,121 @@ public class UserResource {
         return userService.addTweet(userService.findUserByName(userName), tweet, mentions);
     }
 
+    /**
+     * Find a single tweet by it's id.
+     *
+     * @param id is used to search the tweet.
+     * @return a tweet object matching the given id.
+     */
     @GET
     @Path("findtweet/{id}")
     public Tweet findTweet(@PathParam("id") Long id) {
         return tweetService.findTweet(id);
     }
 
-    @DELETE
-    @Path("removetweet/{id}")
-    public boolean removeTweet(@PathParam("id") Long tweetId) {
-        return userService.removeTweet(tweetService.findTweet(tweetId));
+    /**
+     * Removal of a single tweet based on it's id.
+     *
+     * @param tweetId is used to find and remove a certain tweet.
+     * @return true if the action has been successful or false when the action
+     * could not have taken place.
+     */
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("removetweet")//Check for foreign key on removal!!!!
+    public boolean removeTweet(Tweet tweet) {
+
+        return userService.removeTweet(tweetService.findTweet(tweet.getId()));
     }
 
+    /**
+     * Follow a single user by it's username.
+     *
+     * @param username is the user who want's to follow another user.
+     * @param followingUser is the user who is going to be followed by the
+     * 'username' object.
+     * @return true if the following has been successful or false when the
+     * action could not have been succeeded.
+     */
     @GET
     @Path("followuser/{user}/{followuser}")
     public boolean followUser(@PathParam("user") String username, @PathParam("followuser") String followingUser) {
         return userService.followUser(userService.findUserByName(username), userService.findUserByName(followingUser));
     }
 
+    /**
+     * Unfollow a user by it's username.
+     *
+     * @param username is the user who is going to un follow a user.
+     * @param unfollowingUser is the user who is going to be un followed by the
+     * 'username' user.
+     * @return true if the user successfully un followed another user or false
+     * when this action could not have taken place.
+     */
     @GET
     @Path("unfollowuser/{user}/{unfollowuser}")
     public boolean unfollowUser(@PathParam("user") String username, @PathParam("unfollowuser") String unfollowingUser) {
         return userService.unfollowUser(userService.findUserByName(username), userService.findUserByName(unfollowingUser));
     }
 
+    /**
+     * Get the followers base from a single user.
+     *
+     * @param userName is the object where followers are going to be retrieved
+     * from.
+     * @return a list of followers from a single user object.
+     */
     @GET
     @Path("getfollowers/{getfollowers}")
     public List<User> getFollowingUsers(@PathParam("getfollowers") String userName) {
         return userService.getFollowingUsers(userService.findUserByName(userName));
     }
 
+    /**
+     * Get the following users from a single user object.
+     *
+     * @param userName is the user that is going to searched on.
+     * @return a list of users that follow the 'userName'
+     */
     @GET
     @Path("getfollowing/{getfollowing}")
     public List<User> getFollowers(@PathParam("getfollowing") String userName) {
         return userService.getFollowers(userService.findUserByName(userName));
     }
 
+    /**
+     * Get tweets from a single user object by it's username.
+     *
+     * @param username is the user that is going to retrieve it's tweets.
+     * @return a list of tweets from a single user.
+     */
     @GET
     @Path("gettweetsfromuser/{username}")
     public List<Tweet> getTweets(@PathParam("username") String username) {
         return userService.getTweetsByUser(userService.findUserByName(username));
     }
 
+    /**
+     * Method to like a single tweet by a single user.
+     *
+     * @param userName is the user object that is going to like a single tweet.
+     * @param tweetId is the tweet object that is going to be liked.
+     * @return true if the action could have been succeeded or false when it did
+     * not succeed.
+     */
     @POST
     @Path("liketweet/{user}/{tweettolike}")
     public boolean likeTweet(@PathParam("user") String userName, @PathParam("tweettolike") Long tweetId) {
         return userService.likeTweet(userService.findUserByName(userName), tweetService.findTweet(tweetId));
     }
 
+    /**
+     * Promoting a user to a new userRole
+     *
+     * @param user is the object that is going to be promoted.
+     * @return true if the action could have been successful or false when the
+     * action could not have taken place.
+     */
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Path("promote")
@@ -198,6 +264,13 @@ public class UserResource {
         return userService.promoteUser(user);
     }
 
+    /**
+     * Demoting a user to a new userRole
+     *
+     * @param user is the object that is going to be demoted.
+     * @return true if the action could have been successful or false when the
+     * action could not have taken place.
+     */
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Path("demote")
@@ -205,6 +278,12 @@ public class UserResource {
         return userService.demoteUser(user);
     }
 
+    /**
+     * Update a user personal information
+     *
+     * @param user is the object that is going to be modified.
+     * @return return a user with modified information.
+     */
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Path("updateuser")

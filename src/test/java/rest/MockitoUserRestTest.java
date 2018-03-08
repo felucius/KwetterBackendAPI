@@ -221,7 +221,7 @@ public class MockitoUserRestTest {
 
         when(userService.removeTweet(tweet1)).thenReturn(true);
         assertEquals(true, userService.removeTweet(tweet1));
-        userResource.removeTweet(tweet1.getId());
+        userResource.removeTweet(tweet1);
         verify(userService).removeTweet(tweet1);
     }
 

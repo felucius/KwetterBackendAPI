@@ -61,24 +61,24 @@ import javax.persistence.OneToMany;
 
 public class User implements Serializable {
 
-<span class="fc" id="L64">    private String picture = null;</span>
-<span class="fc" id="L65">    private String website = null;</span>
-<span class="fc" id="L66">    private String name = null;</span>
-<span class="fc" id="L67">    private String bio = null;</span>
-<span class="fc" id="L68">    private String location = null;</span>
-<span class="fc" id="L69">    private String email = null;</span>
-<span class="fc" id="L70">    private String password = null;</span>
-<span class="fc" id="L71">    private UserRole userRole = null;</span>
+<span class="pc" id="L64">    private String picture = null;</span>
+<span class="pc" id="L65">    private String website = null;</span>
+<span class="pc" id="L66">    private String name = null;</span>
+<span class="pc" id="L67">    private String bio = null;</span>
+<span class="pc" id="L68">    private String location = null;</span>
+<span class="pc" id="L69">    private String email = null;</span>
+<span class="pc" id="L70">    private String password = null;</span>
+<span class="pc" id="L71">    private UserRole userRole = null;</span>
 
     // When a user is removed it's tweets are removed as well.
-<span class="fc" id="L74">    @OneToMany(mappedBy = &quot;tweetedBy&quot;)</span>
+<span class="pc" id="L74">    @OneToMany(mappedBy = &quot;tweetedBy&quot;)</span>
     private List&lt;Tweet&gt; tweets = null;
 
-<span class="fc" id="L77">    @OneToMany(fetch = FetchType.EAGER)</span>
+<span class="pc" id="L77">    @OneToMany(fetch = FetchType.EAGER)</span>
     @JoinTable(name = &quot;User_following&quot;)
     private List&lt;User&gt; following = null;
 
-<span class="fc" id="L81">    @OneToMany(fetch = FetchType.EAGER)</span>
+<span class="pc" id="L81">    @OneToMany(fetch = FetchType.EAGER)</span>
     @JoinTable(name = &quot;User_followers&quot;)
     private List&lt;User&gt; followers = null;
 
@@ -133,13 +133,13 @@ public class User implements Serializable {
 <span class="fc" id="L133">        this.followers = new ArrayList();</span>
 <span class="fc" id="L134">    }</span>
 
-<span class="fc" id="L136">    public User(String name) {</span>
-<span class="fc" id="L137">        this.name = name;</span>
-<span class="fc" id="L138">        this.picture = &quot;picturePath&quot;;</span>
-<span class="fc" id="L139">        this.tweets = new ArrayList();</span>
-<span class="fc" id="L140">        this.following = new ArrayList();</span>
-<span class="fc" id="L141">        this.followers = new ArrayList();</span>
-<span class="fc" id="L142">    }</span>
+<span class="nc" id="L136">    public User(String name) {</span>
+<span class="nc" id="L137">        this.name = name;</span>
+<span class="nc" id="L138">        this.picture = &quot;picturePath&quot;;</span>
+<span class="nc" id="L139">        this.tweets = new ArrayList();</span>
+<span class="nc" id="L140">        this.following = new ArrayList();</span>
+<span class="nc" id="L141">        this.followers = new ArrayList();</span>
+<span class="nc" id="L142">    }</span>
 
     /**
      * This method allows a tweet to be added with a certain amount of mentions
@@ -192,11 +192,11 @@ public class User implements Serializable {
      * @param user that is going to be removed from the followers base.
      */
     public void unfollowUser(User user) {
-<span class="pc bpc" id="L195" title="1 of 2 branches missed.">        if (this.following.contains(user)) {</span>
+<span class="nc bnc" id="L195" title="All 2 branches missed.">        if (this.following.contains(user)) {</span>
 <span class="nc" id="L196">            user.removeFollower(this);</span>
 <span class="nc" id="L197">            this.following.remove(user);</span>
         }
-<span class="fc" id="L199">    }</span>
+<span class="nc" id="L199">    }</span>
 
     /**
      * This method returns all the followers per user

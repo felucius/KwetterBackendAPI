@@ -1,8 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: service.TweetServiceTest
 -------------------------------------------------------------------------------
-<<<<<<< HEAD
 Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec
-=======
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec
->>>>>>> restlayer
