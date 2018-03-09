@@ -122,7 +122,6 @@ public class TweetDAOImplementation implements TweetDAO {
      */
     @Override
     public boolean addMention(Tweet tweet, User user) {
-        Tweet tweetMention = null;
         try {
             tweet.addMention(user);
             em.persist(tweet);

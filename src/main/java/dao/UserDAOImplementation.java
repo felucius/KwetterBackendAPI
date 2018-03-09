@@ -111,24 +111,6 @@ public class UserDAOImplementation implements UserDAO {
     }
 
     /**
-     * This method allows a tweet to be added from a specific user with mentions
-     *
-     * @param tweet to be created by a single user.
-     * @param mentions are users that are mentioned in this new tweet.
-     * @return true if the tweet has been successfully added or false when the
-     * addition has not been successful.
-     */
-    public boolean addTweet(Tweet tweet, List<User> mentions) {
-        try {
-            em.persist(tweet);
-            return true;
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return false;
-        }
-    }
-
-    /**
      * This method allows to remove a single tweet from the user.
      *
      * @param tweet to be removed from the user.
@@ -139,8 +121,8 @@ public class UserDAOImplementation implements UserDAO {
     public boolean removeTweet(Tweet tweet) {
         try {
             Tweet existingTweet = em.find(Tweet.class, tweet.getId());
-            
-            Query query =em.createNamedQuery("Tweet.removeTweet").
+
+            Query query = em.createNamedQuery("Tweet.removeTweet").
                     setParameter("tweetId", existingTweet.getId());
             query.executeUpdate();
             return true;
@@ -284,6 +266,17 @@ public class UserDAOImplementation implements UserDAO {
     @Override
     public boolean addTweet(User user, Tweet tweet, List<User> mentions) {
         user.addTweet(tweet, mentions);
+        
+        if (mentions != null) {
+            for (User u : mentions) {
+                if (!tweet.getMentions().contains(u)) {
+                    tweet.addMention(u);
+                }
+            }
+        }
+
+        em.persist(tweet);
+
         try {
             em.persist(tweet);
             return true;

@@ -34,6 +34,7 @@ public class init {
 
     private List<String> tags = new ArrayList();
     private List<User> mentions = new ArrayList();
+    private List<User> noMentions = new ArrayList();
 
     private User user1 = null;
     private User user2 = null;
@@ -114,22 +115,22 @@ public class init {
         tweet12 = new Tweet("SPAIN everyone!? someone SPANISH?", tags, user9);
         tweet13 = new Tweet("Yes finally a highscore from a low score..", tags, user10);
 
-        userDAO.addTweet(user1, tweet1, mentions);
-        userDAO.addTweet(user1, tweet2, mentions);
-        userDAO.addTweet(user1, tweet3, mentions);
+        userDAO.addTweet(user1, tweet1, noMentions);
+        userDAO.addTweet(user1, tweet2, noMentions);
+        userDAO.addTweet(user1, tweet3, noMentions);
         
-        userDAO.addTweet(user2, tweet4, mentions);
-        userDAO.addTweet(user1, tweet5, mentions);
+        userDAO.addTweet(user2, tweet4, noMentions);
+        userDAO.addTweet(user1, tweet5, noMentions);
         
         
-        userDAO.addTweet(user3, tweet6, mentions);
-        userDAO.addTweet(user4, tweet7, mentions);
-        userDAO.addTweet(user5, tweet8, mentions);
-        userDAO.addTweet(user6, tweet9, mentions);
-        userDAO.addTweet(user7, tweet10, mentions);
-        userDAO.addTweet(user8, tweet11, mentions);
-        userDAO.addTweet(user9, tweet12, mentions);
-        userDAO.addTweet(user10, tweet13, mentions);
+        userDAO.addTweet(user3, tweet6, noMentions);
+        userDAO.addTweet(user4, tweet7, noMentions);
+        userDAO.addTweet(user5, tweet8, noMentions);
+        userDAO.addTweet(user6, tweet9, noMentions);
+        userDAO.addTweet(user7, tweet10, noMentions);
+        userDAO.addTweet(user8, tweet11, noMentions);
+        userDAO.addTweet(user9, tweet12, noMentions);
+        userDAO.addTweet(user10, tweet13, noMentions);
         
         tweetDAO.addMention(tweet1, user10);
         tweetDAO.addMention(tweet1, user9);
