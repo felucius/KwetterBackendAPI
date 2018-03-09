@@ -179,7 +179,7 @@ public class MockitoUserRestTest {
 
         when(userService.createUser(user1)).thenReturn(user1);
         assertEquals(user1, userService.createUser(user1));
-        userResource.createUser(user1.getName());
+        userResource.createUser(user1);
         verify(userService).createUser(user1);
     }
 

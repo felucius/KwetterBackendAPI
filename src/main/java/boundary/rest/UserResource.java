@@ -59,22 +59,6 @@ public class UserResource {
     }
 
     /**
-     * POST request to the userService. This method allows a new user to be
-     * created Information is send to the userService, to the userDAO and
-     * finally to the entity manager.
-     *
-     * @param username is the object that is created and being persisted to the
-     * database.
-     */
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Path("/createuser/{username}")
-    public User createUser(@PathParam("username") String username) {
-        User user = new User(username);
-        return userService.createUser(user);
-    }
-
-    /**
      * Creates a new user object
      *
      * @param user is the object that is going to be created.
@@ -126,6 +110,17 @@ public class UserResource {
         System.out.println("Rest layer value: " + id);
         return userService.removeUser(userService.findUser(id));
     }*/
+    
+    /**
+     * Allows a tweet to be added from a user with content, tags and mentions.
+     * 
+     * @param userName user to add the tweet.
+     * @param tweetContent content of tweet.
+     * @param tag short messages.
+     * @param userMention user to mentioned on a tweet.
+     * @return true if the creation of a tweet has been successful or false
+     * when the action could not have taken place.
+     */
     @POST
     @Path("addtweet/{username}/{tweetcontent}/{tags}/{mention}")
     public boolean addTweet(@PathParam("username") String userName,
@@ -157,7 +152,7 @@ public class UserResource {
     /**
      * Removal of a single tweet based on it's id.
      *
-     * @param tweetId is used to find and remove a certain tweet.
+     * @param tweet is used to find and remove a certain tweet.
      * @return true if the action has been successful or false when the action
      * could not have taken place.
      */
@@ -184,7 +179,7 @@ public class UserResource {
     }
 
     /**
-     * Unfollow a user by it's username.
+     * Un follow a user by it's username.
      *
      * @param username is the user who is going to un follow a user.
      * @param unfollowingUser is the user who is going to be un followed by the
