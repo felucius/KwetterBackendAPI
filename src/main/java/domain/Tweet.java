@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.enterprise.inject.Model;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,39 +34,47 @@ import javax.persistence.TemporalType;
 @Model
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "Tweet.getAllTweets", 
-            query = "SELECT t FROM Tweet t"),
-    @NamedQuery(name = "Tweet.getAllTweetsfromuser", 
+    @NamedQuery(name = "Tweet.getAllTweets",
+            query = "SELECT t FROM Tweet t")
+    ,
+    @NamedQuery(name = "Tweet.getAllTweetsfromuser",
             query = "SELECT u.name, t.message\n"
-                    + "FROM Tweet t\n"
-                    + "INNER JOIN t.tweetedBy tb\n"
-                    + "INNER JOIN User u\n"
-                    + "WHERE u.id = tb.id\n"
-                    + "AND u.name = :userName"),
+            + "FROM Tweet t\n"
+            + "INNER JOIN t.tweetedBy tb\n"
+            + "INNER JOIN User u\n"
+            + "WHERE u.id = tb.id\n"
+            + "AND u.name = :userName")
+    ,
     @NamedQuery(name = "Tweet.getLikes",
             query = "SELECT t.message, u.name, u.id\n"
-                    + "FROM Tweet t\n"
-                    + "INNER JOIN t.likes til\n"
-                    + "INNER JOIN User u\n"
-                    + "WHERE til.id = u.id\n"
-                    + "AND t.id = :tweetId"),
-    @NamedQuery(name = "Tweet.findTweetByContent", 
+            + "FROM Tweet t\n"
+            + "INNER JOIN t.likes til\n"
+            + "INNER JOIN User u\n"
+            + "WHERE til.id = u.id\n"
+            + "AND t.id = :tweetId")
+    ,
+    @NamedQuery(name = "Tweet.findTweetByContent",
             query = "SELECT t.message, t.id "
-                    + "FROM Tweet t "
-                    + "WHERE t.message "
-                    + "LIKE :message"),
+            + "FROM Tweet t "
+            + "WHERE t.message "
+            + "LIKE :message")
+    ,
     @NamedQuery(name = "Tweet.getTweetsOfFollowers",
             query = "SELECT t.message, u2.name, u2.id\n"
-                    + "FROM User u, Tweet t\n"
-                    + "INNER JOIN t.tweetedBy tb"
-                    + "INNER JOIN u.following uf \n"
-                    + "INNER JOIN User u2 \n"
-                    + "WHERE t.id = uf.id\n"
-                    + "AND u2.id = uf.id \n"
-                    + "AND u.name = :username")
+            + "FROM User u, Tweet t\n"
+            + "INNER JOIN t.tweetedBy tb"
+            + "INNER JOIN u.following uf \n"
+            + "INNER JOIN User u2 \n"
+            + "WHERE t.id = uf.id\n"
+            + "AND u2.id = uf.id \n"
+            + "AND u.name = :username"),
+    @NamedQuery(name = "Tweet.removeTweet",
+            query = "DELETE FROM \n"
+                    + "Tweet t "
+                    + "WHERE t.id = :tweetId")
 })
 public class Tweet implements Serializable {
-    
+
     @OneToMany(orphanRemoval = true)
     @JoinTable(name = "Tweet_mentions")
     private List<User> mentions = null;
@@ -76,7 +85,6 @@ public class Tweet implements Serializable {
     @OneToMany(orphanRemoval = true)
     @JoinTable(name = "Tweet_likes")
     private List<User> likes = null;
-
 
     /**
      * To insert a date into the database, the Temporal injection needs to be
@@ -124,15 +132,24 @@ public class Tweet implements Serializable {
         }
         return false;
     }
-    
+
     /**
      * Retrieving all the likes from users.
-     * 
+     *
      * @return the amount of users that liked the tweet. This can be converted
      * to the specifc user or to a number.
      */
-    public List<User> getLikes(){
+    public List<User> getLikes() {
         return this.likes;
+    }
+
+    /**
+     * Setting the likes of a tweet.
+     *
+     * @param likes are the user objects that like a single tweet.
+     */
+    public void setLikes(List<User> likes) {
+        this.likes = likes;
     }
 
     /**
@@ -141,17 +158,17 @@ public class Tweet implements Serializable {
      * @param mentionedUser is the user to be mentioned in the tweet.
      */
     public boolean addMention(User mentionedUser) {
-        if(mentionedUser != null){
+        if (mentionedUser != null) {
             mentions.add(mentionedUser);
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
     /**
      * Retrieving all the mentions
-     * 
+     *
      * @return all mentions.
      */
     public List<User> getMentions() {
@@ -160,7 +177,7 @@ public class Tweet implements Serializable {
 
     /**
      * Setting a list of mentions
-     * 
+     *
      * @param mentions to be setted.
      */
     public void setMentions(List<User> mentions) {
@@ -169,7 +186,7 @@ public class Tweet implements Serializable {
 
     /**
      * Retrieving the tweet message.
-     * 
+     *
      * @return the message of the tweet.
      */
     public String getMessage() {
@@ -182,7 +199,7 @@ public class Tweet implements Serializable {
 
     /**
      * Retrieving the tags that is going to be added to the tweet.
-     * 
+     *
      * @return tags of the tweet.
      */
     public List<String> getTags() {
@@ -191,7 +208,7 @@ public class Tweet implements Serializable {
 
     /**
      * Setting the tags of the tweet
-     * 
+     *
      * @param tags to be setted per tweet.
      */
     public void setTags(List<String> tags) {
@@ -200,25 +217,25 @@ public class Tweet implements Serializable {
 
     /**
      * Retrieving published date.
-     * 
+     *
      * @return the date of the publishing.
      */
     public Date getPublished() {
         return this.published;
     }
-    
+
     /**
      * Setting the published date.
-     * 
-     * @param published to be set. 
+     *
+     * @param published to be set.
      */
-    public void setPublished(Date published){
+    public void setPublished(Date published) {
         this.published = published;
     }
-    
+
     /**
      * Retrieving the id of the tweet
-     * 
+     *
      * @return tweet id.
      */
     public Long getId() {
@@ -227,10 +244,34 @@ public class Tweet implements Serializable {
 
     /**
      * Setting the id of the tweet.
-     * 
+     *
      * @param id to be changed.
      */
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public User getTweetedBy() {
+        return this.tweetedBy;
+    }
+
+    public void setTweetedBy(User tweetedBy) {
+        this.tweetedBy = tweetedBy;
+    }
+
+    public void removeMention(User user) {
+        if (mentions.contains(user)) {
+            mentions.remove(user);
+        }
+    }
+
+    public void removeLike(User user) {
+        if (likes.contains(user)) {
+            likes.remove(user);
+        }
+    }
+    
+    public void removeTweetedBy(User user){
+        this.tweetedBy = null;
     }
 }

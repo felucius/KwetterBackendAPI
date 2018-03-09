@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.inject.Model;
 import javax.json.bind.annotation.JsonbTransient;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -71,7 +72,7 @@ public class User implements Serializable {
     private UserRole userRole = null;
 
     // When a user is removed it's tweets are removed as well.
-    @OneToMany(mappedBy = "tweetedBy")
+    @OneToMany(mappedBy = "tweetedBy", cascade = CascadeType.ALL)
     private List<Tweet> tweets = null;
 
     @OneToMany(fetch = FetchType.EAGER)

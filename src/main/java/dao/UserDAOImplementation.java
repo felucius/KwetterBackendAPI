@@ -7,10 +7,12 @@ package dao;
 
 import domain.Tweet;
 import domain.User;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -136,7 +138,11 @@ public class UserDAOImplementation implements UserDAO {
     @Override
     public boolean removeTweet(Tweet tweet) {
         try {
-            em.remove(tweet);
+            Tweet existingTweet = em.find(Tweet.class, tweet.getId());
+            
+            Query query =em.createNamedQuery("Tweet.removeTweet").
+                    setParameter("tweetId", existingTweet.getId());
+            query.executeUpdate();
             return true;
         } catch (Exception ex) {
             ex.printStackTrace();

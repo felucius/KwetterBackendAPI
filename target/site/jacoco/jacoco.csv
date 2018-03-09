@@ -1,12 +1,12 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
 KwetterBackend_Maxime,dao,TweetDAOCollection,60,50,16,6,20,17,15,6,4,6
 KwetterBackend_Maxime,dao,UserDAOCollection,98,81,28,10,36,24,26,9,8,8
-KwetterBackend_Maxime,boundary.rest,UserResource,160,0,0,0,24,0,18,0,18,0
+KwetterBackend_Maxime,boundary.rest,UserResource,156,0,0,0,24,0,18,0,18,0
 KwetterBackend_Maxime,boundary.rest,TweetResource,57,0,0,0,9,0,9,0,9,0
 KwetterBackend_Maxime,util,init,650,0,0,0,94,0,4,0,4,0
 KwetterBackend_Maxime,service,UserService,82,0,0,0,16,0,16,0,16,0
 KwetterBackend_Maxime,service,TweetService,48,0,0,0,10,0,10,0,10,0
 KwetterBackend_Maxime,domain,UserRole,0,39,0,0,0,4,0,2,0,2
-KwetterBackend_Maxime,domain,Tweet,4,123,2,2,2,38,2,15,0,15
+KwetterBackend_Maxime,domain,Tweet,41,123,6,2,15,38,10,15,6,15
 KwetterBackend_Maxime,domain,User.new Object() {...},26,0,0,0,1,0,1,0,1,0
 KwetterBackend_Maxime,domain,User,163,235,11,1,44,71,19,26,11,26

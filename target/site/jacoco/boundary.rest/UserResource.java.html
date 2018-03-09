@@ -165,8 +165,7 @@ import service.UserService;
     @Produces(MediaType.APPLICATION_JSON)
     @Path(&quot;removetweet&quot;)//Check for foreign key on removal!!!!
     public boolean removeTweet(Tweet tweet) {
-
-<span class="nc" id="L169">        return userService.removeTweet(tweetService.findTweet(tweet.getId()));</span>
+<span class="nc" id="L168">        return userService.removeTweet(tweet);//tweetService.findTweet(tweet.getId()));</span>
     }
 
     /**
@@ -181,7 +180,7 @@ import service.UserService;
     @GET
     @Path(&quot;followuser/{user}/{followuser}&quot;)
     public boolean followUser(@PathParam(&quot;user&quot;) String username, @PathParam(&quot;followuser&quot;) String followingUser) {
-<span class="nc" id="L184">        return userService.followUser(userService.findUserByName(username), userService.findUserByName(followingUser));</span>
+<span class="nc" id="L183">        return userService.followUser(userService.findUserByName(username), userService.findUserByName(followingUser));</span>
     }
 
     /**
@@ -196,7 +195,7 @@ import service.UserService;
     @GET
     @Path(&quot;unfollowuser/{user}/{unfollowuser}&quot;)
     public boolean unfollowUser(@PathParam(&quot;user&quot;) String username, @PathParam(&quot;unfollowuser&quot;) String unfollowingUser) {
-<span class="nc" id="L199">        return userService.unfollowUser(userService.findUserByName(username), userService.findUserByName(unfollowingUser));</span>
+<span class="nc" id="L198">        return userService.unfollowUser(userService.findUserByName(username), userService.findUserByName(unfollowingUser));</span>
     }
 
     /**
@@ -209,7 +208,7 @@ import service.UserService;
     @GET
     @Path(&quot;getfollowers/{getfollowers}&quot;)
     public List&lt;User&gt; getFollowingUsers(@PathParam(&quot;getfollowers&quot;) String userName) {
-<span class="nc" id="L212">        return userService.getFollowingUsers(userService.findUserByName(userName));</span>
+<span class="nc" id="L211">        return userService.getFollowingUsers(userService.findUserByName(userName));</span>
     }
 
     /**
@@ -221,7 +220,7 @@ import service.UserService;
     @GET
     @Path(&quot;getfollowing/{getfollowing}&quot;)
     public List&lt;User&gt; getFollowers(@PathParam(&quot;getfollowing&quot;) String userName) {
-<span class="nc" id="L224">        return userService.getFollowers(userService.findUserByName(userName));</span>
+<span class="nc" id="L223">        return userService.getFollowers(userService.findUserByName(userName));</span>
     }
 
     /**
@@ -233,7 +232,7 @@ import service.UserService;
     @GET
     @Path(&quot;gettweetsfromuser/{username}&quot;)
     public List&lt;Tweet&gt; getTweets(@PathParam(&quot;username&quot;) String username) {
-<span class="nc" id="L236">        return userService.getTweetsByUser(userService.findUserByName(username));</span>
+<span class="nc" id="L235">        return userService.getTweetsByUser(userService.findUserByName(username));</span>
     }
 
     /**
@@ -247,7 +246,7 @@ import service.UserService;
     @POST
     @Path(&quot;liketweet/{user}/{tweettolike}&quot;)
     public boolean likeTweet(@PathParam(&quot;user&quot;) String userName, @PathParam(&quot;tweettolike&quot;) Long tweetId) {
-<span class="nc" id="L250">        return userService.likeTweet(userService.findUserByName(userName), tweetService.findTweet(tweetId));</span>
+<span class="nc" id="L249">        return userService.likeTweet(userService.findUserByName(userName), tweetService.findTweet(tweetId));</span>
     }
 
     /**
@@ -261,7 +260,7 @@ import service.UserService;
     @Produces(MediaType.APPLICATION_JSON)
     @Path(&quot;promote&quot;)
     public boolean promoteUser(User user) {
-<span class="nc" id="L264">        return userService.promoteUser(user);</span>
+<span class="nc" id="L263">        return userService.promoteUser(user);</span>
     }
 
     /**
@@ -275,7 +274,7 @@ import service.UserService;
     @Produces(MediaType.APPLICATION_JSON)
     @Path(&quot;demote&quot;)
     public boolean demoteUser(User user) {
-<span class="nc" id="L278">        return userService.demoteUser(user);</span>
+<span class="nc" id="L277">        return userService.demoteUser(user);</span>
     }
 
     /**
@@ -288,7 +287,7 @@ import service.UserService;
     @Produces(MediaType.APPLICATION_JSON)
     @Path(&quot;updateuser&quot;)
     public User updateUserInformation(User user) {
-<span class="nc" id="L291">        return userService.updateUser(user);</span>
+<span class="nc" id="L290">        return userService.updateUser(user);</span>
     }
 
 }

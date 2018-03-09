@@ -165,8 +165,7 @@ public class UserResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("removetweet")//Check for foreign key on removal!!!!
     public boolean removeTweet(Tweet tweet) {
-
-        return userService.removeTweet(tweetService.findTweet(tweet.getId()));
+        return userService.removeTweet(tweet);//tweetService.findTweet(tweet.getId()));
     }
 
     /**
