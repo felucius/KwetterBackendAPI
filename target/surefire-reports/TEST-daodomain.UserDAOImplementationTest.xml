@@ -62,7 +62,7 @@
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
   <testcase classname="daodomain.UserDAOImplementationTest" name="testRemoveTweet" time="0"/>
-  <testcase classname="daodomain.UserDAOImplementationTest" name="testAddTweet" time="0"/>
+  <testcase classname="daodomain.UserDAOImplementationTest" name="testAddTweet" time="0.001"/>
   <testcase classname="daodomain.UserDAOImplementationTest" name="testLikeTweet" time="0"/>
   <testcase classname="daodomain.UserDAOImplementationTest" name="testUnfollowUser" time="0"/>
   <testcase classname="daodomain.UserDAOImplementationTest" name="testGetUserByID" time="0"/>

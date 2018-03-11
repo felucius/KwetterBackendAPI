@@ -121,6 +121,7 @@ public class UserResource {
      * @return true if the creation of a tweet has been successful or false
      * when the action could not have taken place.
      */
+    /*
     @POST
     @Path("addtweet/{username}/{tweetcontent}/{tags}/{mention}")
     public boolean addTweet(@PathParam("username") String userName,
@@ -135,6 +136,22 @@ public class UserResource {
 
         Tweet tweet = new Tweet(tweetContent, tags, userService.findUserByName(userName));
         return userService.addTweet(userService.findUserByName(userName), tweet, mentions);
+    }*/
+    
+    /**
+     * 
+     * 
+     * @param id of the user to be used to post a message
+     * @param tweet object to be added from the user.
+     * @return true if the action has been successful or false when the
+     * action could not succeed.
+     */
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("addtweet/{id}")
+    public boolean addTweet(@PathParam("id") Long id, Tweet tweet){
+        User user = userService.findUser(id);
+        return userService.addTweet(user, tweet, null);
     }
 
     /**
@@ -172,7 +189,7 @@ public class UserResource {
      * @return true if the following has been successful or false when the
      * action could not have been succeeded.
      */
-    @GET
+    @POST
     @Path("followuser/{user}/{followuser}")
     public boolean followUser(@PathParam("user") String username, @PathParam("followuser") String followingUser) {
         return userService.followUser(userService.findUserByName(username), userService.findUserByName(followingUser));
@@ -187,7 +204,7 @@ public class UserResource {
      * @return true if the user successfully un followed another user or false
      * when this action could not have taken place.
      */
-    @GET
+    @POST
     @Path("unfollowuser/{user}/{unfollowuser}")
     public boolean unfollowUser(@PathParam("user") String username, @PathParam("unfollowuser") String unfollowingUser) {
         return userService.unfollowUser(userService.findUserByName(username), userService.findUserByName(unfollowingUser));
