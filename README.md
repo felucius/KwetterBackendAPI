@@ -13,6 +13,10 @@ When these 'input' tags are available. Write the input given from the descriptio
 To find all users and their written tweets
 - api/users
 
+To create a new user
+- api/users/create
+- (JSON format)
+
 To find a specific user by it's ID
 - api/users/finduser/'id-of-user'
 
@@ -59,14 +63,16 @@ To find a specific tweet by it's ID
 To find a specific tweet by it's content (has wildcard pattern in it)
 - api/tweets/findtweetbycontent/'content-key'
 
+To add a mention to an existing tweet
+- api/tweets/addmention/'tweet-id-data'/'username-data'
+
 To find all written tweets from a specific user by it's username
 - api/users/gettweetsfromuser/'username-data'
-
-To like a tweet on it's id by a single user
 - api/users/liketweet/'username-data'/'tweet-id-data'
 
 To add a new tweet from a single user with their own context, tags and mentions
-- api/users/addtweet/'username-data'/'text-to-write-data'
+- api/users/addtweet/'username-data'/'text-to-write-data'/'tags-data'/'username-data'
+- api/users/addtweet/'username-data'/'text-to-write-data'/'tags-data'/'noname-data' (no mentions in the tweet)
 
 To find a tweet with liked users by it's tweet id
 - api/tweets/gettweetlikes/'tweet-id-data'
