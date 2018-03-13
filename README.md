@@ -17,6 +17,9 @@ To create a new user
 - api/users/create
 - (JSON format)
 
+To create a tweet from an existing user
+- api/users/addtweet/'user-id-data'
+
 To find a specific user by it's ID
 - api/users/finduser/'id-of-user'
 
