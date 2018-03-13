@@ -5,8 +5,8 @@
  */
 package deprecated;
 
-import boundary.rest.TweetResource;
-import boundary.rest.UserResource;
+import rest.TweetResource;
+import rest.UserResource;
 import domain.Tweet;
 import domain.User;
 import java.util.ArrayList;

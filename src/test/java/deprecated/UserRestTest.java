@@ -5,7 +5,7 @@
  */
 package deprecated;
 
-import boundary.rest.UserResource;
+import rest.UserResource;
 import dao.TweetDAOCollection;
 import domain.Tweet;
 import domain.User;

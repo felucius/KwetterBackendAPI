@@ -5,7 +5,7 @@
  */
 package mockito;
 
-import boundary.rest.UserResource;
+import rest.UserResource;
 import dao.TweetDAOCollection;
 import dao.UserDAO;
 import dao.UserDAOCollection;

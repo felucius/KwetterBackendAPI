@@ -147,5 +147,9 @@ public class init {
         
         userDAO.followUser(user2, user3);
         userDAO.followUser(user2, user4);
+        
+        userDAO.promoteUser(user1);
+        userDAO.promoteUser(user1);
+        userDAO.promoteUser(user3);
     }
 }

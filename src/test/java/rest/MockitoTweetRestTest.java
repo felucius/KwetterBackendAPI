@@ -5,8 +5,6 @@
  */
 package rest;
 
-import boundary.rest.TweetResource;
-import boundary.rest.UserResource;
 import dao.TweetDAO;
 import dao.TweetDAOCollection;
 import dao.UserDAO;

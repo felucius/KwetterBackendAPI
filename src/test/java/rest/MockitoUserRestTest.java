@@ -5,7 +5,6 @@
  */
 package rest;
 
-import boundary.rest.UserResource;
 import dao.UserDAO;
 import dao.UserDAOCollection;
 import domain.Tweet;
