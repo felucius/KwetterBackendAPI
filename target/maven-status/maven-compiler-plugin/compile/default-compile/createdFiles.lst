@@ -1,3 +1,4 @@
+controllers\GetMessagesController.class
 rest\UserResource.class
 dao\TweetDAOImplementation.class
 domain\User_.class

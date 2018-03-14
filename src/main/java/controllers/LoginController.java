@@ -6,6 +6,7 @@
 package controllers;
 
 import domain.User;
+import domain.UserRole;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
@@ -24,6 +25,7 @@ public class LoginController implements Serializable{
     
     private String name;
     private String password;
+    private UserRole userRole;
     private User user = null;
     
     public LoginController(){
@@ -38,7 +40,6 @@ public class LoginController implements Serializable{
         return this.name;
     }
     
-    
     public void setPassword(String password){
         this.password = password;
     }
@@ -48,11 +49,15 @@ public class LoginController implements Serializable{
     }
     
     public String login(){
-        User user = userService.findUserByName(name);
-        if(name.equals(user.getName()) && password.equals(user.getPassword())){
+        user = userService.findUserByName(name);
+        if(name.equals(user.getName()) && password.equals(user.getPassword()) 
+                && userRole.ADMIN.equals(user.getUserRole())){
             return "adminpanel";
+        }else if(name.equals(user.getName()) && password.equals(user.getPassword()) 
+                && userRole.USER.equals(user.getUserRole())){
+            return "account";
         }else{
-            return "Failure";
+            return "failure";
         }
     }
 }

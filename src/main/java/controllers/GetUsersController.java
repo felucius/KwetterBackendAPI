@@ -6,12 +6,17 @@
 package controllers;
 
 import domain.User;
+import domain.UserRole;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.primefaces.event.SelectEvent;
+import org.primefaces.event.UnselectEvent;
 import service.UserService;
 
 /**
@@ -20,27 +25,70 @@ import service.UserService;
  */
 @Named
 @SessionScoped
-public class GetUsersController implements Serializable{
-    
+public class GetUsersController implements Serializable {
+
     @Inject
     private UserService userService;
-    
+
     private List<User> users = null;
-    
-    public GetUsersController(){
-        
+    private User selectedUser = null;
+
+    public GetUsersController() {
+
     }
-    
+
     @PostConstruct
-    public void init(){
+    public void init() {
         users = userService.getAllUsers();
     }
-    
-    public List<User> getAllUsers(){
+
+    public List<User> getAllUsers() {
         return this.users;
     }
-    
-    public void setUsers(List<User> users){
+
+    public void setUsers(List<User> users) {
         this.users = users;
+    }
+
+    public void setSelectedUser(User selectedUser) {
+        if (selectedUser != null) {
+            this.selectedUser = selectedUser;
+        } else {
+            System.out.println("Selected user is null");
+        }
+    }
+
+    public User getSelectedUser() {
+        if (selectedUser != null) {
+            System.out.println("USER SELECTED: " + selectedUser.getName());
+            //promoteUser();
+            return this.selectedUser;
+        } else {
+            System.out.println("Selected user is null");
+            return null;
+        }
+    }
+    
+    public boolean promoteUser(){
+        if(selectedUser != null){
+            return userService.promoteUser(selectedUser);
+        }else{
+            System.out.println("Cannot promote user, user is not found");
+            return false;
+        }
+    }
+    
+    public boolean demoteUser(){
+        if(selectedUser != null){
+            return userService.demoteUser(selectedUser);
+        }else{
+            System.out.println("Cannot demote user, user is not found");
+            return false;
+        }
+    }
+
+    public void onRowSelect(SelectEvent event) {
+        FacesMessage msg = new FacesMessage("User Selected", ((User) event.getObject()).toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 }
