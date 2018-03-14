@@ -61,7 +61,6 @@ public class GetUsersController implements Serializable {
     public User getSelectedUser() {
         if (selectedUser != null) {
             System.out.println("USER SELECTED: " + selectedUser.getName());
-            //promoteUser();
             return this.selectedUser;
         } else {
             System.out.println("Selected user is null");

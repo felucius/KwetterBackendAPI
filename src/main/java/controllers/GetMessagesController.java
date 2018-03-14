@@ -6,12 +6,16 @@
 package controllers;
 
 import domain.Tweet;
+import domain.User;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.primefaces.event.SelectEvent;
 import service.TweetService;
 import service.UserService;
 
@@ -21,26 +25,67 @@ import service.UserService;
  */
 @Named
 @SessionScoped
-public class GetMessagesController implements Serializable{
+public class GetMessagesController implements Serializable {
+
     @Inject
     private TweetService tweetService;
-    
+    @Inject
+    private UserService userService;
+
     private List<Tweet> tweets = null;
-    
-    public GetMessagesController(){
-        
+    private Tweet selectedTweet = null;
+
+    public GetMessagesController() {
+
     }
-    
+
     @PostConstruct
-    public void init(){
+    public void init() {
         tweets = tweetService.getAllTweets();
     }
-    
-    public void setTweets(List<Tweet> tweets){
+
+    public void setTweets(List<Tweet> tweets) {
         this.tweets = tweets;
     }
-    
-    public List<Tweet> getTweets(){
-        return this.tweets;
+
+    public List<Tweet> getTweets() {
+        if (tweets != null) {
+            return tweetService.getAllTweets();
+        } else {
+            System.out.println("No tweets available");
+            return null;
+        }
+    }
+
+    public void setSelectedTweet(Tweet selectedTweet) {
+        if (selectedTweet != null) {
+            this.selectedTweet = selectedTweet;
+        } else {
+            System.out.println("Selected tweet is null and cannot be set");
+        }
+    }
+
+    public Tweet getSelectedTweet() {
+        if (selectedTweet != null) {
+            return this.selectedTweet;
+        } else {
+            System.out.println("Selected tweet is null and cannot be retrieved");
+            return null;
+        }
+    }
+
+    public boolean removeTweet() {
+        if (selectedTweet != null) {
+            System.out.println("Message of tweet: " + selectedTweet.getMessage() + " ID:" + selectedTweet.getId());
+            return userService.removeTweet(selectedTweet);
+        } else {
+            System.out.println("Tweet cannot be removed, tweet does not exist.");
+            return false;
+        }
+    }
+
+    public void onRowSelect(SelectEvent event) {
+        FacesMessage msg = new FacesMessage("Tweet Selected", ((Tweet) event.getObject()).toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 }

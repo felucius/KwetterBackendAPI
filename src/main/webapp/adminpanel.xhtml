@@ -20,7 +20,9 @@ and open the template in the editor.
                 <h:outputLabel value="Welcome to the Admin panel"></h:outputLabel>
             </h2>
             <p:growl id="msgs" showDetail="true" />
-            <p:dataTable id="singleDT" var="User" value="#{getUsersController.allUsers}" 
+            <p:dataTable id="singleDT" 
+                         var="User" 
+                         value="#{getUsersController.allUsers}" 
                          selectionMode="single" 
                          selection="#{getUsersController.selectedUser}" 
                          rowKey="#{User.name}">
@@ -44,12 +46,22 @@ and open the template in the editor.
                     <p:commandButton action="#{getUsersController.demoteUser()}" update=":form" icon="ui-icon-minus" value="Demote" />
                 </f:facet>
             </p:dataTable>
-
-            <h2>
-                <h:outputLabel value="Remove messages"></h:outputLabel>
-            </h2>
-
-            <p:dataTable var="Tweet" value="#{getMessagesController.tweets}">
+        </h:form>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <h:form id="formtweet">
+            <p:growl id="msgs" showDetail="true" />
+            <p:dataTable id="singleDT"
+                         var="Tweet" 
+                         value="#{getMessagesController.tweets}"
+                         selectionMode="single" 
+                         selection="#{getMessagesController.selectedTweet}" 
+                         rowKey="#{Tweet.message}">
+                <f:facet name="header">
+                    Messages
+                </f:facet>
                 <p:column headerText="Message">
                     <h:outputText value="#{Tweet.message}" />
                 </p:column>
@@ -62,9 +74,9 @@ and open the template in the editor.
                 <p:column headerText="Tweeted by">
                     <h:outputText value="#{Tweet.tweetedBy.name}" />
                 </p:column>
-                <p:column headerText="Remove message">
-                    <h:button value="Remove"></h:button>
-                </p:column>
+                <f:facet name="footer">
+                    <p:commandButton action="#{getMessagesController.removeTweet()}" update=":formtweet" value="Remove" />
+                </f:facet>
             </p:dataTable>
         </h:form>
     </h:body>
