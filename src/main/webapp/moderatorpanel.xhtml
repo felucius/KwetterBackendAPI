@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Moderator panel</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+
+    <h:body>
+        <h2>
+            <h:outputLabel value="Welcome to the Moderator panel"></h:outputLabel>
+        </h2>
+        <h:form id="formtweet">
+            <p:growl id="msgs" showDetail="true" />
+            <p:dataTable id="singleDT"
+                         var="Tweet" 
+                         value="#{getMessagesController.tweets}"
+                         selectionMode="single" 
+                         selection="#{getMessagesController.selectedTweet}" 
+                         rowKey="#{Tweet.message}">
+                <f:facet name="header">
+                    Messages
+                </f:facet>
+                <p:column headerText="Message">
+                    <h:outputText value="#{Tweet.message}" />
+                </p:column>
+                <p:column headerText="Published">
+                    <h:outputText value="#{Tweet.published}" />
+                </p:column>
+                <p:column headerText="Tags">
+                    <h:outputText value="#{Tweet.tags}" />
+                </p:column>
+                <p:column headerText="Tweeted by">
+                    <h:outputText value="#{Tweet.tweetedBy.name}" />
+                </p:column>
+                <f:facet name="footer">
+                    <p:commandButton action="#{getMessagesController.removeTweet()}" update=":formtweet" value="Remove" />
+                </f:facet>
+            </p:dataTable>
+        </h:form>
+    </h:body>
+</html>

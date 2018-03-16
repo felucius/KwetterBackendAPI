@@ -53,6 +53,9 @@ public class LoginController implements Serializable{
         if(name.equals(user.getName()) && password.equals(user.getPassword()) 
                 && userRole.ADMIN.equals(user.getUserRole())){
             return "adminpanel";
+        }else if(name.equals(user.getName()) && password.equals(user.getPassword())
+                && userRole.MODERATOR.equals(user.getUserRole())){
+            return "moderatorpanel";
         }else if(name.equals(user.getName()) && password.equals(user.getPassword()) 
                 && userRole.USER.equals(user.getUserRole())){
             return "account";
