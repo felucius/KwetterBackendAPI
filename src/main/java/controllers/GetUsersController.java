@@ -10,6 +10,8 @@ import domain.UserRole;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -25,6 +27,7 @@ import service.UserService;
  */
 @Named
 @SessionScoped
+@DeclareRoles({"ADMIN", "MODERATOR", "USER"})
 public class GetUsersController implements Serializable {
 
     @Inject
@@ -68,6 +71,7 @@ public class GetUsersController implements Serializable {
         }
     }
     
+    @RolesAllowed("ADMIN")
     public boolean promoteUser(){
         if(selectedUser != null){
             return userService.promoteUser(selectedUser);
@@ -77,6 +81,7 @@ public class GetUsersController implements Serializable {
         }
     }
     
+    @RolesAllowed("ADMIN")
     public boolean demoteUser(){
         if(selectedUser != null){
             return userService.demoteUser(selectedUser);

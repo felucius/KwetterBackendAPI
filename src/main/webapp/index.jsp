@@ -13,7 +13,7 @@
     </head>
     <body>
         <%
-            String url = "index.xhtml";
+            String url = "login.xhtml";
             response.sendRedirect(url);
         %>
         <h1>Hello World!</h1>

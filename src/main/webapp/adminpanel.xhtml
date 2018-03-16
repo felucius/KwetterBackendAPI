@@ -16,9 +16,14 @@ and open the template in the editor.
 
     <h:body>
         <h:form id="form">
+            <h:commandButton action="#{loginController.doLogout()}" value="Logout"></h:commandButton>
             <h2>
-                <h:outputLabel value="Welcome to the Admin panel"></h:outputLabel>
+                <h:outputLabel value="Welcome to the Admin panel #{loginController.loggedInUserName}"></h:outputLabel>
             </h2>
+            
+            <p>
+                <h:outputLabel value="Logged in at: #{loginController.loggedInTime}"></h:outputLabel>
+            </p>
             <p:growl id="msgs" showDetail="true" />
             <p:dataTable id="singleDT" 
                          var="User" 

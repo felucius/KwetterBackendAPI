@@ -10,6 +10,9 @@ import domain.User;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -25,6 +28,7 @@ import service.UserService;
  */
 @Named
 @SessionScoped
+@DeclareRoles({"ADMIN", "MODERATOR", "USER"})
 public class GetMessagesController implements Serializable {
 
     @Inject
@@ -74,6 +78,7 @@ public class GetMessagesController implements Serializable {
         }
     }
 
+    @RolesAllowed({"ADMIN", "MODERATOR"})
     public boolean removeTweet() {
         if (selectedTweet != null) {
             System.out.println("Message of tweet: " + selectedTweet.getMessage() + " ID:" + selectedTweet.getId());
