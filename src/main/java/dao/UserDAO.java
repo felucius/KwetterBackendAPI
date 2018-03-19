@@ -7,6 +7,7 @@ package dao;
 
 import domain.Tweet;
 import domain.User;
+import domain.UserGroup;
 import java.util.List;
 import javax.ejb.Stateless;
 
@@ -49,4 +50,8 @@ public interface UserDAO {
     boolean demoteUser(User user);
     
     User updateUser(User user);
+    
+    boolean addUserGroup(UserGroup group);
+    
+    boolean addUserToGroup(User user, UserGroup group);
 }

@@ -10,6 +10,7 @@ import dao.TweetDAO;
 import dao.UserDAO;
 import domain.Tweet;
 import domain.User;
+import domain.UserGroup;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -35,6 +36,7 @@ public class init {
     private List<String> tags = new ArrayList();
     private List<User> mentions = new ArrayList();
     private List<User> noMentions = new ArrayList();
+    private List<User> users = new ArrayList();
 
     private User user1 = null;
     private User user2 = null;
@@ -66,6 +68,7 @@ public class init {
         System.out.println("Initializing basic database information....");
         createUsers();
         createTweets();
+        createUserGroup();
     }
 
     public void createUsers() {
@@ -87,12 +90,12 @@ public class init {
         userDAO.createUser(user2);
         userDAO.createUser(user3);
         userDAO.createUser(user4);
-        userDAO.createUser(user5);
-        userDAO.createUser(user6);
-        userDAO.createUser(user7);
-        userDAO.createUser(user8);
-        userDAO.createUser(user9);
-        userDAO.createUser(user10);
+        //userDAO.createUser(user5);
+        //userDAO.createUser(user6);
+        //userDAO.createUser(user7);
+        //userDAO.createUser(user8);
+        //userDAO.createUser(user9);
+        //userDAO.createUser(user10);
     }
 
     public void createTweets() {
@@ -118,38 +121,64 @@ public class init {
         userDAO.addTweet(user1, tweet1, noMentions);
         userDAO.addTweet(user1, tweet2, noMentions);
         userDAO.addTweet(user1, tweet3, noMentions);
-        
+
         userDAO.addTweet(user2, tweet4, noMentions);
-        userDAO.addTweet(user1, tweet5, noMentions);
-        
-        
-        userDAO.addTweet(user3, tweet6, noMentions);
-        userDAO.addTweet(user4, tweet7, noMentions);
-        userDAO.addTweet(user5, tweet8, noMentions);
-        userDAO.addTweet(user6, tweet9, noMentions);
-        userDAO.addTweet(user7, tweet10, noMentions);
-        userDAO.addTweet(user8, tweet11, noMentions);
-        userDAO.addTweet(user9, tweet12, noMentions);
-        userDAO.addTweet(user10, tweet13, noMentions);
-        
+        //userDAO.addTweet(user1, tweet5, noMentions);
+
+        //userDAO.addTweet(user3, tweet6, noMentions);
+        //userDAO.addTweet(user4, tweet7, noMentions);
+        //userDAO.addTweet(user5, tweet8, noMentions);
+        //userDAO.addTweet(user6, tweet9, noMentions);
+        //userDAO.addTweet(user7, tweet10, noMentions);
+        //userDAO.addTweet(user8, tweet11, noMentions);
+        //userDAO.addTweet(user9, tweet12, noMentions);
+        //userDAO.addTweet(user10, tweet13, noMentions);
+
         tweetDAO.addMention(tweet1, user10);
         tweetDAO.addMention(tweet1, user9);
         tweetDAO.addMention(tweet1, user8);
-        
+
         userDAO.likeTweet(user1, tweet1);
         userDAO.likeTweet(user2, tweet1);
         userDAO.likeTweet(user3, tweet2);
         userDAO.likeTweet(user4, tweet3);
-        
+
         userDAO.followUser(user1, user2);
         userDAO.followUser(user1, user3);
         userDAO.followUser(user1, user4);
-        
+
         userDAO.followUser(user2, user3);
         userDAO.followUser(user2, user4);
-        
+
         userDAO.promoteUser(user1);
         userDAO.promoteUser(user1);
         userDAO.promoteUser(user3);
+    }
+
+    public void createUserGroup() {
+        UserGroup adminGroup = new UserGroup();
+        adminGroup.setGroupName("admin");
+        user1.addGroup(adminGroup);
+        
+        UserGroup moderatorGroup = new UserGroup();
+        moderatorGroup.setGroupName("moderator");
+        user3.addGroup(moderatorGroup);
+        
+        UserGroup userGroup = new UserGroup();
+        userGroup.setGroupName("user");
+        user2.addGroup(userGroup);
+        user4.addGroup(userGroup);
+        //user5.addGroup(userGroup);
+        //user6.addGroup(userGroup);
+        //user7.addGroup(userGroup);
+        //user8.addGroup(userGroup);
+        //user9.addGroup(userGroup);
+        //user10.addGroup(userGroup);
+        
+        //group.addUser(user1);
+        userDAO.addUserGroup(adminGroup);
+        userDAO.addUserGroup(moderatorGroup);
+        userDAO.addUserGroup(userGroup);
+        //userDAO.addUserToGroup(user1, group);
     }
 }

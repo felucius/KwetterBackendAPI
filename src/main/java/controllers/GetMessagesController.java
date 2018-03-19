@@ -28,7 +28,7 @@ import service.UserService;
  */
 @Named
 @SessionScoped
-@DeclareRoles({"ADMIN", "MODERATOR", "USER"})
+@DeclareRoles({"admin", "moderator", "user"})
 public class GetMessagesController implements Serializable {
 
     @Inject
@@ -78,7 +78,7 @@ public class GetMessagesController implements Serializable {
         }
     }
 
-    @RolesAllowed({"ADMIN", "MODERATOR"})
+    @RolesAllowed({"admin", "moderator"})
     public boolean removeTweet() {
         if (selectedTweet != null) {
             System.out.println("Message of tweet: " + selectedTweet.getMessage() + " ID:" + selectedTweet.getId());

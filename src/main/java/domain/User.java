@@ -83,6 +83,9 @@ public class User implements Serializable {
     @JoinTable(name = "User_followers")
     private List<User> followers = null;
 
+    @ManyToMany(mappedBy = "users")
+    private List<UserGroup> groups;
+
     /**
      * ID is automatically generated per persist on the database.
      *
@@ -492,5 +495,10 @@ public class User implements Serializable {
                 return userRole;
         }
         return userRole;
+    }
+    
+    public void addGroup(UserGroup group){
+        this.groups.add(group);
+        group.addUser(this);
     }
 }

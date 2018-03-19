@@ -7,13 +7,12 @@ package dao;
 
 import domain.Tweet;
 import domain.User;
-import java.util.ArrayList;
+import domain.UserGroup;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 
 /**
  *
@@ -386,6 +385,28 @@ public class UserDAOImplementation implements UserDAO {
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
+        }
+    }
+
+    @Override
+    public boolean addUserGroup(UserGroup group) {
+        try{
+            em.persist(group);
+            return true;
+        }catch(Exception ex){
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean addUserToGroup(User user, UserGroup group) {
+        try{
+            group.addUser(user);
+            return true;
+        }catch(Exception ex){
+            ex.printStackTrace();
+            return false;
         }
     }
 }

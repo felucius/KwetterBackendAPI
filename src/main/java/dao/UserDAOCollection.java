@@ -7,6 +7,7 @@ package dao;
 
 import domain.Tweet;
 import domain.User;
+import domain.UserGroup;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -20,6 +21,7 @@ import javax.enterprise.inject.Default;
 public class UserDAOCollection implements UserDAO {
 
     private List<User> users = null;
+    private List<UserGroup> groups = null;
 
     public UserDAOCollection() {
         users = new ArrayList();
@@ -177,6 +179,26 @@ public class UserDAOCollection implements UserDAO {
             return user;
         }else{
             return null;
+        }
+    }
+
+    @Override
+    public boolean addUserGroup(UserGroup group) {
+        if (!groups.contains(group)) {
+            this.groups.add(group);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean addUserToGroup(User user, UserGroup group) {
+        if(user != null && group != null){
+            group.addUser(user);
+            return true;
+        }else{
+            return false;
         }
     }
 }

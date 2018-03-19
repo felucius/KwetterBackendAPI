@@ -27,7 +27,7 @@ import service.UserService;
  */
 @Named
 @SessionScoped
-@DeclareRoles({"ADMIN", "MODERATOR", "USER"})
+@DeclareRoles({"admin", "moderator", "user"})
 public class GetUsersController implements Serializable {
 
     @Inject
@@ -71,7 +71,7 @@ public class GetUsersController implements Serializable {
         }
     }
     
-    @RolesAllowed("ADMIN")
+    @RolesAllowed("admin")
     public boolean promoteUser(){
         if(selectedUser != null){
             return userService.promoteUser(selectedUser);
@@ -81,7 +81,7 @@ public class GetUsersController implements Serializable {
         }
     }
     
-    @RolesAllowed("ADMIN")
+    @RolesAllowed("admin")
     public boolean demoteUser(){
         if(selectedUser != null){
             return userService.demoteUser(selectedUser);
