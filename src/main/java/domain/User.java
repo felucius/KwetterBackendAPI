@@ -58,6 +58,14 @@ import javax.persistence.OneToMany;
             query = "SELECT u "
             + "FROM User u "
             + "where u.name = :name")
+    ,
+    @NamedQuery(name = "User.getUserGroups",
+            query = "SELECT ugn "
+            + "FROM User u "
+            + "INNER JOIN u.groups ugn "
+            + "INNER JOIN UserGroup ug "
+            + "WHERE ug.groupName = ugn.groupName "
+            + "AND u.name = :name")
 })
 
 public class User implements Serializable {
@@ -84,7 +92,7 @@ public class User implements Serializable {
     private List<User> followers = null;
 
     @ManyToMany(mappedBy = "users")
-    private List<UserGroup> groups;
+    private final List<UserGroup> groups = new ArrayList<>();
 
     /**
      * ID is automatically generated per persist on the database.
@@ -496,9 +504,72 @@ public class User implements Serializable {
         }
         return userRole;
     }
-    
-    public void addGroup(UserGroup group){
-        this.groups.add(group);
-        group.addUser(this);
+
+    public void addGroup(UserGroup group) {
+        if (group != null) {
+            this.groups.add(group);
+            group.addUser(this);
+        }
     }
+
+    public void removeGroup(UserGroup group) {
+        if (group != null) {
+            this.groups.remove(group);
+            group.removeUser(this);
+        }
+    }
+
+    public String promoteUserGroup() {
+        boolean mod = false;
+        boolean admin = false;
+        for (UserGroup g : groups) {
+            if (g.getGroupName().equals("moderator")) {
+                mod = true;
+            } else if (g.getGroupName().equals("admin")) {
+                admin = true;
+            }
+        }
+        if (!mod && !admin) {
+            return "moderator";
+        } else if (mod && !admin) {
+            return "admin";
+        }
+        return null;
+    }
+
+    public String demoteUserGroup() {
+        boolean mod = false;
+        boolean admin = false;
+        for (UserGroup g : groups) {
+            if (g.getGroupName().equals("moderator")) {
+                mod = true;
+            } else if (g.getGroupName().equals("admin")) {
+                admin = true;
+            }
+        }
+        if (mod && admin) {
+            return "admin";
+        } else if (mod && !admin) {
+            return "moderator";
+        }
+        return null;
+    }
+
+    public String getUserGroupsString() {
+        if (this.groups.size() > 0) {
+            StringBuilder sb = new StringBuilder();
+            for (UserGroup ug : this.groups) {
+                sb.append(ug.getGroupName());
+                sb.append(" - ");
+            }
+            return sb.substring(0, sb.length() - 3);
+        }
+        return "";
+    }
+
+    @JsonbTransient
+    public List<UserGroup> getGroups() {
+        return this.groups;
+    }
+
 }

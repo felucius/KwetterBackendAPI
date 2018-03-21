@@ -5,26 +5,14 @@
  */
 package controllers;
 
-import domain.User;
-import domain.UserRole;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Map;
-import javax.annotation.Resource;
-import javax.annotation.security.DeclareRoles;
-import javax.annotation.security.PermitAll;
-import javax.ejb.SessionContext;
 import javax.enterprise.context.Dependent;
-import javax.enterprise.context.SessionScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
-import org.eclipse.persistence.jpa.jpql.parser.DateTime;
-import service.UserService;
+
 
 /**
  *

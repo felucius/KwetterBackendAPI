@@ -44,7 +44,7 @@ and open the template in the editor.
                     <h:outputText value="#{User.location}" />
                 </p:column>
                 <p:column headerText="User role">
-                    <h:outputText value="#{User.userRole}" />
+                    <h:outputText value="#{User.userGroupsString}" />
                 </p:column>
                 <f:facet name="footer">
                     <p:commandButton action="#{getUsersController.promoteUser()}" update=":form" icon="ui-icon-plus" value="Promote" />

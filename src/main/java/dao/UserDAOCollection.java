@@ -153,16 +153,6 @@ public class UserDAOCollection implements UserDAO {
     }
 
     @Override
-    public boolean promoteUser(User user) {
-        if (user != null) {
-            user.promoteUser(user);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    @Override
     public boolean demoteUser(User user) {
         if (user != null) {
             user.demoteUser(user);
@@ -200,5 +190,10 @@ public class UserDAOCollection implements UserDAO {
         }else{
             return false;
         }
+    }
+
+    @Override
+    public boolean promoteUser(User user) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

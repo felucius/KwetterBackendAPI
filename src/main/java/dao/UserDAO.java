@@ -46,7 +46,7 @@ public interface UserDAO {
     boolean likeTweet(User user, Tweet tweetToLike);
     
     boolean promoteUser(User user);
-    
+        
     boolean demoteUser(User user);
     
     User updateUser(User user);

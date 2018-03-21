@@ -90,12 +90,12 @@ public class init {
         userDAO.createUser(user2);
         userDAO.createUser(user3);
         userDAO.createUser(user4);
-        //userDAO.createUser(user5);
-        //userDAO.createUser(user6);
-        //userDAO.createUser(user7);
-        //userDAO.createUser(user8);
-        //userDAO.createUser(user9);
-        //userDAO.createUser(user10);
+        userDAO.createUser(user5);
+        userDAO.createUser(user6);
+        userDAO.createUser(user7);
+        userDAO.createUser(user8);
+        userDAO.createUser(user9);
+        userDAO.createUser(user10);
     }
 
     public void createTweets() {
@@ -123,17 +123,16 @@ public class init {
         userDAO.addTweet(user1, tweet3, noMentions);
 
         userDAO.addTweet(user2, tweet4, noMentions);
-        //userDAO.addTweet(user1, tweet5, noMentions);
+        userDAO.addTweet(user1, tweet5, noMentions);
 
-        //userDAO.addTweet(user3, tweet6, noMentions);
-        //userDAO.addTweet(user4, tweet7, noMentions);
-        //userDAO.addTweet(user5, tweet8, noMentions);
-        //userDAO.addTweet(user6, tweet9, noMentions);
-        //userDAO.addTweet(user7, tweet10, noMentions);
-        //userDAO.addTweet(user8, tweet11, noMentions);
-        //userDAO.addTweet(user9, tweet12, noMentions);
-        //userDAO.addTweet(user10, tweet13, noMentions);
-
+        userDAO.addTweet(user3, tweet6, noMentions);
+        userDAO.addTweet(user4, tweet7, noMentions);
+        userDAO.addTweet(user5, tweet8, noMentions);
+        userDAO.addTweet(user6, tweet9, noMentions);
+        userDAO.addTweet(user7, tweet10, noMentions);
+        userDAO.addTweet(user8, tweet11, noMentions);
+        userDAO.addTweet(user9, tweet12, noMentions);
+        userDAO.addTweet(user10, tweet13, noMentions);
         tweetDAO.addMention(tweet1, user10);
         tweetDAO.addMention(tweet1, user9);
         tweetDAO.addMention(tweet1, user8);
@@ -156,29 +155,34 @@ public class init {
     }
 
     public void createUserGroup() {
-        UserGroup adminGroup = new UserGroup();
-        adminGroup.setGroupName("admin");
-        user1.addGroup(adminGroup);
-        
-        UserGroup moderatorGroup = new UserGroup();
-        moderatorGroup.setGroupName("moderator");
-        user3.addGroup(moderatorGroup);
-        
         UserGroup userGroup = new UserGroup();
         userGroup.setGroupName("user");
-        user2.addGroup(userGroup);
-        user4.addGroup(userGroup);
-        //user5.addGroup(userGroup);
-        //user6.addGroup(userGroup);
-        //user7.addGroup(userGroup);
-        //user8.addGroup(userGroup);
-        //user9.addGroup(userGroup);
-        //user10.addGroup(userGroup);
-        
+
+        UserGroup moderatorGroup = new UserGroup();
+        moderatorGroup.setGroupName("moderator");
+
+        UserGroup adminGroup = new UserGroup();
+        adminGroup.setGroupName("admin");
+
         //group.addUser(user1);
-        userDAO.addUserGroup(adminGroup);
-        userDAO.addUserGroup(moderatorGroup);
         userDAO.addUserGroup(userGroup);
-        //userDAO.addUserToGroup(user1, group);
+        userDAO.addUserGroup(moderatorGroup);
+        userDAO.addUserGroup(adminGroup);
+
+        user1.addGroup(userGroup);
+        user2.addGroup(userGroup);
+        user3.addGroup(userGroup);
+        user4.addGroup(userGroup);
+        user5.addGroup(userGroup);
+        user6.addGroup(userGroup);
+        user7.addGroup(userGroup);
+        user8.addGroup(userGroup);
+        user9.addGroup(userGroup);
+        user10.addGroup(userGroup);
+
+        user1.addGroup(moderatorGroup);
+        user3.addGroup(moderatorGroup);
+
+        user1.addGroup(adminGroup);
     }
 }
