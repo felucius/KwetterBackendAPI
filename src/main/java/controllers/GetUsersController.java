@@ -10,6 +10,8 @@ import domain.UserRole;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -25,6 +27,7 @@ import service.UserService;
  */
 @Named
 @SessionScoped
+@DeclareRoles({"admin", "moderator", "user"})
 public class GetUsersController implements Serializable {
 
     @Inject
@@ -68,18 +71,24 @@ public class GetUsersController implements Serializable {
         }
     }
     
+    @RolesAllowed("admin")
     public boolean promoteUser(){
         if(selectedUser != null){
-            return userService.promoteUser(selectedUser);
+            userService.promoteUser(selectedUser);
+            init();
+            return true;
         }else{
             System.out.println("Cannot promote user, user is not found");
             return false;
         }
     }
     
+    @RolesAllowed("admin")
     public boolean demoteUser(){
         if(selectedUser != null){
-            return userService.demoteUser(selectedUser);
+            userService.demoteUser(selectedUser);
+            init();
+            return true;
         }else{
             System.out.println("Cannot demote user, user is not found");
             return false;

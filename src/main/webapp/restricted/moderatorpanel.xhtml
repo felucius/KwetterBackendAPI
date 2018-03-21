@@ -10,48 +10,20 @@ and open the template in the editor.
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Admin panel</title>
+        <title>Moderator panel</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
 
     <h:body>
-        <h:form id="form">
-            <h2>
-                <h:outputLabel value="Welcome to the Admin panel"></h:outputLabel>
-            </h2>
-            <p:growl id="msgs" showDetail="true" />
-            <p:dataTable id="singleDT" 
-                         var="User" 
-                         value="#{getUsersController.allUsers}" 
-                         selectionMode="single" 
-                         selection="#{getUsersController.selectedUser}" 
-                         rowKey="#{User.name}">
-                <f:facet name="header">
-                    Users
-                </f:facet>
-                <p:column headerText="Name">
-                    <h:outputText value="#{User.name}" />
-                </p:column>
-                <p:column headerText="Email">
-                    <h:outputText value="#{User.email}" />
-                </p:column>
-                <p:column headerText="Location">
-                    <h:outputText value="#{User.location}" />
-                </p:column>
-                <p:column headerText="User role">
-                    <h:outputText value="#{User.userRole}" />
-                </p:column>
-                <f:facet name="footer">
-                    <p:commandButton action="#{getUsersController.promoteUser()}" update=":form" icon="ui-icon-plus" value="Promote" />
-                    <p:commandButton action="#{getUsersController.demoteUser()}" update=":form" icon="ui-icon-minus" value="Demote" />
-                </f:facet>
-            </p:dataTable>
-        </h:form>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
         <h:form id="formtweet">
+            <h:commandButton action="#{loginController.doLogout()}" value="Logout"></h:commandButton>
+            <h2>
+                <h:outputLabel value="Welcome to the Moderator panel #{loginController.loggedInUserName}"></h:outputLabel>
+            </h2>    
+
+            <p>
+                <h:outputLabel value="Logged in at: #{loginController.loggedInTime}"></h:outputLabel>
+            </p>
             <p:growl id="msgs" showDetail="true" />
             <p:dataTable id="singleDT"
                          var="Tweet" 

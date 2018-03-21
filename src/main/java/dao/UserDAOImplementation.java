@@ -7,13 +7,12 @@ package dao;
 
 import domain.Tweet;
 import domain.User;
-import java.util.ArrayList;
+import domain.UserGroup;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 
 /**
  *
@@ -266,7 +265,7 @@ public class UserDAOImplementation implements UserDAO {
     @Override
     public boolean addTweet(User user, Tweet tweet, List<User> mentions) {
         user.addTweet(tweet, mentions);
-        
+
         if (mentions != null) {
             for (User u : mentions) {
                 if (!tweet.getMentions().contains(u)) {
@@ -339,8 +338,15 @@ public class UserDAOImplementation implements UserDAO {
     public boolean promoteUser(User user) {
         try {
             user.promoteUser(user);
-            em.merge(user);
-            return true;
+            String group = user.promoteUserGroup();
+            if (group != null) {
+                UserGroup existingGroup = em.find(UserGroup.class, group);
+                user.addGroup(existingGroup);
+                em.merge(user);
+                return true;
+            } else {
+                return false;
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
@@ -358,8 +364,19 @@ public class UserDAOImplementation implements UserDAO {
     public boolean demoteUser(User user) {
         try {
             user.demoteUser(user);
-            em.merge(user);
-            return true;
+            String group = user.demoteUserGroup();
+            if (group != null) {
+                UserGroup existingGroup = em.find(UserGroup.class, group);
+                User existingUser = em.find(User.class, user.getId());
+                
+                existingUser.removeGroup(existingGroup);
+                em.merge(existingUser);
+                em.merge(existingGroup); 
+                return true;
+            } else {
+                return false;
+            }
+
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
@@ -386,6 +403,28 @@ public class UserDAOImplementation implements UserDAO {
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
+        }
+    }
+
+    @Override
+    public boolean addUserGroup(UserGroup group) {
+        try {
+            em.persist(group);
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean addUserToGroup(User user, UserGroup group) {
+        try {
+            group.addUser(user);
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
         }
     }
 }

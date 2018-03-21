@@ -5,59 +5,46 @@
  */
 package controllers;
 
-import domain.User;
-import domain.UserRole;
+import java.io.IOException;
 import java.io.Serializable;
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
+import java.util.Date;
+import javax.enterprise.context.Dependent;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
-import service.UserService;
+import javax.servlet.http.HttpSession;
+
 
 /**
  *
  * @author M
  */
 @Named
-@SessionScoped
-public class LoginController implements Serializable{
-    @Inject
-    private UserService userService;
-    
-    private String name;
-    private String password;
-    private UserRole userRole;
-    private User user = null;
-    
-    public LoginController(){
-        
+@Dependent
+public class LoginController implements Serializable {
+
+    public boolean isLoggedIn() {
+        return FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal() != null;
     }
-    
-    public void setUserName(String username){
-        this.name = username;
+
+    public String doLogout() throws IOException {
+
+        ((HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false)).invalidate();
+
+        return "/index.xhtml?faces-redirect=true";
     }
-    
-    public String getUserName(){
-        return this.name;
-    }
-    
-    public void setPassword(String password){
-        this.password = password;
-    }
-    
-    public String getPassword(){
-        return this.password;
-    }
-    
-    public String login(){
-        user = userService.findUserByName(name);
-        if(name.equals(user.getName()) && password.equals(user.getPassword()) 
-                && userRole.ADMIN.equals(user.getUserRole())){
-            return "adminpanel";
-        }else if(name.equals(user.getName()) && password.equals(user.getPassword()) 
-                && userRole.USER.equals(user.getUserRole())){
-            return "account";
-        }else{
-            return "failure";
+
+    // Returning principal name
+    public String getLoggedInUserName() {
+        if (isLoggedIn()) {
+            return FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
+        } else {
+            return "Not logged in a session.";
         }
     }
+
+    public Date getLoggedInTime() {
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("time", new Date());
+        return (Date) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("time");
+    }
+
 }
