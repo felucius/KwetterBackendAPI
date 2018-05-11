@@ -28,9 +28,11 @@ public interface TweetDAO {
     
     List<Tweet> getAllTweets();
     
-    Tweet findTweet(Long id);
+    Tweet findTweet(Integer id);
     
     List<Tweet> findTweetByContent(String content);
+    
+    List<Tweet> findTagByContent(String content);
     
     Tweet createTweet(Tweet tweet);
     

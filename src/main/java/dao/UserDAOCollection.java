@@ -53,7 +53,7 @@ public class UserDAOCollection implements UserDAO {
         }
     }*/
     @Override
-    public User findUser(Long id) {
+    public User findUser(Integer id) {
         for (User user : users) {
             if (user.getId().equals(id)) {
                 return user;

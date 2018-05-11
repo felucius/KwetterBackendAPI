@@ -82,12 +82,16 @@ public class TweetService {
         return tweetDAO.getAllTweets();
     }
     
-    public Tweet findTweet(Long id){
+    public Tweet findTweet(Integer id){
         return tweetDAO.findTweet(id);
     }
     
     public List<Tweet> findTweetByContent(String content){
         return tweetDAO.findTweetByContent(content);
+    }
+    
+    public List<Tweet> findTagByContent(String content){
+        return tweetDAO.findTagByContent(content);
     }
     
     public Tweet updateTweet(Tweet tweet){

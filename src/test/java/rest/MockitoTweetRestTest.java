@@ -91,7 +91,7 @@ public class MockitoTweetRestTest {
 
         tweet1 = mock(Tweet.class);
         tweet2 = mock(Tweet.class);
-        tweetResource.addMention(tweet1.getId(), user1.getName());
+        tweetResource.addMention(tweet1.getTweetId(), user1.getName());
         //userResource.addTweet(user1.getName(), tweet1.getMessage(), users.get(0).ge);
     }
 
@@ -105,7 +105,7 @@ public class MockitoTweetRestTest {
 
         when(tweetService.addMention(tweet1, user1)).thenReturn(true);
         assertEquals(true, tweetService.addMention(tweet1, user1));
-        tweetResource.addMention(tweet1.getId(), user1.getName());
+        tweetResource.addMention(tweet1.getTweetId(), user1.getName());
         verify(tweetService).addMention(tweet1, user1);
     }
 
@@ -115,7 +115,7 @@ public class MockitoTweetRestTest {
 
         when(tweetService.getLikes(tweet1)).thenReturn(users);
         assertEquals(users, tweetService.getLikes(tweet1));
-        tweetResource.getLikes(tweet1.getId());
+        tweetResource.getLikes(tweet1.getTweetId());
         verify(tweetService).getLikes(tweet1);
     }
 
@@ -125,7 +125,7 @@ public class MockitoTweetRestTest {
 
         when(tweetService.getMentions(tweet1)).thenReturn(users);
         assertEquals(users, tweetService.getMentions(tweet1));
-        tweetResource.getMentions(tweet1.getId());
+        tweetResource.getMentions(tweet1.getTweetId());
         verify(tweetService).getMentions(tweet1);
     }
 

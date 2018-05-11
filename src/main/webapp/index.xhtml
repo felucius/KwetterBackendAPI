@@ -14,7 +14,8 @@ and open the template in the editor.
     <h:body>
         <h:form>
             <h:panelGrid columns="1">
-
+                <h:outputText value="User"/>
+                <h:commandLink action="/tweettimeline.xhtml?faces-redirect=true" value="User login" /><br/>
                 <h:outputText value="Moderator"/>
                 <h:commandLink action="/restricted/moderatorpanel.xhtml?faces-redirect=true" value="Moderator login"/><br/>
                 <h:outputText value="Admin"/>

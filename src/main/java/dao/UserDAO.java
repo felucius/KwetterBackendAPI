@@ -25,7 +25,7 @@ public interface UserDAO {
     
     //boolean removeUser(User user);
     
-    User findUser(Long id);
+    User findUser(Integer id);
     
     User findUserByName(String name);
         

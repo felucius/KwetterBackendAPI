@@ -102,21 +102,21 @@ public class init {
         tags.add("#cool");
         tags.add("#like");
 
-        tweet1 = new Tweet("This is my first Tweet Hello from Maxime", tags, user1);
-        tweet2 = new Tweet("This is my second Tweet AWESOME", tags, user1);
-        tweet3 = new Tweet("This is my third Tweet MUCH C00l", tags, user1);
+        tweet1 = new Tweet("This is my first Tweet Hello from Maxime", "#Cool", user1);
+        tweet2 = new Tweet("This is my second Tweet AWESOME", "#Like", user1);
+        tweet3 = new Tweet("This is my third Tweet MUCH C00l", "#Dope", user1);
 
-        tweet4 = new Tweet("Hey everyone Look at me NO HANDS!", tags, user2);
-        tweet5 = new Tweet("WHOA what was that all about!", tags, user2);
+        tweet4 = new Tweet("Hey everyone Look at me NO HANDS!", "#Friendly", user2);
+        tweet5 = new Tweet("WHOA what was that all about!", "#Smile", user2);
 
-        tweet6 = new Tweet("Welcome to my channel piepol", tags, user3);
-        tweet7 = new Tweet("Hellow Hello", tags, user4);
-        tweet8 = new Tweet("Wilkommen damen und herren", tags, user5);
-        tweet9 = new Tweet("Dikke BMW HAHA", tags, user6);
-        tweet10 = new Tweet("Waarom tweet ik? ik verveel me!", tags, user7);
-        tweet11 = new Tweet("This is a message from KOREA", tags, user8);
-        tweet12 = new Tweet("SPAIN everyone!? someone SPANISH?", tags, user9);
-        tweet13 = new Tweet("Yes finally a highscore from a low score..", tags, user10);
+        tweet6 = new Tweet("Welcome to my channel piepol", "#Kwetter", user3);
+        tweet7 = new Tweet("Hellow Hello", "#Happy", user4);
+        tweet8 = new Tweet("Wilkommen damen und herren", "#Kwetter", user5);
+        tweet9 = new Tweet("Dikke BMW HAHA", "#Kwetter", user6);
+        tweet10 = new Tweet("Waarom tweet ik? ik verveel me!", "#Smile", user7);
+        tweet11 = new Tweet("This is a message from KOREA", "#Angry", user8);
+        tweet12 = new Tweet("SPAIN everyone!? someone SPANISH?", "#Like", user9);
+        tweet13 = new Tweet("Yes finally a highscore from a low score..", "#Cool", user10);
 
         userDAO.addTweet(user1, tweet1, noMentions);
         userDAO.addTweet(user1, tweet2, noMentions);
@@ -133,9 +133,12 @@ public class init {
         userDAO.addTweet(user8, tweet11, noMentions);
         userDAO.addTweet(user9, tweet12, noMentions);
         userDAO.addTweet(user10, tweet13, noMentions);
+        
         tweetDAO.addMention(tweet1, user10);
         tweetDAO.addMention(tweet1, user9);
         tweetDAO.addMention(tweet1, user8);
+        tweetDAO.addMention(tweet1, user2);
+        tweetDAO.addMention(tweet1, user3);
 
         userDAO.likeTweet(user1, tweet1);
         userDAO.likeTweet(user2, tweet1);

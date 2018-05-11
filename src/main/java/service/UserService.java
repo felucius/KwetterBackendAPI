@@ -71,7 +71,7 @@ public class UserService {
      * @param id of the user to be searched.
      * @return the user object.
      */
-    public User findUser(Long id) {
+    public User findUser(Integer id) {
         return userDAO.findUser(id);
     }
     

@@ -98,7 +98,7 @@ public class UserDAOImplementation implements UserDAO {
      * @return the value as a User object.
      */
     @Override
-    public User findUser(Long id) {
+    public User findUser(Integer id) {
         User user = null;
         try {
             user = em.find(User.class, id);

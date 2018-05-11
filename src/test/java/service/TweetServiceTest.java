@@ -65,8 +65,8 @@ public class TweetServiceTest {
         user3 = userService.createUser(new User("picURL", "webURL", "Karel", "Men", "Veldhoven", "Karel@hotmail.com", "pass"));
         users.add(user3);
 
-        tweet1 = new Tweet("Hello message", tags, user1);
-        tweet2 = new Tweet("Tweeting now!!", tags, user2);
+        tweet1 = new Tweet("Hello message", "#cool", user1);
+        tweet2 = new Tweet("Tweeting now!!", "#cool", user2);
         tweetService.addMention(tweet1, user1);
         userService.addTweet(user1, tweet1, users);
     }

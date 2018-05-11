@@ -84,7 +84,7 @@ public class UserDAOImplementationTest {
         List<String> tags = new ArrayList();
         tags.add("#cool");
         User user = new User("Maxime");
-        Tweet tweet = new Tweet("test", tags, user);
+        Tweet tweet = new Tweet("test", "#cool", user);
 
         et.begin();
         em.persist(user);
@@ -101,7 +101,7 @@ public class UserDAOImplementationTest {
         List<String> tags = new ArrayList();
         tags.add("#cool");
         User user = new User("Freek");
-        Tweet tweet = new Tweet("test", tags, user);
+        Tweet tweet = new Tweet("test", "#cool", user);
 
         et.begin();
         em.persist(user);
@@ -157,7 +157,7 @@ public class UserDAOImplementationTest {
         List<String> tags = new ArrayList();
         tags.add("#cool");
         User user = new User("Maxime");
-        Tweet tweet = new Tweet("test", tags, user);
+        Tweet tweet = new Tweet("test", "#cool", user);
 
         tweet.likeTweet(user);
         et.begin();
@@ -207,7 +207,7 @@ public class UserDAOImplementationTest {
         List<String> tags = new ArrayList();
         tags.add("#cool");
         User user = new User("Hans");
-        Tweet tweet = new Tweet("testing tweet", tags, user);
+        Tweet tweet = new Tweet("testing tweet", "#cool", user);
 
         et.begin();
         em.persist(user);

@@ -39,7 +39,7 @@ import javax.persistence.OneToMany;
             query = "SELECT u FROM User u")
     ,
     @NamedQuery(name = "User.getFollowingUsers",
-            query = "SELECT u2.name, u2.id\n"
+            query = "SELECT u2\n"
             + "FROM User u\n"
             + "INNER JOIN u.following uf \n"
             + "INNER JOIN User u2 \n"
@@ -47,7 +47,7 @@ import javax.persistence.OneToMany;
             + "AND u.name = :username")
     ,
     @NamedQuery(name = "User.getFollowers",
-            query = "SELECT u2.name, u2.id\n"
+            query = "SELECT u2\n"
             + "FROM User u\n"
             + "INNER JOIN u.followers uf \n"
             + "INNER JOIN User u2 \n"

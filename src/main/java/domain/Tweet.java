@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.enterprise.inject.Model;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,6 +22,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.ResourceSupport;
 
 /**
  * The entity is a table in the database. In this case it is the table Tweet.
@@ -38,7 +39,7 @@ import javax.persistence.TemporalType;
             query = "SELECT t FROM Tweet t")
     ,
     @NamedQuery(name = "Tweet.getAllTweetsfromuser",
-            query = "SELECT u.name, t.message\n"
+            query = "SELECT t\n"
             + "FROM Tweet t\n"
             + "INNER JOIN t.tweetedBy tb\n"
             + "INNER JOIN User u\n"
@@ -46,45 +47,61 @@ import javax.persistence.TemporalType;
             + "AND u.name = :userName")
     ,
     @NamedQuery(name = "Tweet.getLikes",
-            query = "SELECT t.message, u.name, u.id\n"
+            query = "SELECT t\n"
             + "FROM Tweet t\n"
             + "INNER JOIN t.likes til\n"
             + "INNER JOIN User u\n"
             + "WHERE til.id = u.id\n"
-            + "AND t.id = :tweetId")
+            + "AND t.tweetId = :tweetId")
     ,
     @NamedQuery(name = "Tweet.findTweetByContent",
-            query = "SELECT t.message, t.id "
+            query = "SELECT t "
             + "FROM Tweet t "
             + "WHERE t.message "
             + "LIKE :message")
     ,
+    @NamedQuery(name = "Tweet.findTweetByTag",
+            query = "SELECT t "
+            + "FROM Tweet t "
+            + "WHERE t.tag "
+            + "LIKE :tag")
+    ,
     @NamedQuery(name = "Tweet.getTweetsOfFollowers",
-            query = "SELECT t.message, u2.name, u2.id\n"
+            query = "SELECT t\n"
             + "FROM User u, Tweet t\n"
-            + "INNER JOIN t.tweetedBy tb"
+            + "INNER JOIN t.tweetedBy tb "
             + "INNER JOIN u.following uf \n"
             + "INNER JOIN User u2 \n"
-            + "WHERE t.id = uf.id\n"
+            + "WHERE tb.id = uf.id\n"
             + "AND u2.id = uf.id \n"
-            + "AND u.name = :username"),
+            + "AND u.name = :username")
+    ,
     @NamedQuery(name = "Tweet.removeTweet",
             query = "DELETE FROM \n"
-                    + "Tweet t "
-                    + "WHERE t.id = :tweetId")
+            + "Tweet t "
+            + "WHERE t.tweetId = :tweetId")
+    ,
+    @NamedQuery(name = "Tweet.getTweetMentions",
+            query = "SELECT tm "
+            + "FROM Tweet t, User u "
+            + "INNER JOIN t.mentions tm "
+            + "WHERE tm.id = t.tweetId "
+            + "AND u.name = :name")
 })
-public class Tweet implements Serializable {
+public class Tweet extends ResourceSupport implements Serializable {
 
     @OneToMany(orphanRemoval = true)
     @JoinTable(name = "Tweet_mentions")
     private List<User> mentions = null;
     private String message = null;
-    private List<String> tags = null;
+    private String tag = null;
     @ManyToOne()
     private User tweetedBy = null;
     @OneToMany(orphanRemoval = true)
     @JoinTable(name = "Tweet_likes")
     private List<User> likes = null;
+
+    private Link link = null; // = new Link("http://localhost:8080/KwetterBackend_Maxime/api/users/finduserbyname/Maxime");
 
     /**
      * To insert a date into the database, the Temporal injection needs to be
@@ -96,7 +113,7 @@ public class Tweet implements Serializable {
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Assigning primary key values to the Tweet table.
-    private Long id;
+    private Integer tweetId;
 
     public Tweet() {
 
@@ -109,13 +126,14 @@ public class Tweet implements Serializable {
      * @param tags are extra features such as likes and kuddos
      * @param tweetedBy is the person who created the tweet.
      */
-    public Tweet(String message, List<String> tags, User tweetedBy) {
+    public Tweet(String message, String tag, User tweetedBy) {
         this.message = message;
-        this.tags = tags;
+        this.tag = tag;
         this.tweetedBy = tweetedBy;
         this.published = new Date(System.currentTimeMillis());
         this.likes = new ArrayList();
         this.mentions = new ArrayList();
+        this.link = new Link("http://localhost:8080/KwetterBackend_Maxime/api/tweets");
     }
 
     /**
@@ -202,17 +220,17 @@ public class Tweet implements Serializable {
      *
      * @return tags of the tweet.
      */
-    public List<String> getTags() {
-        return this.tags;
+    public String getTag() {
+        return this.tag;
     }
 
     /**
      * Setting the tags of the tweet
      *
-     * @param tags to be setted per tweet.
+     * @param tag to be setted per tweet.
      */
-    public void setTags(List<String> tags) {
-        this.tags = tags;
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 
     /**
@@ -238,8 +256,8 @@ public class Tweet implements Serializable {
      *
      * @return tweet id.
      */
-    public Long getId() {
-        return id;
+    public Integer getTweetId() {
+        return tweetId;
     }
 
     /**
@@ -247,9 +265,19 @@ public class Tweet implements Serializable {
      *
      * @param id to be changed.
      */
-    public void setId(Long id) {
-        this.id = id;
+    public void setTweetId(Integer id) {
+        this.tweetId = id;
     }
+
+    public Link getLink() {
+        return link;
+    }
+
+    public void setLink(Link link) {
+        this.link = link;
+    }
+
+    
 
     public User getTweetedBy() {
         return this.tweetedBy;
@@ -270,8 +298,8 @@ public class Tweet implements Serializable {
             likes.remove(user);
         }
     }
-    
-    public void removeTweetedBy(User user){
+
+    public void removeTweetedBy(User user) {
         this.tweetedBy = null;
     }
 }
