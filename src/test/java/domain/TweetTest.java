@@ -74,22 +74,16 @@ public class TweetTest {
     public void testGetTags() {
         System.out.println("getTags");
         Tweet instance = new Tweet();
-        List<String> tagList = new ArrayList();
-        List<String> tagList2 = new ArrayList();
+        String tagList = "Like";
+        String tagList2 = "Like";
         
-        tagList.add("Like");
-        tagList.add("Kuddos");
+        instance.setTag("Like");
         
-        tagList2.add("Like");
-        tagList2.add("Kuddos");
-        instance.setTags(tagList);
-        
-        List<String> expResult = tagList2;
-        List<String> result = instance.getTags();
+        String expResult = tagList2;
+        String result = instance.getTag();
         
         assertEquals(expResult, result);
         assertNotNull(result);
-        assertNotSame(expResult, result);
     }
 
     /**
@@ -102,7 +96,7 @@ public class TweetTest {
         tags.add("Like");
         tags.add("Kuddo");
         Tweet instance = new Tweet();
-        instance.setTags(tags);
+        instance.setTag("Like");
       
         assertNotNull(tags);
         assertEquals(2, tags.size());
@@ -147,9 +141,9 @@ public class TweetTest {
     public void testGetId() {
         System.out.println("getId");
         Tweet instance = new Tweet();
-        Long expResult = 123456789L;
-        instance.setId(expResult);
-        Long result = instance.getId();
+        Integer expResult = 123456789;
+        instance.setTweetId(expResult);
+        Integer result = instance.getTweetId();
         
         assertNotNull(result);
         assertEquals(expResult, result);
@@ -162,10 +156,10 @@ public class TweetTest {
     @Test
     public void testSetId() {
         System.out.println("setId");
-        Long id = 1234L;
+        Integer id = 1234;
         Tweet instance = new Tweet();
-        instance.setId(id);
-        Long expResult = instance.getId();
+        instance.setTweetId(id);
+        Integer expResult = instance.getTweetId();
         
         assertNotNull(id);
         assertEquals(expResult, id);
@@ -199,7 +193,7 @@ public class TweetTest {
         List<String> tags = new ArrayList();
         tags.add("#Cool");
         User user1 = new User("avatarURL", "Website", "Maxime", "Men", "Geldrop", "EmailMaxime", "Pass");
-        Tweet tweet = new Tweet("Hello", tags, user1);
+        Tweet tweet = new Tweet("Hello", "#Cool", user1);
         assertNotNull(tweet.toString());
     }
 }

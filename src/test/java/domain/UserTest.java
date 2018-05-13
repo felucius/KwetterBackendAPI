@@ -67,34 +67,34 @@ public class UserTest {
         tags.add("#Super");
 
         user1 = new User();
-        tweet1 = new Tweet("Message1", tags, user1);
+        tweet1 = new Tweet("Message1", "#cool", user1);
 
         user2 = new User();
-        tweet2 = new Tweet("Message1", tags, user2);
+        tweet2 = new Tweet("Message1", "#cool", user2);
 
         user3 = new User();
-        tweet3 = new Tweet("Message1", tags, user3);
+        tweet3 = new Tweet("Message1", "#cool", user3);
 
         user4 = new User();
-        tweet4 = new Tweet("Message1", tags, user4);
+        tweet4 = new Tweet("Message1", "#cool", user4);
 
         user5 = new User();
-        tweet5 = new Tweet("Message1", tags, user5);
+        tweet5 = new Tweet("Message1", "#cool", user5);
 
         user6 = new User();
-        tweet6 = new Tweet("Message1", tags, user6);
+        tweet6 = new Tweet("Message1", "#cool", user6);
 
         user7 = new User();
-        tweet7 = new Tweet("Message1", tags, user7);
+        tweet7 = new Tweet("Message1", "#cool", user7);
 
         user8 = new User();
-        tweet8 = new Tweet("Message1", tags, user8);
+        tweet8 = new Tweet("Message1", "#cool", user8);
 
         user9 = new User();
-        tweet9 = new Tweet("Message1", tags, user9);
+        tweet9 = new Tweet("Message1", "#cool", user9);
 
         user10 = new User();
-        tweet10 = new Tweet("Message1", tags, user10);
+        tweet10 = new Tweet("Message1", "#cool", user10);
 
         user1.followUser(user2);
         user1.followUser(user3);

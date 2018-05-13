@@ -69,7 +69,7 @@ public class TweetDAOImplementationTest {
         List<String> tags = new ArrayList();
         tags.add("#cool");
         User user = new User("Maxime");
-        Tweet tweet = new Tweet("test", tags, user);
+        Tweet tweet = new Tweet("test", "#cool", user);
         tweet.addMention(user);
 
         et.begin();
@@ -87,7 +87,7 @@ public class TweetDAOImplementationTest {
         List<String> tags = new ArrayList();
         tags.add("#cool");
         User user = new User("Maxime");
-        Tweet tweet = new Tweet("test", tags, user);
+        Tweet tweet = new Tweet("test", "#cool", user);
         tweet.addMention(user);
 
         et.begin();
@@ -105,7 +105,7 @@ public class TweetDAOImplementationTest {
         List<String> tags = new ArrayList();
         tags.add("#cool");
         User user = new User("Maxime");
-        Tweet tweet = new Tweet("test", tags, user);
+        Tweet tweet = new Tweet("test", "#cool", user);
         
         et.begin();
         em.persist(user);

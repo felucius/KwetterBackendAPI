@@ -6,7 +6,9 @@
 package rest;
 
 import domain.Tweet;
+import domain.TweetDTO;
 import domain.User;
+import domain.UserDTO;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -16,8 +18,11 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import service.TweetService;
 import service.UserService;
+import util.TweetDomainToDto;
+import util.UserDomainToDto;
 
 /**
  * Api call where the user makes a request to the backend to receive data by
@@ -46,88 +51,57 @@ public class TweetResource {
     @Inject
     UserService userService;
 
-    /**
-     * POST request to send data.
-     *
-     * This method allows a user to be added as a mention.
-     *
-     * @param tweetId is the object that is going to be used for mentions.
-     * @param userName is the object that is going to be mentioned on 'tweet'
-     * object
-     * @return the tweet object that has a mentioned user on it.
-     */
     @POST
     @Path("addmention/{tweetId}/{username}")
-    public boolean addMention(@PathParam("tweetId") Long tweetId, @PathParam("username") String userName) {
-        return tweetService.addMention(findTweet(tweetId), userService.findUserByName(userName));
+    public Response addMention(@PathParam("tweetId") Integer tweetId, @PathParam("username") String userName) {
+        //return tweetService.addMention(findTweet(tweetId), userService.findUserByName(userName));
+        return null;
     }
 
-    /**
-     * GET request to retrieve data
-     *
-     * This method retrieves all likes from a single tweet.
-     *
-     * @param tweetId is the id of the tweet that is going to be searched on
-     * @return a list of users that likes a certain tweet.
-     */
     @GET
     @Path("gettweetlikes/{tweetId}")
-    public List<User> getLikes(@PathParam("tweetId") Long tweetId) {
-        return tweetService.getLikes(tweetService.findTweet(tweetId));
+    public Response getLikes(@PathParam("tweetId") Integer tweetId) {
+        List<UserDTO> dto = UserDomainToDto.USER_LIKES_TO_DTO(tweetService.getLikes(tweetService.findTweet(tweetId)));
+        return Response.ok(dto).build();
+        //return tweetService.getLikes(tweetService.findTweet(tweetId));
     }
 
-    /**
-     * GET request to find a tweet based on it's content
-     *
-     * @param content is the content to be searched on
-     * @return a tweet object.
-     */
     @GET
     @Path("findtweetbycontent/{content}")
-    public List<Tweet> findTweetByContent(@PathParam("content") String content) {
-        return tweetService.findTweetByContent(content);
+    public Response findTweetByContent(@PathParam("content") String content) {
+        List<TweetDTO> dto = TweetDomainToDto.TWEETS_TO_DTO(tweetService.findTweetByContent(content));
+        return Response.ok(dto).build();
+        //return tweetService.findTweetByContent(content);
     }
 
-    /**
-     * GET request to find a tweet based on it's id
-     *
-     * @param id is the id to be searched on
-     * @return a tweet object.
-     */
+    @GET
+    @Path("findtagbycontent/{content}")
+    public Response findTagByContent(@PathParam("content") String content) {
+        List<TweetDTO> dto = TweetDomainToDto.TWEETS_TO_DTO(tweetService.findTagByContent(content));
+        return Response.ok(dto).build();
+        //return tweetService.findTagByContent(content);
+    }
+
     @GET
     @Path("findtweet/{id}")
-    public Tweet findTweet(@PathParam("id") Long id) {
-        return tweetService.findTweet(id);
+    public Response findTweet(@PathParam("id") Integer id) {
+        TweetDTO dto = TweetDomainToDto.TWEET_TO_DTO(tweetService.findTweet(id));
+        return Response.ok(dto).build();
+        //return tweetService.findTweet(id);
     }
 
-    /**
-     * GET request to retrieve data.
-     *
-     * This method allows to retrieve mentions from a single tweet.
-     *
-     * @param tweetId is the tweet where all mentions are retrieved from.
-     * @return a list of users that are mentioned in the tweet.
-     */
     @GET
     @Path("gettweetmentions/{tweetId}")
-    public List<User> getMentions(@PathParam("tweetId") Long tweetId) {
+    public List<User> getMentions(@PathParam("tweetId") Integer tweetId) {
         return tweetService.getMentions(tweetService.findTweet(tweetId));
     }
 
-    /**
-     * GET request to receive information.
-     *
-     * This method allows all tweets to be retrieved of the following users from
-     * a single user.
-     *
-     * @param userName is the user that is going to be searched on to retrieve
-     * his following users and their tweets.
-     * @return a list of tweets that the user is following.
-     */
     @GET
     @Path("gettweetsfollowing/{userName}")
-    public List<Tweet> getTweetsOfFollowingUsers(@PathParam("userName") String userName) {
-        return tweetService.getTweetsOfFollowingUsers(userService.findUserByName(userName));
+    public Response getTweetsOfFollowingUsers(@PathParam("userName") String userName) {
+        List<TweetDTO> dto = TweetDomainToDto.TWEETS_FOLLOWING_TO_DTO(tweetService.getTweetsOfFollowingUsers(userService.findUserByName(userName)));
+        return Response.ok(dto).build();
+        //return tweetService.getTweetsOfFollowingUsers(userService.findUserByName(userName));
     }
 
     @POST
@@ -137,16 +111,10 @@ public class TweetResource {
         return tweetService.updateTweet(tweet);
     }
 
-    /**
-     * GET request to retrieve information.
-     *
-     * Retrieving all tweets from the tweetservice. The tweetservice get it's
-     * data from the DAO (Data Access Object). In our case the database.
-     *
-     * @return a list of all tweets.
-     */
     @GET
-    public List<Tweet> getAllTweets() {
-        return tweetService.getAllTweets();
+    public Response getAllTweets() {
+        List<TweetDTO> dto = TweetDomainToDto.TWEETS_TO_DTO(tweetService.getAllTweets());
+        return Response.ok(dto).build();
+        //return tweetService.getAllTweets();
     }
 }

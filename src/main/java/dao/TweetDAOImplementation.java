@@ -62,12 +62,13 @@ public class TweetDAOImplementation implements TweetDAO {
         List<User> users = null;
         try {
             users = em.createNamedQuery("Tweet.getLikes").
-                    setParameter("tweetId", tweet.getId()).
+                    setParameter("tweetId", tweet.getTweetId()).
                     getResultList();
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
         }
+
         return users;
     }
 
@@ -83,7 +84,7 @@ public class TweetDAOImplementation implements TweetDAO {
         List<User> users = null;
         tweet.getMentions();
         try {
-            users = em.find(Tweet.class, tweet.getId()).getMentions();
+            users = em.find(Tweet.class, tweet.getTweetId()).getMentions();
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
@@ -139,7 +140,7 @@ public class TweetDAOImplementation implements TweetDAO {
      * @return a tweet object.
      */
     @Override
-    public Tweet findTweet(Long id) {
+    public Tweet findTweet(Integer id) {
         Tweet tweet = null;
         try {
             tweet = em.find(Tweet.class, id);
@@ -162,6 +163,26 @@ public class TweetDAOImplementation implements TweetDAO {
         try {
             tweet = em.createNamedQuery("Tweet.findTweetByContent").
                     setParameter("message", "%" + message + "%").
+                    getResultList();
+            return tweet;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+    
+    /**
+     * Find a tweet by it's tag.
+     * 
+     * @param tag is the content to be searched on.
+     * @return corresponding tweet.
+     */
+    @Override
+    public List<Tweet> findTagByContent(String tag) {
+        List<Tweet> tweet = null;
+        try {
+            tweet = em.createNamedQuery("Tweet.findTweetByTag").
+                    setParameter("tag", "%" + tag + "%").
                     getResultList();
             return tweet;
         } catch (Exception ex) {

@@ -29,7 +29,7 @@ public interface UserDAO {
     
     User findUserByName(String name);
         
-    boolean addTweet(User user, Tweet tweet, List<User> mentions);
+    Tweet addTweet(User user, Tweet tweet, List<User> mentions);
     
     boolean removeTweet(Tweet tweet);
     

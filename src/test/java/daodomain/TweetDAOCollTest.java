@@ -65,7 +65,7 @@ public class TweetDAOCollTest {
         user3 = userDAO.createUser(new User("picURL", "webURL", "Karel", "Men", "Veldhoven", "Karel@hotmail.com", "pass"));
         users.add(user3);
         
-        tweet1 = new Tweet("Hello message", tags, user1);
+        tweet1 = new Tweet("Hello message", "#cool", user1);
     }
 
     @After

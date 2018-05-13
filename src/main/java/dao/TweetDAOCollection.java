@@ -112,7 +112,7 @@ public class TweetDAOCollection implements TweetDAO {
      * @return the tweet object.
      */
     @Override
-    public Tweet findTweet(Long id) {
+    public Tweet findTweet(Integer id) {
         for (Tweet tweet : tweets) {
             if (tweet.getId().equals(id)) {
                 return tweet;
@@ -153,6 +153,15 @@ public class TweetDAOCollection implements TweetDAO {
         if(tweet != null){
             return tweet;
         }else{
+            return null;
+        }
+    }
+
+    @Override
+    public List<Tweet> findTagByContent(String content) {
+        if(content != null){
+            return tweets;
+        }else {
             return null;
         }
     }

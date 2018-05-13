@@ -119,10 +119,10 @@ public class UserDAOImplementation implements UserDAO {
     @Override
     public boolean removeTweet(Tweet tweet) {
         try {
-            Tweet existingTweet = em.find(Tweet.class, tweet.getId());
+            Tweet existingTweet = em.find(Tweet.class, tweet.getTweetId());
 
             Query query = em.createNamedQuery("Tweet.removeTweet").
-                    setParameter("tweetId", existingTweet.getId());
+                    setParameter("tweetId", existingTweet.getTweetId());
             query.executeUpdate();
             return true;
         } catch (Exception ex) {
@@ -263,7 +263,7 @@ public class UserDAOImplementation implements UserDAO {
      * @return
      */
     @Override
-    public boolean addTweet(User user, Tweet tweet, List<User> mentions) {
+    public Tweet addTweet(User user, Tweet tweet, List<User> mentions) {
         user.addTweet(tweet, mentions);
 
         if (mentions != null) {
@@ -278,10 +278,10 @@ public class UserDAOImplementation implements UserDAO {
 
         try {
             em.persist(tweet);
-            return true;
+            return tweet;
         } catch (Exception ex) {
             ex.printStackTrace();
-            return false;
+            return null;
         }
     }
 
