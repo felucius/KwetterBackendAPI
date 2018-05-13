@@ -24,7 +24,6 @@ import service.TweetService;
 import service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-
 /**
  *
  * @author M
@@ -43,7 +42,7 @@ public class TweetEndPoint {
 
     @OnOpen
     public void onOpen(Session peer) {
-        if(peer != null){
+        if (peer != null) {
             System.out.println("OnOpen: " + peer.getId());
         }
         LOG.info("Connection opened ...");
@@ -52,7 +51,7 @@ public class TweetEndPoint {
 
     @OnClose
     public void onClose(Session peer) {
-        if(peer != null){
+        if (peer != null) {
             System.out.println("OnClose: " + peer.toString());
         }
         LOG.info("Connection closed ...");
@@ -69,10 +68,14 @@ public class TweetEndPoint {
         if (message != null) {
             System.out.println("OnMessage: " + client.getId() + " Message: " + message);
             Tweet tweet = new Tweet(message, "#websocket", userService.findUserByName("Maxime"));
-            TweetDTO jsonTweet = new TweetDTO(tweet.getMessage(), tweet.getTag(), 
-                    tweet.getTweetedBy().getName(), String.valueOf(tweet.getTweetId()));
+
+            Tweet jsonTweet = new Tweet(tweet.getMessage(), tweet.getTag(),
+                    null);
+
+            //TweetDTO jsonTweet = new TweetDTO(tweet.getMessage(), tweet.getTag(), null,
+                    //tweet.getTweetedBy(), null, null);
             sendMessage(client, jsonTweet);
-            sentToAll(jsonTweet);
+            sendToAll(jsonTweet);
         }
     }
 
@@ -80,7 +83,8 @@ public class TweetEndPoint {
         try {
             if (peer.isOpen()) {
                 if (peer != null && send != null) {
-                    System.out.println("Sendmessage: " + peer.getId() + " Object: " + send);
+                    Tweet tweet = (Tweet)send;
+                    System.out.println("Peer ID: " + peer.getId() + " message content: " + tweet.getMessage());
                 }
                 ObjectMapper mapper = new ObjectMapper();
                 peer.getBasicRemote().sendObject(mapper.writeValueAsString(send));
@@ -90,9 +94,10 @@ public class TweetEndPoint {
         }
     }
 
-    private void sentToAll(Object answer) {
-        if(answer != null){
-            System.out.println("SentToAll: " + answer.toString());
+    private void sendToAll(Object answer) {
+        if (answer != null) {
+            Tweet tweet = (Tweet) answer;
+            System.out.println("Sended message to everone: " + tweet.getMessage());
         }
         for (Iterator<Session> it = peers.iterator(); it.hasNext();) {
             sendMessage(it.next(), answer);

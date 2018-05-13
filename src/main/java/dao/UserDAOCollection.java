@@ -53,7 +53,7 @@ public class UserDAOCollection implements UserDAO {
         }
     }*/
     @Override
-    public User findUser(Integer id) {
+    public User findUser(Long id) {
         for (User user : users) {
             if (user.getId().equals(id)) {
                 return user;
@@ -65,12 +65,12 @@ public class UserDAOCollection implements UserDAO {
     }
 
     @Override
-    public boolean addTweet(User user, Tweet tweet, List<User> mentions) {
+    public Tweet addTweet(User user, Tweet tweet, List<User> mentions) {
         if (tweet != null) {
             user.addTweet(tweet, mentions);
-            return true;
+            return tweet;
         } else {
-            return false;
+            return null;
         }
     }
 

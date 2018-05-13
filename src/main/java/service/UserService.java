@@ -71,7 +71,7 @@ public class UserService {
      * @param id of the user to be searched.
      * @return the user object.
      */
-    public User findUser(Integer id) {
+    public User findUser(Long id) {
         return userDAO.findUser(id);
     }
     
@@ -94,7 +94,7 @@ public class UserService {
      * @return return true if the addition of the tweet has been successful or
      * false when this action could not have been completed.
      */
-    public boolean addTweet(User user, Tweet tweet, List<User> mentions) {
+    public Tweet addTweet(User user, Tweet tweet, List<User> mentions) {
         return userDAO.addTweet(user, tweet, mentions);
     }
 

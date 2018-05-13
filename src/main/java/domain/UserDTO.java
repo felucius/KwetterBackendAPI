@@ -8,6 +8,7 @@ package domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.json.bind.annotation.JsonbTransient;
 
 /**
  *
@@ -15,6 +16,7 @@ import java.util.List;
  */
 public class UserDTO implements Serializable {
 
+    private Long id;
     private String picture = null;
     private String website = null;
     private String name = null;
@@ -24,6 +26,10 @@ public class UserDTO implements Serializable {
     private String password = null;
     private UserRole userRole = null;
 
+    private List<User> following = null;
+    private List<User> followers = null;
+    private List<Tweet> tweets = null;
+
     private String followingUri = null;
     private String followersUri = null;
     private String tweetsUri = null;
@@ -32,24 +38,37 @@ public class UserDTO implements Serializable {
 
     }
 
-    public UserDTO(String picture, String website, String name, String bio, 
-            String location, String email, String password, UserRole userRole,
+    public UserDTO(Long id, String picture, String website, String name, String bio,
+            String location, String email, String password,
             String followingUri, String followersUri, String tweetsUri) {
-        this.picture = "picturePath";
+
+        this.id = id;
         this.website = website;
         this.name = name;
         this.bio = bio;
         this.location = location;
         this.email = email;
         this.password = password;
-        this.userRole = userRole;
-        
+        this.userRole = UserRole.USER;
+
+        this.picture = "picturePath";
+        this.tweets = new ArrayList();
+        this.following = new ArrayList();
+        this.followers = new ArrayList();
+
         this.followingUri = followingUri;
         this.followersUri = followersUri;
         this.tweetsUri = tweetsUri;
-        this.userRole = UserRole.USER;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
     public String getPicture() {
         return picture;
     }
@@ -137,5 +156,35 @@ public class UserDTO implements Serializable {
     public void setFollowersUri(String followersUri) {
         this.followersUri = followersUri;
     }
-    
+
+    @JsonbTransient
+    public List<User> getFollowing() {
+        return following;
+    }
+
+    @JsonbTransient
+    public void setFollowing(List<User> following) {
+        this.following = following;
+    }
+
+    @JsonbTransient
+    public List<User> getFollowers() {
+        return followers;
+    }
+
+    @JsonbTransient
+    public void setFollowers(List<User> followers) {
+        this.followers = followers;
+    }
+
+    @JsonbTransient
+    public List<Tweet> getTweets() {
+        return tweets;
+    }
+
+    @JsonbTransient
+    public void setTweets(List<Tweet> tweets) {
+        this.tweets = tweets;
+    }
+
 }

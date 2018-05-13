@@ -14,7 +14,9 @@ import java.io.Serializable;
 public class TweetDTO implements Serializable{
 
     private String message;
+    private String tag;
     private String tagUri;
+    private User tweetedBy;
     private String tweetedByUri;
     private String likesUri;
 
@@ -22,9 +24,11 @@ public class TweetDTO implements Serializable{
 
     }
 
-    public TweetDTO(String message, String tagUri, String tweetedByUri, String likesUri) {
+    public TweetDTO(String message, String tag, String tagUri, User tweetedBy, String tweetedByUri, String likesUri) {
         this.message = message;
+        this.tag = tag;
         this.tagUri = tagUri;
+        this.tweetedBy = tweetedBy;
         this.tweetedByUri = tweetedByUri;
         this.likesUri = likesUri;
     }
@@ -38,11 +42,11 @@ public class TweetDTO implements Serializable{
     }
 
     public String getTag() {
-        return tagUri;
+        return tag;
     }
 
-    public void setTag(String tagUri) {
-        this.tagUri = tagUri;
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 
     public String getTweetedByUri() {
@@ -59,6 +63,22 @@ public class TweetDTO implements Serializable{
 
     public void setLikesUri(String likesUri) {
         this.likesUri = likesUri;
+    }
+
+    public String getTagUri() {
+        return tagUri;
+    }
+
+    public void setTagUri(String tagUri) {
+        this.tagUri = tagUri;
+    }
+
+    public User getTweetedBy() {
+        return tweetedBy;
+    }
+
+    public void setTweetedBy(User tweetedBy) {
+        this.tweetedBy = tweetedBy;
     }
     
     

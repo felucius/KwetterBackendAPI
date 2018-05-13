@@ -30,7 +30,9 @@ public class TweetDomainToDto {
 
             TweetDTO tweetDTO = new TweetDTO(
                     tweet.getMessage(),
+                    tweet.getTag(),
                     apiUri + "tweets/" + "findtagbycontent/" + noHashtag,
+                    tweet.getTweetedBy(),
                     apiUri + "users/" + "finduserbyname/" + tweet.getTweetedBy().getName(),
                     apiUri + "tweets/" + "gettweetlikes/" + tweet.getTweetId());
             tweetsDTOs.add(tweetDTO);
@@ -41,17 +43,22 @@ public class TweetDomainToDto {
     }
 
     public static TweetDTO TWEET_TO_DTO(Tweet tweet) {
-        TweetDTO tweetDTO = new TweetDTO(null, null, null, null);
+        TweetDTO tweetDTO = new TweetDTO(tweet.getMessage(), tweet.getTag(), null, tweet.getTweetedBy(), null, null);
         if (tweet == null) {
             return tweetDTO;
         }
 
         String hashtag = tweet.getTag();
-        String noHashtag = hashtag.substring(1);
+        String noHashtag = null;
+        if (hashtag != null) {
+            noHashtag = hashtag.substring(1);
+        }
 
         tweetDTO = new TweetDTO(
                 tweet.getMessage(),
+                tweet.getTag(),
                 apiUri + "tweets/" + "findtagbycontent/" + noHashtag,
+                tweet.getTweetedBy(),
                 apiUri + "users/" + "finduserbyname/" + tweet.getTweetedBy().getName(),
                 apiUri + "tweets/" + "gettweetlikes/" + tweet.getTweetId());
         return tweetDTO;
@@ -74,7 +81,9 @@ public class TweetDomainToDto {
 
             TweetDTO tweetDTO = new TweetDTO(
                     tweet.getMessage(),
+                    tweet.getTag(),
                     apiUri + "tweets/" + "findtagbycontent/" + noHashtag,
+                    tweet.getTweetedBy(),
                     apiUri + "users/" + "finduserbyname/" + tweet.getTweetedBy().getName(),
                     apiUri + "tweets/" + "gettweetlikes/" + tweet.getTweetId());
             tweetsDTOs.add(tweetDTO);

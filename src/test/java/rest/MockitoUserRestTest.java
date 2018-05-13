@@ -207,7 +207,7 @@ public class MockitoUserRestTest {
     public void testAddTweet() {
         System.out.println("Test add tweet on Mockito - UserService layer");
 
-        when(userService.addTweet(user1, tweet1, users)).thenReturn(true);
+        when(userService.addTweet(user1, tweet1, users)).thenReturn(tweet1);
         assertEquals(true, userService.addTweet(user1, tweet1, users));
         //userResource.addTweet(user1.getName(), tweet1.getMessage(), tags.get(0), 
                 //users.get(user1.getId().intValue()).getName());

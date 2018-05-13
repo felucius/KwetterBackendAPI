@@ -11,23 +11,23 @@ import java.util.List;
  */
 public class TweetDtoToDomain {
 
-    public static List<Tweet> TWEET_DTO_TO_DOMAIN(List<TweetDTO> tweetDTOs) {
+    public static List<Tweet> TWEETS_DTO_TO_DOMAIN(List<TweetDTO> tweetDTOs) {
         List<Tweet> tweets = new ArrayList<>();
         if (tweetDTOs == null || tweetDTOs.isEmpty()) {
             return tweets;
         }
 
         for (TweetDTO t : tweetDTOs) {
-            Tweet tweet = new Tweet(t.getMessage(), t.getTag(), null);
+            Tweet tweet = new Tweet(t.getMessage(), t.getTag(), t.getTweetedBy());
             tweets.add(tweet);
         }
         return tweets;
     }
 
-    public static Tweet VEHICLE_DTO_TO_DOMAIN(TweetDTO tweetDTO) {
+    public static Tweet TWEET_DTO_TO_DOMAIN(TweetDTO tweetDTO) {
         if (tweetDTO == null) {
             return new Tweet();
         }
-        return new Tweet(tweetDTO.getMessage(), tweetDTO.getTag(), null);
+        return new Tweet(tweetDTO.getMessage(), tweetDTO.getTag(), tweetDTO.getTweetedBy());
     }
 }

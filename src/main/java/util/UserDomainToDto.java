@@ -32,6 +32,7 @@ public class UserDomainToDto {
 
         for (User user : users) {
             UserDTO userDTO = new UserDTO(
+                    user.getId(),
                     user.getPicture(),
                     user.getWebsite(),
                     user.getName(),
@@ -39,7 +40,6 @@ public class UserDomainToDto {
                     user.getLocation(),
                     user.getEmail(),
                     user.getPassword(),
-                    user.getUserRole(),
                     apiUri + "users/" + "getfollowing/" + user.getName(),
                     apiUri + "users/" + "getfollowers/" + user.getName(),
                     apiUri + "users/" + "gettweetsfromuser/" + user.getName());
@@ -49,12 +49,14 @@ public class UserDomainToDto {
     }
 
     public static UserDTO USER_TO_DTO(User user) {
-        UserDTO userDTO = new UserDTO(null, null, null, null, null, null, null, null, null, null, null);
+        UserDTO userDTO = new UserDTO(user.getId(), user.getPicture(), user.getWebsite(), user.getName(), 
+                user.getBio(), user.getLocation(), user.getEmail(), user.getPassword(), null, null, null);
         if (user == null) {
             return userDTO;
         }
 
         userDTO = new UserDTO(
+                user.getId(),
                 user.getPicture(),
                 user.getWebsite(),
                 user.getName(),
@@ -62,7 +64,6 @@ public class UserDomainToDto {
                 user.getLocation(),
                 user.getEmail(),
                 user.getPassword(),
-                user.getUserRole(),
                 apiUri + "users/" + "getfollowing/" + user.getName(),
                 apiUri + "users/" + "getfollowers/" + user.getName(),
                 apiUri + "users/" + "gettweetsfromuser/" + user.getName());
@@ -81,6 +82,7 @@ public class UserDomainToDto {
 
         for (User user : users) {
             UserDTO userDTO = new UserDTO(
+                    user.getId(),
                     user.getPicture(),
                     user.getWebsite(),
                     user.getName(),
@@ -88,7 +90,6 @@ public class UserDomainToDto {
                     user.getLocation(),
                     user.getEmail(),
                     user.getPassword(),
-                    user.getUserRole(),
                     apiUri + "users/" + "getfollowing/" + user.getName(),
                     apiUri + "users/" + "getfollowers/" + user.getName(),
                     apiUri + "users/" + "gettweetsfromuser/" + user.getName());
@@ -105,6 +106,7 @@ public class UserDomainToDto {
 
         for (User user : users) {
             UserDTO userDTO = new UserDTO(
+                    user.getId(),
                     user.getPicture(),
                     user.getWebsite(),
                     user.getName(),
@@ -112,7 +114,6 @@ public class UserDomainToDto {
                     user.getLocation(),
                     user.getEmail(),
                     user.getPassword(),
-                    user.getUserRole(),
                     apiUri + "users/" + "getfollowing/" + user.getName(),
                     apiUri + "users/" + "getfollowers/" + user.getName(),
                     apiUri + "users/" + "gettweetsfromuser/" + user.getName());
@@ -135,6 +136,7 @@ public class UserDomainToDto {
 
         for (User user : newUsers) {
             UserDTO userDTO = new UserDTO(
+                    user.getId(),
                     user.getPicture(),
                     user.getWebsite(),
                     user.getName(),
@@ -142,7 +144,6 @@ public class UserDomainToDto {
                     user.getLocation(),
                     user.getEmail(),
                     user.getPassword(),
-                    user.getUserRole(),
                     apiUri + "users/" + "getfollowing/" + user.getName(),
                     apiUri + "users/" + "getfollowers/" + user.getName(),
                     apiUri + "users/" + "gettweetsfromuser/" + user.getName());

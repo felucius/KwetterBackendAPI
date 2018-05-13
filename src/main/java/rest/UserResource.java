@@ -29,6 +29,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import javax.ws.rs.core.Response;
 import util.TweetDomainToDto;
+import util.TweetDtoToDomain;
 import util.UserDomainToDto;
 
 /**
@@ -89,7 +90,7 @@ public class UserResource {
 
     @GET
     @Path("finduser/{id}")
-    public Response findUser(@PathParam("id") Integer id) {
+    public Response findUser(@PathParam("id") Long id) {
         UserDTO dto = UserDomainToDto.USER_TO_DTO(userService.findUser(id));
         return Response.ok(dto).build();
         //return userService.findUser(id);
@@ -129,9 +130,14 @@ public class UserResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Path("addtweet/{id}")
-    public boolean addTweet(@PathParam("id") Integer id, Tweet tweet) {
+    public Response addTweet(@PathParam("id") Long id, TweetDTO tweet) {
         User user = userService.findUser(id);
-        return userService.addTweet(user, tweet, null);
+        Tweet tweetToInsert = TweetDtoToDomain.TWEET_DTO_TO_DOMAIN(tweet);
+        TweetDTO dto = TweetDomainToDto.TWEET_TO_DTO(userService.addTweet(user, tweetToInsert, null));
+        //userService.addTweet(user, tweetToInsert, null);
+        return Response.ok(dto).build();
+        //User user = userService.findUser(id);
+        //return userService.addTweet(user, tweet, null);
     }
 
     @GET
@@ -177,10 +183,10 @@ public class UserResource {
 
     @GET
     @Path("gettweetsfromuser/{username}")
-    public Response getTweets(@PathParam("username") String username) {
-        List<TweetDTO> dto = TweetDomainToDto.TWEETS_TO_DTO(userService.getTweetsByUser(userService.findUserByName(username)));
-        return Response.ok(dto).build();
-        //return userService.getTweetsByUser(userService.findUserByName(username));
+    public List<Tweet> getTweets(@PathParam("username") String username) {
+        //List<TweetDTO> dto = TweetDomainToDto.TWEETS_TO_DTO(userService.getTweetsByUser(userService.findUserByName(username)));
+        //return Response.ok(dto).build();
+        return userService.getTweetsByUser(userService.findUserByName(username));
     }
 
     @POST

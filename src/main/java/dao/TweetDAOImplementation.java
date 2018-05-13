@@ -84,7 +84,7 @@ public class TweetDAOImplementation implements TweetDAO {
         List<User> users = null;
         tweet.getMentions();
         try {
-            users = em.find(Tweet.class, tweet.getId()).getMentions();
+            users = em.find(Tweet.class, tweet.getTweetId()).getMentions();
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
