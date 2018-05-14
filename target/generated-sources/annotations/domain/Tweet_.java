@@ -8,7 +8,7 @@ import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 import org.springframework.hateoas.Link;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2018-05-13T21:01:43")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2018-05-14T14:23:25")
 @StaticMetamodel(Tweet.class)
 public class Tweet_ { 
 
